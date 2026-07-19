@@ -1,0 +1,1242 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 11 - Introspection Java - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5d6b7c;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e3b545;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 11 — Introspection Java</h1>
+  <p>Document autonome en français sur la réflexion Java. Il couvre les classes et méthodes utiles pour inspecter des classes, constructeurs, méthodes, champs et annotations à l'exécution.</p>
+  <p>Version Java visée : Java 8. Toutes les API présentées ici font partie de la bibliothèque standard.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="10-hyperloglog-async-fr.html">&larr; Semaine 10</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="12-injection-dependances-fr.html">Semaine 12 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#notions">Notions essentielles</a>
+    <a href="#imports">Imports utiles</a>
+    <a href="#class">Class&lt;?&gt;</a>
+    <a href="#constructeurs">Constructeurs</a>
+    <a href="#methodes">Method</a>
+    <a href="#champs">Field</a>
+    <a href="#annotations">Annotations</a>
+    <a href="#mini-junit-annotations">Annotations mini-JUnit</a>
+    <a href="#champs-validation">Champs et validation</a>
+    <a href="#validation-declarative">Validation déclarative</a>
+    <a href="#exceptions">Exceptions</a>
+    <a href="#modifiers">Modificateurs</a>
+    <a href="#exemples">Exemples neutres</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="notions">
+      <h2>Notions essentielles</h2>
+      <p>L'introspection, aussi appelée réflexion, permet d'obtenir des informations sur un programme Java pendant son exécution. Elle permet par exemple de connaître les méthodes déclarées par une classe, de lire les annotations présentes sur une méthode, de créer un objet à partir d'un <code>Class&lt;?&gt;</code>, ou d'appeler dynamiquement une méthode.</p>
+      <p>Les classes principales se trouvent dans les packages <code>java.lang</code>, <code>java.lang.reflect</code> et <code>java.lang.annotation</code>.</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Rôle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>Class&lt;?&gt;</code></td>
+          <td>Représente une classe, une interface, un enum, une annotation ou un type primitif à l'exécution.</td>
+        </tr>
+        <tr>
+          <td><code>Constructor&lt;T&gt;</code></td>
+          <td>Représente un constructeur et permet de créer une instance.</td>
+        </tr>
+        <tr>
+          <td><code>Method</code></td>
+          <td>Représente une méthode et permet de l'inspecter ou de l'appeler.</td>
+        </tr>
+        <tr>
+          <td><code>Field</code></td>
+          <td>Représente un attribut et permet de l'inspecter ou d'en lire/modifier la valeur.</td>
+        </tr>
+        <tr>
+          <td><code>Annotation</code></td>
+          <td>Représente une annotation lue à l'exécution si sa rétention est <code>RUNTIME</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="warning">
+        La réflexion est puissante mais contourne une partie des vérifications habituelles du compilateur. Il faut gérer explicitement les exceptions et vérifier les types avant d'invoquer dynamiquement du code.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="imports">
+      <h2>Imports utiles</h2>
+      <pre><code>import java.lang.annotation.ElementType;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+import java.lang.annotation.Target;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;</code></pre>
+      <p><code>Class</code>, <code>String</code>, <code>Object</code> et les exceptions générales comme <code>Exception</code> appartiennent à <code>java.lang</code> et ne demandent pas d'import explicite.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="class">
+      <h2><code>Class&lt;?&gt;</code></h2>
+      <p>La classe <code>java.lang.Class</code> représente le type d'un objet ou d'une déclaration Java à l'exécution.</p>
+
+      <div class="api">
+        <h3>Obtenir un objet <code>Class</code></h3>
+        <span class="signature">MaClasse.class</span>
+        <span class="signature">objet.getClass()</span>
+        <span class="signature">Class.forName(String className)</span>
+        <pre><code>Class&lt;?&gt; type1 = Produit.class;
+Class&lt;?&gt; type2 = produit.getClass();
+Class&lt;?&gt; type3 = Class.forName("demo.Produit");</code></pre>
+        <p><code>.class</code> est vérifié à la compilation. <code>getClass()</code> part d'un objet existant. <code>Class.forName</code> charge une classe depuis son nom complet et peut lancer <code>ClassNotFoundException</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Informations générales</h3>
+        <span class="signature">String getName()</span>
+        <span class="signature">String getSimpleName()</span>
+        <span class="signature">String getPackageName()</span>
+        <span class="signature">Class&lt;? super T&gt; getSuperclass()</span>
+        <span class="signature">Class&lt;?&gt;[] getInterfaces()</span>
+        <span class="signature">boolean isInterface()</span>
+        <span class="signature">boolean isAnnotation()</span>
+        <span class="signature">boolean isEnum()</span>
+        <span class="signature">boolean isArray()</span>
+        <span class="signature">boolean isPrimitive()</span>
+        <pre><code>Class&lt;?&gt; type = Produit.class;
+
+System.out.println(type.getName());       // demo.Produit
+System.out.println(type.getSimpleName()); // Produit
+System.out.println(type.isInterface());   // false</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Membres publics ou déclarés</h3>
+        <p>Les méthodes commençant par <code>get</code> retournent généralement les membres publics accessibles, y compris ceux hérités. Les méthodes commençant par <code>getDeclared</code> retournent les membres déclarés directement dans la classe, y compris les membres privés, mais pas les membres hérités.</p>
+        <span class="signature">Method[] getMethods()</span>
+        <span class="signature">Method[] getDeclaredMethods()</span>
+        <span class="signature">Field[] getFields()</span>
+        <span class="signature">Field[] getDeclaredFields()</span>
+        <span class="signature">Constructor&lt;?&gt;[] getConstructors()</span>
+        <span class="signature">Constructor&lt;?&gt;[] getDeclaredConstructors()</span>
+        <table>
+          <thead>
+          <tr>
+            <th>Méthode</th>
+            <th>Ce qui est retourné</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>getMethods()</code></td>
+            <td>Méthodes publiques de la classe, des superclasses et interfaces.</td>
+          </tr>
+          <tr>
+            <td><code>getDeclaredMethods()</code></td>
+            <td>Méthodes déclarées directement dans la classe, quelle que soit leur visibilité.</td>
+          </tr>
+          <tr>
+            <td><code>getFields()</code></td>
+            <td>Champs publics accessibles, y compris hérités.</td>
+          </tr>
+          <tr>
+            <td><code>getDeclaredFields()</code></td>
+            <td>Champs déclarés directement dans la classe, quelle que soit leur visibilité.</td>
+          </tr>
+          </tbody>
+        </table>
+        <div class="note">
+          L'ordre des éléments retournés par la réflexion n'est pas une garantie portable. Ne pas écrire une logique qui dépend de l'ordre exact des méthodes ou des champs.
+        </div>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="constructeurs">
+      <h2><code>Constructor&lt;T&gt;</code></h2>
+      <p>Classe : <code>java.lang.reflect.Constructor</code>. Elle représente un constructeur et permet de créer une instance dynamiquement.</p>
+
+      <div class="api">
+        <h3>Trouver un constructeur</h3>
+        <span class="signature">Constructor&lt;T&gt; getConstructor(Class&lt;?&gt;... parameterTypes)</span>
+        <span class="signature">Constructor&lt;T&gt; getDeclaredConstructor(Class&lt;?&gt;... parameterTypes)</span>
+        <p><code>getConstructor</code> cherche un constructeur public. <code>getDeclaredConstructor</code> cherche un constructeur déclaré dans la classe, même s'il n'est pas public.</p>
+        <pre><code>Constructor&lt;Produit&gt; constructeur =
+    Produit.class.getDeclaredConstructor();
+
+Constructor&lt;Produit&gt; avecNom =
+    Produit.class.getDeclaredConstructor(String.class);</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Créer une instance</h3>
+        <span class="signature">T newInstance(Object... initargs)</span>
+        <pre><code>Constructor&lt;Produit&gt; constructeur = Produit.class.getDeclaredConstructor();
+Produit produit = constructeur.newInstance();</code></pre>
+        <p>Si le constructeur appelé lance une exception, elle est encapsulée dans une <code>InvocationTargetException</code>. L'exception originale se récupère avec <code>getCause()</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Informations sur un constructeur</h3>
+        <span class="signature">String getName()</span>
+        <span class="signature">Class&lt;?&gt;[] getParameterTypes()</span>
+        <span class="signature">int getParameterCount()</span>
+        <span class="signature">int getModifiers()</span>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="methodes">
+      <h2><code>Method</code></h2>
+      <p>Classe : <code>java.lang.reflect.Method</code>. Elle représente une méthode déclarée dans une classe ou héritée d'un parent.</p>
+
+      <div class="api">
+        <h3>Trouver une méthode</h3>
+        <span class="signature">Method getMethod(String name, Class&lt;?&gt;... parameterTypes)</span>
+        <span class="signature">Method getDeclaredMethod(String name, Class&lt;?&gt;... parameterTypes)</span>
+        <span class="signature">Method[] getMethods()</span>
+        <span class="signature">Method[] getDeclaredMethods()</span>
+        <pre><code>Method methode = Produit.class.getDeclaredMethod("changerPrix", double.class);
+Method[] methodes = Produit.class.getDeclaredMethods();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Informations sur une méthode</h3>
+        <span class="signature">String getName()</span>
+        <span class="signature">Class&lt;?&gt; getReturnType()</span>
+        <span class="signature">Class&lt;?&gt;[] getParameterTypes()</span>
+        <span class="signature">int getParameterCount()</span>
+        <span class="signature">int getModifiers()</span>
+        <pre><code>for (Method methode : Produit.class.getDeclaredMethods()) {
+    System.out.println(methode.getName());
+    System.out.println(methode.getReturnType().getSimpleName());
+    System.out.println(methode.getParameterCount());
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Appeler une méthode</h3>
+        <span class="signature">Object invoke(Object obj, Object... args)</span>
+        <p><code>invoke</code> appelle la méthode représentée par l'objet <code>Method</code>. Pour une méthode d'instance, le premier argument est l'objet cible. Pour une méthode statique, on peut passer <code>null</code> comme objet cible.</p>
+        <pre><code>Produit produit = new Produit("Stylo", 2.5);
+
+Method getNom = Produit.class.getDeclaredMethod("getNom");
+String nom = (String) getNom.invoke(produit);
+
+Method changerPrix = Produit.class.getDeclaredMethod("changerPrix", double.class);
+changerPrix.invoke(produit, 3.0);</code></pre>
+        <p>La valeur de retour est de type <code>Object</code>. Si la méthode appelée retourne <code>void</code>, <code>invoke</code> retourne <code>null</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Méthodes privées ou non publiques</h3>
+        <span class="signature">void setAccessible(boolean flag)</span>
+        <p><code>setAccessible(true)</code> demande à Java d'autoriser l'accès à un membre non public. Cette opération doit être utilisée avec prudence.</p>
+        <pre><code>Method methode = Produit.class.getDeclaredMethod("calculerMarge");
+methode.setAccessible(true);
+double marge = (double) methode.invoke(produit);</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="champs">
+      <h2><code>Field</code></h2>
+      <p>Classe : <code>java.lang.reflect.Field</code>. Elle représente un attribut d'une classe.</p>
+
+      <div class="api">
+        <h3>Trouver un champ</h3>
+        <span class="signature">Field getField(String name)</span>
+        <span class="signature">Field getDeclaredField(String name)</span>
+        <span class="signature">Field[] getFields()</span>
+        <span class="signature">Field[] getDeclaredFields()</span>
+        <pre><code>Field nom = Produit.class.getDeclaredField("nom");
+Field[] champs = Produit.class.getDeclaredFields();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Informations sur un champ</h3>
+        <span class="signature">String getName()</span>
+        <span class="signature">Class&lt;?&gt; getType()</span>
+        <span class="signature">int getModifiers()</span>
+        <pre><code>for (Field champ : Produit.class.getDeclaredFields()) {
+    System.out.println(champ.getName());
+    System.out.println(champ.getType().getSimpleName());
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Lire ou modifier une valeur</h3>
+        <span class="signature">Object get(Object obj)</span>
+        <span class="signature">void set(Object obj, Object value)</span>
+        <span class="signature">void setAccessible(boolean flag)</span>
+        <pre><code>Produit produit = new Produit("Stylo", 2.5);
+
+Field champNom = Produit.class.getDeclaredField("nom");
+champNom.setAccessible(true);
+
+String nom = (String) champNom.get(produit);
+champNom.set(produit, "Crayon");</code></pre>
+        <p>Il existe aussi des méthodes spécialisées comme <code>getInt</code>, <code>setInt</code>, <code>getBoolean</code> et <code>setBoolean</code> pour les types primitifs.</p>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="annotations">
+      <h2>Annotations</h2>
+      <p>Une annotation personnalisée se déclare avec <code>@interface</code>. Pour qu'elle soit lisible par introspection pendant l'exécution, sa rétention doit être <code>RetentionPolicy.RUNTIME</code>.</p>
+
+      <div class="api">
+        <h3>Déclarer une annotation</h3>
+        <span class="signature">@Retention(RetentionPolicy.RUNTIME)</span>
+        <span class="signature">@Target(ElementType.METHOD)</span>
+        <span class="signature">public @interface MonAnnotation { ... }</span>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Action {
+    String nom();
+    int priorite() default 0;
+}</code></pre>
+        <p>Les méthodes déclarées dans une annotation sont ses attributs. Un attribut peut avoir une valeur par défaut avec <code>default</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Cibles possibles</h3>
+        <p>Enum : <code>java.lang.annotation.ElementType</code>.</p>
+        <table>
+          <thead>
+          <tr>
+            <th>Constante</th>
+            <th>Cible</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>TYPE</code></td>
+            <td>Classe, interface, enum ou annotation.</td>
+          </tr>
+          <tr>
+            <td><code>METHOD</code></td>
+            <td>Méthode.</td>
+          </tr>
+          <tr>
+            <td><code>FIELD</code></td>
+            <td>Attribut.</td>
+          </tr>
+          <tr>
+            <td><code>CONSTRUCTOR</code></td>
+            <td>Constructeur.</td>
+          </tr>
+          <tr>
+            <td><code>PARAMETER</code></td>
+            <td>Paramètre de méthode ou de constructeur.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="api">
+        <h3>Rétentions possibles</h3>
+        <p>Enum : <code>java.lang.annotation.RetentionPolicy</code>.</p>
+        <table>
+          <thead>
+          <tr>
+            <th>Constante</th>
+            <th>Effet</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>SOURCE</code></td>
+            <td>L'annotation existe dans le code source seulement. Elle disparaît à la compilation.</td>
+          </tr>
+          <tr>
+            <td><code>CLASS</code></td>
+            <td>L'annotation est présente dans le fichier <code>.class</code>, mais n'est pas disponible par réflexion à l'exécution.</td>
+          </tr>
+          <tr>
+            <td><code>RUNTIME</code></td>
+            <td>L'annotation est disponible à l'exécution via la réflexion.</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="api">
+        <h3>Lire une annotation</h3>
+        <span class="signature">boolean isAnnotationPresent(Class&lt;? extends Annotation&gt; annotationClass)</span>
+        <span class="signature">&lt;A extends Annotation&gt; A getAnnotation(Class&lt;A&gt; annotationClass)</span>
+        <span class="signature">&lt;A extends Annotation&gt; A getDeclaredAnnotation(Class&lt;A&gt; annotationClass)</span>
+        <span class="signature">Annotation[] getAnnotations()</span>
+        <span class="signature">Annotation[] getDeclaredAnnotations()</span>
+        <pre><code>for (Method methode : Controleur.class.getDeclaredMethods()) {
+    if (methode.isAnnotationPresent(Action.class)) {
+        Action action = methode.getAnnotation(Action.class);
+        System.out.println(action.nom());
+        System.out.println(action.priorite());
+    }
+}</code></pre>
+        <p>Ces méthodes existent sur <code>Class</code>, <code>Method</code>, <code>Field</code> et <code>Constructor</code>, car ces types héritent de l'interface <code>AnnotatedElement</code>.</p>
+      </div>
+
+      <div class="warning">
+        Si <code>getAnnotation(...)</code> retourne <code>null</code> alors que l'annotation semble présente dans le code, vérifier que l'annotation est déclarée avec <code>@Retention(RetentionPolicy.RUNTIME)</code>.
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="mini-junit-annotations">
+      <h2>Annotations du mini-JUnit</h2>
+      <p>Un mini-JUnit reconstruit le mécanisme de JUnit avec la réflexion : une annotation <code>@MonTest</code> (équivalent maison de <code>@Test</code>, déclarée exactement comme <code>Action</code> plus haut) marque les méthodes de test, et un <code>TestRunner</code> les découvre avec <code>getDeclaredMethods()</code> et <code>isAnnotationPresent</code>. Quatre annotations supplémentaires enrichissent le runner avec des fonctionnalités connues du vrai JUnit ; chacune ne demande rien de neuf sur le plan des API, seulement une combinaison différente de ce qui précède.</p>
+
+      <table>
+        <thead>
+        <tr>
+          <th>Annotation maison</th>
+          <th>Équivalent JUnit</th>
+          <th>Rôle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>@AvantChaqueTest</code></td>
+          <td><code>@BeforeEach</code></td>
+          <td>Méthode de préparation invoquée avant chaque test, sur l'instance fraîchement créée.</td>
+        </tr>
+        <tr>
+          <td><code>@Affichage(String valeur)</code></td>
+          <td><code>@DisplayName</code></td>
+          <td>Libellé lisible affiché dans le rapport à la place du nom de la méthode.</td>
+        </tr>
+        <tr>
+          <td><code>@Repeter(int fois)</code></td>
+          <td><code>@RepeatedTest</code></td>
+          <td>Invoque la méthode <code>fois</code> fois, une nouvelle instance à chaque répétition.</td>
+        </tr>
+        <tr>
+          <td><code>@TestDesactive</code></td>
+          <td><code>@Disabled</code></td>
+          <td>La méthode annotée n'est jamais invoquée ; elle apparaît dans le rapport avec un statut « ignorée ».</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <div class="api">
+        <h3><code>@AvantChaqueTest</code> : préparer chaque test</h3>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface AvantChaqueTest {
+}</code></pre>
+        <p>Avant d'invoquer chaque méthode de test sur une instance, le <code>TestRunner</code> invoque d'abord toutes les méthodes de la classe annotées <code>@AvantChaqueTest</code>, sur cette même instance :</p>
+        <pre><code>for (Method preparation : classe.getDeclaredMethods()) {
+    if (preparation.isAnnotationPresent(AvantChaqueTest.class)) {
+        preparation.invoke(instance);
+    }
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>@Affichage</code> : un libellé dans le rapport</h3>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Affichage {
+    String valeur();
+}</code></pre>
+        <p>C'est une annotation à élément : le <code>TestRunner</code> lit sa valeur avec <code>getAnnotation(Affichage.class).valeur()</code> pour choisir le libellé à afficher, au lieu du nom brut de la méthode :</p>
+        <pre><code>String libelle = methode.getName();
+if (methode.isAnnotationPresent(Affichage.class)) {
+    libelle = methode.getAnnotation(Affichage.class).valeur();
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>@Repeter</code> : répéter un test</h3>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface Repeter {
+    int fois();
+}</code></pre>
+        <p>Le <code>TestRunner</code> lit l'élément <code>fois</code> et boucle : chaque répétition reçoit une <strong>nouvelle instance</strong> de la classe de test, pour que les répétitions restent isolées les unes des autres.</p>
+        <pre><code>int fois = methode.isAnnotationPresent(Repeter.class)
+    ? methode.getAnnotation(Repeter.class).fois()
+    : 1;
+
+for (int i = 0; i &lt; fois; i++) {
+    Object instance = classe.getDeclaredConstructor().newInstance(); // nouvelle instance à chaque répétition
+    methode.invoke(instance);
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>@TestDesactive</code> : ignorer un test</h3>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface TestDesactive {
+}</code></pre>
+        <p>Une méthode annotée <code>@TestDesactive</code> n'est jamais passée à <code>invoke</code> : le <code>TestRunner</code> la détecte et ajoute directement un résultat de statut « ignorée » au rapport, sans exécuter le corps de la méthode.</p>
+        <pre><code>if (methode.isAnnotationPresent(TestDesactive.class)) {
+    rapport.ajouter(new ResultatTest(methode.getName(), Statut.IGNORE, null));
+    continue; // jamais invoquée
+}</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="champs-validation">
+      <h2>Réflexion sur les champs (validateur par annotations)</h2>
+      <p>Le mini-JUnit réfléchit sur les <strong>méthodes</strong>. Un mini-validateur d'objets — le miroir déclaratif du pattern <code>Util.checkObject</code>/<code>checkString</code> utilisé pour valider des paramètres à la main — applique le même mécanisme aux <strong>champs</strong> : découvrir les champs annotés d'un objet et lire leur valeur. Les API de base (<code>getDeclaredFields()</code>, <code>Field.getName()</code>, <code>Field.get(instance)</code>) sont déjà présentées à la section <a href="#champs">Field</a> ci-dessus ; seul le contexte d'utilisation change ici.</p>
+
+      <div class="api">
+        <h3>Trouver les champs annotés d'une classe</h3>
+        <p><code>getDeclaredFields()</code> est le miroir de <code>getDeclaredMethods()</code> pour les attributs. Un validateur cherche, pour une annotation donnée, tous les champs qui la portent :</p>
+        <pre><code>List&lt;Field&gt; trouverChampsAnnotes(Class&lt;?&gt; classe, Class&lt;? extends Annotation&gt; annotation) {
+    List&lt;Field&gt; champs = new ArrayList&lt;&gt;();
+    for (Field champ : classe.getDeclaredFields()) {
+        if (champ.isAnnotationPresent(annotation)) {
+            champs.add(champ);
+        }
+    }
+    champs.sort(Comparator.comparing(Field::getName));
+    return champs;
+}</code></pre>
+        <p>Comme pour <code>getDeclaredMethods()</code>, l'ordre de <code>getDeclaredFields()</code> n'est pas garanti : trier par nom rend le rapport reproductible.</p>
+      </div>
+
+      <div class="api">
+        <h3><code>setAccessible(true)</code> et les limites de l'encapsulation</h3>
+        <p>Les champs qu'un validateur doit lire sont presque toujours <code>private</code> — c'est même tout l'intérêt de l'encapsulation. Par défaut, la réflexion respecte les modificateurs d'accès : appeler <code>champ.get(objet)</code> sur un champ privé lance une <code>IllegalAccessException</code>. <code>setAccessible(true)</code> désactive ce contrôle avant la lecture.</p>
+        <span class="signature">void setAccessible(boolean flag)</span>
+        <pre><code>Field champ = classe.getDeclaredField("nom");
+champ.setAccessible(true);                 // sans cette ligne : IllegalAccessException
+Object valeur = champ.get(objet);</code></pre>
+        <p>Pour un champ de type primitif (<code>int</code>, <code>double</code>...), <code>champ.get(objet)</code> renvoie la valeur emballée dans sa classe enveloppante (<code>Integer</code>, <code>Double</code>...), qui hérite de <code>Number</code> — utile pour valider un champ numérique quel que soit son type primitif exact.</p>
+        <div class="warning">
+          <code>private</code> protège contre un accès accidentel depuis un autre code Java compilé normalement, pas contre la réflexion. N'importe quel code qui obtient un <code>Field</code> et appelle <code>setAccessible(true)</code> peut lire, et même modifier, un champ privé. L'encapsulation reste une bonne pratique de conception, mais ce n'est pas une barrière de sécurité face à un code qui a le droit d'utiliser la réflexion.
+        </div>
+      </div>
+
+      <div class="note">
+        Déclarer une annotation ciblant un champ est identique à la partie méthode, à un détail près : <code>@Target(ElementType.METHOD)</code> devient <code>@Target(ElementType.FIELD)</code> (voir le tableau des cibles à la section <a href="#annotations">Annotations</a>).
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface NonNul {
+}</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="validation-declarative">
+      <h2>Validation déclarative par annotations</h2>
+      <p>Une validation écrite « à la main » place la règle dans le constructeur, sous forme d'appel impératif (<code>Util.checkObject(nom)</code>, <code>Util.checkString(matricule)</code>...) répété de classe en classe. Une validation <strong>déclarative</strong> inverse l'approche : la règle est posée une seule fois, comme annotation sur le champ, et un mécanisme générique — un validateur, utilisant la réflexion sur les champs — la fait respecter pour n'importe quelle classe.</p>
+
+      <div class="api">
+        <h3>Les annotations de contrainte</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>Annotation</th>
+            <th>Contrainte exprimée</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>@NonNul</code></td>
+            <td>Le champ ne peut pas être <code>null</code>.</td>
+          </tr>
+          <tr>
+            <td><code>@LongueurMin(int valeur)</code></td>
+            <td>Une <code>String</code> doit compter au moins <code>valeur</code> caractères.</td>
+          </tr>
+          <tr>
+            <td><code>@Positif</code></td>
+            <td>Un champ numérique doit être strictement positif.</td>
+          </tr>
+          <tr>
+            <td><code>@Valide</code></td>
+            <td>Un champ objet doit être validé récursivement : ses propres violations sont rapportées, préfixées du nom du champ porteur (par exemple <code>adresse.rue</code>).</td>
+          </tr>
+          </tbody>
+        </table>
+        <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface NonNul {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface LongueurMin {
+    int valeur();
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Positif {
+}
+
+@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.FIELD)
+public @interface Valide {
+}</code></pre>
+        <p>Utilisation sur une classe de domaine :</p>
+        <pre><code>class Personne {
+    @NonNul
+    @LongueurMin(valeur = 3)
+    private String nom;
+
+    @Positif
+    private int age;
+
+    @NonNul
+    @Valide
+    private Adresse adresse;
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Le rapport de validation : <code>Violation</code> et <code>RapportValidation</code></h3>
+        <p><code>Violation</code> associe le nom du champ fautif à un message ; <code>RapportValidation</code> agrège une liste de violations pour un objet entier.</p>
+        <pre><code>class Violation {
+    private final String champ;
+    private final String message;
+    // getChamp(), getMessage(), toString() -&gt; "champ : message"
+}
+
+class RapportValidation {
+    private final List&lt;Violation&gt; violations = new ArrayList&lt;&gt;();
+
+    void ajouter(Violation violation) { violations.add(violation); }
+    void ajouterToutes(List&lt;Violation&gt; nouvelles) { violations.addAll(nouvelles); }
+    boolean estValide() { return violations.isEmpty(); }
+    List&lt;Violation&gt; getViolations() { return Collections.unmodifiableList(violations); }
+}</code></pre>
+        <p>Un rapport sans violation (<code>estValide()</code> vrai) signifie que l'objet respecte toutes ses contraintes déclarées.</p>
+      </div>
+
+      <div class="api">
+        <h3>Le motif général d'une méthode de validation</h3>
+        <p>Chaque contrainte suit le même schéma : trouver les champs annotés, lire leur valeur (avec <code>setAccessible(true)</code>), et ajouter une <code>Violation</code> si la règle est enfreinte.</p>
+        <pre><code>List&lt;Violation&gt; validerNonNul(Object objet) {
+    List&lt;Violation&gt; violations = new ArrayList&lt;&gt;();
+    for (Field champ : trouverChampsAnnotes(objet.getClass(), NonNul.class)) {
+        champ.setAccessible(true);
+        Object valeur = champ.get(objet);
+        if (valeur == null) {
+            violations.add(new Violation(champ.getName(), "ne peut pas être nul"));
+        }
+    }
+    return violations;
+}</code></pre>
+        <p>Une contrainte à élément, comme <code>@LongueurMin</code>, lit d'abord l'élément de l'annotation elle-même avant de le comparer à la valeur du champ :</p>
+        <pre><code>int minimum = champ.getAnnotation(LongueurMin.class).valeur();</code></pre>
+        <p>La validation récursive de <code>@Valide</code> réutilise la méthode de validation générale sur la valeur du champ, puis préfixe chaque nom de champ fautif du nom du champ porteur :</p>
+        <pre><code>for (Field champ : trouverChampsAnnotes(objet.getClass(), Valide.class)) {
+    champ.setAccessible(true);
+    Object valeur = champ.get(objet);
+    if (valeur != null) {
+        for (Violation violation : valider(valeur).getViolations()) {
+            violations.add(new Violation(
+                champ.getName() + "." + violation.getChamp(),
+                violation.getMessage()));
+        }
+    }
+}</code></pre>
+        <p>Un champ nul n'est pas de la responsabilité de <code>@LongueurMin</code>, <code>@Positif</code> ou <code>@Valide</code> : c'est <code>@NonNul</code> qui signale son absence, les autres contraintes se contentent de l'ignorer quand la valeur est nulle.</p>
+      </div>
+
+      <div class="note">
+        Ce mini-validateur reconstruit le cœur du standard Java <strong>Jakarta Bean Validation</strong> (anciennement Bean Validation / JSR 380), utilisé notamment par les frameworks web pour valider automatiquement les objets reçus d'un client.
+        <table>
+          <thead>
+          <tr>
+            <th>Ce mini-validateur</th>
+            <th>Jakarta Bean Validation</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>@NonNul</code></td>
+            <td><code>@NotNull</code></td>
+          </tr>
+          <tr>
+            <td><code>@LongueurMin</code></td>
+            <td><code>@Size</code></td>
+          </tr>
+          <tr>
+            <td><code>@Positif</code></td>
+            <td><code>@Positive</code></td>
+          </tr>
+          <tr>
+            <td><code>@Valide</code></td>
+            <td><code>@Valid</code></td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exceptions">
+      <h2>Exceptions courantes</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Exception</th>
+          <th>Cas typique</th>
+          <th>Traitement habituel</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>ClassNotFoundException</code></td>
+          <td><code>Class.forName(...)</code> ne trouve pas la classe demandée.</td>
+          <td>Vérifier le nom complet de la classe et le classpath.</td>
+        </tr>
+        <tr>
+          <td><code>NoSuchMethodException</code></td>
+          <td>Aucune méthode ou aucun constructeur ne correspond au nom et aux types donnés.</td>
+          <td>Vérifier le nom, la visibilité, et les types exacts des paramètres.</td>
+        </tr>
+        <tr>
+          <td><code>NoSuchFieldException</code></td>
+          <td>Aucun champ ne correspond au nom donné.</td>
+          <td>Vérifier le nom du champ et l'utilisation de <code>getField</code> ou <code>getDeclaredField</code>.</td>
+        </tr>
+        <tr>
+          <td><code>InstantiationException</code></td>
+          <td>Impossible d'instancier la classe, par exemple parce qu'elle est abstraite.</td>
+          <td>Créer une instance d'une classe concrète.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalAccessException</code></td>
+          <td>Le membre existe mais n'est pas accessible depuis le code courant.</td>
+          <td>Utiliser un membre public ou appeler <code>setAccessible(true)</code> si c'est approprié.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalArgumentException</code></td>
+          <td>Arguments incompatibles lors d'un appel dynamique.</td>
+          <td>Vérifier l'objet cible, le nombre d'arguments et leurs types.</td>
+        </tr>
+        <tr>
+          <td><code>InvocationTargetException</code></td>
+          <td>La méthode ou le constructeur appelé a lui-même lancé une exception.</td>
+          <td>Récupérer l'exception originale avec <code>getCause()</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h3><code>InvocationTargetException</code></h3>
+      <span class="signature">Throwable getCause()</span>
+      <p>Quand une méthode appelée par <code>Method.invoke</code> lance une exception, cette exception n'est pas lancée directement. Elle est enveloppée dans une <code>InvocationTargetException</code>.</p>
+      <pre><code>try {
+    methode.invoke(objet);
+} catch (InvocationTargetException e) {
+    Throwable cause = e.getCause();
+    System.out.println(cause.getMessage());
+}</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="modifiers">
+      <h2>Modificateurs</h2>
+      <p>Classe : <code>java.lang.reflect.Modifier</code>. Les méthodes comme <code>getModifiers()</code> retournent un entier contenant les modificateurs Java. La classe <code>Modifier</code> permet de l'interpréter.</p>
+      <span class="signature">static boolean isPublic(int mod)</span>
+      <span class="signature">static boolean isPrivate(int mod)</span>
+      <span class="signature">static boolean isProtected(int mod)</span>
+      <span class="signature">static boolean isStatic(int mod)</span>
+      <span class="signature">static boolean isFinal(int mod)</span>
+      <span class="signature">static boolean isAbstract(int mod)</span>
+      <pre><code>Method methode = Produit.class.getDeclaredMethod("getNom");
+int mod = methode.getModifiers();
+
+if (Modifier.isPublic(mod)) {
+    System.out.println("Méthode publique");
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemples">
+      <h2>Exemples neutres</h2>
+
+      <h3>Classe utilisée dans les exemples</h3>
+      <pre><code>class Produit {
+    private String nom;
+    private double prix;
+
+    public Produit() {
+        this("inconnu", 0.0);
+    }
+
+    public Produit(String nom, double prix) {
+        this.nom = nom;
+        this.prix = prix;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void changerPrix(double nouveauPrix) {
+        if (nouveauPrix &lt; 0) {
+            throw new IllegalArgumentException("prix négatif");
+        }
+        this.prix = nouveauPrix;
+    }
+}</code></pre>
+
+      <h3>Créer un objet puis appeler une méthode</h3>
+      <pre><code>Class&lt;Produit&gt; type = Produit.class;
+
+Constructor&lt;Produit&gt; constructeur =
+    type.getDeclaredConstructor(String.class, double.class);
+
+Produit produit = constructeur.newInstance("Carnet", 4.5);
+
+Method getNom = type.getDeclaredMethod("getNom");
+String nom = (String) getNom.invoke(produit);
+
+System.out.println(nom);</code></pre>
+
+      <h3>Filtrer des méthodes annotées</h3>
+      <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+@interface Action {
+    String nom();
+}
+
+class Controleur {
+    @Action(nom = "ouvrir")
+    public void ouvrir() {
+        System.out.println("ouverture");
+    }
+
+    public void fermer() {
+        System.out.println("fermeture");
+    }
+}
+
+for (Method methode : Controleur.class.getDeclaredMethods()) {
+    if (methode.isAnnotationPresent(Action.class)) {
+        Action action = methode.getAnnotation(Action.class);
+        System.out.println(action.nom() + " - " + methode.getName());
+    }
+}</code></pre>
+
+      <h3>Gérer une exception lancée par une méthode appelée</h3>
+      <pre><code>Produit produit = new Produit("Carnet", 4.5);
+Method changerPrix = Produit.class.getDeclaredMethod("changerPrix", double.class);
+
+try {
+    changerPrix.invoke(produit, -1.0);
+} catch (InvocationTargetException e) {
+    Throwable cause = e.getCause();
+    System.out.println("Erreur réelle : " + cause.getMessage());
+}</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Une annotation n'est jamais détectée.</td>
+          <td>La rétention n'est pas <code>RUNTIME</code>.</td>
+          <td>Déclarer l'annotation avec <code>@Retention(RetentionPolicy.RUNTIME)</code>.</td>
+        </tr>
+        <tr>
+          <td><code>getMethod</code> ne trouve pas une méthode privée.</td>
+          <td><code>getMethod</code> ne cherche que les méthodes publiques accessibles.</td>
+          <td>Utiliser <code>getDeclaredMethod</code>, puis éventuellement <code>setAccessible(true)</code>.</td>
+        </tr>
+        <tr>
+          <td><code>NoSuchMethodException</code> malgré un nom correct.</td>
+          <td>Les types de paramètres ne correspondent pas exactement.</td>
+          <td>Passer les classes exactes : <code>int.class</code>, <code>String.class</code>, <code>double.class</code>, etc.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalArgumentException</code> pendant <code>invoke</code>.</td>
+          <td>Objet cible ou arguments incorrects.</td>
+          <td>Vérifier que l'objet est bien une instance de la classe qui déclare la méthode, et que les arguments ont les bons types.</td>
+        </tr>
+        <tr>
+          <td>Une exception applicative est cachée dans <code>InvocationTargetException</code>.</td>
+          <td>La méthode appelée dynamiquement a lancé une exception.</td>
+          <td>Lire <code>e.getCause()</code> pour obtenir l'exception originale.</td>
+        </tr>
+        <tr>
+          <td>Le résultat de <code>invoke</code> doit être casté.</td>
+          <td><code>invoke</code> retourne toujours <code>Object</code>.</td>
+          <td>Caster vers le type attendu après avoir vérifié la signature de la méthode.</td>
+        </tr>
+        <tr>
+          <td>Le programme dépend de l'ordre des méthodes retournées.</td>
+          <td>La réflexion ne garantit pas l'ordre de déclaration.</td>
+          <td>Trier explicitement si un ordre est nécessaire, par exemple avec <code>Comparator.comparing(Method::getName)</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference">
+      <h2>Référence rapide</h2>
+      <h3>Classe</h3>
+      <pre><code>Class&lt;?&gt; type = Objet.class;
+Class&lt;?&gt; type = objet.getClass();
+Class&lt;?&gt; type = Class.forName("demo.Objet");
+
+type.getName();
+type.getSimpleName();
+type.getDeclaredMethods();
+type.getDeclaredFields();
+type.getDeclaredConstructor();
+type.isAnnotationPresent(MonAnnotation.class);</code></pre>
+
+      <h3>Constructeur</h3>
+      <pre><code>Constructor&lt;Objet&gt; c = Objet.class.getDeclaredConstructor();
+Objet objet = c.newInstance();</code></pre>
+
+      <h3>Méthode</h3>
+      <pre><code>Method m = Objet.class.getDeclaredMethod("nomMethode", String.class);
+m.setAccessible(true);
+Object resultat = m.invoke(objet, "valeur");
+
+if (m.isAnnotationPresent(MonAnnotation.class)) {
+    MonAnnotation annotation = m.getAnnotation(MonAnnotation.class);
+}</code></pre>
+
+      <h3>Annotation</h3>
+      <pre><code>@Retention(RetentionPolicy.RUNTIME)
+@Target(ElementType.METHOD)
+public @interface MonAnnotation {
+    String value() default "";
+}</code></pre>
+
+      <h3>Exception enveloppée</h3>
+      <pre><code>try {
+    methode.invoke(objet);
+} catch (InvocationTargetException e) {
+    Throwable cause = e.getCause();
+}</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être distribuée et ouverte directement dans un navigateur hors ligne.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

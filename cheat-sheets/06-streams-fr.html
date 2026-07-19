@@ -1,0 +1,941 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 6 - Streams Java - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5d6b7c;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e3b545;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 6 — Streams Java</h1>
+  <p>Document autonome en français sur l'API Stream de Java. Il couvre la création de streams, les opérations intermédiaires, les opérations terminales, les Collectors et la classe Optional.</p>
+  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="05-mocks-fr.html">&larr; Semaine 5</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="07-programmation-fonctionnelle-fr.html">Semaine 7 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#notions">Notions essentielles</a>
+    <a href="#imports">Imports utiles</a>
+    <a href="#creation">Créer un Stream</a>
+    <a href="#intermediaires">Opérations intermédiaires</a>
+    <a href="#terminales">Opérations terminales</a>
+    <a href="#collectors">Collectors</a>
+    <a href="#optional">Optional</a>
+    <a href="#exemples">Exemples neutres</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference">Référence rapide</a>
+  </div>
+
+  <div class="content">
+
+    <div class="doc-section" id="notions">
+      <h2>Notions essentielles</h2>
+      <p>Un <code>Stream&lt;T&gt;</code> est une séquence d'éléments sur laquelle on peut enchaîner des opérations de traitement sans modifier la source. Il n'est pas une structure de données : il ne stocke rien et ne peut être consommé qu'une seule fois.</p>
+      <p>Un pipeline Stream se compose de trois parties :</p>
+      <ul>
+        <li><strong>Source</strong> : la collection, le tableau ou la méthode qui produit les éléments.</li>
+        <li><strong>Opérations intermédiaires</strong> : transformations paresseuses qui retournent un nouveau Stream (<code>filter</code>, <code>map</code>, <code>flatMap</code>, <code>distinct</code>, <code>sorted</code>, …).</li>
+        <li><strong>Opération terminale</strong> : déclenche réellement l'exécution et consomme le Stream (<code>collect</code>, <code>count</code>, <code>max</code>, <code>forEach</code>, …).</li>
+      </ul>
+      <div class="warning">
+        Un Stream ne peut être consommé qu'une seule fois. Appeler deux opérations terminales sur le même Stream lance une <code>IllegalStateException</code>.
+      </div>
+      <table>
+        <thead>
+        <tr>
+          <th>Type de Stream</th>
+          <th>Classe</th>
+          <th>Remarque</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Objets</td>
+          <td><code>Stream&lt;T&gt;</code></td>
+          <td>Cas général.</td>
+        </tr>
+        <tr>
+          <td>Entiers primitifs</td>
+          <td><code>IntStream</code></td>
+          <td>Évite le boxing/unboxing des <code>int</code>.</td>
+        </tr>
+        <tr>
+          <td>Longs primitifs</td>
+          <td><code>LongStream</code></td>
+          <td>Évite le boxing/unboxing des <code>long</code>.</td>
+        </tr>
+        <tr>
+          <td>Doubles primitifs</td>
+          <td><code>DoubleStream</code></td>
+          <td>Évite le boxing/unboxing des <code>double</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="imports">
+      <h2>Imports utiles</h2>
+      <pre><code>import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.OptionalInt;
+import java.util.Set;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;</code></pre>
+      <p>Les classes <code>List</code>, <code>Map</code>, <code>Optional</code> et <code>OptionalInt</code> appartiennent à <code>java.util</code>. Les classes <code>Collectors</code> et <code>Stream</code> sont dans <code>java.util.stream</code>.</p>
+      <div class="note">
+        La méthode <code>stream()</code> est disponible directement sur toute <code>Collection</code> (comme <code>List</code> ou <code>Set</code>) sans import supplémentaire.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="creation">
+      <h2>Créer un Stream</h2>
+
+      <div class="api">
+        <h3>Depuis une collection</h3>
+        <span class="signature">Collection&lt;T&gt;.stream()</span>
+        <span class="signature">Collection&lt;T&gt;.parallelStream()</span>
+        <pre><code>List&lt;String&gt; noms = List.of("Alice", "Bob", "Claire");
+
+Stream&lt;String&gt; stream = noms.stream();</code></pre>
+        <p>C'est la manière la plus courante. On part d'une <code>List</code> et on enchaîne les opérations.</p>
+      </div>
+
+      <div class="api">
+        <h3>Depuis des valeurs littérales</h3>
+        <span class="signature">Stream.of(T... values)</span>
+        <pre><code>Stream&lt;String&gt; stream = Stream.of("Alice", "Bob", "Claire");</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Depuis un tableau</h3>
+        <span class="signature">Arrays.stream(T[] array)</span>
+        <pre><code>String[] tableau = {"Alice", "Bob"};
+Stream&lt;String&gt; stream = Arrays.stream(tableau);</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Stream vide</h3>
+        <span class="signature">Stream.empty()</span>
+        <pre><code>Stream&lt;String&gt; vide = Stream.empty();</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="intermediaires">
+      <h2>Opérations intermédiaires</h2>
+      <p>Les opérations intermédiaires sont <strong>paresseuses</strong> : elles ne s'exécutent pas tant qu'aucune opération terminale n'est appelée. Chacune retourne un nouveau <code>Stream</code>.</p>
+
+      <div class="api">
+        <h3><code>filter</code></h3>
+        <span class="signature">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</span>
+        <p>Retient uniquement les éléments pour lesquels le prédicat est vrai.</p>
+        <pre><code>List&lt;Produit&gt; cheers = produits.stream()
+    .filter(p -&gt; p.getPrix() &gt; 100)
+    .collect(Collectors.toList());
+
+List&lt;Produit&gt; electronique = produits.stream()
+    .filter(p -&gt; p.getCategorie().equals("Electronique"))
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>map</code></h3>
+        <span class="signature">Stream&lt;R&gt; map(Function&lt;? super T, ? extends R&gt; mapper)</span>
+        <p>Transforme chaque élément en un autre élément. Le type de sortie peut être différent du type d'entrée.</p>
+        <pre><code>// Extraire le prix de chaque produit
+List&lt;Integer&gt; prix = produits.stream()
+    .map(Produit::getPrix)
+    .collect(Collectors.toList());
+
+// Extraire les noms des produits
+List&lt;String&gt; noms = produits.stream()
+    .map(Produit::getNom)
+    .collect(Collectors.toList());</code></pre>
+        <div class="note">
+          La syntaxe <code>Produit::getNom</code> est une référence de méthode. Elle est équivalente à la lambda <code>p -&gt; p.getNom()</code>.
+        </div>
+      </div>
+
+      <div class="api">
+        <h3><code>mapToInt</code>, <code>mapToLong</code>, <code>mapToDouble</code></h3>
+        <span class="signature">IntStream mapToInt(ToIntFunction&lt;? super T&gt; mapper)</span>
+        <p>Transforme un <code>Stream&lt;T&gt;</code> en stream primitif. Utile pour des calculs numériques (<code>sum</code>, <code>average</code>, <code>max</code>) sans boxing.</p>
+        <pre><code>List&lt;Integer&gt; notes = List.of(12, 8, 15, 9, 18);
+int somme = notes.stream()
+    .mapToInt(Integer::intValue)
+    .sum();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>flatMap</code></h3>
+        <span class="signature">Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper)</span>
+        <p>"Aplatit" une structure imbriquée. Pour chaque élément, la fonction retourne un Stream d'éléments ; tous ces streams sont concaténés en un seul stream.</p>
+        <pre><code>List&lt;List&lt;String&gt;&gt; groupes = List.of(
+    List.of("alpha", "beta"),
+    List.of("gamma", "delta")
+);
+List&lt;String&gt; mots = groupes.stream()
+    .flatMap(List::stream)
+    .collect(Collectors.toList());
+// ["alpha", "beta", "gamma", "delta"]</code></pre>
+        <div class="note">
+          <code>flatMap</code> est la solution pour "passer d'une liste de listes à une liste plate". Si chaque élément contient une <code>List</code>, appeler <code>.stream()</code> sur cette liste à l'intérieur du <code>flatMap</code>.
+        </div>
+      </div>
+
+      <div class="api">
+        <h3><code>distinct</code></h3>
+        <span class="signature">Stream&lt;T&gt; distinct()</span>
+        <p>Supprime les doublons en utilisant <code>equals</code> et <code>hashCode</code>. L'ordre d'apparition des éléments est préservé.</p>
+        <pre><code>List&lt;String&gt; mots = List.of("chat", "chien", "chat", "oiseau");
+List&lt;String&gt; uniques = mots.stream()
+    .distinct()
+    .collect(Collectors.toList());
+// ["chat", "chien", "oiseau"]</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>sorted</code></h3>
+        <span class="signature">Stream&lt;T&gt; sorted()</span>
+        <span class="signature">Stream&lt;T&gt; sorted(Comparator&lt;? super T&gt; comparator)</span>
+        <p>Trie les éléments selon l'ordre naturel ou un comparateur explicite.</p>
+        <pre><code>// Trier les noms de produits par ordre alphabétique
+List&lt;String&gt; nomsTries = produits.stream()
+    .map(Produit::getNom)
+    .sorted()
+    .collect(Collectors.toList());
+
+// Trier les produits par prix croissant
+List&lt;Produit&gt; tries = produits.stream()
+    .sorted(Comparator.comparingInt(Produit::getPrix))
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>limit</code> et <code>skip</code></h3>
+        <span class="signature">Stream&lt;T&gt; limit(long maxSize)</span>
+        <span class="signature">Stream&lt;T&gt; skip(long n)</span>
+        <p><code>limit</code> tronque le stream aux <code>maxSize</code> premiers éléments. <code>skip</code> ignore les <code>n</code> premiers éléments.</p>
+        <pre><code>// Les 3 premiers produits
+List&lt;Produit&gt; premiers = produits.stream()
+    .limit(3)
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>peek</code></h3>
+        <span class="signature">Stream&lt;T&gt; peek(Consumer&lt;? super T&gt; action)</span>
+        <p>Applique une action sur chaque élément sans les modifier, utile pour déboguer un pipeline.</p>
+        <pre><code>produits.stream()
+    .peek(p -&gt; System.out.println("Produit : " + p.getNom()))
+    .filter(p -&gt; p.getCategorie().equals("Electronique"))
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="terminales">
+      <h2>Opérations terminales</h2>
+      <p>Une opération terminale déclenche le traitement du pipeline et consomme le Stream. Après son appel, le Stream est fermé.</p>
+
+      <div class="api">
+        <h3><code>collect</code></h3>
+        <span class="signature">R collect(Collector&lt;? super T, A, R&gt; collector)</span>
+        <p>Accumule les éléments dans un conteneur. C'est l'opération terminale la plus courante. Les <code>Collector</code> prêts à l'emploi sont dans la classe <code>Collectors</code>.</p>
+        <pre><code>List&lt;Produit&gt; electronique = produits.stream()
+    .filter(p -&gt; p.getCategorie().equals("Electronique"))
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>count</code></h3>
+        <span class="signature">long count()</span>
+        <p>Retourne le nombre d'éléments dans le stream.</p>
+        <pre><code>long nombreElectronique = produits.stream()
+    .filter(p -&gt; p.getCategorie().equals("Electronique"))
+    .count();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>max</code> et <code>min</code></h3>
+        <span class="signature">Optional&lt;T&gt; max(Comparator&lt;? super T&gt; comparator)</span>
+        <span class="signature">Optional&lt;T&gt; min(Comparator&lt;? super T&gt; comparator)</span>
+        <p>Retourne l'élément maximal ou minimal selon un comparateur. Retourne un <code>Optional</code> vide si le stream est vide.</p>
+        <pre><code>List&lt;Integer&gt; nombres = List.of(3, 1, 4, 1, 5, 9, 2, 6);
+
+Optional&lt;Integer&gt; max = nombres.stream()
+    .max(Comparator.naturalOrder());
+
+OptionalInt max2 = nombres.stream()
+    .mapToInt(Integer::intValue)
+    .max();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>findFirst</code> et <code>findAny</code></h3>
+        <span class="signature">Optional&lt;T&gt; findFirst()</span>
+        <span class="signature">Optional&lt;T&gt; findAny()</span>
+        <p>Retourne un <code>Optional</code> contenant le premier élément (<code>findFirst</code>) ou n'importe quel élément (<code>findAny</code>). Retourne un <code>Optional</code> vide si le stream est vide.</p>
+        <pre><code>Optional&lt;Produit&gt; premierCher = produits.stream()
+    .filter(p -&gt; p.getPrix() &gt; 100)
+    .findFirst();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>anyMatch</code>, <code>allMatch</code>, <code>noneMatch</code></h3>
+        <span class="signature">boolean anyMatch(Predicate&lt;? super T&gt; predicate)</span>
+        <span class="signature">boolean allMatch(Predicate&lt;? super T&gt; predicate)</span>
+        <span class="signature">boolean noneMatch(Predicate&lt;? super T&gt; predicate)</span>
+        <p>Vérifient si au moins un, tous, ou aucun des éléments satisfont le prédicat.</p>
+        <pre><code>boolean aUnCherProduit = produits.stream()
+    .anyMatch(p -&gt; p.getPrix() &gt; 100);
+
+boolean tousAvecPrix = produits.stream()
+    .allMatch(p -&gt; p.getPrix() &gt; 0);</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>forEach</code></h3>
+        <span class="signature">void forEach(Consumer&lt;? super T&gt; action)</span>
+        <p>Applique une action sur chaque élément. Ne retourne rien.</p>
+        <pre><code>produits.stream()
+    .forEach(p -&gt; System.out.println(p.getNom()));</code></pre>
+        <div class="warning">
+          <code>forEach</code> ne permet pas de construire un résultat. Pour collecter ou transformer, utiliser <code>collect</code>.
+        </div>
+      </div>
+
+      <div class="api">
+        <h3><code>reduce</code></h3>
+        <span class="signature">Optional&lt;T&gt; reduce(BinaryOperator&lt;T&gt; accumulator)</span>
+        <span class="signature">T reduce(T identity, BinaryOperator&lt;T&gt; accumulator)</span>
+        <p>Combine les éléments deux à deux pour produire un seul résultat.</p>
+        <pre><code>// Somme des prix (avec valeur initiale)
+int total = produits.stream()
+    .mapToInt(Produit::getPrix)
+    .reduce(0, Integer::sum);</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="collectors">
+      <h2>Collectors</h2>
+      <p>Classe : <code>java.util.stream.Collectors</code>. Fournit des implémentations prêtes à l'emploi de l'interface <code>Collector</code>.</p>
+
+      <div class="api">
+        <h3><code>toList</code></h3>
+        <span class="signature">Collector toList()</span>
+        <p>Collecte les éléments dans une <code>List</code>. C'est le collector le plus utilisé.</p>
+        <pre><code>List&lt;String&gt; noms = produits.stream()
+    .map(Produit::getNom)
+    .collect(Collectors.toList());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>toSet</code></h3>
+        <span class="signature">Collector toSet()</span>
+        <p>Collecte les éléments dans un <code>Set</code>. Les doublons sont éliminés automatiquement. L'ordre n'est pas garanti.</p>
+        <pre><code>Set&lt;String&gt; categoriesUniques = produits.stream()
+    .map(Produit::getCategorie)
+    .collect(Collectors.toSet());</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>toMap</code></h3>
+        <span class="signature">Collector toMap(Function keyMapper, Function valueMapper)</span>
+        <span class="signature">Collector toMap(Function keyMapper, Function valueMapper, BinaryOperator mergeFunction)</span>
+        <p>Collecte les éléments dans une <code>Map</code>. Lance une exception si deux éléments produisent la même clé, sauf si une fonction de fusion est fournie.</p>
+        <pre><code>// Associer le nom d'un produit à son prix
+Map&lt;String, Integer&gt; prixParNom = produits.stream()
+    .collect(Collectors.toMap(Produit::getNom, Produit::getPrix));</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>groupingBy</code></h3>
+        <span class="signature">Collector groupingBy(Function classifier)</span>
+        <span class="signature">Collector groupingBy(Function classifier, Collector downstream)</span>
+        <p>Regroupe les éléments selon un critère. Retourne une <code>Map&lt;K, List&lt;T&gt;&gt;</code> par défaut. Un collector aval (<em>downstream</em>) peut transformer la valeur de chaque groupe.</p>
+        <pre><code>List&lt;String&gt; mots = List.of("chat", "chien", "cheval", "aigle", "ara");
+
+// Grouper par longueur du mot
+Map&lt;Integer, List&lt;String&gt;&gt; parLongueur = mots.stream()
+    .collect(Collectors.groupingBy(String::length));
+
+// Compter le nombre de mots par longueur
+Map&lt;Integer, Long&gt; compteParLongueur = mots.stream()
+    .collect(Collectors.groupingBy(
+        String::length,
+        Collectors.counting()
+    ));</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>counting</code></h3>
+        <span class="signature">Collector counting()</span>
+        <p>Compte le nombre d'éléments. Souvent utilisé comme collector aval de <code>groupingBy</code>.</p>
+        <pre><code>List&lt;String&gt; mots = List.of("chat", "chien", "cheval", "aigle", "ara");
+Map&lt;Integer, Long&gt; compteParLongueur = mots.stream()
+    .collect(Collectors.groupingBy(
+        String::length,
+        Collectors.counting()
+    ));</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>joining</code></h3>
+        <span class="signature">Collector joining()</span>
+        <span class="signature">Collector joining(CharSequence delimiter)</span>
+        <span class="signature">Collector joining(CharSequence delimiter, CharSequence prefix, CharSequence suffix)</span>
+        <p>Concatène les éléments <code>String</code> en une seule chaîne.</p>
+        <pre><code>String nomsJoints = produits.stream()
+    .map(Produit::getNom)
+    .collect(Collectors.joining(", "));
+// "ProA, ProB, ProC"</code></pre>
+      </div>
+
+      <div class="api">
+        <h3><code>summarizingInt</code> / <code>averagingInt</code> / <code>summingInt</code></h3>
+        <span class="signature">Collector summingInt(ToIntFunction mapper)</span>
+        <span class="signature">Collector averagingInt(ToIntFunction mapper)</span>
+        <span class="signature">Collector summarizingInt(ToIntFunction mapper)</span>
+        <p>Collecteurs numériques. <code>summingInt</code> calcule une somme, <code>averagingInt</code> une moyenne, <code>summarizingInt</code> retourne un <code>IntSummaryStatistics</code> contenant count, sum, min, max et average.</p>
+        <pre><code>List&lt;Integer&gt; nombres = List.of(3, 1, 4, 1, 5, 9);
+int somme = nombres.stream()
+    .collect(Collectors.summingInt(Integer::intValue));</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="optional">
+      <h2>Optional</h2>
+      <p>Classe : <code>java.util.Optional&lt;T&gt;</code>. Un conteneur pouvant contenir une valeur ou être vide. Il permet d'éviter les retours <code>null</code> et les <code>NullPointerException</code> associées. Les opérations terminales <code>max</code>, <code>min</code>, <code>findFirst</code> et <code>findAny</code> retournent un <code>Optional</code>.</p>
+
+      <div class="api">
+        <h3>Créer un Optional</h3>
+        <span class="signature">static &lt;T&gt; Optional&lt;T&gt; of(T value)</span>
+        <span class="signature">static &lt;T&gt; Optional&lt;T&gt; ofNullable(T value)</span>
+        <span class="signature">static &lt;T&gt; Optional&lt;T&gt; empty()</span>
+        <pre><code>Optional&lt;String&gt; present = Optional.of("Alice");
+Optional&lt;String&gt; peut_etre = Optional.ofNullable(valeurPotentiellementNulle);
+Optional&lt;String&gt; vide = Optional.empty();</code></pre>
+        <p><code>Optional.of(null)</code> lance une <code>NullPointerException</code>. Utiliser <code>ofNullable</code> si la valeur peut être <code>null</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Vérifier et lire la valeur</h3>
+        <span class="signature">boolean isPresent()</span>
+        <span class="signature">boolean isEmpty()</span>
+        <span class="signature">T get()</span>
+        <pre><code>Optional&lt;Integer&gt; prixMax = produits.stream()
+    .map(Produit::getPrix)
+    .max(Comparator.naturalOrder());
+
+if (prixMax.isPresent()) {
+    System.out.println("Maximum : " + prixMax.get());
+}</code></pre>
+        <div class="warning">
+          Appeler <code>get()</code> sur un <code>Optional</code> vide lance une <code>NoSuchElementException</code>. Toujours vérifier avec <code>isPresent()</code> avant d'appeler <code>get()</code>, ou préférer les méthodes ci-dessous.
+        </div>
+      </div>
+
+      <div class="api">
+        <h3>Obtenir une valeur par défaut</h3>
+        <span class="signature">T orElse(T other)</span>
+        <span class="signature">T orElseGet(Supplier&lt;? extends T&gt; supplier)</span>
+        <span class="signature">&lt;X extends Throwable&gt; T orElseThrow(Supplier&lt;? extends X&gt; exceptionSupplier)</span>
+        <pre><code>int max = produits.stream()
+    .mapToInt(Produit::getPrix)
+    .max()
+    .orElse(0);
+
+Optional&lt;String&gt; optNom = Optional.ofNullable(produit.getNom());
+String nom = optNom.orElse("Inconnu");
+String nom2 = optNom.orElseGet(() -&gt; "valeur-par-defaut");</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Transformer un Optional</h3>
+        <span class="signature">Optional&lt;U&gt; map(Function&lt;? super T, ? extends U&gt; mapper)</span>
+        <span class="signature">Optional&lt;U&gt; flatMap(Function&lt;? super T, ? extends Optional&lt;? extends U&gt;&gt; mapper)</span>
+        <span class="signature">Optional&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</span>
+        <pre><code>Optional&lt;Produit&gt; optProduit = Optional.of(new Produit("Stylo", "Bureau", 2));
+Optional&lt;String&gt; nom = optProduit
+    .filter(p -&gt; p.getPrix() &gt; 10)
+    .map(Produit::getNom);</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Exécuter du code si valeur présente</h3>
+        <span class="signature">void ifPresent(Consumer&lt;? super T&gt; action)</span>
+        <span class="signature">void ifPresentOrElse(Consumer&lt;? super T&gt; action, Runnable emptyAction)</span>
+        <pre><code>prixMax.ifPresent(v -&gt; System.out.println("Prix max : " + v));</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemples">
+      <h2>Exemples complets</h2>
+
+      <h3>Pipeline sur une liste de chaînes</h3>
+      <pre><code>List&lt;String&gt; villes = List.of("Paris", "Lyon", "Pau", "Périgueux", "Laon");
+
+// Villes dont le nom a plus de 4 lettres, triées
+List&lt;String&gt; longues = villes.stream()
+    .filter(v -&gt; v.length() &gt; 4)
+    .sorted()
+    .collect(Collectors.toList());
+// ["Lyon", "Paris", "Périgueux"]</code></pre>
+
+      <h3>Pipeline sur une liste d'entiers</h3>
+      <pre><code>List&lt;Integer&gt; notes = List.of(12, 8, 15, 12, 9, 15, 18);
+
+// Valeurs distinctes, triées
+List&lt;Integer&gt; distinctes = notes.stream()
+    .distinct()
+    .sorted()
+    .collect(Collectors.toList());
+// [8, 9, 12, 15, 18]
+
+// Maximum
+Optional&lt;Integer&gt; max = notes.stream()
+    .max(Comparator.naturalOrder());
+
+// Somme
+int somme = notes.stream()
+    .mapToInt(Integer::intValue)
+    .sum();</code></pre>
+
+      <h3>flatMap sur une liste de listes</h3>
+      <pre><code>List&lt;List&lt;String&gt;&gt; groupes = List.of(
+    List.of("alpha", "beta", "alpha"),
+    List.of("gamma", "beta")
+);
+
+List&lt;String&gt; tous = groupes.stream()
+    .flatMap(List::stream)
+    .collect(Collectors.toList());
+// ["alpha", "beta", "alpha", "gamma", "beta"]</code></pre>
+
+      <h3>groupingBy + counting sur des chaînes</h3>
+      <pre><code>List&lt;String&gt; mots = List.of("chat", "chien", "cheval", "aigle", "ara");
+
+Map&lt;Integer, Long&gt; parLongueur = mots.stream()
+    .collect(Collectors.groupingBy(
+        String::length,
+        Collectors.counting()
+    ));
+// {3=1, 4=1, 5=2, 6=1}</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Le stream ne produit aucun résultat alors que la source n'est pas vide.</td>
+          <td>L'opération terminale n'a pas été appelée ; les opérations intermédiaires seules ne s'exécutent pas.</td>
+          <td>Ajouter une opération terminale comme <code>collect</code>, <code>count</code>, <code>forEach</code>.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalStateException: stream has already been operated upon or closed</code></td>
+          <td>Le stream a déjà été consommé par une opération terminale.</td>
+          <td>Appeler de nouveau <code>.stream()</code> sur la source pour créer un nouveau stream.</td>
+        </tr>
+        <tr>
+          <td><code>NullPointerException</code> dans un <code>map</code> ou <code>filter</code>.</td>
+          <td>Un élément de la source est <code>null</code> ou un getter retourne <code>null</code>.</td>
+          <td>Filtrer les <code>null</code> avec <code>filter(Objects::nonNull)</code> avant la transformation.</td>
+        </tr>
+        <tr>
+          <td>Utiliser <code>map</code> au lieu de <code>flatMap</code> avec une liste imbriquée.</td>
+          <td><code>map(g -&gt; g.getElements())</code> retourne un <code>Stream&lt;List&lt;T&gt;&gt;</code>, pas un <code>Stream&lt;T&gt;</code>.</td>
+          <td>Utiliser <code>flatMap(g -&gt; g.getElements().stream())</code> pour aplatir.</td>
+        </tr>
+        <tr>
+          <td>Appel à <code>Optional.get()</code> sur un Optional vide.</td>
+          <td>Le stream était vide, donc <code>max</code>, <code>min</code> ou <code>findFirst</code> ont retourné un Optional vide.</td>
+          <td>Utiliser <code>orElse(...)</code>, <code>orElseGet(...)</code> ou vérifier avec <code>isPresent()</code> avant <code>get()</code>.</td>
+        </tr>
+        <tr>
+          <td>Doublons non supprimés malgré l'utilisation de <code>distinct()</code>.</td>
+          <td>La classe des éléments ne redéfinit pas <code>equals</code> et <code>hashCode</code>.</td>
+          <td>Redéfinir <code>equals</code> et <code>hashCode</code> dans la classe, ou mapper vers un type qui les implémente (ex. <code>String</code>) avant <code>distinct()</code>.</td>
+        </tr>
+        <tr>
+          <td>Confondre <code>map</code> et <code>mapToInt</code>.</td>
+          <td><code>map</code> retourne un <code>Stream&lt;Integer&gt;</code> (objets boxés). <code>mapToInt</code> retourne un <code>IntStream</code> (primitifs) avec des méthodes supplémentaires comme <code>sum()</code> et <code>average()</code>.</td>
+          <td>Utiliser <code>mapToInt</code> quand on a besoin de <code>sum()</code>, <code>average()</code> ou <code>max()</code> sans comparateur.</td>
+        </tr>
+        <tr>
+          <td><code>toMap</code> lance une exception si deux éléments ont la même clé.</td>
+          <td>Clés dupliquées sans fonction de fusion.</td>
+          <td>Ajouter une fonction de fusion : <code>Collectors.toMap(keyFn, valueFn, (v1, v2) -&gt; v1)</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference">
+      <h2>Référence rapide</h2>
+
+      <h3>Imports</h3>
+      <pre><code>import java.util.List;
+import java.util.Map;
+import java.util.Optional;
+import java.util.stream.Collectors;</code></pre>
+
+      <h3>Opérations intermédiaires</h3>
+      <pre><code>stream.filter(e -&gt; condition)
+stream.map(e -&gt; transformation)
+stream.mapToInt(e -&gt; valeurInt)
+stream.flatMap(e -&gt; e.getListe().stream())
+stream.distinct()
+stream.sorted()
+stream.sorted(Comparator.comparing(E::getChamp))
+stream.limit(n)
+stream.skip(n)</code></pre>
+
+      <h3>Opérations terminales</h3>
+      <pre><code>stream.collect(Collectors.toList())
+stream.collect(Collectors.toSet())
+stream.count()
+stream.max(Comparator.naturalOrder())
+stream.min(Comparator.naturalOrder())
+stream.findFirst()
+stream.anyMatch(e -&gt; condition)
+stream.allMatch(e -&gt; condition)
+stream.noneMatch(e -&gt; condition)
+stream.forEach(e -&gt; action)</code></pre>
+
+      <h3>Collectors</h3>
+      <pre><code>Collectors.toList()
+Collectors.toSet()
+Collectors.toMap(keyFn, valueFn)
+Collectors.groupingBy(classFn)
+Collectors.groupingBy(classFn, Collectors.counting())
+Collectors.counting()
+Collectors.joining(", ")
+Collectors.summingInt(toIntFn)</code></pre>
+
+      <h3>Optional</h3>
+      <pre><code>optional.isPresent()
+optional.isEmpty()
+optional.get()
+optional.orElse(valeurParDefaut)
+optional.orElseGet(() -&gt; calculer())
+optional.ifPresent(v -&gt; action)</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être distribuée et ouverte directement dans un navigateur hors ligne.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1072 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 7 - Programmation fonctionnelle - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5d6b7c;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e3b545;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 7 — Programmation fonctionnelle</h1>
+  <p>Document autonome en français sur la programmation fonctionnelle en Java. Il ouvre le capot des Streams : interfaces fonctionnelles standard, lambdas, références de méthode, <code>flatMap</code>, comparateurs fonctionnels, immuabilité et gestion des exceptions dans un style fonctionnel.</p>
+  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard (<code>java.util.function</code>, <code>java.util.Comparator</code>).</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="06-streams-fr.html">&larr; Semaine 6</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="08-lecture-fichiers-fr.html">Semaine 8 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#interfaces">Interfaces fonctionnelles</a>
+    <a href="#lambdas">Expressions lambda</a>
+    <a href="#references">Références de méthode</a>
+    <a href="#predicate">Predicate</a>
+    <a href="#function">Function et BiFunction</a>
+    <a href="#consumer-supplier">Consumer et Supplier</a>
+    <a href="#comparateurs">Comparateurs fonctionnels</a>
+    <a href="#flatmap">flatMap</a>
+    <a href="#default-static">Méthodes default et static</a>
+    <a href="#immuabilite">Immuabilité</a>
+    <a href="#exceptions">Exceptions en style fonctionnel</a>
+    <a href="#streams-paralleles">Streams parallèles</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference">Référence rapide</a>
+  </div>
+
+  <div class="content">
+
+    <div class="doc-section" id="interfaces">
+      <h2>Interfaces fonctionnelles</h2>
+      <p>Une <strong>interface fonctionnelle</strong> est une interface qui ne déclare qu'une seule méthode abstraite. C'est ce qui permet à une expression lambda de représenter une implémentation de cette interface : la lambda fournit le corps de l'unique méthode abstraite.</p>
+      <div class="api">
+        <h3><code>@FunctionalInterface</code></h3>
+        <pre><code>@FunctionalInterface
+public interface Predicate&lt;T&gt; {
+    boolean test(T t);
+}</code></pre>
+        <p>Cette annotation est facultative mais recommandée : elle demande au compilateur de vérifier que l'interface possède bien une seule méthode abstraite (elle peut en revanche avoir des méthodes <code>default</code> ou <code>static</code>, voir plus bas).</p>
+      </div>
+      <p>Java 8 fournit dans le package <code>java.util.function</code> un ensemble d'interfaces fonctionnelles prêtes à l'emploi, couvrant la plupart des cas courants :</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Interface</th>
+          <th>Méthode abstraite</th>
+          <th>Rôle</th>
+          <th>Utilisée par</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>Predicate&lt;T&gt;</code></td>
+          <td><code>boolean test(T t)</code></td>
+          <td>Teste une condition sur une valeur.</td>
+          <td><code>filter</code></td>
+        </tr>
+        <tr>
+          <td><code>Function&lt;T, R&gt;</code></td>
+          <td><code>R apply(T t)</code></td>
+          <td>Transforme une valeur de type <code>T</code> en une valeur de type <code>R</code>.</td>
+          <td><code>map</code></td>
+        </tr>
+        <tr>
+          <td><code>BiFunction&lt;T, U, R&gt;</code></td>
+          <td><code>R apply(T t, U u)</code></td>
+          <td>Combine deux valeurs en une seule.</td>
+          <td><code>Map.merge</code>, <code>reduce</code></td>
+        </tr>
+        <tr>
+          <td><code>Consumer&lt;T&gt;</code></td>
+          <td><code>void accept(T t)</code></td>
+          <td>Consomme une valeur sans rien renvoyer (effet de bord).</td>
+          <td><code>forEach</code></td>
+        </tr>
+        <tr>
+          <td><code>BiConsumer&lt;T, U&gt;</code></td>
+          <td><code>void accept(T t, U u)</code></td>
+          <td>Consomme deux valeurs sans rien renvoyer.</td>
+          <td><code>Map.forEach</code></td>
+        </tr>
+        <tr>
+          <td><code>Supplier&lt;T&gt;</code></td>
+          <td><code>T get()</code></td>
+          <td>Fournit une valeur, sans paramètre.</td>
+          <td><code>orElseGet</code></td>
+        </tr>
+        <tr>
+          <td><code>UnaryOperator&lt;T&gt;</code></td>
+          <td><code>T apply(T t)</code></td>
+          <td><code>Function&lt;T, T&gt;</code> spécialisée : entrée et sortie de même type.</td>
+          <td><code>List.replaceAll</code></td>
+        </tr>
+        <tr>
+          <td><code>BinaryOperator&lt;T&gt;</code></td>
+          <td><code>T apply(T t1, T t2)</code></td>
+          <td>Combine deux valeurs du même type en une seule du même type.</td>
+          <td><code>reduce</code></td>
+        </tr>
+        <tr>
+          <td><code>Comparator&lt;T&gt;</code></td>
+          <td><code>int compare(T o1, T o2)</code></td>
+          <td>Compare deux valeurs pour établir un ordre.</td>
+          <td><code>sorted</code></td>
+        </tr>
+        <tr>
+          <td><code>Runnable</code></td>
+          <td><code>void run()</code></td>
+          <td>Exécute une action, sans paramètre ni retour.</td>
+          <td>Threads, tâches planifiées</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        N'importe quelle interface à une seule méthode abstraite peut servir d'interface fonctionnelle, y compris une interface qu'on écrit soi-même (voir l'exemple <code>EmployeNomFunction</code> ci-dessous).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="lambdas">
+      <h2>Expressions lambda</h2>
+      <p>Une expression lambda est une fonction anonyme : elle représente l'implémentation de l'unique méthode abstraite d'une interface fonctionnelle. C'est un raccourci syntaxique pour créer et instancier une classe qui implémente cette interface.</p>
+
+      <div class="api">
+        <h3>Syntaxe</h3>
+        <pre><code>// Sans paramètre
+() -&gt; 42
+
+// Un seul paramètre (les parenthèses sont optionnelles)
+e -&gt; e.getNom()
+(e) -&gt; e.getNom()
+
+// Plusieurs paramètres
+(e1, e2) -&gt; e1.getTaille() - e2.getTaille()
+
+// Type explicite des paramètres
+(Employe e1, Employe e2) -&gt; e1.getTaille() - e2.getTaille()
+
+// Corps avec plusieurs instructions : accolades + return explicite
+(e1, e2) -&gt; {
+    if (e1.getTaille() == e2.getTaille()) {
+        return e1.getNom().compareTo(e2.getNom());
+    }
+    return e2.getTaille() - e1.getTaille();
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Une lambda est une implémentation implicite</h3>
+        <p>Passer une lambda là où une interface fonctionnelle est attendue équivaut à écrire une classe qui l'implémente et à l'instancier.</p>
+        <pre><code>// Avec une lambda
+List&lt;Employe&gt; hommes = employes.stream()
+    .filter(e -&gt; e.getGenre() == Genre.HOMME)
+    .toList();
+
+// Équivalent explicite, sans lambda
+public class PredicatGenreHomme implements Predicate&lt;Employe&gt; {
+    @Override
+    public boolean test(Employe e) {
+        return e.getGenre() == Genre.HOMME;
+    }
+}
+
+List&lt;Employe&gt; hommesBis = employes.stream()
+    .filter(new PredicatGenreHomme())
+    .toList();</code></pre>
+        <p>La méthode <code>filter</code> appelle en réalité <code>test()</code> sur chaque élément du stream ; la lambda n'est qu'un sucre syntaxique pour cette implémentation.</p>
+      </div>
+
+      <div class="api">
+        <h3>Les lambdas hors des Streams</h3>
+        <p>Une lambda peut être utilisée partout où une interface fonctionnelle est attendue, pas seulement dans un pipeline Stream : un <code>Comparator</code> passé à <code>List.sort</code>, un <code>Runnable</code> passé à un <code>Thread</code>, etc.</p>
+        <pre><code>List&lt;Employe&gt; tries = new ArrayList&lt;&gt;(employes);
+tries.sort((e1, e2) -&gt; e1.getNom().compareTo(e2.getNom()));</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="references">
+      <h2>Références de méthode</h2>
+      <p>Quand le corps d'une lambda se contente d'appeler une méthode existante, on peut la remplacer par une <strong>référence de méthode</strong>, plus concise. Il en existe quatre formes.</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Forme</th>
+          <th>Syntaxe</th>
+          <th>Exemple</th>
+          <th>Équivalent lambda</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Méthode statique</td>
+          <td><code>Classe::methodeStatique</code></td>
+          <td><code>Integer::parseInt</code></td>
+          <td><code>s -&gt; Integer.parseInt(s)</code></td>
+        </tr>
+        <tr>
+          <td>Méthode d'instance d'un objet particulier</td>
+          <td><code>instance::methode</code></td>
+          <td><code>System.out::println</code></td>
+          <td><code>x -&gt; System.out.println(x)</code></td>
+        </tr>
+        <tr>
+          <td>Méthode d'instance d'un objet quelconque d'un type donné</td>
+          <td><code>Classe::methode</code></td>
+          <td><code>Employe::getNom</code></td>
+          <td><code>e -&gt; e.getNom()</code></td>
+        </tr>
+        <tr>
+          <td>Référence de constructeur</td>
+          <td><code>Classe::new</code></td>
+          <td><code>ArrayList::new</code></td>
+          <td><code>() -&gt; new ArrayList&lt;&gt;()</code></td>
+        </tr>
+        </tbody>
+      </table>
+      <pre><code>// Méthode d'instance d'un objet quelconque du type Employe
+List&lt;String&gt; noms = employes.stream()
+    .map(Employe::getNom)
+    .toList();
+
+// Méthode statique
+List&lt;Integer&gt; entiers = chaines.stream()
+    .map(Integer::parseInt)
+    .toList();
+
+// Référence de constructeur : produit un nouveau conteneur
+List&lt;Employe&gt; copie = employes.stream()
+    .collect(Collectors.toCollection(ArrayList::new));</code></pre>
+      <div class="note">
+        Une référence de méthode n'est pas un appel de méthode : <code>Employe::getNom</code> désigne la méthode elle-même, à appliquer plus tard sur un employé donné par le code qui la reçoit (ici, <code>map</code>).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="predicate">
+      <h2>Predicate</h2>
+      <p>Classe : <code>java.util.function.Predicate&lt;T&gt;</code>. Représente un test booléen sur une valeur de type <code>T</code>.</p>
+
+      <div class="api">
+        <h3>Méthode abstraite</h3>
+        <span class="signature">boolean test(T t)</span>
+        <pre><code>Predicate&lt;Integer&gt; estPositif = n -&gt; n &gt; 0;
+boolean resultat = estPositif.test(5); // true</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Combiner des Predicate</h3>
+        <span class="signature">Predicate&lt;T&gt; and(Predicate&lt;? super T&gt; other)</span>
+        <span class="signature">Predicate&lt;T&gt; or(Predicate&lt;? super T&gt; other)</span>
+        <span class="signature">Predicate&lt;T&gt; negate()</span>
+        <pre><code>Predicate&lt;Integer&gt; estPositif = n -&gt; n &gt; 0;
+Predicate&lt;Integer&gt; estPair = n -&gt; n % 2 == 0;
+
+Predicate&lt;Integer&gt; positifEtPair = estPositif.and(estPair);
+Predicate&lt;Integer&gt; positifOuPair = estPositif.or(estPair);
+Predicate&lt;Integer&gt; estNegatif = estPositif.negate();</code></pre>
+        <p>Ces méthodes <code>default</code> permettent de composer des prédicats sans écrire de nouvelle lambda pour chaque combinaison.</p>
+      </div>
+
+      <div class="api">
+        <h3>Sans Stream : utiliser <code>test</code> directement</h3>
+        <pre><code>public static &lt;T&gt; List&lt;T&gt; allMatches(List&lt;T&gt; list, Predicate&lt;T&gt; match) {
+    List&lt;T&gt; result = new ArrayList&lt;&gt;();
+    for (T element : list) {
+        if (match.test(element)) {
+            result.add(element);
+        }
+    }
+    return result;
+}
+
+// Utilisation
+List&lt;Integer&gt; pairs = allMatches(nombres, n -&gt; n % 2 == 0);</code></pre>
+        <p>Un <code>Predicate</code> n'a d'intérêt que dans un contexte qui l'appelle via <code>test()</code> ; en dehors d'un Stream, on écrit soi-même la boucle qui l'utilise.</p>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="function">
+      <h2>Function et BiFunction</h2>
+      <p>Classe : <code>java.util.function.Function&lt;T, R&gt;</code>. Transforme une valeur de type <code>T</code> en une valeur de type <code>R</code>.</p>
+
+      <div class="api">
+        <h3>Méthode abstraite</h3>
+        <span class="signature">R apply(T t)</span>
+        <pre><code>Function&lt;Employe, String&gt; nomEmploye = e -&gt; e.getNom();
+String nom = nomEmploye.apply(employe);
+
+// Sous forme de classe explicite
+public class EmployeNomFunction implements Function&lt;Employe, String&gt; {
+    @Override
+    public String apply(Employe employe) {
+        return employe.getNom();
+    }
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Chaîner des Function</h3>
+        <span class="signature">&lt;V&gt; Function&lt;T, V&gt; andThen(Function&lt;? super R, ? extends V&gt; after)</span>
+        <span class="signature">&lt;V&gt; Function&lt;V, R&gt; compose(Function&lt;? super V, ? extends T&gt; before)</span>
+        <pre><code>Function&lt;String, Integer&gt; longueur = String::length;
+Function&lt;Integer, String&gt; versChaine = n -&gt; "Longueur : " + n;
+
+// andThen : applique this, puis after
+Function&lt;String, String&gt; combinee = longueur.andThen(versChaine);
+combinee.apply("Java"); // "Longueur : 4"</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>BiFunction</h3>
+        <span class="signature">R apply(T t, U u)</span>
+        <pre><code>BiFunction&lt;Integer, Integer, Integer&gt; addition = (a, b) -&gt; a + b;
+int somme = addition.apply(3, 4); // 7</code></pre>
+        <p>Utile pour combiner deux valeurs, par exemple dans <code>Map.merge(clé, valeur, BiFunction)</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Sans Stream : <code>transformAll</code></h3>
+        <pre><code>public static &lt;P, R&gt; List&lt;R&gt; transformAll(List&lt;P&gt; list, Function&lt;P, R&gt; transform) {
+    List&lt;R&gt; result = new ArrayList&lt;&gt;();
+    for (P element : list) {
+        result.add(transform.apply(element));
+    }
+    return result;
+}</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="consumer-supplier">
+      <h2>Consumer et Supplier</h2>
+
+      <div class="api">
+        <h3>Consumer&lt;T&gt;</h3>
+        <span class="signature">void accept(T t)</span>
+        <span class="signature">Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after)</span>
+        <p>Consomme une valeur sans rien renvoyer : sert typiquement à produire un effet de bord (affichage, ajout dans une collection).</p>
+        <pre><code>Consumer&lt;Employe&gt; afficher = e -&gt; System.out.println(e.getNom());
+employes.forEach(afficher);
+
+// Sous forme de classe explicite, avec état
+public class EmployeeConsumer implements Consumer&lt;Employe&gt; {
+    private final List&lt;String&gt; noms;
+
+    public EmployeeConsumer(List&lt;String&gt; noms) {
+        this.noms = noms;
+    }
+
+    @Override
+    public void accept(Employe employe) {
+        System.out.println(employe);
+        noms.add(employe.getNom());
+    }
+}</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Supplier&lt;T&gt;</h3>
+        <span class="signature">T get()</span>
+        <p>Fournit une valeur, sans paramètre : sert à différer un calcul ou une lecture (fichier, base de données) jusqu'au moment où la valeur est réellement nécessaire.</p>
+        <pre><code>Supplier&lt;String&gt; valeurParDefaut = () -&gt; "Inconnu";
+String nom = optNom.orElseGet(valeurParDefaut);
+
+Supplier&lt;List&lt;String&gt;&gt; nouvelleListe = ArrayList::new;
+List&lt;String&gt; liste = nouvelleListe.get();</code></pre>
+        <div class="note">
+          <code>orElseGet(Supplier)</code> n'exécute le calcul que si l'<code>Optional</code> est vide, contrairement à <code>orElse(valeur)</code> qui évalue toujours son argument. Préférer <code>orElseGet</code> quand la valeur par défaut est coûteuse à construire (lecture d'un fichier, par exemple).
+        </div>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="comparateurs">
+      <h2>Comparateurs fonctionnels</h2>
+      <p>Classe : <code>java.util.Comparator&lt;T&gt;</code>. Interface fonctionnelle à une méthode abstraite <code>compare</code>, enrichie de nombreuses méthodes <code>default</code>/<code>static</code> pour construire des comparateurs par composition plutôt qu'en écrivant une classe.</p>
+
+      <div class="api">
+        <h3>Construire un comparateur à partir d'une clé</h3>
+        <span class="signature">static &lt;T, U extends Comparable&lt;? super U&gt;&gt; Comparator&lt;T&gt; comparing(Function&lt;? super T, ? extends U&gt; keyExtractor)</span>
+        <span class="signature">static &lt;T&gt; Comparator&lt;T&gt; comparingInt(ToIntFunction&lt;? super T&gt; keyExtractor)</span>
+        <span class="signature">static &lt;T&gt; Comparator&lt;T&gt; comparingDouble(ToDoubleFunction&lt;? super T&gt; keyExtractor)</span>
+        <pre><code>// Trier par nom (ordre naturel de String)
+List&lt;Employe&gt; parNom = employes.stream()
+    .sorted(Comparator.comparing(Employe::getNom))
+    .toList();
+
+// Trier par taille (int) : évite le boxing
+List&lt;Employe&gt; parTaille = employes.stream()
+    .sorted(Comparator.comparingInt(Employe::getTaille))
+    .toList();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Inverser l'ordre</h3>
+        <span class="signature">Comparator&lt;T&gt; reversed()</span>
+        <pre><code>List&lt;Employe&gt; parTailleDecroissante = employes.stream()
+    .sorted(Comparator.comparingInt(Employe::getTaille).reversed())
+    .toList();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Critère de départage : thenComparing</h3>
+        <span class="signature">Comparator&lt;T&gt; thenComparing(Comparator&lt;? super T&gt; other)</span>
+        <span class="signature">Comparator&lt;T&gt; thenComparing(Function&lt;? super T, ? extends U&gt; keyExtractor)</span>
+        <pre><code>// Par taille décroissante, puis par nom en cas d'égalité
+Comparator&lt;Employe&gt; comparateur = Comparator
+    .comparingInt(Employe::getTaille).reversed()
+    .thenComparing(Employe::getNom);
+
+List&lt;Employe&gt; tries = new ArrayList&lt;&gt;(employes);
+tries.sort(comparateur);
+
+// Equivalent écrit "à la main" avec une lambda
+tries.sort((e1, e2) -&gt; {
+    if (e1.getTaille() == e2.getTaille()) {
+        return e1.getNom().compareTo(e2.getNom());
+    }
+    return e2.getTaille() - e1.getTaille();
+});</code></pre>
+        <p><code>thenComparing</code> est le pendant fonctionnel du <code>if (égalité) { ... }</code> qu'on écrirait dans un <code>Comparator</code> manuel : il s'applique seulement quand le comparateur précédent renvoie <code>0</code>.</p>
+      </div>
+
+      <div class="api">
+        <h3>Ordres prédéfinis</h3>
+        <span class="signature">static &lt;T extends Comparable&lt;? super T&gt;&gt; Comparator&lt;T&gt; naturalOrder()</span>
+        <span class="signature">static &lt;T extends Comparable&lt;? super T&gt;&gt; Comparator&lt;T&gt; reverseOrder()</span>
+        <pre><code>List&lt;Integer&gt; tries = nombres.stream()
+    .sorted(Comparator.naturalOrder())
+    .toList();</code></pre>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="flatmap">
+      <h2>flatMap</h2>
+      <p>La méthode <code>flatMap</code> aplatit une structure de données hiérarchique : là où <code>map</code> produirait un stream d'éléments qui sont eux-mêmes des collections (<code>Stream&lt;List&lt;T&gt;&gt;</code>), <code>flatMap</code> fusionne le stream produit pour chaque élément en un seul stream plat (<code>Stream&lt;T&gt;</code>).</p>
+
+      <div class="api">
+        <h3>Signature</h3>
+        <span class="signature">Stream&lt;R&gt; flatMap(Function&lt;? super T, ? extends Stream&lt;? extends R&gt;&gt; mapper)</span>
+        <pre><code>// Un Portfolio contient un Trader et une liste d'actions détenues
+class Portfolio {
+    private final Trader trader;
+    private final List&lt;String&gt; actions;
+    // getters ...
+}
+
+List&lt;Portfolio&gt; portfolios = ...;
+
+// Toutes les actions de tous les portefeuilles (avec doublons)
+List&lt;String&gt; actions = portfolios.stream()
+    .flatMap(portfolio -&gt; portfolio.getActions().stream())
+    .toList();</code></pre>
+        <div class="note">
+          Le réflexe : dès que le modèle de données est hiérarchique (une liste d'objets contenant chacun une liste), <code>map</code> seul renvoie un <code>Stream</code> de listes ; <code>flatMap</code> avec <code>.stream()</code> sur le champ imbriqué aplatit le tout en un seul niveau.
+        </div>
+      </div>
+
+      <div class="api">
+        <h3>flatMap combiné à map, distinct, sorted</h3>
+        <pre><code>// Actions uniques avec leur prix, triées par prix croissant (puis par symbole)
+List&lt;Map.Entry&lt;String, Double&gt;&gt; resultat = portfolios.stream()
+    .flatMap(portfolio -&gt; portfolio.getActions().stream())
+    .distinct()
+    .filter(prices::containsKey)
+    .map(symbole -&gt; Map.entry(symbole, prices.get(symbole)))
+    .sorted(Comparator.comparingDouble((Map.Entry&lt;String, Double&gt; e) -&gt; e.getValue())
+            .thenComparing(Map.Entry::getKey))
+    .toList();</code></pre>
+        <p><code>Map.entry(clé, valeur)</code> construit un couple clé/valeur immuable, pratique pour manipuler des paires sans créer une classe dédiée.</p>
+      </div>
+
+      <div class="api">
+        <h3>flatMap produisant des paires</h3>
+        <pre><code>// Un couple (action, trader) par action détenue
+List&lt;Map.Entry&lt;String, Trader&gt;&gt; couples = portfolios.stream()
+    .flatMap(portfolio -&gt; portfolio.getActions().stream()
+            .map(action -&gt; Map.entry(action, portfolio.getTrader())))
+    .toList();
+
+// Regrouper : pour chaque action, la liste des traders qui la possèdent
+Map&lt;String, List&lt;Trader&gt;&gt; parAction = couples.stream()
+    .collect(Collectors.groupingBy(
+        Map.Entry::getKey,
+        Collectors.mapping(Map.Entry::getValue, Collectors.toList())
+    ));</code></pre>
+        <p>Ici, le <code>flatMap</code> lui-même contient un <code>map</code> imbriqué : pour chaque portefeuille, on transforme chaque action détenue en un couple <code>(action, trader)</code>, puis on aplatit tous ces couples en un seul stream.</p>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="default-static">
+      <h2>Méthodes default et static</h2>
+      <p>Avant Java 8, une interface ne pouvait déclarer que des méthodes abstraites. Ajouter une nouvelle méthode à une interface obligeait donc à modifier toutes ses implémentations existantes — un problème majeur pour faire évoluer des interfaces comme <code>Collection</code> sans casser le code existant.</p>
+
+      <div class="api">
+        <h3>Méthodes <code>default</code></h3>
+        <p>Une méthode <code>default</code> fournit une implémentation directement dans l'interface. Les classes qui implémentent l'interface en héritent automatiquement, sans devoir l'écrire elles-mêmes (mais peuvent la redéfinir si besoin).</p>
+        <pre><code>public interface List&lt;E&gt; extends Collection&lt;E&gt; {
+    default void sort(Comparator&lt;? super E&gt; c) {
+        // implémentation fournie par l'interface elle-même
+    }
+}</code></pre>
+        <p>C'est ainsi que <code>stream()</code> a pu être ajoutée à <code>Collection</code> en Java 8 sans casser aucune classe existante qui l'implémentait déjà : toutes héritent de l'implémentation par défaut.</p>
+      </div>
+
+      <div class="api">
+        <h3>Méthodes <code>static</code></h3>
+        <p>Une interface peut aussi déclarer des méthodes statiques, appelées sur l'interface elle-même plutôt que sur une instance — comme des méthodes utilitaires liées au type.</p>
+        <pre><code>public interface Comparator&lt;T&gt; {
+    static &lt;T extends Comparable&lt;? super T&gt;&gt; Comparator&lt;T&gt; naturalOrder() {
+        // ...
+    }
+}
+
+Comparator&lt;String&gt; c = Comparator.naturalOrder();</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Rappel : les generics dans une signature d'interface</h3>
+        <p>La signature <code>default void sort(Comparator&lt;? super E&gt; c)</code> se lit ainsi : <code>c</code> est un <code>Comparator</code> capable de comparer des objets de type <code>E</code> (le type générique de la liste) ou de l'une de ses super-classes. Cette flexibilité (<code>? super E</code>) permet, par exemple, de trier une <code>List&lt;Dog&gt;</code> avec un <code>Comparator&lt;Animal&gt;</code>.</p>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="immuabilite">
+      <h2>Immuabilité</h2>
+      <p>Un objet <strong>immuable</strong> ne peut pas changer d'état après sa construction. C'est un pilier du design fonctionnel : sans mutation partagée, un objet peut être passé librement entre lambdas, threads ou méthodes sans risque d'effet de bord inattendu.</p>
+
+      <div class="api">
+        <h3>Règles pour une classe immuable</h3>
+        <ul>
+          <li>Tous les champs sont <code>private final</code>.</li>
+          <li>Aucun setter : les valeurs sont fixées uniquement dans le constructeur.</li>
+          <li>La classe n'est pas <code>extends</code>ible de façon incontrôlée (idéalement <code>final</code>), pour éviter qu'une sous-classe n'introduise de la mutabilité.</li>
+          <li>Si un champ est une référence vers un objet mutable (une <code>List</code>, un <code>Date</code>, un tableau), il faut en faire une <strong>copie défensive</strong> — à la construction et/ou dans le getter — pour empêcher l'appelant de modifier l'état interne via la référence obtenue.</li>
+        </ul>
+      </div>
+
+      <div class="api">
+        <h3>Exemple : une classe pas encore immuable</h3>
+        <pre><code>public class Portfolio {
+    private final Trader trader;
+    private final List&lt;String&gt; actions;
+
+    public Portfolio(Trader trader, List&lt;String&gt; actions) {
+        this.trader = trader;
+        this.actions = actions; // référence partagée avec l'appelant !
+    }
+
+    public List&lt;String&gt; getActions() {
+        return actions; // expose directement la liste interne
+    }
+}
+
+// Le problème :
+List&lt;String&gt; mesActions = new ArrayList&lt;&gt;(List.of("AAPL", "TSLA"));
+Portfolio p = new Portfolio(trader, mesActions);
+mesActions.add("GOOGL");     // modifie discrètement le Portfolio !
+p.getActions().add("MSFT"); // modifie aussi le Portfolio, de l'extérieur</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Version immuable, avec copies défensives</h3>
+        <pre><code>public final class Portfolio {
+    private final Trader trader;
+    private final List&lt;String&gt; actions;
+
+    public Portfolio(Trader trader, List&lt;String&gt; actions) {
+        this.trader = trader;
+        this.actions = List.copyOf(actions); // copie non modifiable
+    }
+
+    public List&lt;String&gt; getActions() {
+        return actions; // déjà non modifiable, sûr à exposer tel quel
+    }
+}</code></pre>
+        <p><code>List.copyOf(...)</code> (comme <code>List.of(...)</code>) renvoie une liste immuable : toute tentative de modification lève une <code>UnsupportedOperationException</code>. Alternative équivalente : <code>Collections.unmodifiableList(new ArrayList&lt;&gt;(actions))</code>.</p>
+      </div>
+
+      <div class="note">
+        Modifier un objet immuable ne se fait jamais « sur place » : on construit un <strong>nouvel</strong> objet avec l'état voulu. C'est exactement le principe des Streams : chaque opération intermédiaire renvoie un nouveau <code>Stream</code> sans modifier la source.
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exceptions">
+      <h2>Exceptions en style fonctionnel</h2>
+      <p>Les méthodes abstraites des interfaces fonctionnelles standard (<code>Function.apply</code>, <code>Predicate.test</code>, <code>Consumer.accept</code>...) ne déclarent <strong>aucune</strong> exception vérifiée (<em>checked exception</em>). Il est donc impossible d'appeler directement, dans le corps d'une lambda, une méthode qui déclare <code>throws IOException</code> ou une autre exception vérifiée.</p>
+
+      <div class="api">
+        <h3>Le problème</h3>
+        <pre><code>// Ne compile pas : IOException est vérifiée, Function.apply() ne la déclare pas
+Function&lt;String, List&lt;String&gt;&gt; lireFichier = chemin -&gt; Files.readAllLines(Path.of(chemin));</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Solution 1 : attraper l'exception et la relancer en non vérifiée</h3>
+        <pre><code>Function&lt;String, List&lt;String&gt;&gt; lireFichier = chemin -&gt; {
+    try {
+        return Files.readAllLines(Path.of(chemin));
+    } catch (IOException e) {
+        throw new RuntimeException("Lecture impossible : " + chemin, e);
+    }
+};</code></pre>
+        <p>C'est la solution la plus courante : on convertit l'exception vérifiée en exception non vérifiée (<code>RuntimeException</code>), qui n'a pas besoin d'être déclarée dans la signature de la méthode fonctionnelle. La cause originale (<code>e</code>) est conservée en second argument, pour ne pas perdre l'information de débogage.</p>
+      </div>
+
+      <div class="api">
+        <h3>Solution 2 : gérer l'erreur localement, sans propager</h3>
+        <pre><code>// Ignorer une ligne invalide plutôt que d'interrompre tout le traitement
+List&lt;Acces&gt; acces = new ArrayList&lt;&gt;();
+for (String ligne : lignes) {
+    try {
+        acces.add(parserLigne(ligne));
+    } catch (IllegalArgumentException e) {
+        System.out.println("Ligne ignorée : " + ligne);
+    }
+}</code></pre>
+        <p>Quand l'erreur ne remet pas en cause tout le pipeline (une seule ligne invalide parmi beaucoup d'autres valides), on l'attrape au plus près de sa source et on continue, plutôt que de la propager jusqu'à l'appelant.</p>
+      </div>
+
+      <div class="api">
+        <h3>Solution 3 : une interface fonctionnelle personnalisée</h3>
+        <pre><code>@FunctionalInterface
+public interface FonctionAvecException&lt;T, R&gt; {
+    R apply(T t) throws IOException;
+}</code></pre>
+        <p>Cette solution évite d'avaler l'exception dans la lambda, mais elle exige d'écrire sa propre interface fonctionnelle (les interfaces standard de <code>java.util.function</code> ne peuvent pas être modifiées) et complique l'utilisation directe avec l'API Stream, dont les méthodes attendent les interfaces standard.</p>
+      </div>
+
+      <div class="warning">
+        Une exception vérifiée avalée silencieusement (un <code>catch</code> vide) masque un vrai problème. Toujours au minimum journaliser l'erreur, ou la relancer sous une forme non vérifiée avec la cause d'origine conservée.
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="streams-paralleles">
+      <h2>Streams parallèles</h2>
+      <p>Les opérations d'un stream ne modifient jamais le stream d'origine : traiter les éléments dans un ordre différent, voire simultanément sur plusieurs cœurs, ne change donc pas le résultat. L'API Stream fournit une version parallèle prête à l'emploi.</p>
+      <pre><code>liste.parallelStream()
+     .filter(x -&gt; x % 2 == 0)
+     .map(x -&gt; x * x)
+     .toList();
+
+// ou, à partir d'un stream séquentiel déjà obtenu :
+liste.stream().parallel()...</code></pre>
+      <p>Un stream parallèle répartit les éléments de la collection entre plusieurs threads (via le <code>ForkJoinPool</code> commun) puis combine les résultats partiels.</p>
+      <div class="warning">
+        La parallélisation n'est rentable que sur de gros volumes de données et des opérations coûteuses par élément — sur une petite collection, le surcoût de répartition/combinaison dépasse le gain. Elle exige aussi que les opérations soient sans effet de bord (pas de modification d'un état partagé dans un <code>forEach</code>/<code>map</code>), sous peine de race condition.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Erreur de compilation : une lambda ne compile pas avec une méthode qui lève une exception vérifiée.</td>
+          <td>La méthode abstraite de l'interface fonctionnelle standard utilisée (<code>Function</code>, <code>Predicate</code>...) ne déclare pas cette exception.</td>
+          <td>Attraper l'exception dans le corps de la lambda et la relancer en <code>RuntimeException</code>, ou écrire une interface fonctionnelle personnalisée.</td>
+        </tr>
+        <tr>
+          <td>Utiliser <code>map</code> à la place de <code>flatMap</code> sur une structure hiérarchique.</td>
+          <td><code>map(p -&gt; p.getActions())</code> renvoie un <code>Stream&lt;List&lt;String&gt;&gt;</code>, pas un <code>Stream&lt;String&gt;</code>.</td>
+          <td>Utiliser <code>flatMap(p -&gt; p.getActions().stream())</code> pour aplatir.</td>
+        </tr>
+        <tr>
+          <td><code>NullPointerException</code> lors de l'appel d'une méthode sur un champ censé être immuable.</td>
+          <td>Le constructeur a stocké la référence reçue sans copie défensive ; l'appelant l'a modifiée (voire mise à <code>null</code>) après coup.</td>
+          <td>Copier la structure dans le constructeur (<code>List.copyOf(...)</code>) plutôt que d'en stocker la référence brute.</td>
+        </tr>
+        <tr>
+          <td>Le tri avec <code>thenComparing</code> ne départage pas comme attendu.</td>
+          <td>Le premier <code>Comparator</code> ne renvoie jamais <code>0</code> pour les éléments concernés (par exemple, comparaison sur une clé toujours différente).</td>
+          <td>Vérifier que le critère principal peut effectivement produire des égalités ; sinon <code>thenComparing</code> n'est jamais atteint.</td>
+        </tr>
+        <tr>
+          <td>Confondre <code>Function&lt;T, R&gt;</code> et <code>Consumer&lt;T&gt;</code>.</td>
+          <td><code>Function</code> renvoie une valeur (<code>apply</code>), <code>Consumer</code> ne renvoie rien (<code>accept</code>) — souvent utilisé par erreur pour transformer une valeur.</td>
+          <td>Utiliser <code>Function</code> avec <code>map</code> pour transformer, <code>Consumer</code> avec <code>forEach</code> pour un effet de bord.</td>
+        </tr>
+        <tr>
+          <td>Une classe censée être immuable est en réalité modifiable de l'extérieur.</td>
+          <td>Le getter renvoie directement la référence interne d'une collection mutable.</td>
+          <td>Renvoyer une collection non modifiable (<code>List.copyOf(...)</code> à la construction suffit si le getter renvoie ensuite cette même référence).</td>
+        </tr>
+        <tr>
+          <td><code>orElse(calculCouteux())</code> ralentit le programme même quand l'<code>Optional</code> est présent.</td>
+          <td><code>orElse</code> évalue toujours son argument, contrairement à <code>orElseGet</code>.</td>
+          <td>Utiliser <code>orElseGet(() -&gt; calculCouteux())</code>, qui n'exécute le <code>Supplier</code> que si nécessaire.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference">
+      <h2>Référence rapide</h2>
+
+      <h3>Imports</h3>
+      <pre><code>import java.util.Comparator;
+import java.util.List;
+import java.util.Map;
+import java.util.function.BiFunction;
+import java.util.function.Consumer;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.function.Supplier;
+import java.util.stream.Collectors;</code></pre>
+
+      <h3>Interfaces fonctionnelles</h3>
+      <pre><code>Predicate&lt;T&gt;    boolean test(T t)
+Function&lt;T,R&gt;   R apply(T t)
+BiFunction&lt;T,U,R&gt; R apply(T t, U u)
+Consumer&lt;T&gt;     void accept(T t)
+Supplier&lt;T&gt;     T get()
+UnaryOperator&lt;T&gt; T apply(T t)
+BinaryOperator&lt;T&gt; T apply(T t1, T t2)
+Comparator&lt;T&gt;   int compare(T o1, T o2)</code></pre>
+
+      <h3>Références de méthode</h3>
+      <pre><code>Classe::methodeStatique      // Integer::parseInt
+instance::methode            // System.out::println
+Classe::methodeDInstance     // Employe::getNom
+Classe::new                  // ArrayList::new</code></pre>
+
+      <h3>Comparateurs</h3>
+      <pre><code>Comparator.comparing(T::getChamp)
+Comparator.comparingInt(T::getChampInt)
+Comparator.comparing(T::getChamp).reversed()
+Comparator.comparing(T::getChamp1).thenComparing(T::getChamp2)
+Comparator.naturalOrder()
+Comparator.reverseOrder()</code></pre>
+
+      <h3>flatMap</h3>
+      <pre><code>liste.stream()
+    .flatMap(element -&gt; element.getSousListe().stream())
+    .toList();</code></pre>
+
+      <h3>Immuabilité</h3>
+      <pre><code>private final List&lt;T&gt; champ;
+this.champ = List.copyOf(parametre); // copie défensive, non modifiable</code></pre>
+
+      <h3>Exceptions dans une lambda</h3>
+      <pre><code>Function&lt;String, R&gt; f = valeur -&gt; {
+    try {
+        return traitementQuiLeveIOException(valeur);
+    } catch (IOException e) {
+        throw new RuntimeException(e);
+    }
+};</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être distribuée et ouverte directement dans un navigateur hors ligne.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

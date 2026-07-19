@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 4 - TDD - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 4 — Test Driven Development (TDD)</h1>
+  <p>Document autonome en français. Référence de la démarche TDD utilisée dans les ateliers, sans demander d'accès Internet.</p>
+  <p>Couvre : le cycle red-green-refactor, la spécification des scénarios de tests, le TDD sur du code existant. Les API JUnit (annotations, assertions) sont couvertes par le cheat sheet de la semaine 3.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="03-junit-fr.html">&larr; Semaine 3</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="05-mocks-fr.html">Semaine 5 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#principe">Principe du TDD</a>
+    <a href="#specifier">Spécifier les scénarios</a>
+    <a href="#cycle">Le cycle red-green-refactor</a>
+    <a href="#intellij">Outillage IntelliJ</a>
+    <a href="#evolution">TDD sur du code existant</a>
+    <a href="#tdd-avec-ia">TDD assisté par IA</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="principe">
+      <h2>Principe du TDD</h2>
+      <p>Le Test Driven Development inverse l'ordre habituel : on écrit le <strong>test avant le code</strong>. Le test décrit le comportement attendu ; le code n'existe que pour le faire passer.</p>
+      <ul>
+        <li>Le test sert de <strong>spécification exécutable</strong> : il documente ce que la méthode doit faire.</li>
+        <li>Le code produit est couvert par construction : chaque comportement a son test.</li>
+        <li>La conception émerge des besoins réels (l'API est conçue du point de vue de l'appelant).</li>
+      </ul>
+      <div class="note">
+        TDD ne veut pas dire « écrire tous les tests puis tout le code » : on avance <strong>un scénario à la fois</strong>, en boucle courte.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="specifier">
+      <h2>Spécifier les scénarios de tests</h2>
+      <p>Avant de coder, on identifie les <strong>cas d'utilisation</strong> (UC) de l'application, puis pour chaque UC les <strong>scénarios de tests</strong> :</p>
+      <ul>
+        <li><strong>Cas positifs</strong> : l'opération réussit — vérifier le résultat <em>et</em> le nouvel état.</li>
+        <li><strong>Cas négatifs</strong> : l'opération échoue proprement (retour <code>false</code>, exception) — vérifier aussi que l'état n'a pas changé.</li>
+        <li><strong>Cas limites</strong> : valeurs frontières (0, valeur minimale, chaîne vide, <code>null</code>, doublon, élément inexistant…).</li>
+        <li><strong>Classes d'équivalence</strong> : pour un même paramètre, regrouper les valeurs possibles en catégories qui doivent produire un comportement similaire ; ne tester qu'un représentant par catégorie plutôt que de multiplier les cas redondants.</li>
+      </ul>
+      <p>Exemple de spécification pour « Ajouter une tâche à la liste » :</p>
+      <pre><code>1. (UC1) Ajouter une tâche à la liste :
+   1.1 addTask         : la tâche est contenue dans la liste,
+                         on informe du succès de l'opération
+   1.2 addEmptyTask    : tâche vide ou nulle, non ajoutée,
+                         on informe de l'échec
+   1.3 addExistingTask : tâche déjà présente, on informe de l'échec</code></pre>
+      <p>Chaque scénario devient une méthode de test au nom parlant (<code>addTask</code>, <code>addEmptyTask</code>…). La liste des scénarios <em>est</em> le plan de travail du TDD.</p>
+
+      <h3>Classes d'équivalence : un exemple</h3>
+      <p>Pour le paramètre <code>task</code> de <code>addTask</code>, on peut regrouper les valeurs possibles en deux classes, chacune censée produire le même comportement :</p>
+      <pre><code>Classe « nom vide »   : "", "   ", null   → comportement attendu : échec (un seul scénario addEmptyTask)
+Classe « nom valide » : "tâche 1", "abc"  → comportement attendu : succès (un seul scénario addTask)</code></pre>
+      <p>Plutôt que d'écrire un scénario distinct pour la chaîne vide, la chaîne de blancs et <code>null</code>, un seul scénario <code>addEmptyTask</code> couvre un représentant de chaque valeur de la classe « nom vide » dans le même <code>assertAll</code> (voir l'exemple de la section suivante) — inutile de multiplier les scénarios pour des entrées qui, du point de vue du code, doivent toutes échouer de la même façon.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="cycle">
+      <h2>Le cycle red-green-refactor</h2>
+      <p>Pour chaque scénario, trois étapes strictes :</p>
+
+      <h3>1. Red — écrire un test qui échoue</h3>
+      <p>Travailler <strong>à l'envers, à partir des assertions</strong> : écrire d'abord ce qu'on veut vérifier, pour une méthode et parfois une classe qui n'existent pas encore. Laisser l'IDE générer les éléments manquants.</p>
+      <pre><code>@Test
+void removeTask() {
+    todoList.addTask("tâche 1");
+    assertAll(
+        () -&gt; assertTrue(todoList.removeTask("tâche 1")),   // n'existe pas encore
+        () -&gt; assertFalse(todoList.containsTask("tâche 1"))
+    );
+}</code></pre>
+      <div class="warning">
+        <strong>Le test doit échouer pour de bonnes raisons.</strong> Exécuter le test et vérifier qu'il échoue sur l'assertion attendue (pas sur une erreur de compilation résiduelle ou une exception imprévue). Un test jamais vu en échec ne prouve rien : il pourrait passer pour de mauvaises raisons.
+      </div>
+
+      <h3>2. Green — écrire le code minimum</h3>
+      <p>Écrire une <strong>implémentation évidente</strong> qui fait passer le test — sans anticiper les scénarios suivants, mais sans écrire du code volontairement faux (pas de valeur codée en dur juste pour tricher avec le test).</p>
+      <pre><code>public boolean removeTask(String task) {
+    return tasks.remove(task);
+}</code></pre>
+
+      <h3>3. Refactor — améliorer sans changer le comportement</h3>
+      <p>Nettoyer le code (noms, duplications, structure) en relançant les tests après chaque changement. <strong>Règle de trois</strong> : dès qu'une duplication apparaît trois fois, la remplacer par du code réutilisable ; avant cela, laisser tel quel.</p>
+      <div class="success">
+        Tous les tests verts après le refactor = le comportement est préservé. C'est le filet de sécurité du TDD.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="intellij">
+      <h2>Outillage IntelliJ pour le TDD</h2>
+      <p>IntelliJ génère le code manquant à partir du test — c'est ce qui rend le « travail à l'envers » fluide :</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Besoin</th>
+          <th>Action IntelliJ</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Créer une méthode de test</td>
+          <td>Curseur dans la classe de test : <code>Alt+Insert</code> → Test Method</td>
+        </tr>
+        <tr>
+          <td>Créer la classe manquante référencée par le test</td>
+          <td>Curseur sur le nom en rouge : <code>Alt+Entrée</code> → Create class</td>
+        </tr>
+        <tr>
+          <td>Créer la méthode manquante</td>
+          <td>Curseur sur l'appel en rouge : <code>Alt+Entrée</code> → Create method</td>
+        </tr>
+        <tr>
+          <td>Ajouter la bibliothèque JUnit5</td>
+          <td>Cliquer une fois sur <em>Fix</em> quand « JUnit5 library not found » s'affiche</td>
+        </tr>
+        <tr>
+          <td>Lancer tous les tests</td>
+          <td>Clic droit sur le dossier <code>tests</code> → Run 'All Tests'</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="evolution">
+      <h2>TDD sur du code existant</h2>
+      <p>Quand une exigence change (par exemple : une tâche n'est plus une <code>String</code> mais un objet avec titre et description), le cycle s'applique à partir des <strong>tests existants</strong> :</p>
+      <ol>
+        <li><strong>Adapter les tests d'abord</strong> — mettre à jour les scénarios existants pour la nouvelle exigence. Le code ne compile plus ou échoue : c'est le red, pour de bonnes raisons.</li>
+        <li><strong>Mettre à jour le code minimum</strong> — faire passer tous les tests, anciens adaptés comme nouveaux. Le green garantit que rien d'existant n'est cassé.</li>
+        <li><strong>Refactorer</strong> sous la protection des tests.</li>
+      </ol>
+      <p>Créer de <strong>nouveaux</strong> tests quand la modification introduit : de nouveaux comportements (nouvelles UC), de nouveaux cas limites (ex. l'égalité de deux objets distincts de même contenu — un « clone »), de nouvelles règles de validation (constructeur qui rejette un titre vide).</p>
+      <div class="warning">
+        Si un ancien scénario n'a plus de sens avec la nouvelle exigence, c'est la spécification qui a changé : mettre à jour le scénario, ne pas le supprimer silencieusement.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="tdd-avec-ia">
+      <h2>TDD assisté par IA</h2>
+      <p>Les assistants de code basés sur l'IA (Claude Code, GitHub Copilot…) peuvent générer <strong>en une seule réponse</strong> un test et son implémentation. Cela va à l'encontre du principe même du TDD : si le test et le code arrivent ensemble, on ne voit jamais le test échouer, et on perd le bénéfice principal du cycle — la confirmation que le test vérifie bien ce qu'on croit vérifier.</p>
+      <p>Pour tirer parti de l'IA sans perdre les bénéfices du TDD, on continue à respecter le cycle red-green-refactor <strong>étape par étape</strong>, même quand une IA écrit le code à la place du développeur :</p>
+      <ol>
+        <li><strong>Red</strong> : demander à l'IA de générer <em>uniquement</em> le scénario de test (pas l'implémentation). L'exécuter et vérifier qu'il échoue pour de bonnes raisons — les mêmes vérifications que pour un test écrit à la main s'appliquent.</li>
+        <li><strong>Green</strong> : demander ensuite à l'IA d'écrire le code minimal pour faire passer <em>ce</em> test précis (pas les scénarios suivants). Exécuter tous les tests et vérifier qu'ils passent.</li>
+        <li><strong>Refactor</strong> : demander à l'IA d'appliquer la règle de trois si de la duplication est apparue. Relancer les tests pour confirmer qu'ils passent toujours.</li>
+      </ol>
+      <div class="warning">
+        <strong>Ne jamais valider un test et son implémentation générés ensemble sans être passé par l'étape red.</strong> Un test qui n'a jamais échoué peut ne rien tester (mauvais setup, assertion toujours vraie…) — le risque est le même qu'avec du code écrit à la main, mais plus facile à manquer quand tout est généré d'un coup : l'IA peut écrire un test qui colle exactement à l'implémentation qu'elle va produire, masquant ainsi les vrais bugs de compréhension du besoin.
+      </div>
+
+      <h3>Sur du code existant</h3>
+      <p>Le même risque existe lors d'une évolution, avec une variante : quand on demande à une IA d'adapter un test existant à une nouvelle exigence, elle peut être tentée de mettre à jour le test <strong>et</strong> le code de production en même temps. On perd alors la vérification essentielle du cycle — voir le test adapté échouer pour de bonnes raisons avant de toucher au code.</p>
+      <p>Demander d'abord <em>uniquement</em> la mise à jour du test, l'exécuter et constater l'échec, puis seulement ensuite demander la mise à jour du code.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <p>Itération TDD complète sur un scénario « retirer un article absent du panier » :</p>
+      <pre><code>// ── RED : le test d'abord, il échoue ─────────────────────────
+@Test
+void retirerArticleAbsentEchoue() {
+    Panier panier = new Panier();
+    panier.ajouter("livre");
+
+    assertAll(
+        () -&gt; assertFalse(panier.retirer("stylo")),   // retirer() n'existe pas encore
+        () -&gt; assertTrue(panier.contient("livre"))    // l'état n'a pas changé
+    );
+}
+
+// ── GREEN : le code minimum ──────────────────────────────────
+public boolean retirer(String article) {
+    return articles.remove(article);
+}
+
+// ── REFACTOR : rien à nettoyer ici, on passe au scénario suivant.</code></pre>
+      <p>Puis on recommence le cycle avec le scénario suivant de la spécification (retrait réussi, retrait sur panier vide…).</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Le test passe du premier coup</td>
+          <td>Le comportement existait déjà, ou le test ne teste rien.</td>
+          <td>Vérifier l'assertion (la fausser volontairement doit faire échouer le test), ou passer au scénario suivant.</td>
+        </tr>
+        <tr>
+          <td>Test jamais vu en échec</td>
+          <td>Étape red sautée.</td>
+          <td>Toujours exécuter le test avant d'implémenter et constater l'échec attendu.</td>
+        </tr>
+        <tr>
+          <td>Code qui anticipe des besoins futurs</td>
+          <td>Implémentation au-delà du « minimum » du green.</td>
+          <td>N'écrire que ce que le test courant exige ; les scénarios suivants amèneront le reste.</td>
+        </tr>
+        <tr>
+          <td>Cas négatif qui ne vérifie que le retour</td>
+          <td>Oubli de vérifier l'état après l'échec.</td>
+          <td>Vérifier aussi que l'état n'a pas changé (l'élément est toujours/toujours pas présent).</td>
+        </tr>
+        <tr>
+          <td>Refactor qui casse un test</td>
+          <td>Changement de comportement déguisé en nettoyage.</td>
+          <td>Relancer les tests après chaque étape de refactor ; revenir en arrière si un test tombe.</td>
+        </tr>
+        <tr>
+          <td>Gros scénarios fourre-tout</td>
+          <td>Plusieurs comportements testés dans une méthode.</td>
+          <td>Un scénario = une méthode de test au nom parlant.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>Démarche TDD :
+
+1. Identifier les UC et leurs scénarios de tests
+   (cas positifs, négatifs, limites).
+
+2. Pour chaque scénario :
+   RED      écrire le test (à partir des assertions),
+            l'exécuter, le voir échouer pour de bonnes raisons.
+   GREEN    écrire le code minimum, évident, qui le fait passer.
+   REFACTOR nettoyer (règle de trois pour les duplications),
+            tous les tests restent verts.
+
+3. Code existant qui évolue :
+   adapter les tests d'abord (red) → adapter le code (green)
+   → refactorer ; ajouter des tests pour tout nouveau
+   comportement, cas limite ou règle de validation.</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur. Pour les API JUnit (annotations, assertions, tests paramétrés), voir le cheat sheet de la semaine 3.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

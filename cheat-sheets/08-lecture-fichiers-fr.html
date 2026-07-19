@@ -1,0 +1,843 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 8 - Lecture de fichiers - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f7f9fc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5d6b7c;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e3b545;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 300px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 8 — Lecture de fichiers</h1>
+  <p>Document autonome en français sur la lecture et l'écriture de fichiers texte en Java. Il couvre <code>FileReader</code>/<code>BufferedReader</code>, <code>FileWriter</code>/<code>BufferedWriter</code>, le bloc <code>try-with-resources</code>, les exceptions vérifiées liées aux entrées/sorties, ainsi que les utilitaires <code>java.nio.file.Files</code>.</p>
+  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard (<code>java.io</code>, <code>java.nio.file</code>).</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="07-programmation-fonctionnelle-fr.html">&larr; Semaine 7</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="09-threads-completablefuture-fr.html">Semaine 9 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#lecture">Lire un fichier texte</a>
+    <a href="#imports">Imports utiles</a>
+    <a href="#exceptions">Exceptions vérifiées et E/S</a>
+    <a href="#try-with-resources">try-with-resources</a>
+    <a href="#autocloseable">AutoCloseable</a>
+    <a href="#ecriture">Écrire un fichier texte</a>
+    <a href="#stream-fichier">Stream&lt;String&gt; depuis un fichier</a>
+    <a href="#nio-files">java.nio.file.Files</a>
+    <a href="#validation">Validation vs erreurs techniques</a>
+    <a href="#exemples">Exemple complet</a>
+    <a href="#hyperloglog">HyperLogLog — comptage de cardinalité</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference">Référence rapide</a>
+  </div>
+
+  <div class="content">
+
+    <div class="doc-section" id="lecture">
+      <h2>Lire un fichier texte</h2>
+      <p>Pour lire le contenu d'un fichier texte ligne par ligne, Java propose la classe <code>BufferedReader</code>, qu'on construit généralement à partir d'un <code>FileReader</code>.</p>
+      <div class="api">
+        <h3>FileReader + BufferedReader</h3>
+        <span class="signature">FileReader(String chemin)</span>
+        <span class="signature">BufferedReader(Reader reader)</span>
+        <span class="signature">String readLine()</span>
+        <pre><code>FileReader fileReader = new FileReader("logs/index.txt");
+BufferedReader reader = new BufferedReader(fileReader);
+
+String ligne = reader.readLine();
+while (ligne != null) {
+    System.out.println(ligne);
+    ligne = reader.readLine();
+}
+
+reader.close();</code></pre>
+        <p><code>FileReader</code> ouvre le fichier ; <code>BufferedReader</code> l'enveloppe (un <em>décorateur</em>) pour offrir la méthode <code>readLine()</code>, qui lit une ligne complète et renvoie <code>null</code> lorsqu'il n'y a plus rien à lire.</p>
+      </div>
+      <div class="warning">
+        Le chemin passé au constructeur (par exemple <code>"logs/index.txt"</code>) est <strong>relatif au répertoire de travail</strong> du programme — dans IntelliJ, il s'agit par défaut de la racine du projet. Placer les fichiers de données à la racine du projet, pas dans un sous-dossier de packages ni dans <code>src/</code>.
+      </div>
+      <div class="api">
+        <h3>Forme condensée de la boucle de lecture</h3>
+        <pre><code>String ligne;
+while ((ligne = reader.readLine()) != null) {
+    System.out.println(ligne);
+}</code></pre>
+        <p>L'affectation <code>ligne = reader.readLine()</code> a pour valeur la ligne lue ; la boucle continue tant que cette valeur n'est pas <code>null</code>. C'est la forme la plus courante en pratique.</p>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="imports">
+      <h2>Imports utiles</h2>
+      <pre><code>import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.util.List;
+import java.util.stream.Collectors;</code></pre>
+      <p>Les classes de flux (<code>FileReader</code>, <code>BufferedReader</code>, <code>FileWriter</code>, <code>BufferedWriter</code>, <code>IOException</code>) appartiennent au package historique <code>java.io</code>. Les utilitaires modernes (<code>Files</code>, <code>Path</code>) appartiennent à <code>java.nio.file</code>, introduit en Java 7.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exceptions">
+      <h2>Exceptions vérifiées et E/S</h2>
+      <p>Contrairement à <code>IllegalArgumentException</code> (une exception <strong>non vérifiée</strong>, que le compilateur ne vous oblige pas à traiter), les opérations d'entrée/sortie peuvent lever <code>IOException</code>, qui est une <strong>exception vérifiée</strong> (<em>checked exception</em>).</p>
+      <div class="api">
+        <h3>Deux façons de traiter une exception vérifiée</h3>
+        <ol>
+          <li>L'attraper avec un <code>try</code>/<code>catch</code>.</li>
+          <li>La propager avec <code>throws IOException</code> sur la méthode.</li>
+        </ol>
+        <pre><code>// Propagation : la méthode appelante devra elle-même traiter IOException
+public void afficherFichier(String chemin) throws IOException {
+    BufferedReader reader = new BufferedReader(new FileReader(chemin));
+    // ...
+}</code></pre>
+      </div>
+      <div class="note">
+        Une méthode qui ouvre un fichier peut échouer pour de nombreuses raisons indépendantes du code (fichier absent, droits insuffisants, disque plein...). Le compilateur force donc à décider explicitement quoi faire dans ces cas, contrairement aux exceptions non vérifiées.
+      </div>
+      <div class="api">
+        <h3>Hiérarchie utile</h3>
+        <table>
+          <thead>
+          <tr>
+            <th>Exception</th>
+            <th>Vérifiée ?</th>
+            <th>Cause typique</th>
+          </tr>
+          </thead>
+          <tbody>
+          <tr>
+            <td><code>IOException</code></td>
+            <td>Oui</td>
+            <td>Erreur générale d'entrée/sortie (disque, permissions...).</td>
+          </tr>
+          <tr>
+            <td><code>FileNotFoundException</code></td>
+            <td>Oui (sous-classe d'<code>IOException</code>)</td>
+            <td>Le fichier demandé n'existe pas à l'ouverture.</td>
+          </tr>
+          <tr>
+            <td><code>IllegalArgumentException</code></td>
+            <td>Non</td>
+            <td>Donnée invalide (pas liée à l'E/S elle-même).</td>
+          </tr>
+          </tbody>
+        </table>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="try-with-resources">
+      <h2>try-with-resources</h2>
+      <p>La lecture « manuelle » vue plus haut a un défaut : si une exception survient <strong>entre</strong> l'ouverture et le <code>reader.close()</code>, le fichier ne sera jamais fermé. Sur un programme qui tourne longtemps, cela finit par épuiser les descripteurs de fichiers disponibles.</p>
+      <div class="api">
+        <h3>Syntaxe</h3>
+        <pre><code>try (BufferedReader reader = new BufferedReader(new FileReader("logs/index.txt"))) {
+    String ligne;
+    while ((ligne = reader.readLine()) != null) {
+        System.out.println(ligne);
+    }
+}</code></pre>
+        <p>Ici, <code>reader.close()</code> est appelé automatiquement, même si <code>readLine()</code> lève une exception au milieu de la boucle. C'est équivalent à un <code>try { ... } finally { if (reader != null) reader.close(); }</code> écrit à la main, mais plus lisible et moins sujet à l'oubli.</p>
+      </div>
+      <div class="api">
+        <h3>Plusieurs ressources</h3>
+        <pre><code>try (BufferedReader reader = new BufferedReader(new FileReader("logs/index.txt"));
+     BufferedWriter writer = new BufferedWriter(new FileWriter("rapport.txt"))) {
+    // ...
+}</code></pre>
+        <p>On peut déclarer plusieurs ressources séparées par <code>;</code> ; elles sont fermées automatiquement dans l'ordre <strong>inverse</strong> de leur déclaration.</p>
+      </div>
+      <div class="note">
+        Introduit en Java 7, le try-with-resources est la façon idiomatique d'ouvrir une ressource fermable en Java moderne. En dehors d'un cas d'apprentissage explicite, préférer systématiquement cette forme à un <code>close()</code> manuel.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="autocloseable">
+      <h2>AutoCloseable</h2>
+      <p>Une classe peut être utilisée dans un try-with-resources si elle implémente l'interface <code>AutoCloseable</code> (une seule méthode abstraite : <code>close()</code>).</p>
+      <div class="api">
+        <h3>Signature</h3>
+        <pre><code>public interface AutoCloseable {
+    void close() throws Exception;
+}</code></pre>
+        <p><code>BufferedReader</code>, <code>BufferedWriter</code>, <code>FileReader</code> et <code>FileWriter</code> implémentent tous <code>AutoCloseable</code> (via <code>Closeable</code>), ce qui explique qu'on peut les utiliser directement après <code>try</code>.</p>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="ecriture">
+      <h2>Écrire un fichier texte</h2>
+      <p>L'écriture fonctionne de manière symétrique à la lecture, avec <code>FileWriter</code> et <code>BufferedWriter</code>.</p>
+      <div class="api">
+        <h3>FileWriter + BufferedWriter</h3>
+        <span class="signature">FileWriter(String chemin)</span>
+        <span class="signature">FileWriter(String chemin, boolean append)</span>
+        <span class="signature">void write(String texte)</span>
+        <span class="signature">void newLine()</span>
+        <pre><code>try (BufferedWriter writer = new BufferedWriter(new FileWriter("rapport.txt"))) {
+    writer.write("Bonjour");
+    writer.newLine();
+}</code></pre>
+      </div>
+      <div class="warning">
+        Par défaut, <code>new FileWriter(chemin)</code> <strong>écrase</strong> le fichier existant. Pour ajouter à la suite d'un fichier existant plutôt que l'écraser, utiliser le constructeur à deux arguments : <code>new FileWriter(chemin, true)</code>.
+      </div>
+      <div class="api">
+        <h3>Écrire plusieurs lignes</h3>
+        <pre><code>List&lt;String&gt; ipsUniques = List.of("10.0.0.1", "10.0.0.2", "10.0.0.5");
+
+try (BufferedWriter redacteur = new BufferedWriter(new FileWriter("rapport.txt"))) {
+    for (String ip : ipsUniques) {
+        redacteur.write(ip);
+        redacteur.newLine();
+    }
+    redacteur.write("Nombre d'adresses IP uniques : " + ipsUniques.size());
+    redacteur.newLine();
+}</code></pre>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="stream-fichier">
+      <h2>Stream&lt;String&gt; depuis un fichier</h2>
+      <p><code>BufferedReader</code> fournit une méthode <code>lines()</code> qui renvoie directement un <code>Stream&lt;String&gt;</code>, une ligne par élément — pratique pour enchaîner l'API Stream sur le contenu d'un fichier sans écrire soi-même la boucle <code>readLine()</code>.</p>
+      <div class="api">
+        <h3><code>lines()</code></h3>
+        <span class="signature">Stream&lt;String&gt; lines()</span>
+        <pre><code>try (BufferedReader lecteur = new BufferedReader(new FileReader(chemin))) {
+    List&lt;String&gt; lignes = lecteur.lines().collect(Collectors.toList());
+}</code></pre>
+      </div>
+      <div class="warning">
+        Le <code>Stream</code> renvoyé par <code>lines()</code> reste lié au <code>BufferedReader</code> sous-jacent : il doit être consommé (par exemple avec <code>collect</code>) <strong>avant</strong> la fermeture du reader à la sortie du bloc try-with-resources. Ne pas renvoyer ce <code>Stream</code> tel quel en dehors du bloc.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="nio-files">
+      <h2>java.nio.file.Files</h2>
+      <p>Le package <code>java.nio.file</code> (Java 7+) fournit une API plus moderne pour manipuler des chemins et des fichiers, en complément des classes historiques de <code>java.io</code>. Un <code>Path</code> représente un chemin ; la classe utilitaire <code>Files</code> regroupe des opérations statiques sur les fichiers qu'il désigne.</p>
+      <div class="api">
+        <h3>Construire un chemin</h3>
+        <span class="signature">static Path of(String first, String... more)</span>
+        <pre><code>Path racine = Path.of("logs-grand-volume");
+Path fichier = racine.resolve("2026-01-01.log"); // combine deux segments de chemin</code></pre>
+      </div>
+      <div class="api">
+        <h3>Vérifier et créer</h3>
+        <span class="signature">static boolean exists(Path path)</span>
+        <span class="signature">static Path createDirectories(Path dir)</span>
+        <pre><code>if (!Files.exists(Path.of("logs-grand-volume"))) {
+    Files.createDirectories(Path.of("logs-grand-volume"));
+}</code></pre>
+        <p><code>createDirectories</code> crée aussi, si nécessaire, tous les répertoires parents manquants (contrairement à <code>createDirectory</code>, qui échoue si le parent n'existe pas).</p>
+      </div>
+      <div class="api">
+        <h3>Lire tout le contenu en une fois</h3>
+        <span class="signature">static List&lt;String&gt; readAllLines(Path path)</span>
+        <pre><code>List&lt;String&gt; lignes = Files.readAllLines(Path.of("rapport.txt"));</code></pre>
+        <p>Pratique pour un test ou un petit fichier : contrairement à <code>BufferedReader</code>, aucune gestion manuelle de ressource n'est nécessaire, <code>readAllLines</code> ouvre et ferme le fichier elle-même. Pour un très gros fichier, préférer une lecture ligne par ligne (<code>BufferedReader</code> ou <code>Files.lines(Path)</code>, qui renvoie un <code>Stream&lt;String&gt;</code> paresseux) afin de ne pas tout charger en mémoire d'un coup.</p>
+      </div>
+      <div class="api">
+        <h3>Convertir vers l'API historique si besoin</h3>
+        <pre><code>Path chemin = racine.resolve("index.txt");
+BufferedWriter writer = new BufferedWriter(new FileWriter(chemin.toFile()));</code></pre>
+        <p><code>Path.toFile()</code> convertit vers l'ancien type <code>java.io.File</code>, utile quand une API plus ancienne (comme le constructeur de <code>FileWriter</code>) attend un <code>File</code> plutôt qu'un <code>Path</code>.</p>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="validation">
+      <h2>Validation vs erreurs techniques</h2>
+      <p>Une ligne d'un fichier peut être syntaxiquement lisible (<code>readLine()</code> réussit) mais représenter des données invalides (un champ manquant, un nom vide...). Ce n'est pas une <code>IOException</code> : c'est une erreur de <strong>validation</strong>, qui remonte typiquement sous forme d'<code>IllegalArgumentException</code>.</p>
+      <div class="api">
+        <h3>Ne pas interrompre tout le traitement pour une ligne invalide</h3>
+        <pre><code>try {
+    acces.add(parserLigne(ligne));
+} catch (IllegalArgumentException e) {
+    System.out.println("Ligne ignorée : " + ligne);
+}</code></pre>
+        <p>Ces exceptions ne sont pas vérifiées : rien n'oblige à les traiter, mais on choisit ici de les attraper pour ignorer la ligne fautive sans interrompre tout le programme.</p>
+      </div>
+      <div class="api">
+        <h3>Un fichier référencé mais absent</h3>
+        <p>Un fichier mentionné dans un index mais absent du disque lève une <code>FileNotFoundException</code> (une sous-classe d'<code>IOException</code>, donc vérifiée). Si l'on veut que le chargement continue avec les fichiers suivants, on attrape spécifiquement cette exception-là — les autres <code>IOException</code>, elles, continuent de se propager.</p>
+        <pre><code>for (String nomFichier : lecteur.lireIndex(dossier + "/index.txt")) {
+    try {
+        acces.addAll(parserLignes(lecteur.lireLignes(dossier + "/" + nomFichier)));
+    } catch (FileNotFoundException e) {
+        System.out.println("Fichier introuvable : " + nomFichier);
+    }
+}</code></pre>
+      </div>
+      <div class="note">
+        Ne jamais mélanger validation métier et gestion d'erreurs techniques dans le même <code>catch</code> : une <code>IOException</code> (problème d'accès au fichier) et une <code>IllegalArgumentException</code> (problème de contenu) appellent des réactions différentes et ne doivent pas être traitées comme un seul et même cas d'erreur générique.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemples">
+      <h2>Exemple complet</h2>
+      <p>Un scénario typique : un dossier <code>logs/</code> contient un fichier d'index (<code>index.txt</code>, un nom de fichier de logs par ligne) et plusieurs fichiers de logs à charger, parser puis analyser.</p>
+
+      <h3>Lire l'index et un fichier de logs</h3>
+      <pre><code>public List&lt;String&gt; lireIndex(String chemin) throws IOException {
+    List&lt;String&gt; noms = new ArrayList&lt;&gt;();
+    try (BufferedReader lecteur = new BufferedReader(new FileReader(chemin))) {
+        String ligne;
+        while ((ligne = lecteur.readLine()) != null) {
+            noms.add(ligne);
+        }
+    }
+    return noms;
+}
+
+public List&lt;String&gt; lireLignes(String chemin) throws IOException {
+    try (BufferedReader lecteur = new BufferedReader(new FileReader(chemin))) {
+        return lecteur.lines().collect(Collectors.toList());
+    }
+}</code></pre>
+
+      <h3>Combiner index, parsing et résilience aux erreurs</h3>
+      <pre><code>public List&lt;Acces&gt; chargerTousLesAcces(String dossier) throws IOException {
+    List&lt;Acces&gt; acces = new ArrayList&lt;&gt;();
+    for (String nomFichier : lireIndex(dossier + "/index.txt")) {
+        try {
+            acces.addAll(parserLignes(lireLignes(dossier + "/" + nomFichier)));
+        } catch (FileNotFoundException e) {
+            System.out.println("Fichier introuvable : " + nomFichier);
+        }
+    }
+    return acces;
+}
+
+public List&lt;Acces&gt; parserLignes(List&lt;String&gt; lignes) {
+    List&lt;Acces&gt; acces = new ArrayList&lt;&gt;();
+    for (String ligne : lignes) {
+        try {
+            acces.add(parserLigne(ligne));
+        } catch (IllegalArgumentException e) {
+            System.out.println("Ligne ignorée : " + ligne);
+        }
+    }
+    return acces;
+}</code></pre>
+
+      <h3>Écrire un rapport à partir de résultats calculés par Stream</h3>
+      <pre><code>public void ecrireRapport(String chemin, List&lt;Acces&gt; acces) throws IOException {
+    List&lt;String&gt; ips = acces.stream()
+        .map(Acces::getIp)
+        .distinct()
+        .sorted()
+        .toList();
+
+    try (BufferedWriter redacteur = new BufferedWriter(new FileWriter(chemin))) {
+        for (String ip : ips) {
+            redacteur.write(ip);
+            redacteur.newLine();
+        }
+        redacteur.write("Nombre d'adresses IP uniques : " + ips.size());
+        redacteur.newLine();
+    }
+}</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="hyperloglog">
+      <h2>HyperLogLog — comptage de cardinalité</h2>
+      <p>Le rapport de l'exemple précédent (<code>ecrireRapport</code>) déduplique les adresses IP avec <code>.distinct()</code> sur un <code>Stream</code> : cela suppose que toutes les valeurs tiennent en mémoire. Sur un flux massif — des millions de vues, en continu —, cette approche ne tient plus la charge. <strong>HyperLogLog</strong> est un algorithme <em>probabiliste</em> de comptage de cardinalité : il <strong>estime</strong> le nombre de valeurs distinctes vues dans un flux, avec une occupation mémoire minuscule et fixée à l'avance, au prix d'une petite marge d'erreur.</p>
+
+      <div class="api">
+        <h3>Le problème : deux approches naïves, deux défauts</h3>
+        <ul>
+          <li>Stocker chaque valeur déjà vue (tableau, <code>Set&lt;String&gt;</code>) : exact, mais la mémoire grandit avec le nombre de valeurs distinctes — une vidéo à 10 millions de vues, ce sont déjà 40 Mo rien que pour les adresses IP.</li>
+          <li>Incrémenter un simple compteur à chaque valeur reçue : mémoire minimale, mais faux — une même valeur revue plusieurs fois est comptée plusieurs fois, sans déduplication.</li>
+        </ul>
+        <p>HyperLogLog vise l'entre-deux : ignorer les doublons <strong>sans</strong> mémoriser individuellement tout ce qui a été vu.</p>
+      </div>
+
+      <div class="api">
+        <h3>Le principe : la rareté d'un hash</h3>
+        <p>On calcule un <strong>hash</strong> de chaque valeur — un nombre dont les bits doivent être répartis de façon <strong>uniforme</strong> sur toute la plage possible — et on regarde les zéros au début de son écriture binaire. Plus une séquence de zéros initiaux est longue, plus elle est rare :</p>
+        <table>
+          <thead>
+          <tr><th>Zéros initiaux</th><th>Probabilité</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>0</td><td>1/2</td></tr>
+          <tr><td>1</td><td>1/4</td></tr>
+          <tr><td>2</td><td>1/8</td></tr>
+          <tr><td>k</td><td>1/2<sup>k</sup></td></tr>
+          </tbody>
+        </table>
+        <p>Croiser un hash avec 17 zéros initiaux (une chance sur 2<sup>17</sup>, soit environ 130 000) suggère qu'il a fallu voir beaucoup de valeurs distinctes pour tomber dessus : c'est cette rareté qui permet d'« estimer » une cardinalité. Ajouter dix fois la <strong>même</strong> valeur ne change rien — son hash est identique, il ne bat jamais un record — d'où l'insensibilité de l'algorithme aux doublons.</p>
+      </div>
+
+      <div class="api">
+        <h3>Les buckets (registres)</h3>
+        <span class="signature">HyperLogLog(Hasher hasher, int nbBitsIndex)</span>
+        <span class="signature">void ajouter(String valeur)</span>
+        <span class="signature">long estimerCardinalite()</span>
+        <p>Un seul record est instable : avec trois visiteurs et un simple coup de chance sur un hash, l'estimation exploserait. Pour stabiliser, on répartit les hashs dans des <em>buckets</em> — un tableau <code>registres</code> — et on ne garde, dans chaque bucket, que le <strong>maximum</strong> de zéros initiaux observé :</p>
+        <ol>
+          <li>Calculer le hash de la valeur.</li>
+          <li>Les <code>nbBitsIndex</code> premiers bits du hash donnent le numéro de bucket (la <strong>précision</strong>, passée au constructeur).</li>
+          <li>Sur les bits restants, compter les zéros initiaux.</li>
+          <li>Le bucket garde le maximum rencontré jusqu'ici — jamais moins.</li>
+        </ol>
+        <pre><code>hash  = 0x12345678 = 0001 0010 0011 0100 0101 0110 0111 1000
+index = les 4 premiers bits  -> 0001 = bucket 1
+reste = les 28 bits restants -> 0010 0011 0100 0101 0110 0111 1000
+                                 (2 zéros initiaux -> registres[1] = 3)</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>L'estimation finale : moyenne harmonique</h3>
+        <pre><code>estimation = ALPHA * m² / Σ(2⁻ʳᵉᵍⁱˢᵗʳᵉ⁽ⁱ⁾)</code></pre>
+        <p>où <code>m</code> est le nombre de buckets et <code>ALPHA</code> une constante qui dépend de <code>m</code> (<code>0.673</code> pour <code>m = 16</code>). La moyenne <strong>harmonique</strong> a l'avantage de faire peu peser les valeurs extrêmes : un registre qui saute à un record improbable ne fait pas exploser l'estimation globale — c'est elle qui amortit le risque de coup de chance évoqué plus haut.</p>
+      </div>
+
+      <div class="api">
+        <h3>Précision et mémoire figée</h3>
+        <table>
+          <thead>
+          <tr><th>Précision (bits d'index)</th><th>Nombre de buckets</th><th>Erreur observée (100 000 valeurs)</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>4</td><td>16</td><td>≈ 25 %</td></tr>
+          <tr><td>14</td><td>16 384</td><td>≈ 1 %</td></tr>
+          </tbody>
+        </table>
+        <p>Le point clé : la mémoire est <strong>figée à l'avance</strong> par le nombre de buckets choisi au constructeur, et elle ne grandit <strong>jamais</strong> avec le nombre d'éléments traités — que le flux compte 300 vues ou 500 millions. Avec un hash sur 32 bits et 14 bits de bucket, il reste 18 bits, donc au plus 18 zéros initiaux à mémoriser par registre : quelques bits par bucket suffisent, pour un total de l'ordre de quelques kilo-octets seulement. C'est cette propriété qui explique la présence de HyperLogLog dans Redis (<code>PFCOUNT</code>) ou BigQuery (<code>APPROX_COUNT_DISTINCT</code>).</p>
+      </div>
+
+      <div class="warning">
+        Toute la mécanique repose sur un hash bien mélangé : chaque valeur doit avoir autant de chances d'atterrir dans n'importe quel bucket, avec n'importe quel nombre de zéros. Le <code>hashCode()</code> par défaut des chaînes Java est <strong>mal adapté</strong> : des valeurs proches (<code>"user1"</code>, <code>"user2"</code>, des IP qui ne diffèrent que par le dernier chiffre) produisent des hashs qui commencent par les mêmes bits — exactement ceux qui choisissent le bucket. Résultat : la quasi-totalité des valeurs s'entasserait dans deux ou trois buckets, et l'estimation n'aurait plus aucun rapport avec la réalité. Une bonne implémentation de <code>Hasher</code> mélange donc les bits (par exemple via le finalizer de MurmurHash3) avant de s'en servir :
+        <pre><code>int hash = valeur.hashCode();
+hash ^= (hash &gt;&gt;&gt; 16);
+hash *= 0x85ebca6b;
+hash ^= (hash &gt;&gt;&gt; 13);
+hash *= 0xc2b2ae35;
+hash ^= (hash &gt;&gt;&gt; 16);</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>Fusionner des compteurs</h3>
+        <p>Deux compteurs HyperLogLog se fusionnent facilement : il suffit de prendre, <strong>bucket par bucket</strong>, le maximum des deux tableaux de registres, puis de relancer le calcul d'estimation sur le tableau fusionné. Aucune valeur individuelle n'a besoin d'être échangée entre les deux compteurs — seuls les registres (de simples entiers) circulent.</p>
+        <table>
+          <thead>
+          <tr><th>Registre</th><th>Serveur A</th><th>Serveur B</th><th>Fusion (max)</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>0</td><td>2</td><td>4</td><td>4</td></tr>
+          <tr><td>1</td><td>8</td><td>7</td><td>8</td></tr>
+          <tr><td>2</td><td>5</td><td>5</td><td>5</td></tr>
+          <tr><td>3</td><td>0</td><td>3</td><td>3</td></tr>
+          </tbody>
+        </table>
+        <p>Prendre le maximum registre par registre est une opération <strong>commutative et associative</strong> : l'ordre de fusion de plusieurs compteurs n'a pas d'importance, et le résultat est le même que si toutes les valeurs avaient été ajoutées à un seul et même compteur dès le départ.</p>
+      </div>
+
+      <div class="success">
+        À retenir : HyperLogLog échange de l'exactitude contre une mémoire quasi constante. Le nombre de buckets fixé au constructeur est le seul curseur qui compte : plus il est grand, plus l'estimation est précise, sans jamais dépendre du volume de données traité.
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Erreur de compilation : « unreported exception IOException; must be caught or declared to be thrown ».</td>
+          <td>Une opération d'E/S vérifiée n'est ni attrapée ni propagée par la méthode qui l'appelle.</td>
+          <td>Ajouter <code>throws IOException</code> sur la méthode, ou l'entourer d'un <code>try</code>/<code>catch</code>.</td>
+        </tr>
+        <tr>
+          <td><code>FileNotFoundException</code> alors que le fichier existe pourtant.</td>
+          <td>Le chemin est relatif à un répertoire de travail différent de celui attendu (souvent : fichier placé dans un package au lieu de la racine du projet).</td>
+          <td>Vérifier le répertoire de travail (racine du projet dans IntelliJ) et y placer les fichiers de données, hors de <code>src/</code>.</td>
+        </tr>
+        <tr>
+          <td>Le fichier écrit est vide ou tronqué, malgré des appels à <code>write(...)</code>.</td>
+          <td>Le <code>BufferedWriter</code> n'a pas été fermé : les données restent dans le tampon interne et ne sont jamais réellement écrites sur le disque.</td>
+          <td>Utiliser systématiquement un try-with-resources, qui garantit l'appel à <code>close()</code> (donc le vidage du tampon) même en cas d'exception.</td>
+        </tr>
+        <tr>
+          <td>Le fichier de sortie ne contient que la dernière exécution, les précédentes ont disparu.</td>
+          <td><code>new FileWriter(chemin)</code> écrase le fichier existant par défaut.</td>
+          <td>Utiliser <code>new FileWriter(chemin, true)</code> pour ajouter à la suite du contenu existant.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalStateException</code> en essayant de réutiliser le <code>Stream&lt;String&gt;</code> renvoyé par <code>lines()</code> après le bloc try-with-resources.</td>
+          <td>Le <code>BufferedReader</code> sous-jacent a déjà été fermé à la sortie du bloc, or <code>lines()</code> est paresseux et lit depuis ce reader à la demande.</td>
+          <td>Consommer le stream (<code>collect</code>, <code>toList</code>...) à l'intérieur du bloc try-with-resources, avant la fermeture.</td>
+        </tr>
+        <tr>
+          <td>Une seule ligne mal formée fait planter tout le chargement du fichier.</td>
+          <td>L'exception de validation (<code>IllegalArgumentException</code>) n'est pas attrapée ligne par ligne, elle remonte et interrompt toute la boucle.</td>
+          <td>Entourer le parsing de chaque ligne d'un <code>try</code>/<code>catch (IllegalArgumentException e)</code> pour ignorer uniquement la ligne fautive.</td>
+        </tr>
+        <tr>
+          <td>Un seul fichier manquant dans l'index fait planter tout le chargement.</td>
+          <td><code>FileNotFoundException</code> non attrapée spécifiquement lors du chargement d'un fichier référencé par l'index.</td>
+          <td>Attraper <code>FileNotFoundException</code> autour de la lecture de chaque fichier de l'index, en laissant les autres <code>IOException</code> se propager.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference">
+      <h2>Référence rapide</h2>
+
+      <h3>Imports</h3>
+      <pre><code>import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;</code></pre>
+
+      <h3>Lecture</h3>
+      <pre><code>try (BufferedReader reader = new BufferedReader(new FileReader(chemin))) {
+    String ligne;
+    while ((ligne = reader.readLine()) != null) {
+        // traiter ligne
+    }
+}
+
+try (BufferedReader reader = new BufferedReader(new FileReader(chemin))) {
+    List&lt;String&gt; lignes = reader.lines().collect(Collectors.toList());
+}</code></pre>
+
+      <h3>Écriture</h3>
+      <pre><code>try (BufferedWriter writer = new BufferedWriter(new FileWriter(chemin))) {
+    writer.write("texte");
+    writer.newLine();
+}
+
+// Ajouter sans écraser
+new FileWriter(chemin, true)</code></pre>
+
+      <h3>java.nio.file.Files</h3>
+      <pre><code>Files.exists(Path.of(chemin))
+Files.createDirectories(Path.of(dossier))
+Files.readAllLines(Path.of(chemin))</code></pre>
+
+      <h3>Exceptions</h3>
+      <pre><code>IOException              // vérifiée : disque, droits, E/S en général
+FileNotFoundException    // vérifiée : sous-classe d'IOException, fichier absent
+IllegalArgumentException // non vérifiée : donnée invalide, pas un problème d'E/S</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être distribuée et ouverte directement dans un navigateur hors ligne.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,87 @@
+Quantité de blanc de poulet nécessaire : 600 gr
+
+Waterzooi
+
+Pour 4 personnes
+Difficulté : **
+Coût : €€€
+Durée : 1 h 27 m
+
+Ingrédients :
+1 pincée Sel
+10 cl Crème fraiche
+600 gr Blanc de poulet
+200 gr Céleri
+2  Carottes
+
+1. (00:15) Couper les légumes
+2. (00:05) Faire revenir les légumes
+3. (00:00) Ajouter le poulet
+4. (01:07) Laisser mijoter jusqu'à cuisson du poulet
+5. (00:00) Ajouter la crème et servir
+
+Entrée
+=====
+Croquettes au fromage
+Plat
+=====
+Waterzooi
+
+Entrée
+=====
+Croquettes au fromage
+Plat
+=====
+Waterzooi
+
+Usages des ingrédients :
+Crème fraiche : 1
+Sel : 2
+Blanc de poulet : 1
+Carottes : 1
+Céleri : 1
+
+Plat original (ne doit pas avoir changé) :
+Waterzooi
+
+Pour 4 personnes
+Difficulté : **
+Coût : €€€
+Durée : 1 h 27 m
+
+Ingrédients :
+1 pincée Sel
+10 cl Crème fraiche
+600 gr Blanc de poulet
+200 gr Céleri
+2  Carottes
+
+1. (00:15) Couper les légumes
+2. (00:05) Faire revenir les légumes
+3. (00:00) Ajouter le poulet
+4. (01:07) Laisser mijoter jusqu'à cuisson du poulet
+5. (00:00) Ajouter la crème et servir
+
+Plat copié (doit contenir la nouvelle étape et le sel modifié) :
+Waterzooi
+
+Pour 4 personnes
+Difficulté : **
+Coût : €€€
+Durée : 1 h 29 m
+
+Ingrédients :
+600 gr Blanc de poulet
+10 cl Crème fraiche
+2  Carottes
+999 pincée Sel
+200 gr Céleri
+
+1. (00:15) Couper les légumes
+2. (00:05) Faire revenir les légumes
+3. (00:00) Ajouter le poulet
+4. (01:07) Laisser mijoter jusqu'à cuisson du poulet
+5. (00:00) Ajouter la crème et servir
+6. (00:02) Étape ajoutée sur la copie
+
+Note : l'ordre des ingrédients et des usages dépend du HashSet/HashMap utilisé et peut varier d'une exécution à l'autre.

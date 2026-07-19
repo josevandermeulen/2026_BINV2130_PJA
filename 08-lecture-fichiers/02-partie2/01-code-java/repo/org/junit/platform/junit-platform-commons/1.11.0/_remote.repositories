@@ -1,0 +1,4 @@
+#NOTE: This is a Maven Resolver internal implementation file, its format can be changed without prior notice.
+#Wed Jul 08 08:55:57 UTC 2026
+junit-platform-commons-1.11.0.jar>=
+junit-platform-commons-1.11.0.pom>=

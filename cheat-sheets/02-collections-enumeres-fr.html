@@ -1,0 +1,723 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 2 - Collections et énumérés - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 2 — Collections et énumérés</h1>
+  <p>Document autonome en français. Référence des collections Java et des énumérés utilisés dans les ateliers, sans demander d'accès Internet.</p>
+  <p>Couvre : enum, List, Set, Map, SortedSet/SortedMap, Comparable/Comparator, classes anonymes, StringBuilder, autoboxing.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="01-rappels-fr.html">&larr; Semaine 1</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="03-junit-fr.html">Semaine 3 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#enums">Énumérés</a>
+    <a href="#list-set">List et Set</a>
+    <a href="#map">Map et parcours</a>
+    <a href="#sorted">Collections triées</a>
+    <a href="#comparable">Comparable et Comparator</a>
+    <a href="#anonymes">Classes anonymes</a>
+    <a href="#non-modifiable">Collections non modifiables</a>
+    <a href="#divers">StringBuilder, autoboxing</a>
+    <a href="#clonage">Clonage d'objets</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="enums">
+      <h2>Énumérés</h2>
+      <p>Un <code>enum</code> définit un type dont les valeurs possibles sont fixées à la compilation. Chaque constante est une instance unique.</p>
+      <pre><code>public enum TypePromo {
+    SOLDE, PUB, DESTOCKAGE
+}</code></pre>
+      <h3>Méthodes disponibles sur tout enum</h3>
+      <span class="signature">String name()</span>
+      <span class="signature">int ordinal()</span>
+      <span class="signature">static T[] values()</span>
+      <span class="signature">static T valueOf(String name)</span>
+      <pre><code>TypePromo promo = TypePromo.SOLDE;
+promo.name();                    // "SOLDE"
+TypePromo.values();              // [SOLDE, PUB, DESTOCKAGE]
+TypePromo.valueOf("PUB");        // TypePromo.PUB (exception si inconnu)</code></pre>
+      <h3>Attributs et méthodes dans un enum</h3>
+      <pre><code>public enum Jour {
+    LUNDI("Lun"), MARDI("Mar");
+
+    private final String abreviation;
+
+    Jour(String abreviation) {          // constructeur toujours privé
+        this.abreviation = abreviation;
+    }
+
+    public String getAbreviation() {
+        return abreviation;
+    }
+}</code></pre>
+      <h3>Switch sur un enum</h3>
+      <p>Style classique :</p>
+      <pre><code>switch (promo) {
+    case SOLDE:
+        System.out.println("Soldes !");
+        break;
+    case PUB:
+    case DESTOCKAGE:
+        System.out.println("Autre promo");
+        break;
+}</code></pre>
+      <p>Style flèche (Java 14+), plus concis, plusieurs constantes sur un même <code>case</code> :</p>
+      <pre><code>switch (promo) {
+    case SOLDE -&gt; System.out.println("Soldes !");
+    case PUB, DESTOCKAGE -&gt; System.out.println("Autre promo");
+}</code></pre>
+      <div class="note">
+        Comparer deux énumérés avec <code>==</code> est correct et idiomatique : chaque constante n'existe qu'en un seul exemplaire.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="list-set">
+      <h2><code>List</code> et <code>Set</code></h2>
+      <p>Package <code>java.util</code>. Deux interfaces principales de <code>Collection</code> :</p>
+      <ul>
+        <li><code>List&lt;E&gt;</code> : séquence ordonnée, doublons autorisés, accès par index. Implémentation courante : <code>ArrayList</code>.</li>
+        <li><code>Set&lt;E&gt;</code> : pas de doublons (au sens de <code>equals</code>), pas d'accès par index. Implémentations : <code>HashSet</code> (rapide, ordre non garanti), <code>TreeSet</code> (trié).</li>
+      </ul>
+      <h3>Méthodes principales (communes)</h3>
+      <span class="signature">boolean add(E e)</span>
+      <span class="signature">boolean remove(Object o)</span>
+      <span class="signature">boolean contains(Object o)</span>
+      <span class="signature">int size()</span>
+      <span class="signature">boolean isEmpty()</span>
+      <span class="signature">void clear()</span>
+      <h3>Spécifique à <code>List</code></h3>
+      <span class="signature">E get(int index)</span>
+      <span class="signature">E set(int index, E element)</span>
+      <span class="signature">void add(int index, E element)</span>
+      <span class="signature">E remove(int index)</span>
+      <span class="signature">int indexOf(Object o)</span>
+      <pre><code>List&lt;String&gt; noms = new ArrayList&lt;&gt;();
+noms.add("alice");
+noms.add("alice");        // ok, doublon accepté
+
+Set&lt;String&gt; unique = new HashSet&lt;&gt;();
+unique.add("alice");
+unique.add("alice");      // renvoie false, pas de doublon</code></pre>
+      <div class="warning">
+        Dans les collections <code>HashXXX</code> (<code>HashSet</code>, <code>HashMap</code>), il faut <strong>redéfinir <code>hashCode</code> et <code>equals</code></strong> dans la classe des éléments (ou des clés). Ces implémentations s'appuient sur les deux méthodes : sans redéfinition, les doublons ne sont pas détectés et les recherches échouent. Toujours redéfinir les deux ensemble, de manière cohérente (deux objets <code>equals</code> doivent avoir le même <code>hashCode</code>).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="map">
+      <h2><code>Map</code> et parcours</h2>
+      <p><code>Map&lt;K, V&gt;</code> associe des clés uniques à des valeurs. Implémentations : <code>HashMap</code> (ordre non garanti), <code>TreeMap</code> (clés triées). Pour une <code>HashMap</code>, la classe des clés doit redéfinir <code>hashCode</code> et <code>equals</code>.</p>
+      <span class="signature">V put(K key, V value)</span>
+      <span class="signature">V get(Object key)</span>
+      <span class="signature">V getOrDefault(Object key, V defaultValue)</span>
+      <span class="signature">boolean containsKey(Object key)</span>
+      <span class="signature">V remove(Object key)</span>
+      <span class="signature">Set&lt;K&gt; keySet()</span>
+      <span class="signature">Collection&lt;V&gt; values()</span>
+      <span class="signature">Set&lt;Map.Entry&lt;K, V&gt;&gt; entrySet()</span>
+      <pre><code>Map&lt;String, Integer&gt; stock = new HashMap&lt;&gt;();
+stock.put("livre", 3);
+stock.put("livre", 5);          // remplace la valeur existante
+stock.get("stylo");             // null si absent
+stock.getOrDefault("stylo", 0); // 0 si absent</code></pre>
+      <h3>Parcourir une Map</h3>
+      <pre><code>// Par entrées (clé + valeur en même temps)
+for (Map.Entry&lt;String, Integer&gt; entry : stock.entrySet()) {
+    System.out.println(entry.getKey() + " : " + entry.getValue());
+}
+
+// Par clés
+for (String cle : stock.keySet()) { ... }
+
+// Par valeurs
+for (Integer valeur : stock.values()) { ... }</code></pre>
+      <div class="note">
+        <code>put</code> sur une clé existante <strong>remplace</strong> la valeur et renvoie l'ancienne. C'est le comportement attendu, par exemple, quand on redéfinit un prix pour une quantité déjà présente.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="sorted">
+      <h2>Collections triées : <code>SortedSet</code>, <code>SortedMap</code></h2>
+      <p><code>TreeSet</code> implémente <code>SortedSet</code> ; <code>TreeMap</code> implémente <code>SortedMap</code>. Les éléments (ou les clés) sont maintenus triés en permanence.</p>
+      <span class="signature">E first() / K firstKey()</span>
+      <span class="signature">E last() / K lastKey()</span>
+      <span class="signature">SortedMap&lt;K,V&gt; headMap(K toKey)</span>
+      <span class="signature">SortedMap&lt;K,V&gt; tailMap(K fromKey)</span>
+      <p>Le tri utilise soit l'<strong>ordre naturel</strong> des éléments (interface <code>Comparable</code>), soit un <code>Comparator</code> passé au constructeur :</p>
+      <pre><code>// Ordre naturel (String implémente Comparable)
+SortedSet&lt;String&gt; noms = new TreeSet&lt;&gt;();
+
+// Ordre décroissant via un Comparator
+SortedMap&lt;LocalDate, Prix&gt; historique =
+    new TreeMap&lt;&gt;(Comparator.reverseOrder());</code></pre>
+      <div class="warning">
+        Dans un <code>TreeSet</code>/<code>TreeMap</code>, c'est la <strong>comparaison</strong> (pas <code>equals</code>) qui détermine les doublons : deux éléments dont la comparaison vaut 0 sont considérés identiques. Garder la comparaison cohérente avec <code>equals</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="comparable">
+      <h2><code>Comparable</code> et <code>Comparator</code></h2>
+      <h3>Ordre naturel : <code>Comparable&lt;T&gt;</code></h3>
+      <p>La classe elle-même définit comment ses instances s'ordonnent.</p>
+      <span class="signature">int compareTo(T o)</span>
+      <p>Contrat : négatif si <code>this</code> avant <code>o</code>, 0 si équivalents, positif si après.</p>
+      <pre><code>public class Produit implements Comparable&lt;Produit&gt; {
+
+    @Override
+    public int compareTo(Produit autre) {
+        int parNom = this.nom.compareTo(autre.nom);
+        if (parNom != 0) {
+            return parNom;
+        }
+        int parMarque = this.marque.compareTo(autre.marque);
+        if (parMarque != 0) {
+            return parMarque;
+        }
+        return this.rayon.compareTo(autre.rayon);
+    }
+}</code></pre>
+      <h3>Ordre externe : <code>Comparator&lt;T&gt;</code></h3>
+      <p>Un objet à part qui compare deux instances — utile pour des ordres multiples ou quand on ne peut pas modifier la classe.</p>
+      <span class="signature">int compare(T o1, T o2)</span>
+      <span class="signature">static &lt;T extends Comparable&gt; Comparator&lt;T&gt; naturalOrder()</span>
+      <span class="signature">static &lt;T extends Comparable&gt; Comparator&lt;T&gt; reverseOrder()</span>
+      <span class="signature">static &lt;T, U extends Comparable&gt; Comparator&lt;T&gt; comparing(Function&lt;T, U&gt; keyExtractor)</span>
+      <span class="signature">default Comparator&lt;T&gt; thenComparing(Comparator&lt;T&gt; other)</span>
+      <span class="signature">default Comparator&lt;T&gt; reversed()</span>
+      <pre><code>Comparator&lt;Produit&gt; parMarque = Comparator.comparing(Produit::getMarque)
+                                          .thenComparing(Produit::getNom);
+
+List&lt;Produit&gt; produits = ...;
+produits.sort(parMarque);
+Collections.sort(produits);      // ordre naturel (Comparable)</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="anonymes">
+      <h2>Classes anonymes</h2>
+      <p>Une classe anonyme implémente une interface (ou étend une classe) sur place, sans être nommée. Syntaxe historique fréquente pour les <code>Comparator</code> :</p>
+      <pre><code>Comparator&lt;Produit&gt; parNom = new Comparator&lt;Produit&gt;() {
+    @Override
+    public int compare(Produit p1, Produit p2) {
+        return p1.getNom().compareTo(p2.getNom());
+    }
+};</code></pre>
+      <p>Depuis Java 8, une interface fonctionnelle (une seule méthode abstraite) peut s'écrire en lambda, plus concise :</p>
+      <pre><code>Comparator&lt;Produit&gt; parNom = (p1, p2) -&gt; p1.getNom().compareTo(p2.getNom());</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="non-modifiable">
+      <h2>Renvoyer une collection non modifiable</h2>
+      <p>Pour exposer une collection interne sans permettre sa modification :</p>
+      <span class="signature">static &lt;T&gt; List&lt;T&gt; List.copyOf(Collection&lt;T&gt; coll)</span>
+      <span class="signature">static &lt;T&gt; Set&lt;T&gt; Set.copyOf(Collection&lt;T&gt; coll)</span>
+      <span class="signature">static &lt;T&gt; List&lt;T&gt; Collections.unmodifiableList(List&lt;T&gt; list)</span>
+      <span class="signature">static &lt;K,V&gt; SortedMap&lt;K,V&gt; Collections.unmodifiableSortedMap(SortedMap&lt;K,V&gt; m)</span>
+      <pre><code>public List&lt;Produit&gt; getProduits() {
+    return Collections.unmodifiableList(produits);
+}</code></pre>
+      <p>Différence : <code>List.copyOf</code> fait une copie figée (indépendante des changements ultérieurs) ; <code>unmodifiableList</code> est une <strong>vue</strong> : elle reflète les changements internes mais interdit la modification via cette référence (lance <code>UnsupportedOperationException</code>).</p>
+      <div class="note">
+        La théorie de la semaine ne couvre que <code>Collections.unmodifiableXXX</code>. <code>List.copyOf</code>/<code>Set.copyOf</code> sont ajoutés ici en complément (pas faux, mais au-delà du programme officiel de cette semaine).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="divers">
+      <h2>StringBuilder, autoboxing, Duration</h2>
+      <h3><code>StringBuilder</code></h3>
+      <p>Concaténer des <code>String</code> dans une boucle crée un objet par itération. <code>StringBuilder</code> accumule efficacement :</p>
+      <span class="signature">StringBuilder append(...)</span>
+      <span class="signature">String toString()</span>
+      <pre><code>StringBuilder sb = new StringBuilder();
+for (Produit p : produits) {
+    sb.append(p.getNom()).append("\n");
+}
+return sb.toString();</code></pre>
+      <h3>Wrapper classes et autoboxing</h3>
+      <p>Les collections ne stockent que des objets : <code>Integer</code>, <code>Double</code>, <code>Boolean</code>… La conversion primitif ↔ wrapper est automatique (autoboxing/unboxing).</p>
+      <pre><code>List&lt;Integer&gt; nombres = new ArrayList&lt;&gt;();
+nombres.add(3);            // int → Integer automatique
+int premier = nombres.get(0);   // Integer → int automatique</code></pre>
+      <div class="warning">
+        Unboxing d'un <code>null</code> → <code>NullPointerException</code>. Exemple : <code>int n = map.get("absent");</code> plante si la clé n'existe pas.
+      </div>
+      <h3><code>Duration</code></h3>
+      <span class="signature">static Duration ofMinutes(long minutes)</span>
+      <span class="signature">static Duration between(Temporal start, Temporal end)</span>
+      <span class="signature">Duration plusMinutes(long minutes)</span>
+      <span class="signature">Duration minusMinutes(long minutes)</span>
+      <span class="signature">long toHours()</span>
+      <span class="signature">long toMinutes()</span>
+      <span class="signature">int toMinutesPart()</span>
+      <pre><code>Duration duree = Duration.ofMinutes(90);
+duree.toHours();         // 1  (heures complètes)
+duree.toMinutesPart();   // 30 (minutes restantes une fois les heures retirées)
+
+duree = duree.plusMinutes(30);   // Duration est immuable : il faut récupérer le résultat</code></pre>
+      <div class="warning">
+        <code>Duration</code> est <strong>immuable</strong> : <code>plusXXX</code>/<code>minusXXX</code> renvoient une nouvelle instance sans modifier l'objet d'origine. Il faut donc toujours réaffecter : <code>duree = duree.plusMinutes(30);</code>
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="clonage">
+      <h2>Clonage d'objets</h2>
+      <p>Cloner un objet signifie en créer une copie <strong>indépendante</strong> : modifier le clone ne doit pas affecter l'original, et inversement.</p>
+      <h3>Rendre une classe clonable</h3>
+      <ul>
+        <li>Implémenter <code>Cloneable</code> — interface <strong>marqueur</strong> (aucune méthode déclarée).</li>
+        <li>Redéfinir <code>clone()</code>, héritée d'<code>Object</code> : <code>protected</code> à l'origine, à repasser en <code>public</code>.</li>
+      </ul>
+      <div class="api">
+        <h3><code>protected Object Object.clone() throws CloneNotSupportedException</code></h3>
+        <p>Lance <code>CloneNotSupportedException</code> (exception vérifiée) si la classe n'implémente pas <code>Cloneable</code>.</p>
+      </div>
+      <pre><code>public class Boisson implements Cloneable {
+    private String nom;
+
+    @Override
+    public Boisson clone() {
+        try {
+            return (Boisson) super.clone();
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(e);
+        }
+    }
+}</code></pre>
+      <div class="note">
+        Comme la classe implémente <code>Cloneable</code>, <code>CloneNotSupportedException</code> ne peut jamais se produire en pratique : on l'attrape et on la convertit en <code>AssertionError</code> (non vérifiée) plutôt que de déclarer <code>throws</code> sur <code>clone()</code>.
+      </div>
+      <h3>Copie superficielle (shallow copy)</h3>
+      <p><code>super.clone()</code> crée un nouvel objet et copie la valeur de <strong>chaque champ telle quelle</strong>. Suffisant pour un champ primitif ou un type immuable (<code>String</code>, <code>LocalDate</code>, <code>Duration</code>…). Pour un champ objet mutable ou une collection, seule la <strong>référence</strong> est copiée : original et clone pointent alors vers le <strong>même</strong> objet interne.</p>
+      <pre><code>public class Commande implements Cloneable {
+    private List&lt;String&gt; articles = new ArrayList&lt;&gt;();
+
+    @Override
+    public Commande clone() {
+        try {
+            return (Commande) super.clone();
+            // ATTENTION : le clone et l'original partagent la même liste articles !
+        } catch (CloneNotSupportedException e) {
+            throw new AssertionError(e);
+        }
+    }
+}</code></pre>
+      <div class="warning">
+        Avec cette copie superficielle, ajouter un article via le clone modifie aussi la liste de l'original — ce n'est pas le comportement attendu d'un clone.
+      </div>
+      <h3>Copie profonde (deep copy)</h3>
+      <p>Après <code>super.clone()</code>, il faut remplacer chaque champ mutable par une copie indépendante :</p>
+      <pre><code>@Override
+public Commande clone() {
+    try {
+        Commande copie = (Commande) super.clone();
+        copie.articles = new ArrayList&lt;&gt;(this.articles);   // nouvelle liste, mêmes éléments
+        return copie;
+    } catch (CloneNotSupportedException e) {
+        throw new AssertionError(e);
+    }
+}</code></pre>
+      <p>Si les éléments de la collection sont eux-mêmes mutables, il faut aussi les cloner un par un — copier la collection ne copie pas les objets qu'elle contient :</p>
+      <pre><code>copie.articles = new ArrayList&lt;&gt;();
+for (Article article : this.articles) {
+    copie.articles.add(article.clone());
+}</code></pre>
+      <div class="warning">
+        <code>clone()</code> doit dupliquer chaque champ mutable (listes, ensembles, objets internes mutables), pas se contenter du <code>super.clone()</code> par défaut.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Doublons dans un <code>HashSet</code></td>
+          <td><code>equals</code>/<code>hashCode</code> non redéfinis.</td>
+          <td>Redéfinir les deux ensemble.</td>
+        </tr>
+        <tr>
+          <td>Élément « disparu » d'un <code>TreeSet</code></td>
+          <td>Comparaison qui renvoie 0 pour deux éléments différents.</td>
+          <td>Rendre le <code>Comparator</code>/<code>compareTo</code> cohérent avec <code>equals</code> (départager sur tous les attributs).</td>
+        </tr>
+        <tr>
+          <td><code>UnsupportedOperationException</code> sur un <code>add</code></td>
+          <td>Collection non modifiable (<code>List.of</code>, <code>unmodifiableList</code>…).</td>
+          <td>Créer une copie modifiable : <code>new ArrayList&lt;&gt;(collection)</code>.</td>
+        </tr>
+        <tr>
+          <td><code>NullPointerException</code> sur un calcul</td>
+          <td>Unboxing d'un wrapper <code>null</code> (ex. <code>map.get</code> sur clé absente).</td>
+          <td><code>getOrDefault</code> ou test de nullité avant l'unboxing.</td>
+        </tr>
+        <tr>
+          <td><code>ConcurrentModificationException</code></td>
+          <td>Modification de la collection pendant un foreach.</td>
+          <td>Utiliser un <code>Iterator</code> et sa méthode <code>remove</code>, ou <code>removeIf</code>.</td>
+        </tr>
+        <tr>
+          <td>Ordre inattendu à l'affichage</td>
+          <td><code>HashSet</code>/<code>HashMap</code> ne garantissent aucun ordre.</td>
+          <td>Utiliser <code>TreeSet</code>/<code>TreeMap</code> (tri) ou <code>LinkedHashSet</code>/<code>LinkedHashMap</code> (ordre d'insertion).</td>
+        </tr>
+        <tr>
+          <td>Durée inchangée après <code>plusMinutes</code>/<code>minusMinutes</code></td>
+          <td><code>Duration</code> est immuable : l'appel ne modifie pas l'objet, il en renvoie un nouveau.</td>
+          <td>Réaffecter le résultat : <code>duree = duree.plusMinutes(30);</code></td>
+        </tr>
+        <tr>
+          <td>Le clone modifie aussi l'original</td>
+          <td>Copie superficielle (<code>super.clone()</code>) sur un champ mutable : la référence est partagée.</td>
+          <td>Copie profonde : dupliquer chaque champ mutable après <code>super.clone()</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Enum
+public enum TypePromo { SOLDE, PUB, DESTOCKAGE }
+TypePromo.values();  promo.name();  promo == TypePromo.PUB;
+
+// List / Set / Map
+List&lt;String&gt; l = new ArrayList&lt;&gt;();     l.add(x); l.get(0); l.contains(x);
+Set&lt;String&gt; s = new HashSet&lt;&gt;();        s.add(x);           // false si doublon
+Map&lt;String,Integer&gt; m = new HashMap&lt;&gt;(); m.put(k,v); m.get(k); m.getOrDefault(k,0);
+
+// Triées
+SortedSet&lt;String&gt; ts = new TreeSet&lt;&gt;();
+SortedMap&lt;LocalDate,Prix&gt; tm = new TreeMap&lt;&gt;(Comparator.reverseOrder());
+
+// Comparable / Comparator
+class P implements Comparable&lt;P&gt; { public int compareTo(P o) { ... } }
+Comparator&lt;P&gt; c = Comparator.comparing(P::getNom).thenComparing(P::getMarque);
+liste.sort(c);
+
+// Non modifiable
+return Collections.unmodifiableList(interne);
+return List.copyOf(interne);
+
+// StringBuilder
+StringBuilder sb = new StringBuilder();
+sb.append(...).append(...);  sb.toString();</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

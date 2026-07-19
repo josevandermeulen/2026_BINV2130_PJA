@@ -1,0 +1,969 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 3 - JUnit Jupiter - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 3 — JUnit Jupiter</h1>
+  <p>Document autonome en français. Il remplace les pages de Javadoc nécessaires aux tests unitaires sans demander d'accès Internet.</p>
+  <p>Versions couvertes : JUnit Jupiter 5.11.0, JUnit Jupiter Params 5.11.0. Les mocks et Mockito sont couverts par le cheat sheet de la semaine 5.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="02-collections-enumeres-fr.html">&larr; Semaine 2</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="04-tdd-fr.html">Semaine 4 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#contexte">Contexte d'utilisation</a>
+    <a href="#imports">Imports utiles</a>
+    <a href="#structure-test">Structure d'un test</a>
+    <a href="#junit-annotations">Annotations</a>
+    <a href="#assertions">Assertions</a>
+    <a href="#exceptions">Exceptions et lambdas</a>
+    <a href="#parametres">Tests paramétrés</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#tests-avec-ia">Développer des tests avec l'IA</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="contexte">
+      <h2>Contexte d'utilisation</h2>
+      <p>Cette documentation couvre les dépendances de test suivantes : <code>org.junit.jupiter:junit-jupiter:5.11.0</code> et <code>org.junit.jupiter:junit-jupiter-params:5.11.0</code> via l'agrégat JUnit.</p>
+      <p>Pour écrire des tests unitaires, les étudiants ont surtout besoin de :</p>
+      <ul>
+        <li><code>org.junit.jupiter.api.Test</code> et des annotations de cycle de vie comme <code>BeforeEach</code>.</li>
+        <li><code>org.junit.jupiter.api.Assertions</code> pour vérifier les résultats.</li>
+        <li><code>org.junit.jupiter.params.ParameterizedTest</code> et les sources de paramètres si des tests paramétrés sont souhaités.</li>
+      </ul>
+      <div class="warning">
+        <strong>Attention aux imports JUnit 4.</strong> Cette documentation utilise JUnit 5, aussi appelé JUnit Jupiter. Ne pas importer <code>org.junit.Test</code> ni <code>org.junit.Assert</code>. Utiliser <code>org.junit.jupiter.api.Test</code> et <code>org.junit.jupiter.api.Assertions</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="imports">
+      <h2>Imports utiles</h2>
+      <p>Imports minimaux pour un test JUnit Jupiter classique :</p>
+      <pre><code>import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
+import static org.junit.jupiter.api.Assertions.*;</code></pre>
+      <p>Imports utiles pour les tests paramétrés :</p>
+      <pre><code>import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+import org.junit.jupiter.params.provider.CsvSource;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.junit.jupiter.params.provider.Arguments;</code></pre>
+      <div class="note">
+        <strong>Convention pratique.</strong> Avec <code>import static org.junit.jupiter.api.Assertions.*;</code>, on écrit <code>assertTrue(...)</code> au lieu de <code>Assertions.assertTrue(...)</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="structure-test">
+      <h2>Structure d'un test JUnit Jupiter</h2>
+      <p>Une classe de test JUnit Jupiter peut être package-private. Les méthodes de test peuvent aussi être package-private. Elles ne doivent pas être <code>private</code> et retournent généralement <code>void</code>.</p>
+      <pre><code>class MaClasseTest {
+
+    @BeforeEach
+    void setUp() {
+        // Préparation avant chaque test.
+    }
+
+    @Test
+    void nomDuCasDeTest() {
+        // Arrange : préparer les objets et les données.
+        // Act : appeler la méthode testée.
+        // Assert : vérifier le résultat.
+    }
+}</code></pre>
+      <p>Un test réussit si la méthode se termine sans lancer d'exception inattendue et sans assertion en échec. Un test échoue si une assertion échoue ou si une exception non attendue est lancée.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="junit-annotations">
+      <h2>Annotations principales</h2>
+      <p>Package principal : <code>org.junit.jupiter.api</code>.</p>
+
+      <div class="api" id="api-test">
+        <h3><code>@Test</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">méthode</span>
+        <p>Marque une méthode comme méthode de test. JUnit l'exécute comme un cas de test indépendant.</p>
+        <span class="signature">@Test</span>
+        <pre><code>@Test
+void additionneDeuxNombres() {
+    assertEquals(5, calculatrice.additionner(2, 3));
+}</code></pre>
+        <p>Une méthode annotée <code>@Test</code> ne doit pas être <code>private</code>. Elle peut déclarer <code>throws Exception</code> si nécessaire.</p>
+      </div>
+
+      <div class="api" id="api-before-each">
+        <h3><code>@BeforeEach</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">cycle de vie</span>
+        <p>Indique qu'une méthode doit être exécutée avant chaque méthode de test de la classe. Elle sert à recréer un état propre pour chaque test.</p>
+        <span class="signature">@BeforeEach</span>
+        <pre><code>private Service service;
+
+@BeforeEach
+void setUp() {
+    service = new Service();
+}</code></pre>
+        <div class="note">
+          Si la fixture a besoin d'une date relative à « maintenant » (par exemple l'historique de prix d'un produit), calculer la date une seule fois dans une constante nommée plutôt que d'appeler <code>LocalDate.now()</code> dans chaque test : <code>private static final LocalDate DATE_ANNEE_PASSEE = LocalDate.now().minusYears(1);</code>. Cela évite des tests qui deviennent aléatoirement instables (<em>flaky</em>) si l'horloge tourne entre deux appels.
+        </div>
+      </div>
+
+      <div class="api" id="api-after-each">
+        <h3><code>@AfterEach</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">cycle de vie</span>
+        <p>Indique qu'une méthode doit être exécutée après chaque test. Elle est utile pour libérer des ressources ou vérifier un état final commun.</p>
+        <span class="signature">@AfterEach</span>
+      </div>
+
+      <div class="api" id="api-before-after-all">
+        <h3><code>@BeforeAll</code> et <code>@AfterAll</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">cycle de vie</span>
+        <p><code>@BeforeAll</code> exécute une méthode une seule fois avant tous les tests de la classe. <code>@AfterAll</code> exécute une méthode une seule fois après tous les tests.</p>
+        <span class="signature">@BeforeAll</span>
+        <span class="signature">@AfterAll</span>
+        <p>Par défaut, ces méthodes doivent être <code>static</code>. Elles peuvent être non statiques si la classe de test est annotée avec <code>@TestInstance(TestInstance.Lifecycle.PER_CLASS)</code>.</p>
+      </div>
+
+      <div class="api" id="api-display-name">
+        <h3><code>@DisplayName</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">lisibilité</span>
+        <p>Définit un nom lisible pour une classe de test ou une méthode de test dans les rapports.</p>
+        <span class="signature">@DisplayName(String value)</span>
+        <pre><code>@Test
+@DisplayName("Additionne deux nombres positifs")
+void additionneDeuxNombresPositifs() {
+    assertEquals(5, calculatrice.additionner(2, 3));
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-disabled">
+        <h3><code>@Disabled</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">désactivation</span>
+        <p>Désactive temporairement une classe ou une méthode de test. Le test est ignoré et n'est pas exécuté.</p>
+        <span class="signature">@Disabled</span>
+        <span class="signature">@Disabled(String reason)</span>
+        <pre><code>@Test
+@Disabled("Cas couvert plus tard")
+void testNonExecute() {
+    fail("Ce code ne sera pas exécuté");
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-nested">
+        <h3><code>@Nested</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">organisation</span>
+        <p>Permet de regrouper des tests dans des classes internes non statiques. Les tests imbriqués peuvent partager le contexte de la classe externe.</p>
+        <span class="signature">@Nested</span>
+      </div>
+
+      <div class="api" id="api-repeated-test">
+        <h3><code>@RepeatedTest</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">répétition</span>
+        <p>Répète le même test plusieurs fois.</p>
+        <span class="signature">@RepeatedTest(int value)</span>
+        <span class="signature">@RepeatedTest(value = int, name = String)</span>
+        <span class="signature">@RepeatedTest(value = int, failureThreshold = int)</span>
+        <pre><code>@RepeatedTest(3)
+void genereToujoursUnIdentifiant() {
+    assertNotNull(service.genererId());
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-timeout">
+        <h3><code>@Timeout</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">durée</span>
+        <p>Échoue si la méthode annotée dépasse la durée donnée.</p>
+        <span class="signature">@Timeout(long value)</span>
+        <span class="signature">@Timeout(value = long, unit = TimeUnit.SECONDS)</span>
+        <pre><code>@Test
+@Timeout(2)
+void termineEnMoinsDeDeuxSecondes() {
+    service.traitementCourt();
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-test-instance">
+        <h3><code>@TestInstance</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">cycle de vie</span>
+        <p>Contrôle la création des instances de classe de test.</p>
+        <span class="signature">@TestInstance(TestInstance.Lifecycle.PER_METHOD)</span>
+        <span class="signature">@TestInstance(TestInstance.Lifecycle.PER_CLASS)</span>
+        <ul>
+          <li><code>PER_METHOD</code> : comportement par défaut, nouvelle instance de test pour chaque méthode.</li>
+          <li><code>PER_CLASS</code> : une seule instance pour toute la classe, ce qui permet des <code>@BeforeAll</code> non statiques.</li>
+        </ul>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="assertions">
+      <h2><code>Assertions</code></h2>
+      <p>Classe : <code>org.junit.jupiter.api.Assertions</code>. Toutes les méthodes utiles sont statiques. Une assertion vérifie qu'une condition attendue est remplie ; si ce n'est pas le cas, elle échoue en lançant une erreur d'assertion JUnit et le test est marqué en échec.</p>
+
+      <h3>Messages d'échec</h3>
+      <p>La plupart des assertions existent avec ces variantes :</p>
+      <span class="signature">assertXxx(arguments)</span>
+      <span class="signature">assertXxx(arguments, String message)</span>
+      <span class="signature">assertXxx(arguments, Supplier&lt;String&gt; messageSupplier)</span>
+      <p>Le message est affiché uniquement si l'assertion échoue. Le <code>Supplier&lt;String&gt;</code> permet de construire un message tardivement.</p>
+
+      <h3>Vrai ou faux</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Méthode</th>
+          <th>Effet</th>
+          <th>Exemple</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>assertTrue(boolean condition)</code></td>
+          <td>Réussit si la condition vaut <code>true</code>.</td>
+          <td><code>assertTrue(panier.contient("livre"));</code></td>
+        </tr>
+        <tr>
+          <td><code>assertFalse(boolean condition)</code></td>
+          <td>Réussit si la condition vaut <code>false</code>.</td>
+          <td><code>assertFalse(panier.contient("stylo"));</code></td>
+        </tr>
+        <tr>
+          <td><code>assertTrue(BooleanSupplier condition)</code></td>
+          <td>Évalue une lambda retournant un booléen.</td>
+          <td><code>assertTrue(() -&gt; service.estValide());</code></td>
+        </tr>
+        </tbody>
+      </table>
+
+      <h3>Égalité et différence</h3>
+      <p>Ordre des paramètres : <strong>valeur attendue</strong>, puis <strong>valeur réelle</strong>.</p>
+      <span class="signature">assertEquals(expected, actual)</span>
+      <span class="signature">assertEquals(expected, actual, message)</span>
+      <span class="signature">assertNotEquals(unexpected, actual)</span>
+      <span class="signature">assertEquals(double expected, double actual, double delta)</span>
+      <span class="signature">assertEquals(float expected, float actual, float delta)</span>
+      <p>Les surcharges existent pour les objets et plusieurs types primitifs : <code>byte</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>char</code>, <code>float</code> et <code>double</code>. Pour un booléen, on utilise le plus souvent <code>assertTrue</code> ou <code>assertFalse</code>; <code>assertEquals</code> peut aussi comparer des objets <code>Boolean</code>.</p>
+      <pre><code>assertEquals(3, liste.size());
+assertEquals("alice@example.com", utilisateur.getEmail());
+assertNotEquals("admin", utilisateur.getRole());
+assertEquals(12.5, prix, 0.001);</code></pre>
+      <div class="note">
+        Pour les nombres à virgule flottante, utiliser une marge d'erreur avec <code>delta</code>. Exemple : <code>assertEquals(0.3, resultat, 0.0001)</code>.
+      </div>
+
+      <h3>Nullité</h3>
+      <span class="signature">assertNull(Object actual)</span>
+      <span class="signature">assertNotNull(Object actual)</span>
+      <pre><code>assertNull(repository.findById("inconnu"));
+assertNotNull(service.creerCommande("client-1"));</code></pre>
+
+      <h3>Identité d'objet</h3>
+      <span class="signature">assertSame(Object expected, Object actual)</span>
+      <span class="signature">assertNotSame(Object unexpected, Object actual)</span>
+      <p><code>assertSame</code> vérifie que les deux références pointent vers le même objet, pas seulement vers deux objets égaux.</p>
+
+      <h3>Tester <code>equals</code> et <code>hashCode</code></h3>
+      <p>Quand une classe métier redéfinit <code>equals</code>, un test dédié vérifie que deux instances distinctes mais avec le même contenu sont bien considérées égales, qu'un attribut différent suffit à rendre les objets inégaux, et que <code>hashCode</code> reste cohérent avec <code>equals</code> (deux objets égaux doivent avoir le même <code>hashCode</code>).</p>
+      <pre><code>@Test
+@DisplayName("Deux articles avec le même nom et la même catégorie sont égaux")
+void testEquals() {
+    Article article = new Article("Cahier", "Papeterie");
+    assertEquals(articleReference, article);    // même contenu, référence différente
+    assertNotSame(articleReference, article);   // ce n'est pas le même objet
+}
+
+@Test
+@DisplayName("Un nom différent rend les articles inégaux")
+void testNonEquals() {
+    Article article = new Article("Stylo", "Papeterie");
+    assertNotEquals(articleReference, article);
+}
+
+@Test
+@DisplayName("Deux articles égaux ont le même hashCode")
+void testHashCode() {
+    Article article = new Article("Cahier", "Papeterie");
+    assertEquals(articleReference.hashCode(), article.hashCode());
+}</code></pre>
+      <div class="note">
+        Le test d'égalité doit comparer à un objet <strong>différent en référence</strong> mais égal en contenu (pas <code>articleReference</code> lui-même) : sinon <code>assertEquals</code> réussirait même si <code>equals</code> n'avait jamais été redéfini, à cause de l'égalité par défaut héritée d'<code>Object</code> qui compare les références. <code>assertNotSame</code> confirme que ce n'est bien pas le même objet. Le test de <code>hashCode</code> vérifie la cohérence avec <code>equals</code>, pas une valeur de hash précise.
+      </div>
+
+      <h3>Tableaux, itérables et lignes</h3>
+      <span class="signature">assertArrayEquals(expectedArray, actualArray)</span>
+      <span class="signature">assertArrayEquals(double[] expected, double[] actual, double delta)</span>
+      <span class="signature">assertIterableEquals(Iterable&lt;?&gt; expected, Iterable&lt;?&gt; actual)</span>
+      <span class="signature">assertLinesMatch(List&lt;String&gt; expectedLines, List&lt;String&gt; actualLines)</span>
+      <p><code>assertArrayEquals</code> compare le contenu des tableaux. <code>assertIterableEquals</code> compare l'ordre et le contenu d'itérables comme des listes.</p>
+
+      <h3>Regrouper plusieurs assertions</h3>
+      <span class="signature">assertAll(Executable... executables)</span>
+      <span class="signature">assertAll(String heading, Executable... executables)</span>
+      <p><code>assertAll</code> exécute toutes les assertions fournies. Si plusieurs échouent, JUnit les regroupe dans un seul rapport d'échec.</p>
+      <pre><code>assertAll("commande valide",
+    () -&gt; assertEquals("CMD-1", commande.getNumero()),
+    () -&gt; assertEquals(3, commande.getArticles().size()),
+    () -&gt; assertTrue(commande.estPayee())
+);</code></pre>
+
+      <h3>Vérifier une exception</h3>
+      <span class="signature">&lt;T extends Throwable&gt; T assertThrows(Class&lt;T&gt; expectedType, Executable executable)</span>
+      <span class="signature">&lt;T extends Throwable&gt; T assertThrowsExactly(Class&lt;T&gt; expectedType, Executable executable)</span>
+      <p><code>assertThrows</code> réussit si l'exécutable lance une exception du type attendu ou d'un sous-type. <code>assertThrowsExactly</code> exige exactement le type indiqué.</p>
+      <pre><code>IllegalArgumentException ex = assertThrows(
+    IllegalArgumentException.class,
+    () -&gt; compte.retirer(-10)
+);
+
+assertEquals("Le montant doit être positif", ex.getMessage());</code></pre>
+      <p><code>assertThrows</code> fonctionne aussi bien avec les exceptions du JDK qu'avec une exception métier définie dans le projet (par exemple une exception custom qui étend <code>Exception</code> ou <code>RuntimeException</code>) :</p>
+      <pre><code>@Test
+void testAjouterPrixDateDejaPresente() {
+    assertThrows(DateDejaPresenteException.class,
+        () -&gt; produit.ajouterPrix(dateDejaUtilisee, nouveauPrix));
+}</code></pre>
+
+      <h3>Vérifier l'absence d'exception</h3>
+      <span class="signature">assertDoesNotThrow(Executable executable)</span>
+      <span class="signature">&lt;T&gt; T assertDoesNotThrow(ThrowingSupplier&lt;T&gt; supplier)</span>
+      <pre><code>assertDoesNotThrow(() -&gt; compte.deposer(50));
+
+int resultat = assertDoesNotThrow(() -&gt; calculatrice.diviser(10, 2));</code></pre>
+
+      <h3>Échouer explicitement</h3>
+      <span class="signature">fail()</span>
+      <span class="signature">fail(String message)</span>
+      <span class="signature">fail(Throwable cause)</span>
+      <p><code>fail</code> marque immédiatement le test comme échoué. C'est utile dans une branche qui ne devrait jamais être atteinte.</p>
+
+      <h3>Durée d'exécution</h3>
+      <span class="signature">assertTimeout(Duration timeout, Executable executable)</span>
+      <span class="signature">assertTimeoutPreemptively(Duration timeout, Executable executable)</span>
+      <p><code>assertTimeout</code> attend la fin du code puis échoue si la durée est dépassée. <code>assertTimeoutPreemptively</code> interrompt l'exécution quand le délai expire, ce qui peut avoir des effets de bord avec des threads ou des ressources partagées.</p>
+
+      <h3>Type d'objet</h3>
+      <span class="signature">&lt;T&gt; T assertInstanceOf(Class&lt;T&gt; expectedType, Object actual)</span>
+      <p>Vérifie qu'un objet est une instance d'un type donné et retourne l'objet typé.</p>
+      <pre><code>Object resultat = service.getResultat();
+String texte = assertInstanceOf(String.class, resultat);</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exceptions">
+      <h2>Exceptions et lambdas</h2>
+      <p>Type fonctionnel : <code>org.junit.jupiter.api.function.Executable</code>.</p>
+      <span class="signature">void execute() throws Throwable</span>
+      <p>JUnit utilise <code>Executable</code> pour représenter un bloc de code susceptible de lancer une exception. En pratique, on écrit presque toujours une lambda.</p>
+      <pre><code>// Correct : le code est exécuté par assertThrows.
+assertThrows(IllegalArgumentException.class,
+    () -&gt; service.creerUtilisateur(null)
+);
+
+// Incorrect : la méthode est appelée avant assertThrows.
+assertThrows(IllegalArgumentException.class,
+    service.creerUtilisateur(null)
+);</code></pre>
+      <div class="warning">
+        Si la méthode testée prend des paramètres, l'expression lambda doit contenir l'appel complet : <code>() -&gt; objet.methode(parametre)</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="parametres">
+      <h2>Tests paramétrés</h2>
+      <p>Package principal : <code>org.junit.jupiter.params</code> et <code>org.junit.jupiter.params.provider</code>. Un test paramétré s'écrit avec <code>@ParameterizedTest</code>, pas avec <code>@Test</code>.</p>
+
+      <div class="api" id="api-parameterized-test">
+        <h3><code>@ParameterizedTest</code></h3>
+        <span class="tag">annotation</span>
+        <span class="tag">méthode</span>
+        <p>Marque une méthode comme test exécuté plusieurs fois avec des paramètres différents.</p>
+        <span class="signature">@ParameterizedTest</span>
+        <span class="signature">@ParameterizedTest(name = String)</span>
+        <pre><code>@ParameterizedTest
+@ValueSource(strings = {"alice", "bob"})
+void nomNonVide(String nom) {
+    assertFalse(nom.isBlank());
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-value-source">
+        <h3><code>@ValueSource</code></h3>
+        <span class="tag">source</span>
+        <p>Fournit une liste simple de valeurs d'un seul type.</p>
+        <span class="signature">@ValueSource(strings = {...})</span>
+        <span class="signature">@ValueSource(ints = {...})</span>
+        <span class="signature">@ValueSource(longs = {...})</span>
+        <span class="signature">@ValueSource(doubles = {...})</span>
+        <span class="signature">@ValueSource(booleans = {...})</span>
+        <span class="signature">@ValueSource(classes = {...})</span>
+        <p>Autres attributs disponibles : <code>shorts</code>, <code>bytes</code>, <code>floats</code>, <code>chars</code>.</p>
+      </div>
+
+      <div class="api" id="api-csv-source">
+        <h3><code>@CsvSource</code></h3>
+        <span class="tag">source</span>
+        <p>Fournit plusieurs colonnes de valeurs sous forme de chaînes CSV intégrées dans l'annotation.</p>
+        <span class="signature">@CsvSource({"a, 1", "b, 2"})</span>
+        <span class="signature">@CsvSource(value = {...}, delimiter = ';')</span>
+        <span class="signature">@CsvSource(value = {...}, nullValues = {"NULL"})</span>
+        <pre><code>@ParameterizedTest
+@CsvSource({
+    "2, 3, 5",
+    "4, 5, 9"
+})
+void addition(int a, int b, int attendu) {
+    assertEquals(attendu, calculatrice.additionner(a, b));
+}</code></pre>
+        <p>Attributs utiles : <code>delimiter</code>, <code>delimiterString</code>, <code>quoteCharacter</code>, <code>emptyValue</code>, <code>nullValues</code>, <code>ignoreLeadingAndTrailingWhitespace</code>.</p>
+      </div>
+
+      <div class="api" id="api-method-source">
+        <h3><code>@MethodSource</code></h3>
+        <span class="tag">source</span>
+        <p>Fournit les paramètres à partir d'une méthode. La méthode source retourne par exemple un <code>Stream</code>, une <code>Collection</code>, un tableau ou un <code>Stream&lt;Arguments&gt;</code>.</p>
+        <span class="signature">@MethodSource</span>
+        <span class="signature">@MethodSource("nomDeMethode")</span>
+        <pre><code>static Stream&lt;Arguments&gt; casAdditions() {
+    return Stream.of(
+        Arguments.of(2, 3, 5),
+        Arguments.of(4, 5, 9)
+    );
+}
+
+@ParameterizedTest
+@MethodSource("casAdditions")
+void additionAvecMethodSource(int a, int b, int attendu) {
+    assertEquals(attendu, calculatrice.additionner(a, b));
+}</code></pre>
+        <p>Si la classe de test utilise le cycle de vie par défaut, la méthode source est généralement <code>static</code>.</p>
+      </div>
+
+      <div class="api" id="api-arguments">
+        <h3><code>Arguments</code></h3>
+        <span class="tag">interface</span>
+        <p>Représente un ensemble d'arguments pour une invocation de test paramétré.</p>
+        <span class="signature">static Arguments of(Object... arguments)</span>
+        <span class="signature">static Arguments arguments(Object... arguments)</span>
+      </div>
+
+      <div class="api" id="api-null-empty-source">
+        <h3><code>@NullSource</code>, <code>@EmptySource</code>, <code>@NullAndEmptySource</code></h3>
+        <span class="tag">source</span>
+        <p><code>@NullSource</code> fournit <code>null</code>. <code>@EmptySource</code> fournit une valeur vide adaptée au type, par exemple <code>""</code> pour <code>String</code>. <code>@NullAndEmptySource</code> combine les deux.</p>
+        <pre><code>@ParameterizedTest
+@NullAndEmptySource
+void nomUtilisateurInvalide(String nom) {
+    assertThrows(IllegalArgumentException.class,
+        () -&gt; utilisateurService.creerUtilisateur(nom));
+}</code></pre>
+      </div>
+
+      <div class="api" id="api-enum-source">
+        <h3><code>@EnumSource</code></h3>
+        <span class="tag">source</span>
+        <p>Fournit les constantes d'un enum. Les attributs <code>names</code> et <code>mode</code> permettent de filtrer les constantes.</p>
+        <span class="signature">@EnumSource(MonEnum.class)</span>
+        <span class="signature">@EnumSource(value = MonEnum.class, names = {"A", "B"})</span>
+      </div>
+
+      <div class="api" id="api-csv-file-source">
+        <h3><code>@CsvFileSource</code></h3>
+        <span class="tag">source</span>
+        <p>Lit des paramètres depuis un fichier CSV dans les ressources disponibles ou depuis un chemin de fichier.</p>
+        <span class="signature">@CsvFileSource(resources = "/cas.csv")</span>
+        <span class="signature">@CsvFileSource(files = "src/test/resources/cas.csv", numLinesToSkip = 1)</span>
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <p>Exemple complet combinant annotations, assertions et test paramétré avec des classes fictives.</p>
+      <pre><code>import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.ValueSource;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class CompteBancaireTest {
+
+    private CompteBancaire compte;
+
+    @BeforeEach
+    void setUp() {
+        compte = new CompteBancaire("BE-001");
+        compte.deposer(100);
+    }
+
+    @Test
+    @DisplayName("Un dépôt augmente le solde")
+    void deposerAugmenteLeSolde() {
+        compte.deposer(50);
+        assertEquals(150, compte.getSolde());
+    }
+
+    @Test
+    @DisplayName("Un retrait supérieur au solde lance une exception")
+    void retirerPlusQueLeSoldeLanceException() {
+        assertThrows(IllegalStateException.class,
+            () -&gt; compte.retirer(500));
+    }
+
+    @ParameterizedTest
+    @ValueSource(ints = {0, -1, -50})
+    @DisplayName("Un dépôt non strictement positif est refusé")
+    void deposerMontantInvalideLanceException(int montant) {
+        assertThrows(IllegalArgumentException.class,
+            () -&gt; compte.deposer(montant));
+    }
+
+    @Test
+    @DisplayName("État complet du compte après création")
+    void etatInitialComplet() {
+        CompteBancaire nouveau = new CompteBancaire("BE-002");
+        assertAll("nouveau compte",
+            () -&gt; assertEquals("BE-002", nouveau.getNumero()),
+            () -&gt; assertEquals(0, nouveau.getSolde()),
+            () -&gt; assertFalse(nouveau.estBloque())
+        );
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="tests-avec-ia">
+      <h2>Développer des tests avec l'IA</h2>
+      <p>Un assistant IA (Claude, ChatGPT, Copilot, …) peut faire gagner du temps sur les tests : proposer des cas limites auxquels on n'a pas pensé, générer la répétition mécanique d'un test paramétré, ou reformuler un <code>@DisplayName</code> plus clair. C'est un bon usage : l'IA complète la réflexion, elle ne la remplace pas.</p>
+
+      <div class="warning">
+        <strong>Ce qui ne marche pas.</strong> Demander à l'IA d'écrire les tests sans avoir compris soi-même ce que la méthode testée est censée faire. L'IA n'a pas accès au comportement métier voulu par l'énoncé — seulement au code qu'on lui montre — et peut donc :
+        <ul>
+          <li>halluciner une méthode ou un attribut qui n'existe pas dans la classe ;</li>
+          <li>se tromper sur une règle métier si elle n'est pas explicitement donnée (par exemple un plancher ou un plafond non mentionné dans le code) ;</li>
+          <li>écrire un test qui passe sans vraiment vérifier le bon comportement — un test qui recopie l'implémentation au lieu de vérifier le résultat attendu ne détecte aucune régression.</li>
+        </ul>
+      </div>
+
+      <div class="note">
+        <strong>Réflexe de vérification.</strong> Un test généré par IA doit être relu et compris ligne par ligne avant d'être gardé, exactement comme un test écrit à la main. Le meilleur moyen de vérifier qu'un test teste vraiment quelque chose : casser volontairement la méthode testée (inverser une condition, changer une valeur) et vérifier que le test passe au rouge. S'il reste vert alors que le code est cassé, le test ne sert à rien, qu'il vienne d'une IA ou non.
+      </div>
+
+      <h3>Pièges spécifiques à <code>equals</code>/<code>hashCode</code></h3>
+      <p>Le contrat <code>equals</code>/<code>hashCode</code> a deux moitiés : un test généré par IA peut ne couvrir que l'égalité et oublier <code>hashCode</code>, ou l'inverse. Vérifier que les deux sont bien testées séparément (voir <a href="#assertions">Tester <code>equals</code> et <code>hashCode</code></a>).</p>
+      <p>La distinction égalité/identité est également subtile : un test généré par IA peut réutiliser la même référence là où le scénario demande justement un objet égal (<code>equals</code>) mais de référence différente (<code>assertNotSame</code>) — ce test-là ne vérifierait pas la bonne chose, puisqu'il resterait vert même si <code>equals</code> n'était jamais appelé.</p>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>@Test</code> non reconnu</td>
+          <td>Mauvais import JUnit 4.</td>
+          <td>Importer <code>org.junit.jupiter.api.Test</code>.</td>
+        </tr>
+        <tr>
+          <td><code>assertThrows</code> ne compile pas</td>
+          <td>L'appel testé n'est pas dans une lambda.</td>
+          <td>Écrire <code>() -&gt; objet.methode()</code>.</td>
+        </tr>
+        <tr>
+          <td>Un test dépend d'un autre test</td>
+          <td>État partagé entre tests.</td>
+          <td>Réinitialiser l'état dans <code>@BeforeEach</code>. Chaque test doit pouvoir être exécuté seul.</td>
+        </tr>
+        <tr>
+          <td><code>@ParameterizedTest</code> ne s'exécute pas</td>
+          <td>Pas de source de paramètres.</td>
+          <td>Ajouter <code>@ValueSource</code>, <code>@CsvSource</code>, <code>@MethodSource</code>, etc.</td>
+        </tr>
+        <tr>
+          <td><code>assertEquals</code> échoue sur deux objets « identiques »</td>
+          <td>La classe ne redéfinit pas <code>equals</code>.</td>
+          <td>Redéfinir <code>equals</code>/<code>hashCode</code>, ou comparer les attributs un à un.</td>
+        </tr>
+        <tr>
+          <td>Comparaison de <code>double</code> échoue de peu</td>
+          <td>Imprécision des nombres à virgule flottante.</td>
+          <td>Utiliser la surcharge avec <code>delta</code> : <code>assertEquals(expected, actual, 0.0001)</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <h3>JUnit Jupiter</h3>
+      <pre><code>import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
+
+@Test
+void testName() { ... }
+
+@BeforeEach
+void setUp() { ... }
+
+assertTrue(condition);
+assertFalse(condition);
+assertEquals(expected, actual);
+assertNotEquals(unexpected, actual);
+assertNull(actual);
+assertNotNull(actual);
+assertSame(expected, actual);
+assertNotSame(unexpected, actual);
+assertArrayEquals(expectedArray, actualArray);
+assertIterableEquals(expectedIterable, actualIterable);
+assertAll("groupe", () -&gt; assertEquals(...), () -&gt; assertTrue(...));
+assertThrows(ExceptionClass.class, () -&gt; codeQuiDoitLancer());
+assertDoesNotThrow(() -&gt; codeQuiNeDoitPasLancer());
+fail("message");</code></pre>
+
+      <h3>Tests paramétrés</h3>
+      <pre><code>@ParameterizedTest
+@ValueSource(strings = {"a", "b"})
+void testAvecUneValeur(String valeur) { ... }
+
+@ParameterizedTest
+@CsvSource({"a, 1", "b, 2"})
+void testAvecDeuxValeurs(String texte, int nombre) { ... }
+
+static Stream&lt;Arguments&gt; data() {
+    return Stream.of(Arguments.of("a", 1), Arguments.of("b", 2));
+}
+
+@ParameterizedTest
+@MethodSource("data")
+void testAvecMethodSource(String texte, int nombre) { ... }</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur. Pour les mocks et Mockito, voir le cheat sheet de la semaine 5.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

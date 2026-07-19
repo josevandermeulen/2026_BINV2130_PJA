@@ -1,0 +1,812 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 5 - Mockito - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 5 — Mocks et Mockito</h1>
+  <p>Document autonome en français. Il remplace les pages de Javadoc nécessaires aux tests avec doublures (stubs, mocks) sans demander d'accès Internet.</p>
+  <p>Versions couvertes : Mockito pour JUnit Jupiter et Mockito Core. Les bases de JUnit (annotations, assertions, tests paramétrés) sont couvertes par le cheat sheet de la semaine 3.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="04-tdd-fr.html">&larr; Semaine 4</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="06-streams-fr.html">Semaine 6 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#contexte">Contexte d'utilisation</a>
+    <a href="#taxonomie">Taxonomie des doublures</a>
+    <a href="#cycles-de-vie">Cycles de vie (AAA)</a>
+    <a href="#stubs">Stubs écrits à la main</a>
+    <a href="#imports">Imports utiles</a>
+    <a href="#mockito">Mockito - bases</a>
+    <a href="#mockito-verification">Mockito - vérifications</a>
+    <a href="#mockito-annotations">Mockito - annotations</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="contexte">
+      <h2>Contexte d'utilisation</h2>
+      <p>On parle de <strong>vrai test unitaire</strong> quand on teste une seule classe sans tester ses dépendances : on isole la classe testée en remplaçant ses collaborateurs par des doublures de test. Si l'on teste le fonctionnement de plusieurs classes qui communiquent réellement entre elles, on parle de <strong>test d'intégration</strong>.</p>
+      <p>Quand la classe testée dépend d'autres objets, un test unitaire doit pouvoir l'isoler : on remplace ses dépendances par des <strong>doublures de test</strong> dont on contrôle entièrement le comportement. Deux approches :</p>
+      <ul>
+        <li>Le <strong>stub</strong> : une petite classe écrite à la main qui implémente l'interface de la dépendance et retourne des valeurs fixes.</li>
+        <li>Le <strong>mock</strong> : un objet simulé généré par une bibliothèque comme Mockito, configurable appel par appel, et dont on peut vérifier les interactions.</li>
+      </ul>
+      <p>Le critère qui distingue vraiment les deux n'est pas la technique utilisée pour les créer (main vs bibliothèque), mais <strong>ce que le test vérifie</strong> :</p>
+      <div class="note">
+        <ul>
+          <li><strong>Stub → teste l'état.</strong> Le test appelle la méthode de l'objet testé, puis vérifie par un simple <code>assert</code> le résultat produit (valeur de retour, état de l'objet) — peu importe comment l'objet testé a interagi avec le stub. Exemple : <code>Calculator.addToX(3, 4)</code> avec un <code>DataServiceStub</code> qui renvoie toujours 5 ; le test vérifie seulement <code>assertEquals(12, result)</code>.</li>
+          <li><strong>Mock → teste le comportement.</strong> Le test vérifie que l'objet testé a effectué les bons appels sur ses dépendances (bonne méthode, bons arguments, bon nombre de fois) ; c'est le mock lui-même qui échoue le test si l'appel attendu n'a pas eu lieu. Exemple : vérifier qu'un service de facturation a bien appelé <code>dao.save(facture)</code>, via <code>Mockito.verify(dao).save(facture)</code>.</li>
+        </ul>
+      </div>
+      <p>Dépendance Maven : <code>org.mockito:mockito-junit-jupiter</code> (elle amène Mockito Core).</p>
+      <div class="note">
+        Un mock ne s'utilise que pour les <strong>dépendances</strong> de la classe testée — jamais pour la classe testée elle-même. Si l'objet est trivial à construire (un simple objet de données), il est souvent plus simple de l'instancier directement.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="taxonomie">
+      <h2>Taxonomie des doublures de test</h2>
+      <p>Le terme générique pour tout objet qui remplace une vraie dépendance dans un test est <strong>doublure de test</strong> (« test double »). Ce cours en utilise principalement deux, mais la famille complète compte quatre grandes catégories :</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Type</th>
+          <th>Définition conceptuelle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><strong>Fake object</strong></td>
+          <td>Implémentation fonctionnelle simplifiée d'une dépendance, qui prend un raccourci la rendant inadaptée à la production (ex. une base de données en mémoire à la place d'une vraie base de données).</td>
+        </tr>
+        <tr>
+          <td><strong>Stub</strong></td>
+          <td>Faux objet « sans intelligence » : aucune logique, aucun calcul à partir des arguments reçus. Configuré à l'avance pour renvoyer une réponse fixe. Sert à tester l'<strong>état</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Mock</strong></td>
+          <td>Objet configuré avec des attentes précises sur les appels qu'il doit recevoir (méthode, arguments, ordre, nombre) ; c'est lui qui fait échouer le test si un appel attendu n'a pas eu lieu. Sert à tester le <strong>comportement</strong>.</td>
+        </tr>
+        <tr>
+          <td><strong>Spy</strong></td>
+          <td>Un stub qui enregistre en plus les informations sur la façon dont il a été appelé (nombre d'appels, paramètres reçus, …), afin de les vérifier après coup dans le test.</td>
+        </tr>
+        </tbody>
+      </table>
+      <div class="note">
+        Le <code>Spy</code> de Mockito (voir plus bas, section « Mockito - bases ») correspond à cette définition : il encapsule un vrai objet, en appelle réellement les méthodes par défaut, et permet de vérifier après coup les interactions — comme un stub augmenté d'un enregistrement des appels.
+      </div>
+      <p class="muted">(Référence : <em>xUnit Test Patterns</em>, Gerard Meszaros, http://xunitpatterns.com/Test%20Double.html)</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="cycles-de-vie">
+      <h2>Cycles de vie d'un test (modèle AAA)</h2>
+      <p>Le modèle AAA (Arrange / Act / Assert) se décline différemment selon qu'on utilise un stub ou un mock, car la vérification ne se fait pas au même endroit.</p>
+
+      <h3>Avec un stub</h3>
+      <ul>
+        <li><strong>Arrange – Set context</strong> : préparez l'objet sous test, ses collaborateurs « stubs » et connectez-les.</li>
+        <li><strong>Act</strong> : appelez la méthode à tester.</li>
+        <li><strong>Interact</strong> : l'objet sous test fait son travail en collaborant avec les stubs.</li>
+        <li><strong>Assert</strong> : vérifiez l'état de l'objet sous test (valeur de retour, état après l'appel) — l'assertion vit dans le code du test.</li>
+      </ul>
+
+      <h3>Avec un mock</h3>
+      <ul>
+        <li><strong>Arrange – Set context</strong> : préparez l'objet sous test.</li>
+        <li><strong>Arrange – Configure the mock</strong> : indiquez au mock quoi attendre (méthodes, arguments).</li>
+        <li><strong>Act</strong> : appelez la méthode à tester.</li>
+        <li><strong>Interact</strong> : l'objet sous test collabore avec le mock.</li>
+        <li><strong>Mock remembers its interactions</strong> : le mock retient automatiquement les appels reçus.</li>
+        <li><strong>Assert expectations</strong> : vérifiez, via <code>Mockito.verify(...)</code>, que les bons appels ont eu lieu — la vérification vit dans le mock, pas dans un simple <code>assert</code>.</li>
+      </ul>
+      <div class="note">
+        Différence clé : avec un stub, l'assertion finale porte sur l'<strong>état</strong> et reste un <code>assert</code> classique ; avec un mock, la vérification finale porte sur les <strong>interactions</strong> et passe par <code>Mockito.verify(...)</code>, qui interroge le mock lui-même.
+      </div>
+      <p class="muted">(Référence : <em>Fake and Mock Objects in Pictures</em>, Bill Wake, https://www.industriallogic.com/blog/mock-objects-pictures/)</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="stubs">
+      <h2>Stubs écrits à la main</h2>
+      <p>Un stub implémente l'interface de la dépendance avec des réponses codées en dur. Aucune bibliothèque nécessaire.</p>
+      <pre><code>// Interface de la dépendance
+public interface Sport {
+    String getNom();
+    int getNbMoniteursNecessaires();
+}
+
+// Stub : réponses fixes, juste ce qu'il faut pour le test
+public class SportStub implements Sport {
+
+    @Override
+    public String getNom() {
+        return "natation";
+    }
+
+    @Override
+    public int getNbMoniteursNecessaires() {
+        return 2;
+    }
+}</code></pre>
+      <p>Le test utilise le stub à la place de la vraie implémentation :</p>
+      <pre><code>@Test
+void moniteurPeutEncadrerSport() {
+    Sport sport = new SportStub();
+    Moniteur moniteur = new MoniteurImpl("Alice", sport);
+    assertTrue(moniteur.getSports().contains(sport));
+}</code></pre>
+      <div class="warning">
+        Le stub devient vite encombrant quand chaque test a besoin de réponses différentes : il faut alors un stub par variante. C'est exactement le problème que Mockito résout.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="imports">
+      <h2>Imports utiles</h2>
+      <p>Import de base pour Mockito :</p>
+      <pre><code>import org.mockito.Mockito;
+
+// Variante possible :
+import static org.mockito.Mockito.*;</code></pre>
+      <p>Imports pour l'utilisation par annotations avec JUnit Jupiter :</p>
+      <pre><code>import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;</code></pre>
+      <div class="note">
+        <strong>Convention pratique.</strong> Avec <code>import static org.mockito.Mockito.*;</code>, on écrit <code>when(...)</code> et <code>verify(...)</code> au lieu de <code>Mockito.when(...)</code> et <code>Mockito.verify(...)</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="mockito">
+      <h2>Mockito - bases</h2>
+      <p>Classe principale : <code>org.mockito.Mockito</code>. Mockito permet de remplacer une dépendance par un objet simulé, appelé mock, dont on contrôle le comportement.</p>
+
+      <h3>Créer un mock</h3>
+      <span class="signature">static &lt;T&gt; T mock(Class&lt;T&gt; classToMock)</span>
+      <span class="signature">static &lt;T&gt; T mock(Class&lt;T&gt; classToMock, String name)</span>
+      <pre><code>EmailGateway emailGateway = Mockito.mock(EmailGateway.class);</code></pre>
+      <p>Un mock retourne des valeurs par défaut tant qu'aucun comportement n'est défini : <code>false</code> pour <code>boolean</code>, <code>0</code> pour les nombres, <code>null</code> pour les objets.</p>
+
+      <h3>Définir le comportement d'un mock</h3>
+      <span class="signature">static &lt;T&gt; OngoingStubbing&lt;T&gt; when(T methodCall)</span>
+      <span class="signature">when(mock.methode(...)).thenReturn(valeur)</span>
+      <span class="signature">when(mock.methode(...)).thenThrow(exception)</span>
+      <pre><code>Mockito.when(emailGateway.estDisponible()).thenReturn(true);
+Mockito.when(emailGateway.envoyer("alice@example.com", "Bonjour")).thenReturn(true);</code></pre>
+      <p>Plusieurs retours peuvent être chaînés pour des appels successifs :</p>
+      <pre><code>Mockito.when(repository.count()).thenReturn(1, 2, 3);</code></pre>
+
+      <h3>Méthodes void</h3>
+      <p>Pour une méthode <code>void</code>, on utilise la famille <code>doXxx</code>.</p>
+      <span class="signature">doNothing().when(mock).methodeVoid(...)</span>
+      <span class="signature">doThrow(Throwable...).when(mock).methodeVoid(...)</span>
+      <span class="signature">doReturn(Object).when(mock).methode(...)</span>
+      <pre><code>Mockito.doThrow(new IllegalStateException())
+       .when(notificationService)
+       .envoyer("alice@example.com");</code></pre>
+
+      <h3>Spy</h3>
+      <span class="signature">static &lt;T&gt; T spy(T object)</span>
+      <span class="signature">static &lt;T&gt; T spy(Class&lt;T&gt; classToSpy)</span>
+      <p>Un spy encapsule un vrai objet. Les méthodes réelles sont appelées par défaut, sauf celles explicitement stubées. C'est l'implémentation Mockito de la notion conceptuelle de <a href="#taxonomie">spy</a> : un stub qui enregistre en plus ses appels pour permettre une vérification a posteriori.</p>
+      <div class="warning">
+        Utiliser les spies avec prudence. Un mock simple est souvent plus clair pour isoler la classe testée.
+      </div>
+
+      <h3>Matchers d'arguments</h3>
+      <p>Classe : <code>org.mockito.ArgumentMatchers</code>. <code>Mockito</code> en hérite, donc on peut appeler ces méthodes via <code>Mockito.anyString()</code> ou avec un import statique.</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Méthode</th>
+          <th>Signification</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>any()</code>, <code>any(Class&lt;T&gt;)</code></td>
+          <td>N'importe quelle valeur du type demandé.</td>
+        </tr>
+        <tr>
+          <td><code>anyString()</code>, <code>anyInt()</code>, <code>anyBoolean()</code>, etc.</td>
+          <td>N'importe quelle valeur du type primitif ou courant.</td>
+        </tr>
+        <tr>
+          <td><code>eq(T value)</code></td>
+          <td>Valeur égale à celle donnée.</td>
+        </tr>
+        <tr>
+          <td><code>isNull()</code>, <code>notNull()</code>, <code>nullable(Class&lt;T&gt;)</code></td>
+          <td>Correspondance sur la nullité.</td>
+        </tr>
+        <tr>
+          <td><code>contains(String)</code>, <code>startsWith(String)</code>, <code>endsWith(String)</code>, <code>matches(String)</code></td>
+          <td>Correspondances utiles pour les chaînes.</td>
+        </tr>
+        <tr>
+          <td><code>argThat(ArgumentMatcher&lt;T&gt;)</code></td>
+          <td>Correspondance personnalisée par lambda ou matcher.</td>
+        </tr>
+        </tbody>
+      </table>
+      <pre><code>Mockito.when(emailGateway.envoyer(Mockito.anyString(), Mockito.anyString()))
+       .thenReturn(true);
+
+Mockito.verify(emailGateway)
+       .envoyer(Mockito.eq("alice@example.com"), Mockito.anyString());</code></pre>
+      <div class="warning">
+        Si un argument d'un appel Mockito utilise un matcher, les autres arguments de ce même appel doivent aussi utiliser des matchers. Exemple : utiliser <code>eq("alice@example.com")</code> avec <code>anyString()</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="mockito-verification">
+      <h2>Mockito - vérifications</h2>
+      <p>Après avoir exécuté la méthode testée, Mockito permet de vérifier que le mock a reçu ou non certains appels.</p>
+
+      <h3>Vérification simple</h3>
+      <span class="signature">static &lt;T&gt; T verify(T mock)</span>
+      <span class="signature">static &lt;T&gt; T verify(T mock, VerificationMode mode)</span>
+      <pre><code>Mockito.verify(emailGateway).envoyer("alice@example.com", "Bonjour");</code></pre>
+
+      <h3>Nombre d'appels</h3>
+      <table>
+        <thead>
+        <tr>
+          <th>Méthode</th>
+          <th>Effet</th>
+          <th>Exemple</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>times(int wantedNumberOfInvocations)</code></td>
+          <td>Exactement ce nombre d'appels.</td>
+          <td><code>verify(mock, times(1)).save(obj);</code></td>
+        </tr>
+        <tr>
+          <td><code>never()</code></td>
+          <td>Aucun appel. Équivalent lisible de <code>times(0)</code>.</td>
+          <td><code>verify(mock, never()).delete(id);</code></td>
+        </tr>
+        <tr>
+          <td><code>atLeastOnce()</code></td>
+          <td>Au moins un appel.</td>
+          <td><code>verify(mock, atLeastOnce()).findAll();</code></td>
+        </tr>
+        <tr>
+          <td><code>atLeast(int minNumberOfInvocations)</code></td>
+          <td>Au moins ce nombre d'appels.</td>
+          <td><code>verify(mock, atLeast(2)).log(anyString());</code></td>
+        </tr>
+        <tr>
+          <td><code>atMost(int maxNumberOfInvocations)</code></td>
+          <td>Au plus ce nombre d'appels.</td>
+          <td><code>verify(mock, atMost(1)).connect();</code></td>
+        </tr>
+        <tr>
+          <td><code>only()</code></td>
+          <td>Cet appel est le seul appel fait au mock.</td>
+          <td><code>verify(mock, only()).save(obj);</code></td>
+        </tr>
+        </tbody>
+      </table>
+      <pre><code>Mockito.verify(emailGateway, Mockito.times(1))
+       .envoyer("alice@example.com", "Bonjour");
+
+Mockito.verify(emailGateway, Mockito.never())
+       .envoyer(Mockito.anyString(), Mockito.anyString());</code></pre>
+
+      <h3>Aucune interaction restante</h3>
+      <span class="signature">static void verifyNoMoreInteractions(Object... mocks)</span>
+      <span class="signature">static void verifyNoInteractions(Object... mocks)</span>
+      <p><code>verifyNoMoreInteractions</code> vérifie qu'il ne reste pas d'appel non vérifié sur les mocks. <code>verifyNoInteractions</code> vérifie qu'aucun appel n'a eu lieu (remplace l'ancienne méthode dépréciée <code>verifyZeroInteractions</code>).</p>
+
+      <h3>Ordre des appels</h3>
+      <span class="signature">static InOrder inOrder(Object... mocks)</span>
+      <span class="signature">&lt;T&gt; T InOrder.verify(T mock)</span>
+      <span class="signature">&lt;T&gt; T InOrder.verify(T mock, VerificationMode mode)</span>
+      <pre><code>InOrder inOrder = Mockito.inOrder(repository);
+inOrder.verify(repository).findById("42");
+inOrder.verify(repository).save(objet);</code></pre>
+
+      <h3>Capturer un argument</h3>
+      <p>Classe : <code>org.mockito.ArgumentCaptor&lt;T&gt;</code>.</p>
+      <span class="signature">static &lt;U, S extends U&gt; ArgumentCaptor&lt;U&gt; forClass(Class&lt;S&gt; clazz)</span>
+      <span class="signature">T capture()</span>
+      <span class="signature">T getValue()</span>
+      <span class="signature">List&lt;T&gt; getAllValues()</span>
+      <pre><code>ArgumentCaptor&lt;String&gt; captor = ArgumentCaptor.forClass(String.class);
+
+Mockito.verify(emailGateway).envoyer(captor.capture(), Mockito.eq("Bonjour"));
+
+assertEquals("alice@example.com", captor.getValue());</code></pre>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="mockito-annotations">
+      <h2>Mockito - annotations avec JUnit Jupiter</h2>
+      <p>Mockito peut être utilisé uniquement avec <code>Mockito.mock(...)</code>. Il peut aussi être activé par annotations avec l'extension JUnit Jupiter.</p>
+
+      <h3><code>MockitoExtension</code></h3>
+      <p>Classe : <code>org.mockito.junit.jupiter.MockitoExtension</code>. Elle initialise les champs annotés par Mockito avant les tests. On l'enregistre avec l'annotation JUnit <code>@ExtendWith</code>.</p>
+      <span class="signature">@ExtendWith(MockitoExtension.class)</span>
+      <pre><code>import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.InjectMocks;
+import org.mockito.Mock;
+import org.mockito.junit.jupiter.MockitoExtension;
+
+@ExtendWith(MockitoExtension.class)
+class FacturationServiceTest {
+
+    @Mock
+    ClientRepository clientRepository;
+
+    @Mock
+    EmailGateway emailGateway;
+
+    @InjectMocks
+    FacturationService service;
+}</code></pre>
+
+      <h3><code>@Mock</code></h3>
+      <p>Crée automatiquement un mock pour le champ annoté.</p>
+      <span class="signature">@Mock</span>
+      <span class="signature">@Mock(name = String)</span>
+
+      <h3><code>@InjectMocks</code></h3>
+      <p>Demande à Mockito de créer l'objet testé et d'y injecter les mocks disponibles, par constructeur, setter ou champ si possible.</p>
+      <span class="signature">@InjectMocks</span>
+
+      <h3><code>@Spy</code></h3>
+      <p>Crée un spy sur un vrai objet. Les méthodes réelles sont appelées par défaut.</p>
+      <span class="signature">@Spy</span>
+
+      <h3><code>@Captor</code></h3>
+      <p>Crée un <code>ArgumentCaptor</code> typé pour capturer les arguments passés aux mocks.</p>
+      <span class="signature">@Captor</span>
+
+      <div class="note">
+        <code>Mockito.mock(...)</code> est souvent plus explicite et ne demande pas de retenir les annotations Mockito. Les annotations sont utiles quand une classe de test contient plusieurs mocks.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <p>Exemple complet combinant JUnit Jupiter, assertions et Mockito avec des classes fictives.</p>
+      <pre><code>import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
+
+import static org.junit.jupiter.api.Assertions.*;
+
+class NotificationServiceTest {
+
+    private EmailGateway emailGateway;
+    private NotificationService notificationService;
+
+    @BeforeEach
+    void setUp() {
+        emailGateway = Mockito.mock(EmailGateway.class);
+        notificationService = new NotificationService(emailGateway);
+    }
+
+    @Test
+    void notifierAvecAdresseVideLanceException() {
+        assertThrows(IllegalArgumentException.class,
+            () -&gt; notificationService.notifier("", "Bonjour"));
+    }
+
+    @Test
+    void notifierRetourneTrueQuandMessageEnvoye() {
+        Mockito.when(emailGateway.estDisponible()).thenReturn(true);
+        Mockito.when(emailGateway.envoyer("alice@example.com", "Bonjour")).thenReturn(true);
+
+        assertTrue(notificationService.notifier("alice@example.com", "Bonjour"));
+
+        Mockito.verify(emailGateway, Mockito.times(1))
+               .envoyer("alice@example.com", "Bonjour");
+    }
+
+    @Test
+    void notifierNeTentePasEnvoiSiPasserelleIndisponible() {
+        Mockito.when(emailGateway.estDisponible()).thenReturn(false);
+
+        assertFalse(notificationService.notifier("alice@example.com", "Bonjour"));
+
+        Mockito.verify(emailGateway, Mockito.never())
+               .envoyer(Mockito.anyString(), Mockito.anyString());
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Le mock retourne <code>false</code> ou <code>null</code></td>
+          <td>Aucun comportement n'a été défini pour cet appel exact.</td>
+          <td>Ajouter <code>when(...).thenReturn(...)</code> avec les bons arguments.</td>
+        </tr>
+        <tr>
+          <td><code>verify(...)</code> échoue alors que la méthode semble appelée</td>
+          <td>Arguments différents ou appel sur un autre objet que le mock.</td>
+          <td>Vérifier que la classe testée reçoit bien le mock et utiliser des matchers si nécessaire.</td>
+        </tr>
+        <tr>
+          <td>Erreur Mockito avec matchers</td>
+          <td>Mélange entre valeur brute et matcher dans le même appel.</td>
+          <td>Remplacer les valeurs brutes par <code>eq(...)</code> quand un autre argument utilise <code>any...</code>.</td>
+        </tr>
+        <tr>
+          <td><code>UnnecessaryStubbingException</code></td>
+          <td>Un <code>when(...)</code> configuré n'est jamais utilisé par le test.</td>
+          <td>Supprimer le stubbing inutile, ou le déplacer dans le test qui en a besoin.</td>
+        </tr>
+        <tr>
+          <td>On mocke la classe testée elle-même</td>
+          <td>Confusion entre objet testé et dépendances.</td>
+          <td>Instancier la vraie classe testée ; ne mocker que ses dépendances.</td>
+        </tr>
+        <tr>
+          <td>Un test dépend d'un autre test</td>
+          <td>État partagé entre tests (mock configuré dans un test, réutilisé dans un autre).</td>
+          <td>Recréer les mocks dans <code>@BeforeEach</code>. Chaque test doit pouvoir être exécuté seul.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <h3>Mockito</h3>
+      <pre><code>import org.mockito.Mockito;
+import org.mockito.ArgumentCaptor;
+
+Service mock = Mockito.mock(Service.class);
+
+Mockito.when(mock.method("x")).thenReturn("resultat");
+Mockito.when(mock.method(Mockito.anyString())).thenReturn("resultat");
+Mockito.when(mock.method("y")).thenThrow(new IllegalStateException());
+
+assertEquals("resultat", mock.method("x"));
+
+Mockito.verify(mock).method("x");
+Mockito.verify(mock, Mockito.times(1)).method("x");
+Mockito.verify(mock, Mockito.never()).method("y");
+
+ArgumentCaptor&lt;String&gt; captor = ArgumentCaptor.forClass(String.class);
+Mockito.verify(mock).method(captor.capture());
+assertEquals("x", captor.getValue());</code></pre>
+
+      <h3>Annotations</h3>
+      <pre><code>@ExtendWith(MockitoExtension.class)
+class MonServiceTest {
+
+    @Mock
+    Dependance dependance;
+
+    @InjectMocks
+    MonService service;
+}</code></pre>
+
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur. Pour les bases de JUnit (annotations, assertions, tests paramétrés), voir le cheat sheet de la semaine 3.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

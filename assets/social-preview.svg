@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1280" height="640" viewBox="0 0 1280 640">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161221"/>
+      <stop offset="100%" stop-color="#231a35"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8c42"/>
+      <stop offset="100%" stop-color="#ff5f6d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1280" height="640" fill="url(#bg)"/>
+
+  <g fill="#ffffff" opacity="0.05">
+    <circle cx="80" cy="60" r="3"/><circle cx="200" cy="140" r="3"/><circle cx="60" cy="300" r="3"/>
+    <circle cx="1180" cy="80" r="3"/><circle cx="1100" cy="200" r="3"/><circle cx="1200" cy="500" r="3"/>
+    <circle cx="140" cy="560" r="3"/><circle cx="1000" cy="580" r="3"/>
+  </g>
+
+  <rect x="0" y="0" width="16" height="640" fill="url(#accent)"/>
+
+  <text x="120" y="270" font-family="Helvetica, Arial, sans-serif" font-size="92" font-weight="700" fill="#f5f3f7">BINV2130</text>
+  <text x="122" y="325" font-family="Helvetica, Arial, sans-serif" font-size="38" font-weight="400" fill="#c9c3d6">Programmation Java : avancé</text>
+
+  <rect x="122" y="360" width="70" height="6" rx="3" fill="url(#accent)"/>
+
+  <text x="122" y="415" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#9891a8">12 ateliers hebdomadaires · théorie, exercices, solutions</text>
+  <text x="122" y="450" font-family="Helvetica, Arial, sans-serif" font-size="24" fill="#9891a8">Haute École Léonard de Vinci</text>
+
+  <!-- week grid 6 x 2 across the bottom -->
+  <g transform="translate(122,500)">
+    <!-- row 1: S1..S6 -->
+    <g font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="600">
+      <g transform="translate(0,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S1</text></g>
+      <g transform="translate(66,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S2</text></g>
+      <g transform="translate(132,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S3</text></g>
+      <g transform="translate(198,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S4</text></g>
+      <g transform="translate(264,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S5</text></g>
+      <g transform="translate(330,0)"><rect width="56" height="56" rx="10" fill="#382a52" stroke="url(#accent)" stroke-width="2"/><text x="28" y="34" text-anchor="middle" fill="#ffd9c2" font-weight="700">S6</text></g>
+      <g transform="translate(396,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S7</text></g>
+      <g transform="translate(462,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S8</text></g>
+      <g transform="translate(528,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6">S9</text></g>
+      <g transform="translate(594,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6" font-size="15">S10</text></g>
+      <g transform="translate(660,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6" font-size="15">S11</text></g>
+      <g transform="translate(726,0)"><rect width="56" height="56" rx="10" fill="#2c2340" stroke="#3c3153"/><text x="28" y="34" text-anchor="middle" fill="#c9c3d6" font-size="15">S12</text></g>
+      <g transform="translate(792,0)"><rect width="192" height="56" rx="10" fill="none" stroke="#3c3153" stroke-dasharray="4 4"/><text x="96" y="34" text-anchor="middle" fill="#6f6884" font-size="15" font-weight="400">buffer / révisions</text></g>
+    </g>
+  </g>
+</svg>

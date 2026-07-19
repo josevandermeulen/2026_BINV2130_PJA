@@ -1,0 +1,695 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 12 - Injection de dépendances - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 12 — Injection de dépendances</h1>
+  <p>Document autonome en français. Référence des patterns Factory et injection de dépendances, et des API réseau utilisées dans l'atelier, sans demander d'accès Internet.</p>
+  <p>Couvre : programmation par interfaces, Factory method, Abstract Factory, injection de dépendances (constructeur, setter, automatique par annotation), fichiers .properties, HttpClient, Scanner, Javadoc et packaging JAR.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="11-introspection-fr.html">&larr; Semaine 11</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#interfaces">Programmer par interfaces</a>
+    <a href="#factory">Le pattern Factory</a>
+    <a href="#di">Injection de dépendances</a>
+    <a href="#properties">Fichiers .properties</a>
+    <a href="#di-setter">Injection par setter</a>
+    <a href="#di-auto">Injection automatique (@Inject)</a>
+    <a href="#javadoc-packaging">Javadoc &amp; packaging JAR</a>
+    <a href="#http-client">HttpClient - requête HTTP</a>
+    <a href="#scanner">Scanner - lecture au clavier</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="interfaces">
+      <h2>Programmer par interfaces</h2>
+      <p>Le code client dépend d'<strong>interfaces</strong>, jamais des classes concrètes. Les implémentations (<code>QueryImpl</code>, <code>ServiceImpl</code>…) restent invisibles hors de leur package (visibilité package-private).</p>
+      <pre><code>// Visible partout : le contrat
+public interface Query {
+    String getUrl();
+    String execute();
+}
+
+// Package-private : personne ne peut faire new QueryImpl() hors du package
+class QueryImpl implements Query {
+    ...
+}</code></pre>
+      <p>Avantages : on peut changer l'implémentation sans toucher au code client, et la remplacer par un mock dans les tests.</p>
+      <div class="note">
+        Question immédiate : si le client ne peut pas faire <code>new QueryImpl()</code>, qui crée les objets ? Réponse : la <strong>factory</strong>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="factory">
+      <h2>Le pattern Factory</h2>
+      <h3>Factory method</h3>
+      <p>Une méthode dédiée centralise la création : le client demande un objet du type interface, la factory choisit la classe concrète.</p>
+      <pre><code>public interface QueryFactory {
+    Query getQuery();
+}
+
+class QueryFactoryImpl implements QueryFactory {
+    @Override
+    public Query getQuery() {
+        return new QueryImpl();   // seule la factory connaît QueryImpl
+    }
+}</code></pre>
+      <h3>Abstract Factory</h3>
+      <p>Une interface de factory dont plusieurs implémentations produisent des familles d'objets différentes (par exemple une factory de production et une factory de test). Le client reçoit la factory via son constructeur et ne sait pas laquelle il utilise.</p>
+      <h3>Factory configurable</h3>
+      <p>Le choix de l'implémentation peut venir d'une configuration (fichier, propriété système) plutôt que d'être codé en dur — souvent combiné avec l'introspection (<code>Class.forName(...).getConstructor().newInstance()</code>) pour instancier la classe dont le nom est lu dans la configuration.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="di">
+      <h2>Injection de dépendances (DI)</h2>
+      <p>Un objet ne crée pas lui-même ses dépendances : elles lui sont <strong>fournies de l'extérieur</strong>, idéalement par le constructeur. C'est l'inverse du <code>new</code> interne.</p>
+      <pre><code>// Sans DI : couplage fort, non testable
+public class ProxyServer {
+    private QueryFactory factory = new QueryFactoryImpl();   // figé
+}
+
+// Avec DI par constructeur : découplé, testable
+public class ProxyServer {
+
+    private final QueryFactory factory;
+
+    public ProxyServer(QueryFactory factory) {   // la dépendance est injectée
+        this.factory = factory;
+    }
+}</code></pre>
+      <p>La composition de l'application (qui reçoit quoi) se fait en un seul endroit, typiquement le <code>main</code> :</p>
+      <pre><code>public static void main(String[] args) {
+    QueryFactory factory = new QueryFactoryImpl();
+    ProxyServer serveur = new ProxyServer(factory);   // injection
+    serveur.demarrer();
+}</code></pre>
+      <div class="success">
+        DI + interfaces + factory = chaque pièce est remplaçable : une autre implémentation en production, un mock dans les tests (voir le cheat sheet semaine 5).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="properties">
+      <h2>Fichiers <code>.properties</code> - configuration sans recompilation</h2>
+      <p>Paires clé/valeur dans un fichier texte, lu au démarrage par <code>java.util.Properties</code>. Le fichier vit à la racine du projet (puis à côté du JAR), jamais dans <code>src</code> : il doit rester modifiable sans recompiler.</p>
+      <pre><code># blacklist.properties
+blacklistedDomains=google.be;facebook.com;instagram.com</code></pre>
+      <span class="signature">void load(InputStream inStream)</span>
+      <span class="signature">String getProperty(String key)</span>
+      <span class="signature">String getProperty(String key, String defaultValue)</span>
+      <pre><code>Properties properties = new Properties();
+try (FileInputStream input = new FileInputStream("blacklist.properties")) {
+    properties.load(input);
+} catch (IOException e) {
+    throw new RuntimeException("Fichier de configuration introuvable", e);
+}
+Set&lt;String&gt; domaines = Set.of(properties.getProperty("blacklistedDomains", "").split(";"));</code></pre>
+      <div class="note">
+        Charger le fichier <strong>une seule fois</strong> (bloc/champ <code>static</code> ou constructeur), pas à chaque requête.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="di-setter">
+      <h2>Injection par setter</h2>
+      <p>Variante de la DI : la dépendance est injectée après l'instanciation, via une méthode publique, au lieu du constructeur.</p>
+      <pre><code>public class ProxyServer {
+
+    private QueryFactory factory;              // plus final
+
+    public void setFactory(QueryFactory factory) {
+        this.factory = factory;
+    }
+}
+
+// Composition dans le main
+ProxyServer serveur = new ProxyServer();
+serveur.setFactory(new QueryFactoryImpl());   // injection
+serveur.demarrer();</code></pre>
+      <p>Setter : pour une dépendance optionnelle ou remplaçable après création. Constructeur : pour une dépendance obligatoire et définitive (le champ peut rester <code>final</code>).</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="di-auto">
+      <h2>Injection automatique (<code>@Inject</code> + réflexion)</h2>
+      <p>Principe des conteneurs <strong>IoC</strong> (Spring…) : on annote les champs à injecter, un injecteur les remplit par réflexion (voir cheat sheet semaine 11). Plus aucun assemblage manuel dans le <code>main</code>.</p>
+      <pre><code>@Retention(RetentionPolicy.RUNTIME)   // lisible à l'exécution
+@Target(ElementType.FIELD)            // uniquement sur des champs
+public @interface Inject {
+    Class&lt;?&gt; value();                 // l'implémentation à instancier
+}
+
+public class ProxyServer {
+    @Inject(QueryFactoryImpl.class)
+    private QueryFactory queryFactory;
+}
+
+public class Injector {
+    public static void inject(Object target) {
+        for (Field field : target.getClass().getDeclaredFields()) {
+            if (!field.isAnnotationPresent(Inject.class)) {
+                continue;
+            }
+            Class&lt;?&gt; impl = field.getAnnotation(Inject.class).value();
+            field.setAccessible(true);            // champ privé
+            try {
+                field.set(target, impl.getDeclaredConstructor().newInstance());
+            } catch (ReflectiveOperationException e) {
+                throw new RuntimeException("Injection impossible : " + field.getName(), e);
+            }
+        }
+    }
+}
+
+// main : l'injecteur assemble tout
+ProxyServer serveur = new ProxyServer();
+Injector.inject(serveur);
+serveur.demarrer();</code></pre>
+      <div class="note">
+        Sans <code>@Retention(RetentionPolicy.RUNTIME)</code>, l'annotation disparaît à la compilation : <code>isAnnotationPresent</code> renvoie toujours <code>false</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="javadoc-packaging">
+      <h2>Javadoc &amp; packaging JAR</h2>
+      <h3>Javadoc</h3>
+      <p>Commentaires <code>/** ... */</code> sur les interfaces publiques et leurs méthodes ; tags <code>@param</code>, <code>@return</code>, <code>@throws</code>, <code>@deprecated</code>. Génération : IntelliJ → Tools → Generate JavaDoc (output : dossier <code>doc</code>). Les classes package-private (ex. <code>QueryImpl</code>) n'apparaissent pas dans la doc générée — c'est l'encapsulation ; la javadoc des implémentations publiques est héritée des interfaces.</p>
+      <h3>JAR exécutable avec Maven</h3>
+      <pre><code>&lt;plugin&gt;
+    &lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+    &lt;configuration&gt;
+        &lt;archive&gt;
+            &lt;manifest&gt;
+                &lt;mainClass&gt;main.Main&lt;/mainClass&gt;
+            &lt;/manifest&gt;
+        &lt;/archive&gt;
+        &lt;descriptorRefs&gt;
+            &lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+        &lt;/descriptorRefs&gt;
+    &lt;/configuration&gt;
+&lt;/plugin&gt;</code></pre>
+      <pre><code>mvn clean compile assembly:single   # JAR dans target/
+java -jar target/monapp-jar-with-dependencies.jar</code></pre>
+      <div class="note">
+        Les fichiers <code>.properties</code> ne sont pas dans le JAR : ils doivent se trouver dans le dossier depuis lequel on lance <code>java -jar</code>.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="http-client">
+      <h2><code>HttpClient</code> - envoyer une requête HTTP</h2>
+      <p>Package <code>java.net.http</code> (Java 11+). Trois classes : <code>HttpClient</code>, <code>HttpRequest</code>, <code>HttpResponse</code>.</p>
+      <span class="signature">static HttpClient newHttpClient()</span>
+      <span class="signature">&lt;T&gt; HttpResponse&lt;T&gt; send(HttpRequest request, HttpResponse.BodyHandler&lt;T&gt; handler)</span>
+      <span class="signature">&lt;T&gt; CompletableFuture&lt;HttpResponse&lt;T&gt;&gt; sendAsync(HttpRequest request, HttpResponse.BodyHandler&lt;T&gt; handler)</span>
+      <pre><code>HttpClient client = HttpClient.newHttpClient();
+
+HttpRequest requete = HttpRequest.newBuilder()
+    .uri(URI.create("https://example.org/data"))
+    .GET()
+    .build();
+
+// Synchrone
+HttpResponse&lt;String&gt; reponse =
+    client.send(requete, HttpResponse.BodyHandlers.ofString());
+System.out.println(reponse.statusCode());
+System.out.println(reponse.body());
+
+// Asynchrone : renvoie un CompletableFuture&lt;HttpResponse&lt;String&gt;&gt;
+client.sendAsync(requete, HttpResponse.BodyHandlers.ofString());</code></pre>
+      <p class="muted">La mécanique de <code>CompletableFuture</code> (<code>thenApply</code>, <code>thenAccept</code>, <code>join</code>…) est couverte en détail dans le cheat sheet semaine 9.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="scanner">
+      <h2><code>Scanner</code> - lecture au clavier</h2>
+      <p>Classe : <code>java.util.Scanner</code>, branchée sur <code>System.in</code>.</p>
+      <span class="signature">Scanner(InputStream source)</span>
+      <span class="signature">String nextLine()</span>
+      <span class="signature">int nextInt()</span>
+      <span class="signature">boolean hasNextLine()</span>
+      <pre><code>Scanner scanner = new Scanner(System.in);
+System.out.print("URL à interroger : ");
+String url = scanner.nextLine();</code></pre>
+      <div class="note">
+        Après un <code>nextInt()</code>, le retour à la ligne reste dans le tampon : un <code>nextLine()</code> qui suit renvoie une chaîne vide. Consommer le reste de ligne avec un <code>nextLine()</code> intermédiaire.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <p>Mini-application combinant interface, factory, DI et requête HTTP asynchrone :</p>
+      <pre><code>public interface Telechargeur {
+    CompletableFuture&lt;String&gt; telecharger(String url);
+}
+
+class TelechargeurHttp implements Telechargeur {
+
+    private final HttpClient client = HttpClient.newHttpClient();
+
+    @Override
+    public CompletableFuture&lt;String&gt; telecharger(String url) {
+        HttpRequest requete = HttpRequest.newBuilder()
+            .uri(URI.create(url)).GET().build();
+        return client.sendAsync(requete, HttpResponse.BodyHandlers.ofString())
+                     .thenApply(HttpResponse::body);
+    }
+}
+
+public interface TelechargeurFactory {
+    Telechargeur creer();
+}
+
+class TelechargeurFactoryImpl implements TelechargeurFactory {
+    @Override
+    public Telechargeur creer() {
+        return new TelechargeurHttp();
+    }
+}
+
+public class Application {
+
+    private final Telechargeur telechargeur;
+
+    public Application(Telechargeur telechargeur) {   // DI par constructeur
+        this.telechargeur = telechargeur;
+    }
+
+    public void afficher(String url) {
+        telechargeur.telecharger(url)
+                    .thenAccept(System.out::println)
+                    .join();
+    }
+
+    public static void main(String[] args) {
+        TelechargeurFactory factory = new TelechargeurFactoryImpl();
+        Application app = new Application(factory.creer());
+        app.afficher("https://example.org");
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>new QueryImpl()</code> ne compile pas depuis le client</td>
+          <td>La classe est package-private, c'est voulu.</td>
+          <td>Passer par la factory du package.</td>
+        </tr>
+        <tr>
+          <td>Impossible de tester une classe isolément</td>
+          <td>Elle fait <code>new</code> sur ses dépendances en interne.</td>
+          <td>Injecter les dépendances par le constructeur ; mocker dans les tests.</td>
+        </tr>
+        <tr>
+          <td>Le client HTTP async ne produit rien</td>
+          <td>Le main se termine avant la fin du <code>CompletableFuture</code>.</td>
+          <td><code>join()</code> sur le future final (voir semaine 9).</td>
+        </tr>
+        <tr>
+          <td><code>nextLine()</code> renvoie une chaîne vide</td>
+          <td>Retour à la ligne resté dans le tampon après <code>nextInt()</code>.</td>
+          <td>Appeler un <code>nextLine()</code> de purge avant.</td>
+        </tr>
+        <tr>
+          <td>Types concrets qui fuient dans les signatures</td>
+          <td>Retour <code>QueryImpl</code> au lieu de <code>Query</code>.</td>
+          <td>Toujours déclarer les types interface dans les signatures publiques.</td>
+        </tr>
+        <tr>
+          <td><code>isAnnotationPresent</code> renvoie toujours <code>false</code></td>
+          <td>Annotation sans rétention runtime.</td>
+          <td>Ajouter <code>@Retention(RetentionPolicy.RUNTIME)</code>.</td>
+        </tr>
+        <tr>
+          <td><code>IllegalAccessException</code> en injectant un champ privé</td>
+          <td><code>field.set</code> sur un champ non accessible.</td>
+          <td><code>field.setAccessible(true)</code> avant <code>field.set</code>.</td>
+        </tr>
+        <tr>
+          <td>Le JAR ne trouve pas le fichier <code>.properties</code></td>
+          <td>Le fichier n'est pas embarqué dans le JAR (et ne doit pas l'être).</td>
+          <td>Le copier à côté du JAR, dans le dossier de lancement.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Interface + implémentation cachée + factory
+public interface Service { ... }
+class ServiceImpl implements Service { ... }          // package-private
+public interface ServiceFactory { Service creer(); }
+class ServiceFactoryImpl implements ServiceFactory {
+    public Service creer() { return new ServiceImpl(); }
+}
+
+// DI par constructeur (composition dans le main)
+public Client(Service service) { this.service = service; }
+new Client(factory.creer());
+
+// HttpClient
+HttpClient client = HttpClient.newHttpClient();
+HttpRequest req = HttpRequest.newBuilder().uri(URI.create(url)).GET().build();
+client.send(req, HttpResponse.BodyHandlers.ofString());        // sync
+client.sendAsync(req, HttpResponse.BodyHandlers.ofString());   // CF&lt;HttpResponse&gt;, voir semaine 9
+
+// Scanner
+Scanner sc = new Scanner(System.in);
+String ligne = sc.nextLine();
+
+// Properties (fichier à la racine, hors src)
+Properties p = new Properties();
+try (FileInputStream in = new FileInputStream("app.properties")) { p.load(in); }
+String valeur = p.getProperty("cle", "defaut");
+
+// DI par setter
+client.setService(new ServiceImpl());
+
+// DI automatique
+@Inject(ServiceImpl.class) private Service service;   // sur le champ
+Injector.inject(objet);                                // dans le main
+
+// JAR exécutable
+mvn clean compile assembly:single</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur. Pour <code>CompletableFuture</code>, voir le cheat sheet de la semaine 9 ; pour les mocks, la semaine 5.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

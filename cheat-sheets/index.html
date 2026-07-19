@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cheat Sheets Java avancé - Index</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .content {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .doc-card {
+      display: block;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px 20px;
+      margin-bottom: 12px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .doc-card:hover {
+      border-color: var(--accent);
+    }
+
+    .doc-card h2 {
+      margin: 0 0 4px;
+      font-size: 1.1rem;
+      color: var(--accent);
+    }
+
+    .doc-card p {
+      margin: 0;
+      color: var(--muted);
+      font-size: .95rem;
+    }
+
+    .version-note {
+      margin-top: 10px;
+      color: #9aa8bd;
+      font-size: .85rem;
+    }
+
+    .archive-note {
+      margin-top: 24px;
+      padding: 14px 18px;
+      background: var(--panel);
+      border: 1px dashed var(--border);
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
+    .archive-note a {
+      color: var(--accent);
+    }
+
+    @media (max-width: 860px) {
+      .site-header {
+        padding: 26px 18px;
+      }
+
+      .content {
+        padding: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="site-header">
+  <h1>Cheat Sheets Java avancé — Index</h1>
+  <p>Un cheat sheet autonome par semaine du cours. Chaque page fonctionne hors ligne et peut être copiée dans un dossier d'examen.</p>
+  <p class="version-note">v5 · 10/07/2026 — 12 semaines, à jour du planning en cours.</p>
+</div>
+
+<div class="content">
+  <a class="doc-card" href="01-rappels-fr.html">
+    <h2>Semaine 1 — Rappels POO</h2>
+    <p>Classes, encapsulation, constructeurs, héritage, classes abstraites, equals/hashCode, ArrayList.</p>
+  </a>
+  <a class="doc-card" href="02-collections-enumeres-fr.html">
+    <h2>Semaine 2 — Collections et énumérés</h2>
+    <p>Enum, List, Set, Map, collections triées, Comparable/Comparator, classes anonymes, StringBuilder.</p>
+  </a>
+  <a class="doc-card" href="03-junit-fr.html">
+    <h2>Semaine 3 — JUnit Jupiter</h2>
+    <p>Annotations, assertions, assertThrows, assertAll, tests paramétrés.</p>
+  </a>
+  <a class="doc-card" href="04-tdd-fr.html">
+    <h2>Semaine 4 — Test Driven Development</h2>
+    <p>Cycle red-green-refactor, spécification des scénarios, TDD sur du code existant.</p>
+  </a>
+  <a class="doc-card" href="05-mocks-fr.html">
+    <h2>Semaine 5 — Mocks et Mockito</h2>
+    <p>Stubs, mocks, when/thenReturn, verify, matchers, annotations Mockito.</p>
+  </a>
+  <a class="doc-card" href="06-streams-fr.html">
+    <h2>Semaine 6 — Streams Java</h2>
+    <p>Création, opérations intermédiaires et terminales, Collectors, Optional.</p>
+  </a>
+  <a class="doc-card" href="07-programmation-fonctionnelle-fr.html">
+    <h2>Semaine 7 — Programmation fonctionnelle</h2>
+    <p>Interfaces fonctionnelles, Predicate/Function, flatMap, design fonctionnel, immuabilité.</p>
+  </a>
+  <a class="doc-card" href="08-lecture-fichiers-fr.html">
+    <h2>Semaine 8 — Lecture de fichiers</h2>
+    <p>File, Reader/Writer, try-with-resources, streams de fichiers.</p>
+  </a>
+  <a class="doc-card" href="09-threads-completablefuture-fr.html">
+    <h2>Semaine 9 — Programmation asynchrone</h2>
+    <p>Thread, Runnable, synchronized, race conditions, deadlock, ExecutorService, CompletableFuture.</p>
+  </a>
+  <a class="doc-card" href="10-hyperloglog-async-fr.html">
+    <h2>Semaine 10 — HyperLogLog appliqué (programmation asynchrone)</h2>
+    <p>CompletableFuture appliqué à HyperLogLog : chaîne asynchrone, fusion de compteurs, un CompletableFuture par fichier.</p>
+  </a>
+  <a class="doc-card" href="11-introspection-fr.html">
+    <h2>Semaine 11 — Introspection Java</h2>
+    <p>Class, constructeurs, méthodes, champs, annotations, instanciation dynamique, mini-JUnit, validateur par annotations.</p>
+  </a>
+  <a class="doc-card" href="12-injection-dependances-fr.html">
+    <h2>Semaine 12 — Injection de dépendances</h2>
+    <p>Programmation par interfaces, Factory method, Abstract Factory, injection de dépendances (constructeur, setter, @Inject), fichiers .properties, HttpClient, packaging JAR.</p>
+  </a>
+</div>
+
+<div class="content">
+  <div class="archive-note">
+    Anciennes semaines hors planning actuel (contenu conservé pour référence, non maintenu) : <a href="archives/12-di-packaging-properties-javadoc-fr.html">.properties, jar exécutable Maven, Javadoc</a>.
+  </div>
+</div>
+</body>
+</html>

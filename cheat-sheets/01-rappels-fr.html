@@ -1,0 +1,694 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 1 - Rappels POO - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 1 — Rappels de programmation orientée objet</h1>
+  <p>Document autonome en français. Référence des notions de POO utilisées dans les ateliers, sans demander d'accès Internet.</p>
+  <p>Couvre : classes et objets, encapsulation, constructeurs, héritage, classes abstraites, égalité, listes et associations.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="02-collections-enumeres-fr.html">Semaine 2 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#classes">Classes, objets, encapsulation</a>
+    <a href="#constructeurs">Constructeurs et surcharge</a>
+    <a href="#statique">Attributs et méthodes statiques</a>
+    <a href="#heritage">Héritage et classes abstraites</a>
+    <a href="#egalite">Égalité : ==, equals, hashCode</a>
+    <a href="#listes">ArrayList et associations</a>
+    <a href="#divers">Dates, exceptions, chaînes</a>
+    <a href="#exemple-complet">Exemple complet</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="classes">
+      <h2>Classes, objets, encapsulation</h2>
+      <p>Une classe décrit un type d'objet : ses attributs (état) et ses méthodes (comportement). Un objet est une instance de la classe, créée avec <code>new</code>.</p>
+      <pre><code>public class Compte {
+
+    private String numero;   // attribut d'instance, encapsulé
+    private double solde;
+
+    public String getNumero() {
+        return numero;
+    }
+
+    public double getSolde() {
+        return solde;
+    }
+}</code></pre>
+      <p><strong>Encapsulation</strong> : les attributs sont <code>private</code> ; l'accès extérieur passe par des getters (et éventuellement des setters). Cela permet de contrôler les modifications et de protéger les invariants de la classe.</p>
+      <div class="note">
+        Un setter n'est fourni que s'il est réellement nécessaire. Moins la classe expose de moyens de modifier son état, plus elle est facile à raisonner et à tester.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="constructeurs">
+      <h2>Constructeurs et surcharge</h2>
+      <p>Le constructeur initialise l'objet à sa création. Il porte le nom de la classe et n'a pas de type de retour.</p>
+      <span class="signature">public NomClasse(paramètres) { ... }</span>
+      <pre><code>public Compte(String numero, double soldeInitial) {
+    if (numero == null || numero.isBlank()) {
+        throw new IllegalArgumentException("numero obligatoire");
+    }
+    this.numero = numero;
+    this.solde = soldeInitial;
+}</code></pre>
+      <h3>Surcharge et chaînage avec <code>this(...)</code></h3>
+      <p>Une classe peut définir plusieurs constructeurs (surcharge). Un constructeur peut en appeler un autre avec <code>this(...)</code>, qui doit être la première instruction.</p>
+      <pre><code>public Compte(String numero) {
+    this(numero, 0);   // délègue au constructeur complet
+}</code></pre>
+      <div class="warning">
+        Valider les paramètres dans le constructeur le plus complet et y faire déléguer les autres : la validation n'est écrite qu'une seule fois.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="statique">
+      <h2>Attributs et méthodes statiques</h2>
+      <p>Un membre <code>static</code> appartient à la classe, pas aux instances : une seule copie partagée.</p>
+      <pre><code>public class Commande {
+
+    private static int compteur = 0;   // partagé par toutes les commandes
+
+    private final int numero;
+
+    public Commande() {
+        compteur++;
+        this.numero = compteur;   // numérotation automatique
+    }
+
+    public static int getNombreDeCommandes() {
+        return compteur;
+    }
+}</code></pre>
+      <p>Usage typique : numérotation automatique des instances, constantes (<code>static final</code>), méthodes utilitaires.</p>
+      <h3>Constantes dans une interface</h3>
+      <p>Un champ déclaré dans une <code>interface</code> est implicitement <code>public static final</code>, même sans écrire ces mots-clés. On accède donc directement à la constante via le nom de l'interface, sans instance.</p>
+      <pre><code>public interface Couleurs {
+    public static final String ROUGE = "rouge";   // public static final implicite
+    public static final String BLEU = "bleu";
+}</code></pre>
+      <pre><code>Couleurs.ROUGE   // accès direct, pas besoin d'instance</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="heritage">
+      <h2>Héritage et classes abstraites</h2>
+      <p>Une sous-classe <code>extends</code> sa superclasse : elle hérite des attributs et méthodes non privés, peut en ajouter et peut redéfinir (<code>@Override</code>) les méthodes héritées.</p>
+      <pre><code>public abstract class Vehicule {
+
+    private final String immatriculation;
+
+    protected Vehicule(String immatriculation) {
+        this.immatriculation = immatriculation;
+    }
+
+    public String getImmatriculation() {
+        return immatriculation;
+    }
+
+    // Méthode abstraite : pas de corps, chaque sous-classe DOIT l'implémenter.
+    public abstract double calculerTaxe();
+}
+
+public class Voiture extends Vehicule {
+
+    private final int puissance;
+
+    public Voiture(String immatriculation, int puissance) {
+        super(immatriculation);   // appel au constructeur parent, première instruction
+        this.puissance = puissance;
+    }
+
+    @Override
+    public double calculerTaxe() {
+        return puissance * 12.5;
+    }
+}</code></pre>
+      <ul>
+        <li>Une classe <code>abstract</code> ne peut pas être instanciée directement ; elle sert de base commune.</li>
+        <li><code>super(...)</code> appelle le constructeur parent et doit être la première instruction du constructeur.</li>
+        <li><code>@Override</code> est fortement recommandé : le compilateur vérifie qu'on redéfinit bien une méthode existante.</li>
+        <li>Le polymorphisme permet de manipuler une <code>Voiture</code> via une référence de type <code>Vehicule</code> : l'appel <code>v.calculerTaxe()</code> exécute la version de la classe réelle de l'objet.</li>
+      </ul>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="egalite">
+      <h2>Égalité : <code>==</code>, <code>equals</code>, <code>hashCode</code></h2>
+      <p><code>==</code> compare les <strong>références</strong> (même objet en mémoire). <code>equals</code> compare le <strong>contenu</strong>, si la classe le redéfinit — sinon il hérite du comportement de <code>Object</code>, qui équivaut à <code>==</code>.</p>
+      <pre><code>@Override
+public boolean equals(Object o) {
+    if (this == o) {
+        return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+        return false;
+    }
+    Compte compte = (Compte) o;
+    return numero.equals(compte.numero);
+}
+
+@Override
+public int hashCode() {
+    return numero.hashCode();
+}</code></pre>
+      <div class="warning">
+        <strong>Contrat :</strong> deux objets égaux selon <code>equals</code> doivent avoir le même <code>hashCode</code>. Toujours redéfinir les deux ensemble, sinon les collections basées sur le hachage (<code>HashSet</code>, <code>HashMap</code>) se comportent de façon incohérente.
+      </div>
+      <p>IntelliJ génère les deux méthodes : <code>Alt+Insert</code> → equals() and hashCode().</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="listes">
+      <h2><code>ArrayList</code> et associations entre objets</h2>
+      <p>Classe : <code>java.util.ArrayList&lt;E&gt;</code>, implémentation de <code>java.util.List&lt;E&gt;</code>. On déclare la variable avec le type interface.</p>
+      <span class="signature">boolean add(E e)</span>
+      <span class="signature">boolean remove(Object o)</span>
+      <span class="signature">boolean contains(Object o)</span>
+      <span class="signature">E get(int index)</span>
+      <span class="signature">int size()</span>
+      <pre><code>List&lt;Compte&gt; comptes = new ArrayList&lt;&gt;();
+comptes.add(new Compte("BE-1"));
+comptes.contains(unCompte);   // utilise equals !
+</code></pre>
+      <h3>Association entre objets</h3>
+      <p>Un objet peut référencer un autre objet ou une collection d'objets, selon la multiplicité UML de l'association : <code>1</code> (exactement un, attribut simple), <code>0..1</code> (zéro ou un, attribut pouvant valoir <code>null</code>) ou <code>*</code> (zéro ou plusieurs, une collection comme <code>ArrayList</code>). Dans une association bidirectionnelle, chacun référence l'autre : la cohérence des deux côtés se gère dans les méthodes, pas depuis l'extérieur.</p>
+      <pre><code>public class Banque {
+
+    private List&lt;Compte&gt; comptes = new ArrayList&lt;&gt;();
+
+    public boolean ajouterCompte(Compte compte) {
+        if (compte == null || comptes.contains(compte)) {
+            return false;
+        }
+        return comptes.add(compte);
+    }
+
+    // Copie défensive : l'appelant ne peut pas modifier la liste interne.
+    public List&lt;Compte&gt; getComptes() {
+        return new ArrayList&lt;&gt;(comptes);
+    }
+}</code></pre>
+      <div class="note">
+        Pattern courant pour une méthode booléenne qui peut échouer (<code>ajouterCompte</code> ci-dessus, <code>inscrire</code> plus bas) : renvoyer <code>false</code> immédiatement si une condition bloque l'opération, sans rien modifier ; sinon effectuer l'opération et renvoyer <code>true</code>. L'appelant peut alors tester le résultat (<code>if (!banque.ajouterCompte(c)) { ... }</code>).
+      </div>
+      <h3>Interface <code>Iterable</code> et méthode <code>iterator</code></h3>
+      <p>Pour permettre de parcourir une collection interne sans exposer l'objet <code>List</code> lui-même (donc sans permettre d'y ajouter/retirer des éléments depuis l'extérieur), la classe implémente <code>Iterable&lt;T&gt;</code> et fournit une méthode <code>iterator</code> qui renvoie l'itérateur de sa liste interne.</p>
+      <pre><code>public class Bibliotheque implements Iterable&lt;Livre&gt; {
+
+    private ArrayList&lt;Livre&gt; livres = new ArrayList&lt;&gt;();
+
+    @Override
+    public Iterator&lt;Livre&gt; iterator() {
+        return livres.iterator();
+    }
+}</code></pre>
+      <p>Import nécessaire : <code>java.util.Iterator</code>. L'encapsulation est préservée : le code extérieur peut lire les livres via un <code>for</code>, mais ne peut pas modifier la liste interne (contrairement à un getter qui renverrait directement <code>livres</code>).</p>
+      <h3>Parcours avec foreach</h3>
+      <p>Le foreach fonctionne sur tout objet <code>Iterable</code> (donc aussi sur toute <code>ArrayList</code>, et sur <code>Bibliotheque</code> ci-dessus) : Java appelle sa méthode <code>iterator</code> en coulisses.</p>
+      <pre><code>for (Compte compte : comptes) {
+    System.out.println(compte.getNumero());
+}
+
+for (Livre livre : bibliotheque) {   // bibliotheque implémente Iterable&lt;Livre&gt;
+    System.out.println(livre);
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="divers">
+      <h2>Dates, exceptions, chaînes</h2>
+      <h3><code>LocalDateTime</code> et <code>LocalDate</code></h3>
+      <p>Package <code>java.time</code>. Objets immuables représentant une date (et une heure).</p>
+      <span class="signature">static LocalDateTime now()</span>
+      <span class="signature">static LocalDate of(int year, int month, int dayOfMonth)</span>
+      <span class="signature">boolean isBefore(ChronoLocalDate other)</span>
+      <span class="signature">boolean isAfter(ChronoLocalDate other)</span>
+      <pre><code>LocalDate date = LocalDate.of(2026, 9, 14);
+LocalDateTime maintenant = LocalDateTime.now();</code></pre>
+
+      <h3><code>IllegalArgumentException</code> dans un constructeur</h3>
+      <p>Quand un paramètre est invalide, le constructeur lance une exception plutôt que de créer un objet incohérent :</p>
+      <pre><code>if (montant &lt;= 0) {
+    throw new IllegalArgumentException("montant strictement positif attendu");
+}</code></pre>
+      <p><code>IllegalArgumentException</code> est une exception non vérifiée (unchecked) : pas de <code>throws</code> à déclarer.</p>
+
+      <h3><code>UnsupportedOperationException</code></h3>
+      <p>Deuxième exemple canonique d'exception unchecked (hérite elle aussi de <code>RuntimeException</code>) : elle signale qu'une opération existe mais n'est pas autorisée dans ce contexte précis — par exemple une méthode volontairement non implémentée, ou une modification refusée sur une liste protégée.</p>
+      <pre><code>throw new UnsupportedOperationException("Cette opération n'est pas autorisée");</code></pre>
+
+      <h3>Construire une chaîne — <code>toString</code></h3>
+      <pre><code>@Override
+public String toString() {
+    return "Compte " + numero + " (solde : " + solde + ")";
+}</code></pre>
+      <p>Pour des concaténations répétées dans une boucle, préférer <code>StringBuilder</code> (voir le cheat sheet semaine 2).</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet</h2>
+      <pre><code>import java.util.ArrayList;
+import java.util.List;
+
+public abstract class Personne {
+
+    private static int compteur = 0;
+
+    private final int id;
+    private final String nom;
+
+    protected Personne(String nom) {
+        if (nom == null || nom.isBlank()) {
+            throw new IllegalArgumentException("nom obligatoire");
+        }
+        compteur++;
+        this.id = compteur;
+        this.nom = nom;
+    }
+
+    public int getId() { return id; }
+    public String getNom() { return nom; }
+
+    public abstract String getRole();
+
+    @Override
+    public String toString() {
+        return getRole() + " " + nom + " (id " + id + ")";
+    }
+}
+
+public class Etudiant extends Personne {
+
+    private final List&lt;String&gt; cours = new ArrayList&lt;&gt;();
+
+    public Etudiant(String nom) {
+        super(nom);
+    }
+
+    public boolean inscrire(String intitule) {
+        if (intitule == null || cours.contains(intitule)) {
+            return false;
+        }
+        return cours.add(intitule);
+    }
+
+    public List&lt;String&gt; getCours() {
+        return new ArrayList&lt;&gt;(cours);
+    }
+
+    @Override
+    public String getRole() {
+        return "Étudiant";
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>contains</code>/<code>remove</code> ne trouve pas un objet « identique »</td>
+          <td><code>equals</code> non redéfini : comparaison par référence.</td>
+          <td>Redéfinir <code>equals</code> et <code>hashCode</code> ensemble.</td>
+        </tr>
+        <tr>
+          <td>Comparaison de chaînes avec <code>==</code></td>
+          <td><code>==</code> compare les références, pas le contenu.</td>
+          <td>Utiliser <code>equals</code> : <code>"a".equals(variable)</code>.</td>
+        </tr>
+        <tr>
+          <td>La liste interne est modifiée depuis l'extérieur</td>
+          <td>Le getter renvoie la référence de la liste interne.</td>
+          <td>Renvoyer une copie (<code>new ArrayList&lt;&gt;(liste)</code>) ou une vue non modifiable.</td>
+        </tr>
+        <tr>
+          <td><code>super(...)</code> ne compile pas</td>
+          <td>Pas en première instruction du constructeur.</td>
+          <td>Placer <code>super(...)</code> (ou <code>this(...)</code>) en tout premier.</td>
+        </tr>
+        <tr>
+          <td>Objet créé avec un état invalide</td>
+          <td>Pas de validation des paramètres du constructeur.</td>
+          <td>Lancer <code>IllegalArgumentException</code> dès qu'un paramètre est invalide.</td>
+        </tr>
+        <tr>
+          <td>Un attribut statique garde sa valeur entre les tests</td>
+          <td><code>static</code> = partagé par toute la JVM, pas réinitialisé par instance.</td>
+          <td>Éviter l'état statique mutable ; le réinitialiser explicitement si nécessaire.</td>
+        </tr>
+        <tr>
+          <td><code>UnsupportedOperationException</code> à l'exécution</td>
+          <td>Opération appelée alors qu'elle n'est pas autorisée dans ce contexte (ex. méthode volontairement non implémentée).</td>
+          <td>Vérifier que l'opération est bien censée être disponible ; sinon la retirer de l'appel ou l'implémenter.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Constructeur avec validation et chaînage
+public Compte(String numero) { this(numero, 0); }
+public Compte(String numero, double solde) {
+    if (numero == null || numero.isBlank())
+        throw new IllegalArgumentException("numero obligatoire");
+    this.numero = numero;
+    this.solde = solde;
+}
+
+// Héritage
+public class Voiture extends Vehicule {
+    public Voiture(String imm) { super(imm); }
+    @Override public double calculerTaxe() { ... }
+}
+
+// equals / hashCode (contrat : toujours les deux)
+@Override public boolean equals(Object o) { ... }
+@Override public int hashCode() { ... }
+
+// Liste + copie défensive
+private List&lt;Compte&gt; comptes = new ArrayList&lt;&gt;();
+public List&lt;Compte&gt; getComptes() { return new ArrayList&lt;&gt;(comptes); }
+
+// Dates
+LocalDate.of(2026, 9, 14);
+LocalDateTime.now();</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

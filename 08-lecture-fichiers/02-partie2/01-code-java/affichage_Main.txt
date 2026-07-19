@@ -1,0 +1,15 @@
+Ligne ignorée : 2026-11-09T12:00:00;user99
+Ligne ignorée : 2026-11-10T09:30:00;;10.0.0.1
+Ligne ignorée : 2026-11-11T15:00:00
+Ligne ignorée : 2026-11-12T13:45:00;user07;1.2.3.4;proxy
+Fichier introuvable : 2026-11-13.log
+
+Nombre d'accès valides : 2000
+Nombre réel d'adresses IP uniques : 580
+Estimation HyperLogLog : 628
+
+Estimation par jour :
+2026-11-09.log : 474
+2026-11-10.log : 367
+2026-11-11.log : 380
+2026-11-12.log : 310

@@ -1,0 +1,31 @@
+Ligne ignorée : 2026-11-09T09:14:02;bob
+Ligne ignorée : 2026-11-09T10:45:00;;192.168.0.44
+Ligne ignorée : 2026-11-10T09:47:03;bob;10.0.0.7;proxy
+Ligne ignorée : 2026-11-10T11:00:41;;10.0.0.7
+Ligne ignorée : 2026-11-11T12:30:58
+Fichier introuvable : 2026-11-12.log
+
+Nombre d'accès valides : 26
+
+Adresses IP uniques :
+  10.0.0.7
+  10.0.0.8
+  172.16.4.101
+  172.16.4.102
+  172.16.4.999
+  192.168.0.12
+  192.168.0.44
+  192.168.1.9
+  203.0.113.5
+  203.0.113.6
+  300.0.0.1
+
+Nombre d'accès par utilisateur :
+  alice : 6
+  bob : 4
+  carla : 4
+  david : 4
+  emma : 5
+  fred : 3
+
+Rapport écrit dans rapport.txt

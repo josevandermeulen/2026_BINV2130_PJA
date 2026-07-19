@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1000" height="760" viewBox="0 0 1000 760">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161221"/>
+      <stop offset="100%" stop-color="#211a30"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8c42"/>
+      <stop offset="100%" stop-color="#ff5f6d"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1000" height="760" rx="16" fill="url(#bg)"/>
+
+  <text x="40" y="56" font-family="Helvetica, Arial, sans-serif" font-size="26" font-weight="700" fill="#f5f3f7">Structure d'un atelier</text>
+  <text x="40" y="82" font-family="Helvetica, Arial, sans-serif" font-size="15" fill="#9891a8">BINV2130 — arborescence type d'une semaine à deux parties</text>
+
+  <rect x="40" y="104" width="70" height="4" rx="2" fill="url(#accent)"/>
+
+  <g font-family="Menlo, Consolas, 'Courier New', monospace" font-size="16" fill="#d8d3e3">
+    <!-- root -->
+    <text x="40" y="150" fill="#ffd9c2" font-weight="700">NN-topic/</text>
+
+    <!-- partie1 -->
+    <text x="40" y="180" fill="#6f6884">├──</text>
+    <text x="90" y="180" fill="#ffb787" font-weight="600">01-partie1/</text>
+
+    <text x="70" y="208" fill="#6f6884">│   ├──</text>
+    <text x="150" y="208">01-code-java/</text>
+    <text x="90" y="234" fill="#4b4560">│   │     └── &lt;package&gt;/*.java, affichage_*.txt</text>
+
+    <text x="70" y="262" fill="#6f6884">│   ├──</text>
+    <text x="150" y="262">02-solution/</text>
+    <text x="90" y="288" fill="#4b4560">│   │     └── &lt;package&gt;/*.java  (+ src/ · tests/ si JUnit)</text>
+
+    <text x="70" y="316" fill="#6f6884">│   ├──</text>
+    <text x="150" y="316">01A_1_theorie.md</text>
+    <text x="70" y="344" fill="#6f6884">│   ├──</text>
+    <text x="150" y="344">01A_2_exercices.md</text>
+    <text x="70" y="372" fill="#6f6884">│   └──</text>
+    <text x="150" y="372">03_images/</text>
+    <text x="90" y="398" fill="#4b4560">│         └── 01A_3_*.png / *.drawio</text>
+
+    <!-- partie2 -->
+    <text x="40" y="440" fill="#6f6884">└──</text>
+    <text x="90" y="440" fill="#ffb787" font-weight="600">02-partie2/</text>
+    <text x="90" y="468" fill="#4b4560">      (même forme, X = B)</text>
+  </g>
+
+  <!-- legend / notes panel -->
+  <g transform="translate(560,150)">
+    <rect x="0" y="0" width="400" height="330" rx="12" fill="#221a33" stroke="#382a52"/>
+    <text x="24" y="36" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#f5f3f7">Repères</text>
+
+    <circle cx="32" cy="66" r="4" fill="url(#accent)"/>
+    <text x="48" y="71" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">01-code-java : starter, incomplet par design</text>
+
+    <circle cx="32" cy="98" r="4" fill="url(#accent)"/>
+    <text x="48" y="103" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">02-solution : compile et tourne toujours</text>
+
+    <circle cx="32" cy="130" r="4" fill="url(#accent)"/>
+    <text x="48" y="135" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">NNX_1_theorie.md → NNX_2_exercices.md</text>
+
+    <circle cx="32" cy="162" r="4" fill="url(#accent)"/>
+    <text x="48" y="167" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">03_images/ : nom fixe, quel que soit NN</text>
+
+    <circle cx="32" cy="194" r="4" fill="url(#accent)"/>
+    <text x="48" y="199" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">dès l'atelier 5 : projet Maven</text>
+
+    <circle cx="32" cy="226" r="4" fill="url(#accent)"/>
+    <text x="48" y="231" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">dès l'atelier 6 : tests JUnit fournis</text>
+
+    <circle cx="32" cy="258" r="4" fill="url(#accent)"/>
+    <text x="48" y="263" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">partie2 reprend souvent 02-solution de partie1</text>
+
+    <text x="24" y="304" font-family="Helvetica, Arial, sans-serif" font-size="12" fill="#6f6884">12 ateliers · S1 → S12</text>
+  </g>
+</svg>

@@ -1,0 +1,567 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 10 - HyperLogLog appliqué (programmation asynchrone) - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 10 — HyperLogLog appliqué (programmation asynchrone)</h1>
+  <p>Document autonome en français. Cette semaine n'introduit aucune nouvelle théorie : elle applique <code>CompletableFuture</code> (semaine 9) à HyperLogLog (semaine 8) pour charger, estimer et fusionner des cardinalités en asynchrone.</p>
+  <p>Couvre : chaîne asynchrone de chargement + estimation, piège des exceptions checked dans une lambda <code>supplyAsync</code>, fusion de compteurs HyperLogLog, schéma scatter/gather avec un <code>CompletableFuture</code> par fichier, déterminisme du résultat malgré l'ordre imprévisible des threads.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="09-threads-completablefuture-fr.html">&larr; Semaine 9</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="11-introspection-fr.html">Semaine 11 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#rappel">Rappel : HyperLogLog et CompletableFuture</a>
+    <a href="#chaine-async">Partie 1 - Chargement et estimation en asynchrone</a>
+    <a href="#exceptions-checked">Le piège des exceptions checked</a>
+    <a href="#chrono">Mesurer séquentiel vs asynchrone</a>
+    <a href="#fusion">Partie 2 - Fusionner deux HyperLogLog</a>
+    <a href="#scatter-gather">Un CompletableFuture par routeur (scatter/gather)</a>
+    <a href="#determinisme">Pourquoi le résultat est déterministe</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="rappel">
+      <h2>Rappel : HyperLogLog et <code>CompletableFuture</code></h2>
+      <p>Cette semaine ne réexplique ni HyperLogLog (registres, zéros de tête, formule d'estimation — voir la fiche de la semaine 8) ni <code>CompletableFuture</code> (création, composition — voir la fiche de la semaine 9). Elle combine les deux : les traitements HyperLogLog déjà connus (<code>ajouter</code>, <code>estimerCardinalite</code>, lecture de fichiers de logs) sont simplement lancés via <code>supplyAsync</code>/<code>thenApply</code>/<code>thenCombine</code> au lieu d'être appelés directement.</p>
+      <ul>
+        <li><strong>HyperLogLog</strong> : structure de comptage de cardinalité <em>approximatif</em> — estime le nombre de valeurs distinctes vues (ex. IP uniques) avec très peu de mémoire, au prix d'une erreur d'estimation.</li>
+        <li><strong><code>supplyAsync</code></strong> : démarre un calcul dans un autre thread, renvoie immédiatement un <code>CompletableFuture&lt;T&gt;</code>.</li>
+        <li><strong><code>thenApply</code></strong> : enchaîne une transformation synchrone sur le résultat, sans bloquer.</li>
+        <li><strong><code>thenCombine</code></strong> : fusionne les résultats de deux futures indépendantes dès que les deux sont prêtes.</li>
+      </ul>
+      <div class="note">
+        Pour le détail de HyperLogLog : fiche de la semaine 8. Pour le détail de <code>CompletableFuture</code> (création, <code>thenCompose</code>, gestion d'erreurs, <code>get</code>/<code>join</code>...) : fiche de la semaine 9. Cette page ne couvre que leur combinaison.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="chaine-async">
+      <h2>Partie 1 - Chargement et estimation en asynchrone</h2>
+      <p>Lire des fichiers est une opération d'entrée/sortie : le programme passe l'essentiel de son temps à attendre le disque. C'est le cas d'école de l'asynchrone : pendant que le chargement s'exécute dans un thread du pool, le thread principal reste libre. Le schéma est une simple <strong>chaîne</strong> :</p>
+      <pre><code>supplyAsync(charger les accès) ──thenApply──&gt; estimer les IP uniques ──join──&gt; résultat</code></pre>
+      <p>L'estimation elle-même (<code>HyperLogLog</code>, <code>Hasher</code>, <code>AnalyseIp</code>) ne change pas d'un iota par rapport à la semaine 8. Seule la façon de <strong>lancer</strong> le traitement change :</p>
+      <pre><code>public CompletableFuture&lt;List&lt;Acces&gt;&gt; chargerAccesAsync(String dossier) {
+    return CompletableFuture.supplyAsync(() -&gt; {
+        try {
+            return analyse.chargerTousLesAcces(dossier);
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur de lecture du dossier " + dossier, e);
+        }
+    });
+}
+
+public CompletableFuture&lt;Long&gt; estimerDepuisDossierAsync(String dossier, HyperLogLog hyperLogLog) {
+    return chargerAccesAsync(dossier)
+        .thenApply(acces -&gt; AnalyseIp.estimerIpUniques(acces, hyperLogLog));
+}</code></pre>
+      <p>Utilisation :</p>
+      <pre><code>Long estimation = analyseAsync
+    .estimerDepuisDossierAsync("logs", new HyperLogLog(hasher, 4))
+    .join();   // on ne bloque qu'au moment où on a vraiment besoin du résultat</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exceptions-checked">
+      <h2>Le piège des exceptions checked</h2>
+      <p>Le <code>Supplier&lt;T&gt;</code> attendu par <code>supplyAsync</code> ne déclare <strong>aucun</strong> <code>throws</code>. Une lambda qui appelle une méthode levant une exception <em>checked</em> (comme <code>IOException</code> pour la lecture de fichier) ne compile donc pas telle quelle.</p>
+      <div class="warning">
+        <strong>Impossible de faire :</strong>
+        <pre><code>// NE COMPILE PAS : IOException est checked, Supplier ne la déclare pas
+CompletableFuture.supplyAsync(() -&gt; analyse.chargerTousLesAcces(dossier));</code></pre>
+      </div>
+      <p>La solution : attraper l'exception checked à l'intérieur de la lambda et la relancer sous forme d'exception <em>unchecked</em> (<code>RuntimeException</code>), qui n'a pas besoin d'être déclarée :</p>
+      <pre><code>CompletableFuture.supplyAsync(() -&gt; {
+    try {
+        return analyse.chargerTousLesAcces(dossier);
+    } catch (IOException e) {
+        throw new RuntimeException("Erreur de lecture du dossier " + dossier, e);
+    }
+});</code></pre>
+      <div class="note">
+        Toujours passer la cause (<code>new RuntimeException(message, e)</code>) plutôt que d'afficher la trace et de continuer : sinon l'appelant de <code>join()</code> perd complètement l'information de ce qui a échoué.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="chrono">
+      <h2>Mesurer séquentiel vs asynchrone</h2>
+      <p>Pour objectiver le gain, on chronomètre les deux approches sur le même jeu de dossiers : la version séquentielle traite un dossier après l'autre, la version asynchrone lance tous les chargements en parallèle avant de bloquer sur le résultat.</p>
+      <pre><code>long debutSeq = System.currentTimeMillis();
+List&lt;Long&gt; resultatsSeq = analyseAsync.estimerPlusieursDossiersSequentiellement(dossiers, hasher);
+long dureeSeq = System.currentTimeMillis() - debutSeq;
+
+long debutAsync = System.currentTimeMillis();
+List&lt;Long&gt; resultatsAsync = analyseAsync.estimerPlusieursDossiersAsync(dossiers, hasher).join();
+long dureeAsync = System.currentTimeMillis() - debutAsync;
+
+System.out.println("Séquentiel : " + dureeSeq + " ms");
+System.out.println("Asynchrone : " + dureeAsync + " ms");</code></pre>
+      <p>Pour traiter plusieurs dossiers <strong>en parallèle</strong> puis attendre tous les résultats d'un coup, on combine <code>allOf</code> (qui attend que toutes les futures soient terminées) et une relecture des résultats déjà disponibles via <code>join()</code> (qui ne bloque alors plus, puisque tout est déjà fini) :</p>
+      <pre><code>public CompletableFuture&lt;List&lt;Long&gt;&gt; estimerPlusieursDossiersAsync(List&lt;String&gt; dossiers, Hasher hasher) {
+    List&lt;CompletableFuture&lt;Long&gt;&gt; futures = dossiers.stream()
+        .map(dossier -&gt; estimerDepuisDossierAsync(dossier, new HyperLogLog(hasher, 4)))
+        .toList();
+
+    return CompletableFuture.allOf(futures.toArray(new CompletableFuture[0]))
+        .thenApply(v -&gt; futures.stream().map(CompletableFuture::join).toList());
+}</code></pre>
+      <div class="note">
+        Le gain n'apparaît que si le travail est réellement parallélisable (plusieurs fichiers/dossiers indépendants) et dominé par de l'attente d'entrée/sortie. Sur un seul petit fichier, l'overhead de création des threads peut rendre l'asynchrone plus lent que le séquentiel.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="fusion">
+      <h2>Partie 2 - Fusionner deux HyperLogLog</h2>
+      <p>Un HyperLogLog n'est qu'un tableau de registres, chacun retenant le <strong>maximum</strong> de zéros de tête observé pour les valeurs qui lui sont tombées dessus. Conséquence directe : pour fusionner deux estimateurs de même taille ayant vu des ensembles de valeurs différents, il suffit de prendre, registre par registre, le maximum des deux :</p>
+      <pre><code>fusion.registres[i] = max(premier.registres[i], second.registres[i])</code></pre>
+      <div class="api">
+        <h3><code>HyperLogLog.fusionner</code></h3>
+        <span class="signature">public void fusionner(HyperLogLog autre)</span>
+        <pre><code>public void fusionner(HyperLogLog autre) {
+    Util.checkObject(autre);
+    if (autre.registres.length != registres.length)
+        throw new IllegalArgumentException(
+            "Les deux HyperLogLog doivent avoir le même nombre de registres");
+    for (int i = 0; i &lt; registres.length; i++) {
+        registres[i] = Math.max(registres[i], autre.registres[i]);
+    }
+}</code></pre>
+      </div>
+      <p>Le tableau obtenu est exactement celui qu'on aurait eu en ajoutant toutes les valeurs des deux ensembles dans un seul estimateur — peu importe quel estimateur a vu quelle valeur, ni combien de fois. Deux propriétés en découlent :</p>
+      <ul>
+        <li><strong>Commutativité</strong> : <code>fusionner(a, b)</code> et <code>fusionner(b, a)</code> donnent le même tableau.</li>
+        <li><strong>Associativité</strong> : fusionner dans n'importe quel ordre de regroupement donne le même tableau.</li>
+      </ul>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="scatter-gather">
+      <h2>Un <code>CompletableFuture</code> par routeur (scatter/gather)</h2>
+      <p>Chaque source de données (ici, un fichier de logs par routeur réseau) construit son propre petit estimateur dans son coin — donc dans son propre thread — et les résultats se combinent à la fin, sans perte de précision. C'est exactement ainsi que les bases de données distribuées (Redis <code>PFMERGE</code>/<code>PFCOUNT</code>, BigQuery, Redshift...) comptent des cardinalités réparties sur des dizaines de machines.</p>
+      <p>Le schéma est un <strong>éventail</strong> (scatter/gather) plutôt qu'une chaîne :</p>
+      <pre><code>                 ┌─ supplyAsync(HLL du routeur 0) ─┐
+index des        ├─ supplyAsync(HLL du routeur 1) ─┤   fusion des résultats
+fichiers ──────&gt; ├─ supplyAsync(HLL du routeur 2) ─┼─&gt; (thenCombine en cascade
+                 ├─ ...                            │    ou allOf puis boucle)
+                 └─ supplyAsync(HLL du routeur N) ─┘</code></pre>
+      <p>Un <code>CompletableFuture&lt;HyperLogLog&gt;</code> par fichier routeur (lecture + construction d'un estimateur local) :</p>
+      <pre><code>// un HyperLogLog local pour un fichier routeur
+public HyperLogLog hllPourFichier(String dossier, String nomFichier) throws IOException {
+    HyperLogLog hyperLogLog = new HyperLogLog(hasher, NB_BITS_INDEX);
+    analyse.chargerAcces(dossier + "/" + nomFichier).stream()
+        .map(Acces::getIp)
+        .forEach(hyperLogLog::ajouter);
+    return hyperLogLog;
+}
+
+// la version asynchrone : mêmes pièges checked que plus haut
+public CompletableFuture&lt;HyperLogLog&gt; hllPourFichierAsync(String dossier, String nomFichier) {
+    return CompletableFuture.supplyAsync(() -&gt; {
+        try {
+            return hllPourFichier(dossier, nomFichier);
+        } catch (IOException e) {
+            throw new RuntimeException("Erreur de lecture du fichier " + nomFichier, e);
+        }
+    });
+}</code></pre>
+      <p>Pour rassembler, <code>thenCombine</code> combine deux futures dès qu'elles sont toutes les deux complétées. On chaîne un <code>thenCombine</code> par fichier, en partant d'une future déjà complétée comme point de départ neutre :</p>
+      <pre><code>public CompletableFuture&lt;HyperLogLog&gt; fusionnerTousLesRouteursAsync(String dossier) throws IOException {
+    CompletableFuture&lt;HyperLogLog&gt; resultat =
+        CompletableFuture.completedFuture(new HyperLogLog(hasher, NB_BITS_INDEX));
+    for (String nomFichier : analyse.listerFichiers(dossier)) {
+        resultat = resultat.thenCombine(hllPourFichierAsync(dossier, nomFichier),
+            (fusion, hllRouteur) -&gt; {
+                fusion.fusionner(hllRouteur);
+                return fusion;
+            });
+    }
+    return resultat;
+}</code></pre>
+      <div class="note">
+        <code>CompletableFuture.completedFuture(valeur)</code> crée une future déjà complétée — utile comme accumulateur initial d'une cascade de <code>thenCombine</code>, ici un estimateur vide.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="determinisme">
+      <h2>Pourquoi le résultat est déterministe</h2>
+      <p>Avec des threads, l'ordre d'exécution est imprévisible : le routeur 7 peut finir avant le routeur 2 aujourd'hui, et après lui demain. En général, c'est la porte ouverte aux résultats non reproductibles (les race conditions de la semaine 9).</p>
+      <p>Ici, non : la fusion étant <strong>commutative et associative</strong>, l'ordre et le regroupement des fusions n'ont aucune influence sur le tableau final. Le résultat asynchrone est identique au résultat séquentiel, à chaque exécution.</p>
+      <div class="success">
+        Critère de conception à retenir : les traitements parallèles les plus sûrs sont ceux dont l'étape de combinaison est <strong>insensible à l'ordre</strong> (commutative et associative) — comme un maximum, une somme, une union d'ensembles. C'est ce qui rend ce traitement parfaitement testable en JUnit, sans aléa, et réutilisable pour toute agrégation parallèle.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Rien ne s'affiche, ou <code>NullPointerException</code> sur le résultat</td>
+          <td>Le résultat de la chaîne asynchrone est lu avant que <code>join()</code>/<code>get()</code> n'ait été appelé.</td>
+          <td>Appeler <code>join()</code> (ou <code>get()</code>) en bout de chaîne, uniquement quand le résultat est vraiment nécessaire.</td>
+        </tr>
+        <tr>
+          <td>Erreur de compilation dans la lambda de <code>supplyAsync</code></td>
+          <td>Une exception checked (<code>IOException</code>) est levée dans une lambda alors que <code>Supplier</code> ne déclare aucun <code>throws</code>.</td>
+          <td>Attraper l'exception dans la lambda et la relancer en <code>RuntimeException(message, e)</code>.</td>
+        </tr>
+        <tr>
+          <td>On pense qu'il faut fusionner « dans le bon ordre »</td>
+          <td>Confusion avec les race conditions de la semaine 9 : ici la fusion est une opération de <code>max</code>, commutative et associative.</td>
+          <td>Aucun ordre particulier requis — le résultat est identique quel que soit l'ordre d'arrivée des <code>thenCombine</code>.</td>
+        </tr>
+        <tr>
+          <td>Estimation faussée, valeurs perdues sous charge</td>
+          <td>Un seul <code>HyperLogLog</code> partagé entre plusieurs threads, modifié en parallèle par <code>ajouter</code> sans synchronisation.</td>
+          <td>Un <code>HyperLogLog</code> local par tâche asynchrone, puis <code>fusionner</code> les résultats une fois chaque tâche terminée.</td>
+        </tr>
+        <tr>
+          <td>Le programme se termine avant d'avoir tout traité</td>
+          <td>Le <code>main</code> ne bloque jamais sur la future finale (threads du pool commun daemon).</td>
+          <td><code>join()</code> sur la future racine avant de quitter le <code>main</code>.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Chaîne asynchrone : charger puis estimer (partie 1)
+CompletableFuture&lt;List&lt;Acces&gt;&gt; futureAcces = CompletableFuture.supplyAsync(() -&gt; {
+    try {
+        return analyse.chargerTousLesAcces(dossier);
+    } catch (IOException e) {
+        throw new RuntimeException("Erreur de lecture", e);
+    }
+});
+CompletableFuture&lt;Long&gt; futureEstimation =
+    futureAcces.thenApply(acces -&gt; AnalyseIp.estimerIpUniques(acces, hyperLogLog));
+long estimation = futureEstimation.join();   // bloque en tout dernier
+
+// Fusion de deux HyperLogLog (partie 2)
+hyperLogLogA.fusionner(hyperLogLogB);   // max registre par registre, commutatif et associatif
+
+// Scatter/gather : un CompletableFuture par fichier, fusionnés en cascade
+CompletableFuture&lt;HyperLogLog&gt; resultat =
+    CompletableFuture.completedFuture(new HyperLogLog(hasher, 4));
+for (String nomFichier : fichiers) {
+    resultat = resultat.thenCombine(hllPourFichierAsync(dossier, nomFichier),
+        (fusion, hllRouteur) -&gt; { fusion.fusionner(hllRouteur); return fusion; });
+}
+HyperLogLog hllGlobal = resultat.join();
+long cardinaliteTotale = hllGlobal.estimerCardinalite();</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

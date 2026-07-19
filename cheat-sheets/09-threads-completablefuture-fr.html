@@ -1,0 +1,618 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 9 - Programmation asynchrone - Cheat Sheet</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .site-header code {
+      background: rgba(255, 255, 255, .14);
+      color: #eaf2ff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  
+    .fiche-nav {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      flex-wrap: wrap;
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(255,255,255,.15);
+      font-size: .88rem;
+    }
+
+    .fiche-nav a {
+      color: #9cc4ff;
+      text-decoration: none;
+    }
+
+    .fiche-nav a:hover {
+      text-decoration: underline;
+    }
+
+    .fiche-nav .version-badge {
+      margin-left: auto;
+      color: #9aa8bd;
+      white-space: nowrap;
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 9 — Programmation asynchrone</h1>
+  <p>Document autonome en français. Référence des threads et de <code>CompletableFuture</code> utilisés dans les ateliers, sans demander d'accès Internet.</p>
+  <p>Couvre : Thread et Runnable, synchronisation et race conditions, ExecutorService, CompletableFuture et sa composition.</p>
+  <div class="fiche-nav">
+    <a href="index.html">Index</a>
+    <a href="08-lecture-fichiers-fr.html">&larr; Semaine 8</a>
+    <span class="version-badge">v5 &middot; 10/07/2026</span>
+    <a href="10-hyperloglog-async-fr.html">Semaine 10 &rarr;</a>
+  </div>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#threads">Thread et Runnable</a>
+    <a href="#synchronisation">Race conditions et synchronized</a>
+    <a href="#executor">ExecutorService</a>
+    <a href="#completable">CompletableFuture - création</a>
+    <a href="#composition">CompletableFuture - composition</a>
+    <a href="#resultats">Récupérer les résultats</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="threads">
+      <h2><code>Thread</code> et <code>Runnable</code></h2>
+      <p>Un thread est un fil d'exécution indépendant. Le code à exécuter s'exprime via l'interface fonctionnelle <code>Runnable</code>.</p>
+      <span class="signature">Thread(Runnable target)</span>
+      <span class="signature">void start()</span>
+      <span class="signature">void run()</span>
+      <span class="signature">void join() throws InterruptedException</span>
+      <span class="signature">static void sleep(long millis) throws InterruptedException</span>
+      <span class="signature">static Thread currentThread()</span>
+      <pre><code>Thread t = new Thread(() -&gt; {
+    System.out.println("dans " + Thread.currentThread().getName());
+});
+t.start();     // démarre le thread : run() s'exécute en parallèle
+t.join();      // attend la fin du thread</code></pre>
+      <div class="warning">
+        <strong><code>start()</code>, jamais <code>run()</code>.</strong> Appeler <code>run()</code> directement exécute le code dans le thread courant, séquentiellement — aucun parallélisme. Seul <code>start()</code> crée un nouveau fil d'exécution.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="synchronisation">
+      <h2>Race conditions et <code>synchronized</code></h2>
+      <p>Quand plusieurs threads modifient la même donnée, les opérations s'entrelacent de façon imprévisible. Même <code>compteur++</code> n'est pas atomique (lecture, incrément, écriture) : deux threads peuvent lire la même valeur et l'un des deux incréments est perdu. C'est une <strong>race condition</strong> : le résultat dépend de l'ordre d'exécution.</p>
+      <pre><code>public class Compteur {
+
+    private int valeur = 0;
+
+    // synchronized : un seul thread à la fois peut exécuter cette méthode
+    public synchronized void incrementer() {
+        valeur++;
+    }
+
+    public synchronized int getValeur() {
+        return valeur;
+    }
+}</code></pre>
+      <p><code>synchronized</code> pose un verrou sur l'objet : les autres threads attendent leur tour. On peut aussi synchroniser un bloc précis :</p>
+      <pre><code>synchronized (verrou) {
+    // section critique
+}</code></pre>
+      <h3>Deadlock (interblocage)</h3>
+      <p>Un <strong>deadlock</strong> survient quand deux threads (ou plus) s'attendent mutuellement, chacun détenant un verrou dont l'autre a besoin. Plus aucun des deux ne peut avancer : le programme est figé, sans exception, sans message d'erreur.</p>
+      <p>Le scénario classique demande deux verrous pris <strong>dans un ordre différent</strong> par deux threads :</p>
+      <pre><code>Object verrouA = new Object();
+Object verrouB = new Object();
+
+// Thread 1
+synchronized (verrouA) {          // 1. prend A
+    Thread.sleep(50);
+    synchronized (verrouB) {      // 3. attend B... détenu par le thread 2
+        // ...
+    }
+}
+
+// Thread 2
+synchronized (verrouB) {          // 2. prend B
+    Thread.sleep(50);
+    synchronized (verrouA) {      // 4. attend A... détenu par le thread 1
+        // ...
+    }
+}</code></pre>
+      <p>Le thread 1 détient <code>verrouA</code> et attend <code>verrouB</code> ; le thread 2 détient <code>verrouB</code> et attend <code>verrouA</code>. Aucun des deux ne relâchera jamais ce que l'autre attend.</p>
+      <p>Quatre conditions doivent être réunies simultanément (<strong>conditions de Coffman</strong>) pour qu'un deadlock soit possible :</p>
+      <ul>
+        <li><strong>Exclusion mutuelle</strong> : les ressources (verrous) ne peuvent être détenues que par un thread à la fois ;</li>
+        <li><strong>Rétention et attente</strong> : un thread garde ses verrous pendant qu'il en attend d'autres ;</li>
+        <li><strong>Pas de préemption</strong> : un verrou ne peut pas être retiré de force à son détenteur ;</li>
+        <li><strong>Attente circulaire</strong> : chaque thread attend une ressource détenue par le suivant, en boucle fermée.</li>
+      </ul>
+      <p>Casser une seule de ces conditions suffit à rendre le deadlock impossible. En pratique, la parade la plus simple casse l'attente circulaire : <strong>toujours acquérir les verrous dans le même ordre global</strong>. Autres bonnes habitudes :</p>
+      <ul>
+        <li>garder les sections synchronisées <strong>courtes</strong> et éviter d'y appeler du code qui prend lui-même des verrous ;</li>
+        <li>ne jamais faire d'appel bloquant (<code>sleep</code>, entrée/sortie, <code>join</code>...) en détenant un verrou ;</li>
+        <li>préférer un seul verrou à plusieurs quand c'est possible — pas de deuxième verrou, pas de cycle.</li>
+      </ul>
+      <div class="warning">
+        Contrairement à une race condition (résultat faux, mais le programme continue), un deadlock se <strong>voit</strong> : le programme reste suspendu, sans erreur. Un <em>thread dump</em> (<code>jstack</code>, ou le bouton de dump de threads d'IntelliJ) montre alors quels threads se bloquent mutuellement et sur quels verrous.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="executor">
+      <h2><code>ExecutorService</code></h2>
+      <p>Créer un thread par tâche ne passe pas à l'échelle. Un <code>ExecutorService</code> gère un pool de threads réutilisés.</p>
+      <p>Fabriques : <code>java.util.concurrent.Executors</code>.</p>
+      <span class="signature">static ExecutorService newFixedThreadPool(int nThreads)</span>
+      <span class="signature">static ExecutorService newCachedThreadPool()</span>
+      <span class="signature">static ExecutorService newSingleThreadExecutor()</span>
+      <p>Méthodes principales :</p>
+      <span class="signature">void execute(Runnable command)</span>
+      <span class="signature">&lt;T&gt; Future&lt;T&gt; submit(Callable&lt;T&gt; task)</span>
+      <span class="signature">void shutdown()</span>
+      <pre><code>ExecutorService executor = Executors.newFixedThreadPool(4);
+
+executor.execute(() -&gt; traiterCommande("CMD-1"));
+
+executor.shutdown();   // n'accepte plus de tâches, termine celles en cours</code></pre>
+      <div class="note">
+        Sans <code>shutdown()</code>, les threads du pool restent vivants et le programme ne se termine pas.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="completable">
+      <h2><code>CompletableFuture</code> - création</h2>
+      <p>Classe : <code>java.util.concurrent.CompletableFuture&lt;T&gt;</code>. Représente un résultat futur, produit de façon asynchrone, sur lequel on peut chaîner des traitements.</p>
+      <span class="signature">static CompletableFuture&lt;Void&gt; runAsync(Runnable runnable)</span>
+      <span class="signature">static &lt;U&gt; CompletableFuture&lt;U&gt; supplyAsync(Supplier&lt;U&gt; supplier)</span>
+      <span class="signature">static &lt;U&gt; CompletableFuture&lt;U&gt; supplyAsync(Supplier&lt;U&gt; supplier, Executor executor)</span>
+      <span class="signature">static &lt;U&gt; CompletableFuture&lt;U&gt; completedFuture(U value)</span>
+      <pre><code>CompletableFuture&lt;String&gt; future = CompletableFuture.supplyAsync(() -&gt; {
+    // exécuté dans un thread du pool commun (ForkJoinPool.commonPool)
+    return apiClient.chargerProfil("alice");
+});</code></pre>
+      <p>Sans executor explicite, les tâches tournent dans le pool commun de la JVM. Passer son propre <code>Executor</code> donne le contrôle du nombre de threads.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="composition">
+      <h2><code>CompletableFuture</code> - composition</h2>
+
+      <h3>Transformer le résultat : <code>thenApply</code></h3>
+      <span class="signature">&lt;U&gt; CompletableFuture&lt;U&gt; thenApply(Function&lt;T, U&gt; fn)</span>
+      <p>Applique une fonction <strong>synchrone</strong> au résultat : T → U.</p>
+      <pre><code>CompletableFuture&lt;Integer&gt; longueur =
+    future.thenApply(profil -&gt; profil.length());</code></pre>
+
+      <h3>Consommer le résultat : <code>thenAccept</code>, <code>thenRun</code></h3>
+      <span class="signature">CompletableFuture&lt;Void&gt; thenAccept(Consumer&lt;T&gt; action)</span>
+      <span class="signature">CompletableFuture&lt;Void&gt; thenRun(Runnable action)</span>
+      <pre><code>future.thenAccept(profil -&gt; System.out.println(profil));</code></pre>
+
+      <h3>Chaîner une autre opération asynchrone : <code>thenCompose</code></h3>
+      <span class="signature">&lt;U&gt; CompletableFuture&lt;U&gt; thenCompose(Function&lt;T, CompletableFuture&lt;U&gt;&gt; fn)</span>
+      <p>Quand l'étape suivante renvoie <strong>elle-même un <code>CompletableFuture</code></strong> (autre appel asynchrone). <code>thenCompose</code> aplatit le résultat :</p>
+      <pre><code>CompletableFuture&lt;List&lt;Commande&gt;&gt; commandes =
+    chargerUtilisateur("alice")                       // CF&lt;Utilisateur&gt;
+        .thenCompose(u -&gt; chargerCommandes(u.getId())); // CF&lt;List&lt;Commande&gt;&gt;</code></pre>
+      <div class="warning">
+        <code>thenApply</code> avec une fonction qui renvoie un <code>CompletableFuture</code> produit un <code>CompletableFuture&lt;CompletableFuture&lt;U&gt;&gt;</code> imbriqué. Pour chaîner de l'asynchrone, utiliser <code>thenCompose</code>.
+      </div>
+
+      <h3>Combiner deux futures indépendants : <code>thenCombine</code></h3>
+      <span class="signature">&lt;U,V&gt; CompletableFuture&lt;V&gt; thenCombine(CompletionStage&lt;U&gt; other, BiFunction&lt;T, U, V&gt; fn)</span>
+      <p>Les deux opérations tournent en parallèle ; la fonction fusionne leurs deux résultats quand les deux sont prêts :</p>
+      <pre><code>CompletableFuture&lt;Facture&gt; facture =
+    chargerClient("alice")
+        .thenCombine(chargerTarifs(), (client, tarifs) -&gt; calculer(client, tarifs));</code></pre>
+
+      <h3>Gérer les erreurs : <code>exceptionally</code>, <code>handle</code></h3>
+      <span class="signature">CompletableFuture&lt;T&gt; exceptionally(Function&lt;Throwable, T&gt; fn)</span>
+      <span class="signature">&lt;U&gt; CompletableFuture&lt;U&gt; handle(BiFunction&lt;T, Throwable, U&gt; fn)</span>
+      <pre><code>future.exceptionally(ex -&gt; "profil par défaut");</code></pre>
+
+      <h3>Attendre plusieurs futures</h3>
+      <span class="signature">static CompletableFuture&lt;Void&gt; allOf(CompletableFuture&lt;?&gt;... cfs)</span>
+      <span class="signature">static CompletableFuture&lt;Object&gt; anyOf(CompletableFuture&lt;?&gt;... cfs)</span>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="resultats">
+      <h2>Récupérer les résultats</h2>
+      <span class="signature">T get() throws InterruptedException, ExecutionException</span>
+      <span class="signature">T get(long timeout, TimeUnit unit)</span>
+      <span class="signature">T join()</span>
+      <span class="signature">boolean isDone()</span>
+      <p><code>get()</code> et <code>join()</code> <strong>bloquent</strong> le thread courant jusqu'au résultat. <code>join()</code> lance une exception non vérifiée (<code>CompletionException</code>), <code>get()</code> des exceptions vérifiées.</p>
+      <pre><code>CompletableFuture&lt;String&gt; f = CompletableFuture.supplyAsync(() -&gt; calculLong());
+// ... autre travail en parallèle ...
+String resultat = f.join();   // bloque ici si pas encore fini</code></pre>
+      <div class="note">
+        Bloquer avec <code>get</code>/<code>join</code> annule l'intérêt de l'asynchrone si on le fait immédiatement. Préférer chaîner (<code>thenApply</code>, <code>thenAccept</code>…) et ne bloquer qu'en bout de chaîne (par exemple dans le <code>main</code> pour attendre la fin).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <pre><code>import java.util.concurrent.CompletableFuture;
+
+public class Demo {
+
+    public static void main(String[] args) {
+        CompletableFuture&lt;String&gt; commande =
+            chargerUtilisateur("alice")                          // async
+                .thenCompose(Demo::chargerDerniereCommande)      // async chaîné
+                .thenCombine(chargerTauxTva(),                   // async parallèle
+                    (cmd, tva) -&gt; cmd + " (TVA " + tva + "%)")
+                .thenApply(String::toUpperCase)                  // transformation
+                .exceptionally(ex -&gt; "ERREUR : " + ex.getMessage());
+
+        System.out.println("Le main continue pendant le chargement...");
+
+        System.out.println(commande.join());   // on ne bloque qu'à la fin
+    }
+
+    static CompletableFuture&lt;String&gt; chargerUtilisateur(String nom) {
+        return CompletableFuture.supplyAsync(() -&gt; {
+            attendre(300);                     // simule un appel réseau
+            return nom;
+        });
+    }
+
+    static CompletableFuture&lt;String&gt; chargerDerniereCommande(String utilisateur) {
+        return CompletableFuture.supplyAsync(() -&gt; "commande de " + utilisateur);
+    }
+
+    static CompletableFuture&lt;Integer&gt; chargerTauxTva() {
+        return CompletableFuture.supplyAsync(() -&gt; 21);
+    }
+
+    static void attendre(long millis) {
+        try {
+            Thread.sleep(millis);
+        } catch (InterruptedException e) {
+            Thread.currentThread().interrupt();
+        }
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>Aucun parallélisme constaté</td>
+          <td><code>run()</code> appelé au lieu de <code>start()</code>.</td>
+          <td>Appeler <code>start()</code> sur le thread.</td>
+        </tr>
+        <tr>
+          <td>Compteur final incorrect (aléatoirement)</td>
+          <td>Race condition : opération non atomique partagée.</td>
+          <td><code>synchronized</code> sur la section critique (ou <code>AtomicInteger</code>).</td>
+        </tr>
+        <tr>
+          <td>Le programme ne se termine jamais</td>
+          <td><code>ExecutorService</code> jamais arrêté.</td>
+          <td>Appeler <code>shutdown()</code> après soumission des tâches.</td>
+        </tr>
+        <tr>
+          <td>Le main se termine avant les traitements async</td>
+          <td>Les threads du pool commun sont daemon : la JVM n'attend pas.</td>
+          <td><code>join()</code> sur le future final avant de quitter le main.</td>
+        </tr>
+        <tr>
+          <td><code>CompletableFuture&lt;CompletableFuture&lt;T&gt;&gt;</code></td>
+          <td><code>thenApply</code> utilisé avec une fonction asynchrone.</td>
+          <td>Utiliser <code>thenCompose</code>.</td>
+        </tr>
+        <tr>
+          <td>Résultat disponible mais jamais consommé</td>
+          <td>Chaîne construite mais future final ignoré.</td>
+          <td>Chaîner un <code>thenAccept</code>, ou <code>join()</code> en bout de chaîne.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Thread
+Thread t = new Thread(() -&gt; travail());
+t.start();  t.join();
+Thread.sleep(1000);
+
+// Synchronisation
+public synchronized void incrementer() { valeur++; }
+
+// ExecutorService
+ExecutorService ex = Executors.newFixedThreadPool(4);
+ex.execute(() -&gt; tache());
+ex.shutdown();
+
+// CompletableFuture
+CompletableFuture.supplyAsync(() -&gt; produireValeur())   // CF&lt;T&gt;
+    .thenApply(v -&gt; transformer(v))                     // T → U (sync)
+    .thenCompose(v -&gt; autreAsync(v))                    // T → CF&lt;U&gt; (async)
+    .thenCombine(autreCF, (a, b) -&gt; fusionner(a, b))    // 2 CF parallèles
+    .thenAccept(v -&gt; consommer(v))                      // T → void
+    .exceptionally(ex2 -&gt; valeurParDefaut);             // gestion d'erreur
+
+resultat = cf.join();   // bloque jusqu'au résultat (en bout de chaîne)</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

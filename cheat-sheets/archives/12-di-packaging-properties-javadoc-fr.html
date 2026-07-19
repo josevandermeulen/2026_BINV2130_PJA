@@ -1,0 +1,562 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Semaine 12 - DI, Packaging, Properties, Javadoc - Référence autonome</title>
+  <style>
+    :root {
+      --bg: #f8fafc;
+      --panel: #ffffff;
+      --ink: #172033;
+      --muted: #5f6f85;
+      --border: #d9e2ec;
+      --accent: #1f6feb;
+      --accent-soft: #e9f1ff;
+      --code-bg: #111827;
+      --code-ink: #f4f7fb;
+      --warn-bg: #fff7df;
+      --warn-border: #e7b84a;
+      --ok-bg: #eaf7ef;
+      --ok-border: #4ea66f;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--ink);
+      font-family: Arial, Helvetica, sans-serif;
+      line-height: 1.55;
+    }
+
+    .site-header {
+      background: #152238;
+      color: white;
+      padding: 34px 28px;
+    }
+
+    .site-header h1 {
+      margin: 0 0 8px;
+      font-size: 2rem;
+      letter-spacing: 0;
+    }
+
+    .site-header p {
+      margin: 6px 0;
+      max-width: 980px;
+      color: #dbe7f6;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: minmax(220px, 290px) minmax(0, 1fr);
+      gap: 24px;
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+
+    .toc {
+      align-self: start;
+      position: sticky;
+      top: 12px;
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 18px;
+      max-height: calc(100vh - 24px);
+      overflow: auto;
+    }
+
+    .toc h2 {
+      margin: 0 0 12px;
+      font-size: 1rem;
+    }
+
+    .toc a {
+      display: block;
+      padding: 6px 0;
+      color: var(--accent);
+      text-decoration: none;
+      font-size: .94rem;
+    }
+
+    .toc a:hover {
+      text-decoration: underline;
+    }
+
+    .content {
+      min-width: 0;
+    }
+
+    .doc-section {
+      background: var(--panel);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 24px;
+      margin-bottom: 20px;
+    }
+
+    h2 {
+      margin: 0 0 14px;
+      font-size: 1.5rem;
+      color: #102033;
+    }
+
+    h3 {
+      margin: 26px 0 10px;
+      font-size: 1.16rem;
+      color: #102033;
+    }
+
+    h4 {
+      margin: 18px 0 8px;
+      font-size: 1rem;
+      color: #203047;
+    }
+
+    p {
+      margin: 10px 0;
+    }
+
+    ul {
+      margin-top: 8px;
+      padding-left: 22px;
+    }
+
+    li {
+      margin: 5px 0;
+    }
+
+    code {
+      font-family: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
+      background: #eef2f7;
+      padding: 1px 4px;
+      border-radius: 4px;
+      font-size: .95em;
+    }
+
+    pre {
+      margin: 12px 0;
+      padding: 14px 16px;
+      overflow: auto;
+      background: var(--code-bg);
+      color: var(--code-ink);
+      border-radius: 8px;
+      line-height: 1.45;
+      font-size: .92rem;
+    }
+
+    pre code {
+      background: transparent;
+      color: inherit;
+      padding: 0;
+      border-radius: 0;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 12px 0 20px;
+      font-size: .95rem;
+    }
+
+    th,
+    td {
+      border: 1px solid var(--border);
+      padding: 9px 10px;
+      vertical-align: top;
+      text-align: left;
+    }
+
+    th {
+      background: #eef4fb;
+      font-weight: 700;
+    }
+
+    .note,
+    .warning,
+    .success {
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin: 14px 0;
+    }
+
+    .note {
+      background: var(--accent-soft);
+      border: 1px solid #b7d1ff;
+    }
+
+    .warning {
+      background: var(--warn-bg);
+      border: 1px solid var(--warn-border);
+    }
+
+    .success {
+      background: var(--ok-bg);
+      border: 1px solid var(--ok-border);
+    }
+
+    .api {
+      border-left: 4px solid var(--accent);
+      padding-left: 14px;
+      margin: 18px 0;
+    }
+
+    .signature {
+      display: block;
+      margin: 6px 0;
+      padding: 7px 9px;
+      background: #eef2f7;
+      border-radius: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+    }
+
+    .tag {
+      display: inline-block;
+      margin: 0 5px 6px 0;
+      padding: 2px 7px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: #f3f6fa;
+      font-size: .85rem;
+      color: var(--muted);
+    }
+
+    .muted {
+      color: var(--muted);
+    }
+
+    .toplink {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: .9rem;
+    }
+
+    @media (max-width: 860px) {
+      .layout {
+        display: block;
+        padding: 16px;
+      }
+
+      .toc {
+        position: static;
+        max-height: none;
+        margin-bottom: 18px;
+      }
+
+      .site-header {
+        padding: 26px 18px;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="site-header" id="top">
+  <h1>Semaine 12 — DI, Packaging, Properties, Javadoc</h1>
+  <p>Document autonome en français. Référence des fichiers .properties, du packaging Maven et de la Javadoc, sans demander d'accès Internet.</p>
+  <p>Couvre : java.util.Properties, chargement de configuration, jar exécutable avec Maven, rédaction et génération de Javadoc.</p>
+</div>
+
+<div class="layout">
+  <div class="toc" aria-label="Sommaire">
+    <h2>Sommaire</h2>
+    <a href="#properties-fichier">Fichiers .properties</a>
+    <a href="#properties-api">API Properties</a>
+    <a href="#di-config">DI configurée par properties</a>
+    <a href="#packaging">Packaging : jar avec Maven</a>
+    <a href="#javadoc-rediger">Javadoc - rédiger</a>
+    <a href="#javadoc-generer">Javadoc - générer</a>
+    <a href="#exemple-complet">Exemple complet neutre</a>
+    <a href="#pieges">Pièges fréquents</a>
+    <a href="#reference-rapide">Référence rapide</a>
+  </div>
+
+  <div class="content">
+    <div class="doc-section" id="properties-fichier">
+      <h2>Fichiers <code>.properties</code></h2>
+      <p>Format texte simple : une paire <code>clé=valeur</code> par ligne, <code>#</code> pour les commentaires. Il externalise la configuration hors du code : on change le comportement sans recompiler.</p>
+      <pre><code># blacklist.properties
+blacklist.actif=true
+blacklist.service=blacklist.BlacklistServiceImpl
+blacklist.urls=example.org,test.example.com</code></pre>
+      <div class="note">
+        Convention : le fichier vit à la racine du projet ou dans les ressources (<code>src/main/resources</code> pour un projet Maven, embarqué dans le jar).
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="properties-api">
+      <h2>API <code>java.util.Properties</code></h2>
+      <p><code>Properties</code> étend <code>Hashtable&lt;Object,Object&gt;</code> ; en pratique on ne manipule que des <code>String</code>.</p>
+      <span class="signature">void load(InputStream inStream) throws IOException</span>
+      <span class="signature">void load(Reader reader) throws IOException</span>
+      <span class="signature">String getProperty(String key)</span>
+      <span class="signature">String getProperty(String key, String defaultValue)</span>
+      <span class="signature">Object setProperty(String key, String value)</span>
+      <span class="signature">void store(Writer writer, String comments) throws IOException</span>
+      <span class="signature">Set&lt;String&gt; stringPropertyNames()</span>
+      <pre><code>Properties props = new Properties();
+
+// Depuis un fichier sur disque
+try (InputStream in = new FileInputStream("blacklist.properties")) {
+    props.load(in);
+}
+
+// Ou depuis les ressources du classpath (fonctionne aussi dans un jar)
+try (InputStream in = Main.class.getResourceAsStream("/blacklist.properties")) {
+    props.load(in);
+}
+
+boolean actif = Boolean.parseBoolean(props.getProperty("blacklist.actif", "false"));
+String[] urls = props.getProperty("blacklist.urls", "").split(",");</code></pre>
+      <div class="warning">
+        <code>getProperty</code> renvoie toujours une <code>String</code> (ou <code>null</code>) : convertir explicitement (<code>Boolean.parseBoolean</code>, <code>Integer.parseInt</code>…) et prévoir une valeur par défaut.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="di-config">
+      <h2>DI configurée par properties</h2>
+      <p>Combinaison des semaines précédentes : le fichier properties contient le <strong>nom de la classe</strong> à instancier, la factory la crée par introspection, le client la reçoit par injection. Changer d'implémentation = éditer le fichier, zéro recompilation.</p>
+      <pre><code>String nomClasse = props.getProperty("blacklist.service");
+
+BlacklistService service = (BlacklistService) Class.forName(nomClasse)
+        .getDeclaredConstructor()
+        .newInstance();
+
+ProxyServer serveur = new ProxyServer(service);   // injection classique</code></pre>
+      <p>Voir la référence de la semaine 7 pour l'introspection et de la semaine 9 pour factory et DI.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="packaging">
+      <h2>Packaging : jar exécutable avec Maven</h2>
+      <p>Un <strong>jar</strong> (Java ARchive) regroupe classes compilées et ressources. Pour le rendre exécutable, son manifest doit indiquer la classe principale.</p>
+      <h3>Configuration du pom.xml</h3>
+      <pre><code>&lt;build&gt;
+  &lt;plugins&gt;
+    &lt;plugin&gt;
+      &lt;groupId&gt;org.apache.maven.plugins&lt;/groupId&gt;
+      &lt;artifactId&gt;maven-jar-plugin&lt;/artifactId&gt;
+      &lt;configuration&gt;
+        &lt;archive&gt;
+          &lt;manifest&gt;
+            &lt;mainClass&gt;main.Main&lt;/mainClass&gt;
+          &lt;/manifest&gt;
+        &lt;/archive&gt;
+      &lt;/configuration&gt;
+    &lt;/plugin&gt;
+  &lt;/plugins&gt;
+&lt;/build&gt;</code></pre>
+      <h3>Commandes</h3>
+      <pre><code>mvn package        # compile, teste et produit target/monprojet-1.0.jar
+java -jar target/monprojet-1.0.jar        # exécute la mainClass du manifest
+java -cp target/monprojet-1.0.jar autre.Main   # exécute une autre classe</code></pre>
+      <ul>
+        <li><code>mvn package</code> enchaîne compile → test → jar ; un test rouge bloque le packaging.</li>
+        <li>Les fichiers de <code>src/main/resources</code> sont embarqués dans le jar — les lire avec <code>getResourceAsStream</code>, pas avec un chemin disque.</li>
+      </ul>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="javadoc-rediger">
+      <h2>Javadoc - rédiger</h2>
+      <p>Commentaire <code>/** ... */</code> juste au-dessus de la classe, méthode ou attribut documenté. Première phrase = résumé (elle apparaît dans les index générés).</p>
+      <table>
+        <thead>
+        <tr>
+          <th>Tag</th>
+          <th>Rôle</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>@param nom description</code></td>
+          <td>Décrit un paramètre (un tag par paramètre).</td>
+        </tr>
+        <tr>
+          <td><code>@return description</code></td>
+          <td>Décrit la valeur de retour (jamais sur un void).</td>
+        </tr>
+        <tr>
+          <td><code>@throws Exception description</code></td>
+          <td>Décrit quand l'exception est lancée.</td>
+        </tr>
+        <tr>
+          <td><code>@see référence</code></td>
+          <td>Renvoi vers une autre classe ou méthode.</td>
+        </tr>
+        <tr>
+          <td><code>@deprecated raison</code></td>
+          <td>Marque un élément obsolète et indique le remplacement.</td>
+        </tr>
+        <tr>
+          <td><code>{@link Classe#methode}</code></td>
+          <td>Lien cliquable dans le texte de la description.</td>
+        </tr>
+        <tr>
+          <td><code>{@code expression}</code></td>
+          <td>Formatage code dans la description.</td>
+        </tr>
+        </tbody>
+      </table>
+      <pre><code>/**
+ * Vérifie si une URL est présente dans la liste noire.
+ *
+ * @param url l'URL à vérifier, non nulle
+ * @return {@code true} si l'URL est bloquée, {@code false} sinon
+ * @throws IllegalArgumentException si {@code url} est nulle ou vide
+ * @see #ajouter(String)
+ */
+boolean estBloquee(String url);</code></pre>
+      <div class="note">
+        Documenter le <strong>contrat</strong> (quoi, conditions, exceptions), pas l'implémentation (comment). La Javadoc s'écrit sur l'interface d'abord : les implémentations en héritent dans la documentation générée.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="javadoc-generer">
+      <h2>Javadoc - générer</h2>
+      <h3>Depuis IntelliJ</h3>
+      <ol>
+        <li>Tools → Generate JavaDoc…</li>
+        <li>Choisir la portée (projet ou package) et le dossier de sortie (par ex. <code>doc/</code>).</li>
+        <li>Locale : <code>fr_BE</code> ou <code>fr_FR</code> pour des libellés français.</li>
+        <li>Ouvrir <code>doc/index.html</code> dans un navigateur.</li>
+      </ol>
+      <h3>En ligne de commande</h3>
+      <pre><code>javadoc -d doc -sourcepath src/main/java -subpackages domaine:server
+
+# ou via Maven
+mvn javadoc:javadoc     # sortie dans target/site/apidocs</code></pre>
+      <p>La documentation générée reflète la visibilité : par défaut, seuls les membres <code>public</code> et <code>protected</code> apparaissent.</p>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="exemple-complet">
+      <h2>Exemple complet neutre</h2>
+      <pre><code>import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
+/**
+ * Charge la configuration de l'application depuis un fichier properties.
+ */
+public class Configuration {
+
+    private final Properties props = new Properties();
+
+    /**
+     * Charge le fichier de configuration donné.
+     *
+     * @param chemin le chemin du fichier .properties, non nul
+     * @throws IOException si le fichier est introuvable ou illisible
+     */
+    public Configuration(String chemin) throws IOException {
+        try (InputStream in = new FileInputStream(chemin)) {
+            props.load(in);
+        }
+    }
+
+    /**
+     * Renvoie la valeur entière associée à la clé.
+     *
+     * @param cle la clé recherchée
+     * @param defaut la valeur renvoyée si la clé est absente
+     * @return la valeur entière de la clé, ou {@code defaut} si absente
+     */
+    public int getEntier(String cle, int defaut) {
+        String valeur = props.getProperty(cle);
+        return valeur == null ? defaut : Integer.parseInt(valeur);
+    }
+}</code></pre>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="pieges">
+      <h2>Pièges fréquents</h2>
+      <table>
+        <thead>
+        <tr>
+          <th>Problème</th>
+          <th>Cause probable</th>
+          <th>Correction</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td><code>getProperty</code> renvoie <code>null</code></td>
+          <td>Clé mal orthographiée ou fichier non chargé.</td>
+          <td>Vérifier la clé exacte ; fournir une valeur par défaut.</td>
+        </tr>
+        <tr>
+          <td>Fichier properties introuvable une fois dans le jar</td>
+          <td>Lecture par chemin disque (<code>FileInputStream</code>).</td>
+          <td>Le placer dans les ressources et lire via <code>getResourceAsStream</code>.</td>
+        </tr>
+        <tr>
+          <td><code>no main manifest attribute</code> au lancement du jar</td>
+          <td><code>mainClass</code> absent du manifest.</td>
+          <td>Configurer <code>maven-jar-plugin</code> avec la <code>mainClass</code>.</td>
+        </tr>
+        <tr>
+          <td><code>ClassNotFoundException</code> au chargement configuré</td>
+          <td>Nom de classe incomplet dans le properties.</td>
+          <td>Utiliser le nom pleinement qualifié (<code>package.Classe</code>).</td>
+        </tr>
+        <tr>
+          <td>Javadoc générée vide ou incomplète</td>
+          <td>Membres package-private, ou commentaires <code>//</code> au lieu de <code>/** */</code>.</td>
+          <td>Documenter les éléments publics avec de vrais commentaires Javadoc.</td>
+        </tr>
+        <tr>
+          <td>Avertissements javadoc au build</td>
+          <td><code>@param</code>/<code>@return</code> manquants ou paramètres renommés.</td>
+          <td>Un <code>@param</code> par paramètre, noms exacts, <code>@return</code> sauf void.</td>
+        </tr>
+        </tbody>
+      </table>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
+    <div class="doc-section" id="reference-rapide">
+      <h2>Référence rapide</h2>
+      <pre><code>// Properties
+Properties props = new Properties();
+try (InputStream in = new FileInputStream("app.properties")) {
+    props.load(in);
+}
+props.getProperty("cle");
+props.getProperty("cle", "defaut");
+
+// Packaging
+mvn package
+java -jar target/app-1.0.jar
+
+// Javadoc
+/**
+ * Résumé en une phrase.
+ *
+ * @param x description du paramètre
+ * @return description du retour
+ * @throws IllegalArgumentException si x invalide
+ */
+
+Tools → Generate JavaDoc…       (IntelliJ)
+mvn javadoc:javadoc             (target/site/apidocs)</code></pre>
+      <div class="success">
+        Cette page ne dépend d'aucune ressource externe. Elle peut être copiée dans un dossier d'examen et ouverte directement dans un navigateur. Pour l'introspection, voir la semaine 7 ; pour factory et DI, la semaine 9.
+      </div>
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+  </div>
+</div>
+</body>
+</html>

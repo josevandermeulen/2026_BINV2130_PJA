@@ -1,0 +1,12 @@
+target/
+out/
+build/
+.idea/
+*.class
+*.log
+!08-lecture-fichiers/**/logs/*.log
+!10-hyperloglog-async/**/logs/*.log
+.DS_Store
+logs-grand-volume/
+logs-routeurs/
+__pycache__/

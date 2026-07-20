@@ -38,7 +38,7 @@ Dans IntelliJ, créez un projet intitulé `AJ_atelier02_partie1`. Récupérez le
 
 À ce stade, il est normal que le projet ne compile pas encore : les fichiers fournis utilisent déjà des éléments que vous allez créer progressivement dans les questions suivantes, notamment l'énuméré `Unite`, la classe `Instruction` et la classe `Plat`.
 
-### Énuméré Unite
+### L'énuméré `Unite`
 
 **Question 1** :
 
@@ -180,7 +180,7 @@ Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur la solut
 **Question 5** :
 On vous fournit une classe `Main` (dans `01-code-java/main/`) que vous devez copier dans votre projet (à vous de voir dans quel package la mettre) et exécuter. La sortie de ce programme doit être identique à celle attendue dans `01-code-java/affichage_Main.txt` (excepté le format des durées).
 
-### Gestion des ingrédients dans Plat
+### Gestion des ingrédients dans `Plat`
 
 **Question 6** :
 Ajoutons maintenant des fonctionnalités de gestion des ingrédients à la classe `Plat`.

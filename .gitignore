@@ -2,6 +2,9 @@ target/
 out/
 build/
 .idea/
+# Javadoc généré (atelier 12 partie 2, Question « Generate JavaDoc » — l'étudiant
+# le régénère lui-même, inutile de versionner la sortie)
+12-injection-dependances/**/doc/
 *.class
 *.log
 !08-lecture-fichiers/**/logs/*.log

@@ -49,6 +49,10 @@ IntelliJ crée `StudentTest.java` dans `test/be/vinci/domain/`, avec une méthod
 
 ---
 
+*Retour à la [théorie](03A_1_theorie.md).*
+
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*
+
+*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/03-junit-fr.html).*
 
 *Cette fiche a été rédigée conjointement avec [Claude Code](https://claude.com/claude-code) et [Codex](https://openai.com/codex).*

@@ -37,8 +37,6 @@ Ci-dessous, se trouve une ébauche du diagramme de classes de l'application. Les
 
 ### Consignes
 
-✏️ *A corriger au tableau (+ GitHub)* 
-
 Vous allez devoir implémenter les classes présentées ci-dessus en tenant compte des commentaires ainsi que répondre à diverses questions.
 
 Dans IntelliJ, créez un projet intitulé `AJ_atelier01_partie1`. Vous pouvez mettre vos classes directement dans le répertoire `src` de ce projet.
@@ -104,7 +102,7 @@ Implémentez la classe `PizzaComposee` en tenant compte des remarques suivantes 
 
 ### Test
 
-Le fichier [`01-code-java/toString_partie1.txt`](01-code-java/toString_partie1.txt) contient les méthodes `toString` des classes `Client`, `Pizza` et `PizzaComposable`. Copiez les `toString` dans les bonnes classes.
+Le fichier [`01-code-java/toString_a_copier.txt`](01-code-java/toString_a_copier.txt) contient les méthodes `toString` des classes `Client`, `Pizza` et `PizzaComposable`. Copiez les `toString` dans les bonnes classes.
 
 Les fichiers `01-code-java/Ingredients.java` et `01-code-java/MainPizza.java` sont fournis : copiez-les dans le répertoire `src` de votre projet.
 

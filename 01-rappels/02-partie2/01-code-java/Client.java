@@ -24,12 +24,15 @@ public class Client {
     public int getNumero() {
         return numero;
     }
+
     public String getNom() {
         return nom;
     }
+
     public String getPrenom() {
         return prenom;
     }
+
     public String getTelephone() {
         return telephone;
     }

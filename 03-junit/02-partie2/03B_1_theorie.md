@@ -8,9 +8,10 @@ Ce document reprend les notions utiles pour réaliser l'exercice. Il suppose acq
 2. [Tester `equals` et `hashCode`](#tester-equals-et-hashcode)
 3. [Fixtures avec des dates](#fixtures-avec-des-dates)
 4. [Tester des exceptions métier personnalisées](#tester-des-exceptions-métier-personnalisées)
-5. [Plusieurs classes de test dans un même projet](#plusieurs-classes-de-test-dans-un-même-projet)
-6. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
-7. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+5. [Tester une méthode qui filtre et trie](#tester-une-méthode-qui-filtre-et-trie)
+6. [Plusieurs classes de test dans un même projet](#plusieurs-classes-de-test-dans-un-même-projet)
+7. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
+8. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
 
 ## Vidéos
 
@@ -74,6 +75,19 @@ void testAjouterPrixDateDejaPresente() {
 }
 ```
 
+## Tester une méthode qui filtre et trie
+
+Certaines méthodes ne renvoient pas une valeur unique mais une collection construite à partir d'autres objets — `produitsTriesParPrix` filtre les produits d'un rayon, calcule leur prix et les trie. Pour tester ce genre de méthode, le plus lisible est de comparer directement la liste obtenue à la liste attendue :
+
+```java
+List<Produit> resultat = liste.produitsTriesParPrix("rayonX", date, 1);
+assertEquals(List.of(pasCher, cher), resultat);
+```
+
+`assertEquals` sur des listes vérifie à la fois le contenu **et** l'ordre : une seule assertion couvre donc le tri et les exclusions (tout produit en trop, manquant ou mal placé fait échouer le test).
+
+Particularité de `produitsTriesParPrix` : un produit sans prix disponible à la date demandée, ou dont la quantité minimale est trop élevée, est **exclu** du résultat, sans qu'aucune exception ne sorte de la méthode. Dans son implémentation, la méthode attrape ces deux exceptions métier d'un coup avec un *multi-catch* (`catch (PrixNonDisponibleException | QuantiteNonAutoriseeException e)`) et passe simplement au produit suivant. Côté test, il n'y a donc pas d'`assertThrows` à écrire pour ces cas-là : on vérifie l'**absence** du produit dans la liste renvoyée.
+
 ## Plusieurs classes de test dans un même projet
 
 Rien n'empêche d'avoir une classe de test par classe métier (`PrixTest`, `ProduitTest`, …) dans le même dossier `tests`, tant que chacune reste dans le package correspondant à la classe qu'elle teste (ici `domaine`). Chaque classe de test a sa propre fixture et son propre `@BeforeEach` : elles sont totalement indépendantes les unes des autres.
@@ -83,7 +97,7 @@ Rien n'empêche d'avoir une classe de test par classe métier (`PrixTest`, `Prod
 Comme vu en partie 1, un assistant IA peut aider à écrire des tests, mais chaque test généré doit être relu, exécuté, et vérifié en cassant volontairement le code testé (le test doit alors passer au rouge). Sur cette partie, deux pièges supplémentaires à surveiller :
 
 - Le contrat `equals`/`hashCode` a deux moitiés : un test généré par IA peut ne couvrir que l'égalité et oublier `hashCode`, ou l'inverse. Vérifiez que les deux sont bien testées.
-- La distinction égalité/identité (voir question 4 de l'exercice) est subtile : un test généré par IA peut réutiliser la même référence là où l'énoncé demande justement un objet égal (`equals`) mais de référence différente — ce test-là ne vérifierait pas la bonne chose.
+- La distinction égalité/identité (voir question 6 de l'exercice) est subtile : un test généré par IA peut réutiliser la même référence là où l'énoncé demande justement un objet égal (`equals`) mais de référence différente — ce test-là ne vérifierait pas la bonne chose.
 
 ## Points d'attention pour l'exercice
 

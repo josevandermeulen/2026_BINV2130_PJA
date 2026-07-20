@@ -21,7 +21,8 @@ public abstract class Pizza implements Iterable<Ingredient> {
 
         for (Ingredient i : ingredients) {
             if (this.ingredients.contains(i)) {
-                throw new IllegalArgumentException("Il ne peut pas y avoir deux fois le même ingrédient dans une pizza.");
+                throw new IllegalArgumentException(
+                        "Il ne peut pas y avoir deux fois le même ingrédient dans une pizza.");
             }
             this.ingredients.add(i);
         }

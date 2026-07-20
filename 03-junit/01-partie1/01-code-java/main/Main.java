@@ -56,7 +56,10 @@ public class Main {
 
             System.out.println(listeProduits);
 
-            System.out.println("Le prix du jeans rose le 3 janvier 2019 :\n"+listeProduits.trouverPrix(new Produit("Jeans Rose", "One Green Elephant", "Y8"), LocalDate.of(2019, 1, 3)));
+            System.out.println("Le prix du jeans rose le 3 janvier 2019 :\n"
+                    + listeProduits.trouverPrix(
+                            new Produit("Jeans Rose", "One Green Elephant", "Y8"),
+                            LocalDate.of(2019, 1, 3)));
 
         } catch (DateDejaPresenteException e) {
             // TODO Auto-generated catch block

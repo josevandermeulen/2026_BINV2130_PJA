@@ -43,7 +43,7 @@ Vérifiez qu'il fonctionne correctement en démarrant le main.
 
 Certaines questions ci-dessous sont des questions de réflexion (rien à coder) : leurs réponses se trouvent dans [`02-solution/02B_solutions-observations.md`](02-solution/02B_solutions-observations.md) — réfléchissez (et testez !) avant de les consulter.
 
-### Énuméré Type
+### L'énuméré `Type`
 
 **Question 1** :
 
@@ -196,7 +196,7 @@ Une fois que vous avez une idée du résultat attendu, exécutez-le. Si vous vou
 
 Corrigez ensuite le tir : modifiez votre méthode `compare` pour trier par niveau de difficulté, puis par nom. Deux plats seront donc identiques si leur niveau de difficulté est identique, et si leur nom est identique. Une fois la modification effectuée, vérifiez que tout est rentré dans l'ordre.
 
-### Améliorer le Livre
+### Améliorer le `Livre`
 
 **Question 10** :
 Ajoutez les méthodes suivantes dans la classe `Livre` :
@@ -239,7 +239,7 @@ Complétez ces méthodes.
 
 N'hésitez pas à modifier votre `main` pour les tester.
 
-### Améliorer l'énuméré Type de plat
+### Améliorer l'énuméré `Type` de plat
 
 **Question 11** :
 Lors de l'affichage du livre, on affiche directement le nom de l'énuméré. Il est donc affiché en majuscules.
@@ -364,7 +364,7 @@ Si vous n'aviez pas redéfini `clone` dans `Plat` pour dupliquer la liste et l'e
 ### Ingrédients : changement de structure de données
 
 **Question 18** :
-Modifiez votre implémentation en utilisant une collection `Map<Ingredient, IngredientQuantifie>` dans la classe `Plat` au lieu de la collection `Set<IngredientQuantifie>` pour stocker les ingrédients.
+Modifiez votre implémentation en utilisant une collection `Map<Ingredient, IngredientQuantifie>` dans la classe `Plat` au lieu de la collection `Set<IngredientQuantifie>` pour stocker les ingrédients. Après ce changement, l'ordre d'affichage des ingrédients peut différer de celui que vous obteniez avec le `Set` : une `HashMap` ne garantit pas plus d'ordre qu'un `HashSet`. Ce n'est pas une régression — seul le contenu compte, comme indiqué à la Question 12.
 
 ### `StringBuilder`
 

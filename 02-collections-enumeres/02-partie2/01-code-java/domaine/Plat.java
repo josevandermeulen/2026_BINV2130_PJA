@@ -125,7 +125,8 @@ public class Plat {
     }
 
     /**
-     * Cette méthode supprime l’instruction qui se trouve à la position précisée en paramètre (la position commence à 1).
+     * Cette méthode supprime l’instruction qui se trouve à la position précisée en
+     * paramètre (la position commence à 1).
      * @param position la position de l'instruction à supprimer
      * @return l'instruction supprimée
      * @throws IllegalArgumentException en cas de position invalide
@@ -166,7 +167,8 @@ public class Plat {
     }
 
     /**
-     * Dans le cas où l'ingrédient n'est pas encore présent, cette méthode crée et ajoute un ingrédient quantifié avec la quantité passée en paramètre
+     * Dans le cas où l'ingrédient n'est pas encore présent, cette méthode crée et
+     * ajoute un ingrédient quantifié avec la quantité passée en paramètre
      * et l'unité NEANT.
      * @param ingredient l'ingrédient à ajouter
      * @param quantite la quantité désirée
@@ -214,7 +216,8 @@ public class Plat {
     }
 
     /**
-     * Cette méthode recherche et renvoie une copie de l'ingrédient quantifié correspondant à l'ingrédient passé en paramètre.
+     * Cette méthode recherche et renvoie une copie de l'ingrédient quantifié
+     * correspondant à l'ingrédient passé en paramètre.
      * @param ingredient l'ingrédient recherché
      * @return une copie de l'ingrédient quantifié correspondant s'il existe, null sinon
      * @throws IllegalArgumentException en cas de paramètre null

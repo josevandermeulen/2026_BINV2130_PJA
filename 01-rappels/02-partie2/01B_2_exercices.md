@@ -51,7 +51,7 @@ Remarque : dans un premier temps, traitez uniquement les cas d'exception demand�
 
 Implémentez la classe `LigneDeCommande` selon le diagramme de classes ci-dessus. Le prix unitaire représente le prix unitaire de la pizza. Il est gardé car, comme les prix peuvent varier au cours du temps, il est important de garder le prix au moment de la commande.
 
-### Associations entre Commande et Client
+### Associations entre `Commande` et `Client`
 
 Quand on crée une commande pour un client, celle-ci doit automatiquement être enregistrée comme commande en cours de ce client. De ce fait, on ne peut pas créer une commande pour un client s'il a encore une commande en cours, ce qui donne des contraintes supplémentaires au niveau des associations.
 
@@ -96,7 +96,7 @@ Ajoutez, dans les classes adéquates, les méthodes nécessaires pour définir c
 
 ### Test
 
-Le fichier [`01-code-java/toString_partie2.txt`](01-code-java/toString_partie2.txt) contient les méthodes `toString` des classes `LigneDeCommande` et `Commande`. Copiez les `toString` dans les bonnes classes.
+Le fichier [`01-code-java/toString_a_copier.txt`](01-code-java/toString_a_copier.txt) contient les méthodes `toString` des classes `LigneDeCommande` et `Commande`. Copiez les `toString` dans les bonnes classes.
 
 La classe [`MenuPizzeria`](01-code-java/MenuPizzeria.java) contient des constantes de type [`PizzaComposee`](01-code-java/PizzaComposee.java) correspondant aux différentes pizzas composées du menu de la pizzeria.
 

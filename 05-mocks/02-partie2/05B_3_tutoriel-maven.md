@@ -158,6 +158,10 @@ Si les deux tests passent (`CalculatorTest` et `MockitoSmokeTest`), l'environnem
 
 ---
 
+*Retour à la [théorie](05B_1_theorie.md).*
+
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*
+
+*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/05-mocks-fr.html).*
 
 *Cette fiche a été rédigée conjointement avec [Claude Code](https://claude.com/claude-code) et [Codex](https://openai.com/codex).*

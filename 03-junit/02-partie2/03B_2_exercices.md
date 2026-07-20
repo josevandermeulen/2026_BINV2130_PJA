@@ -45,61 +45,75 @@ Comme dans la partie 1, créez une classe de test JUnit 5 pour la classe `Produi
 
 ### Tests de la classe `Produit`
 
-**Question 1** :
+**Question 1** : Préparation du test
 
 ✏️ *A corriger au tableau*
 
 Créez la classe `ProduitTest` de façon similaire à `PrixTest`. Ajoutez-y 3 attributs de type `Prix` et initialisez-les comme dans `PrixTest` (copier-coller ok juste une fois !). Ajoutez-y aussi 2 attributs `Produit` et dans l'un d'eux insérez les 3 prix. Attention, on ne peut pas ajouter deux prix à la même date !
 
-**Question 2** : Test des prix (ajouterPrix et getPrix)
+**Question 2** : Test des prix (`ajouterPrix` et `getPrix`)
 
 Une même méthode peut échouer de plusieurs façons différentes (trois types d'exceptions distincts). Et quand ça marche, il faut retrouver le bon prix parmi plusieurs prix historisés selon la date demandée.
 
 Demandez un prix pour une date comprise entre deux dates pour lesquelles un prix a été défini. C'est celui de la date antérieure (la plus récente parmi celles passées) qui doit être renvoyé — la logique est similaire à celle des paliers de quantité vus en partie 1, mais appliquée à des dates.
 
-**Question 3** : Test du contrat equals/hashCode
+**Question 3** : `equals` — deux produits de même état
 
 ✏️ *A corriger au tableau*
 
-tester un **contrat** plutôt qu'un comportement isolé. Le contrat `equals`/`hashCode` impose que deux objets égaux aient le même `hashCode`, et que l'égalité ne tienne que si les trois attributs (nom, marque, rayon) correspondent tous.
+Il s'agit ici de tester un **contrat** plutôt qu'un comportement isolé. Le contrat `equals`/`hashCode` impose que deux objets égaux aient le même `hashCode`, et que l'égalité ne tienne que si les trois attributs (nom, marque, rayon) correspondent tous. Commencez par l'égalité attendue : deux instances distinctes mais avec les mêmes nom, marque et rayon doivent être `equals`.
 
-1. Deux instances distinctes mais avec les mêmes nom, marque et rayon doivent être `equals`.
-2. Faites ensuite varier un seul attribut à la fois (nom différent, puis marque différente, puis rayon différent, les deux autres restant identiques) : dans chacun des trois cas, `equals` doit renvoyer faux.
-3. Ces mêmes deux instances égales (point 1) doivent aussi avoir le même `hashCode` — c'est l'autre moitié du contrat, à tester dans une méthode dédiée.
+**Question 4** : `equals` — un seul attribut différent
+
+Faites ensuite varier un seul attribut à la fois (nom différent, puis marque différente, puis rayon différent, les deux autres restant identiques) : dans chacun des trois cas, `equals` doit renvoyer faux.
+
+**Question 5** : `hashCode` cohérent avec `equals`
+
+Ces mêmes deux instances égales (question 3) doivent aussi avoir le même `hashCode` — c'est l'autre moitié du contrat, à tester dans une méthode dédiée.
 
 ### À partir d'ici, testez avec l'IA
 
-À partir de la question 4, aidez-vous d'un assistant IA pour écrire vos tests (voir la section « Développer des tests avec l'IA » de la théorie) : relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé. Attention en particulier au contrat `equals`/`hashCode` et à la distinction égalité/identité, deux pièges où l'IA se trompe facilement.
+À partir de la question 6, aidez-vous d'un assistant IA pour écrire vos tests (voir la section « Développer des tests avec l'IA » de la théorie) : relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé. Attention en particulier au contrat `equals`/`hashCode` et à la distinction égalité/identité, deux pièges où l'IA se trompe facilement.
 
 ### Tests de la classe `ListeProduits`
 
-**Question 4** :
+**Question 6** : Tests de `ListeProduits` et scénario complet
 
 Créez la classe `ListeProduitsTest` et testez-y la classe `ListeProduits` du package `usecase`. Pour chaque méthode, pensez à bien tester tous les cas où la méthode doit échouer (quand elle doit renvoyer faux ou lancer une exception) comme cela a été fait, par exemple, pour le test des prix de la classe `Produit`. Dans le cas où la méthode doit réussir, pensez à vérifier que ce qui devait être fait l'a bien été (par exemple, vérifiez la présence du produit après l'avoir ajouté).
 
-Le point le plus subtil, déjà entrevu à la question 3 : **égalité n'est pas identité**. Pour la méthode permettant d'ajouter un prix à un produit, pensez à tester que le travail est bien fait sur le bon produit (celui stocké et non celui passé en paramètre) en passant en paramètre un produit égal (mêmes nom/marque/rayon) mais de référence différente à celui stocké. De même pour la méthode permettant de retrouver le prix.
+Le point le plus subtil, déjà entrevu aux questions 3 à 5 : **égalité n'est pas identité**. Pour la méthode permettant d'ajouter un prix à un produit, pensez à tester que le travail est bien fait sur le bon produit (celui stocké et non celui passé en paramètre) en passant en paramètre un produit égal (mêmes nom/marque/rayon) mais de référence différente à celui stocké. De même pour la méthode permettant de retrouver le prix.
 
-Ajoutez ensuite un test de scénario complet dans `ListeProduitsTest`. Ce test doit enchaîner plusieurs actions dans une situation réaliste :
-
-1. Créez une `ListeProduits` vide, un produit `p1` et un autre produit `p2` égal à `p1`, mais créé avec `new` dans une autre variable.
-2. Ajoutez `p1` à la liste et vérifiez que l'ajout renvoie `true`.
-3. Essayez d'ajouter `p2` et vérifiez que l'ajout renvoie `false`, puisque le produit est déjà présent au sens de `equals`.
-4. Ajoutez deux prix à deux dates différentes en passant `p2` à `ajouterPrix`. Le test doit donc vérifier que la liste retrouve le produit stocké (`p1`) même si l'objet reçu en paramètre est une autre référence.
-5. Retrouvez ensuite le prix avec `trouverPrix`, toujours en passant `p2`, pour une date exacte et pour une date située entre les deux dates de prix. Vérifiez que le bon `Prix` est renvoyé dans les deux cas.
-6. Vérifiez enfin deux cas d'erreur dans ce même scénario ou dans des méthodes séparées : rechercher le prix d'un produit absent doit lever [`ProduitNonPresentException`](01-code-java/src/exceptions/ProduitNonPresentException.java), et rechercher un prix à une date trop ancienne doit lever [`PrixNonDisponibleException`](01-code-java/src/exceptions/PrixNonDisponibleException.java) (package `exceptions`).
+Ajoutez ensuite un test de scénario complet dans `ListeProduitsTest`. Ce test doit enchaîner plusieurs actions dans une situation réaliste. Créez une `ListeProduits` vide, un produit `p1` et un autre produit `p2` égal à `p1`, mais créé avec `new` dans une autre variable. Ajoutez `p1` à la liste et vérifiez que l'ajout renvoie `true`, puis essayez d'ajouter `p2` et vérifiez que l'ajout renvoie `false`, puisque le produit est déjà présent au sens de `equals`. Ajoutez deux prix à deux dates différentes en passant `p2` à `ajouterPrix` : le test doit donc vérifier que la liste retrouve le produit stocké (`p1`) même si l'objet reçu en paramètre est une autre référence. Retrouvez ensuite le prix avec `trouverPrix`, toujours en passant `p2`, pour une date exacte et pour une date située entre les deux dates de prix, et vérifiez que le bon `Prix` est renvoyé dans les deux cas. Vérifiez enfin deux cas d'erreur, dans ce même scénario ou dans des méthodes séparées : rechercher le prix d'un produit absent doit lever [`ProduitNonPresentException`](01-code-java/src/exceptions/ProduitNonPresentException.java), et rechercher un prix à une date trop ancienne doit lever [`PrixNonDisponibleException`](01-code-java/src/exceptions/PrixNonDisponibleException.java) (package `exceptions`).
 
 Ce scénario doit être plus conséquent qu'un test de getter : il doit montrer que `ListeProduits` orchestre correctement l'ajout, la détection des doublons, l'égalité entre produits, l'historique des prix et les exceptions métier.
 
-**Question 5** : Test de produitsTriesParPrix
+### Tests de `produitsTriesParPrix`
 
-`produitsTriesParPrix` combine filtrage, tri et gestion de plusieurs cas d'exclusion : il faut construire un scénario avec plusieurs produits pour couvrir chaque branche.
+`produitsTriesParPrix` combine filtrage, tri et gestion de plusieurs cas d'exclusion : les questions suivantes construisent un scénario avec plusieurs produits pour couvrir chaque branche. Vous pouvez enrichir un même scénario de question en question, ou écrire des méthodes de test séparées.
 
-1. Créez au moins 3 produits dans un même rayon, avec des prix différents, et vérifiez que la méthode les renvoie triés par prix croissant.
-2. Ajoutez un produit du même rayon sans aucun prix défini à la date demandée : vérifiez qu'il est exclu du résultat (pas d'exception).
-3. Ajoutez un produit du même rayon dont le prix a une quantité minimale supérieure à celle demandée : vérifiez qu'il est également exclu.
-4. Ajoutez un produit dans un autre rayon : vérifiez qu'il n'apparaît jamais dans le résultat, quel que soit son prix.
-5. Vérifiez qu'un rayon sans aucun produit renvoie une liste vide, sans exception.
-6. Vérifiez qu'un rayon `null`, une date `null` ou une quantité négative ou nulle lèvent une `IllegalArgumentException`.
+**Question 7** : Tri par prix croissant
+
+Créez au moins 3 produits dans un même rayon, avec des prix différents, et vérifiez que la méthode les renvoie triés par prix croissant.
+
+**Question 8** : Exclusion — pas de prix à la date demandée
+
+Ajoutez un produit du même rayon sans aucun prix défini à la date demandée : vérifiez qu'il est exclu du résultat (pas d'exception).
+
+**Question 9** : Exclusion — quantité minimale trop élevée
+
+Ajoutez un produit du même rayon dont le prix a une quantité minimale supérieure à celle demandée : vérifiez qu'il est également exclu.
+
+**Question 10** : Exclusion — autre rayon
+
+Ajoutez un produit dans un autre rayon : vérifiez qu'il n'apparaît jamais dans le résultat, quel que soit son prix.
+
+**Question 11** : Rayon sans produit
+
+Vérifiez qu'un rayon sans aucun produit renvoie une liste vide, sans exception.
+
+**Question 12** : Paramètres invalides
+
+Vérifiez qu'un rayon `null`, une date `null` ou une quantité négative ou nulle lèvent une `IllegalArgumentException`.
 
 ---
 

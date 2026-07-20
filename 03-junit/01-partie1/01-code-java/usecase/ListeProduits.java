@@ -100,7 +100,8 @@ public class ListeProduits {
      * @throws DateDejaPresenteException  s'il y a déjà un prix pour cette date pour ce produit
      * @throws IllegalArgumentException   en cas de paramètre invalide ou si le produit n'est pas présent
      */
-    public void ajouterPrix(Produit prod, LocalDate date, Prix prix) throws DateDejaPresenteException, ProduitNonPresentException {
+    public void ajouterPrix(Produit prod, LocalDate date, Prix prix)
+            throws DateDejaPresenteException, ProduitNonPresentException {
         checkObject(prix);
         checkObject(date);
         //Il faut récupérer le produit dans le SortedSet afin d'ajouter le prix au bon produit
@@ -117,7 +118,8 @@ public class ListeProduits {
      * @throws PrixNonDisponibleException s'il n'y a de prix pour cette date pour ce produit
      * @throws IllegalArgumentException   en cas de paramètre invalide ou si le produit n'est pas présent
      */
-    public Prix trouverPrix(Produit prod, LocalDate date) throws ProduitNonPresentException, PrixNonDisponibleException {
+    public Prix trouverPrix(Produit prod, LocalDate date)
+            throws ProduitNonPresentException, PrixNonDisponibleException {
         Produit produit = trouverProduit(prod);
         //Il faut récupérer le produit dans le SortedSet afin de rechercher dans le bon produit
         return produit.getPrix(date);
@@ -148,7 +150,8 @@ public class ListeProduits {
      * @param date     la date pour laquelle il faut connaître le prix courant
      * @param quantite la quantité pour laquelle il faut calculer le prix
      * @return la liste des produits du rayon ayant un prix disponible, triés par prix croissant (liste vide si aucun)
-     * @throws IllegalArgumentException en cas de paramètre invalide (rayon vide/null, date null, quantité négative ou nulle)
+     * @throws IllegalArgumentException en cas de paramètre invalide (rayon vide/null,
+     *                                  date null, quantité négative ou nulle)
      */
     public List<Produit> produitsTriesParPrix(String rayon, LocalDate date, int quantite) {
         checkString(rayon);

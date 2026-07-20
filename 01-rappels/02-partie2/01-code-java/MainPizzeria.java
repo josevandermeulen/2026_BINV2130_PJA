@@ -23,7 +23,8 @@ public class MainPizzeria {
         System.out.println();
         System.out.println("Commande en cours d'Emmeline : " + emmeline.getCommandeEnCours());
         System.out.println();
-        System.out.println("ajout d'une pizza à une commande clôturée : " + commandeEmmeline.ajouter(MenuPizzeria.PIZZA_4FROMAGES));
+        System.out.println("ajout d'une pizza à une commande clôturée : "
+                + commandeEmmeline.ajouter(MenuPizzeria.PIZZA_4FROMAGES));
         System.out.println();
         Commande commandeStephanie = new Commande(stephanie);
         commandeStephanie.ajouter(MenuPizzeria.PIZZA_MARGARITA, 1);

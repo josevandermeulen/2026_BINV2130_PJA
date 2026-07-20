@@ -43,7 +43,8 @@ public class Instruction {
 
     @Override
     public String toString() {
-        return "(" + String.format("%02d:%02d", dureeEnMinutes.toHours(), dureeEnMinutes.toMinutesPart()) + ") " + description;
+        return "(" + String.format("%02d:%02d", dureeEnMinutes.toHours(),
+                dureeEnMinutes.toMinutesPart()) + ") " + description;
     }
 
 }

@@ -11,11 +11,14 @@ import org.junit.jupiter.params.provider.ValueSource;
 import static org.junit.jupiter.api.Assertions.*;
 
 class PrixTest {
+
+    // (test repris de la partie 1, Question 1) : Préparation du test
     private Prix prixAucune;
+
     private Prix prixPub;
+
     private Prix prixSolde;
 
-    // Question 1
     @BeforeEach
     void setUp() {
         prixAucune = new Prix();
@@ -31,7 +34,7 @@ class PrixTest {
         prixSolde.definirPrix(10, 9);
     }
 
-    // Question 2 : Tests des getters
+    // (test repris de la partie 1, Question 2) : Tests des getters
 
     @Test
     @DisplayName("getValeurPromo sur prixAucune renvoie 0")
@@ -45,24 +48,26 @@ class PrixTest {
         assertNull(prixAucune.getTypePromo());
     }
 
-    // Question 3 : Tests du constructeur
+    // (test repris de la partie 1, Question 3) : Test du constructeur avec TypePromo null
 
     @Test
     @DisplayName("Test du constructeur avec paramètre Promo null")
-    void testPrix1(){
+    void testPrix1() {
         assertThrows(IllegalArgumentException.class, () -> new Prix(null, 15));
     }
 
-    // Question 4 : Regroupement d'assertions (assertAll)
+    // (test repris de la partie 1, Question 4) : Regroupement d'assertions (assertAll)
 
     @Test
     @DisplayName("getValeurPromo et getTypePromo sur prixSolde renvoient les valeurs du constructeur")
     void testGettersSolde() {
-        assertAll(()->assertEquals(30, prixSolde.getValeurPromo()),
-                ()->assertSame(TypePromo.SOLDE, prixSolde.getTypePromo()));
+        assertAll(
+                () -> assertEquals(30, prixSolde.getValeurPromo()),
+                () -> assertSame(TypePromo.SOLDE, prixSolde.getTypePromo())
+        );
     }
 
-    // Question 5 : Test de getPrixPromo
+    // (test repris de la partie 1, Question 5) : getPrixPromo sans promo
 
     @Test
     @DisplayName("getPrixPromo sur prixAucune renvoie le même résultat que getPrix")
@@ -70,17 +75,23 @@ class PrixTest {
         assertEquals(prixAucune.getPrix(1), prixAucune.getPrixPromo(1));
     }
 
+    // (test repris de la partie 1, Question 6) : getPrixPromo avec promo PUB
+
     @Test
     @DisplayName("getPrixPromo sur prixPub soustrait le montant fixe de valeurPromo")
     void testGetPrixPromoPub() {
         assertEquals(prixPub.getPrix(3) - prixPub.getValeurPromo(), prixPub.getPrixPromo(3));
     }
 
+    // (test repris de la partie 1, Question 7) : getPrixPromo avec promo SOLDE
+
     @Test
     @DisplayName("getPrixPromo sur prixSolde applique le pourcentage de valeurPromo")
     void testGetPrixPromoSolde() {
         assertEquals(prixSolde.getPrix(2) * (1 - prixSolde.getValeurPromo() / 100), prixSolde.getPrixPromo(2));
     }
+
+    // (test repris de la partie 1, Question 8) : getPrixPromo et le plancher de DESTOCKAGE
 
     @Test
     @DisplayName("getPrixPromo avec une promo DESTOCKAGE ne descend jamais sous 1 euro")
@@ -90,51 +101,61 @@ class PrixTest {
         assertEquals(1, prixDestockage.getPrixPromo(1));
     }
 
+    // (test repris de la partie 1, Question 9) : getPrixPromo avec une quantité invalide
+
     @ParameterizedTest
     @ValueSource(ints = {-1, 0})
     @DisplayName("Test de la méthode getPrixPromo avec une quantité < ou = à 0")
     void testGetPrixPromo1(int quantite) {
-        assertThrows(IllegalArgumentException.class, ()->prixPub.getPrixPromo(quantite));
+        assertThrows(IllegalArgumentException.class, () -> prixPub.getPrixPromo(quantite));
     }
 
-    // Question 6 : Test paramétré et de définirPrix
+    // (test repris de la partie 1, Question 10) : Constructeur — valeur de promo invalide
 
     @ParameterizedTest
-    @DisplayName("Test du constructeur avec valeur <0")
-    @ValueSource(doubles={-7, -4, 0})
-    void testPrix2(double valeur){
+    @DisplayName("Test du constructeur avec une valeur de promo < ou = à 0")
+    @ValueSource(doubles = {-7, -4, 0})
+    void testPrix2(double valeur) {
         assertThrows(IllegalArgumentException.class, () -> new Prix(TypePromo.SOLDE, valeur));
     }
 
-    @ParameterizedTest
-    @ValueSource(ints={-1, 0})
-    @DisplayName("Test de la méthode getPrix avec une quantité < ou = à 0")
-    void definirPrix1(int quantite) {
-        assertThrows(IllegalArgumentException.class, ()->prixPub.definirPrix(quantite, 15));
-    }
+    // (test repris de la partie 1, Question 11) : definirPrix — quantité invalide
 
     @ParameterizedTest
-    @ValueSource(doubles={-3, 0})
-    @DisplayName("Test de la méthode getPrix avec une valeur < ou = à 0")
-    void definirPrix2(double valeur) {
-        assertThrows(IllegalArgumentException.class, ()->prixPub.definirPrix(15, valeur));
+    @ValueSource(ints = {-1, 0})
+    @DisplayName("Test de la méthode definirPrix avec une quantité < ou = à 0")
+    void definirPrix1(int quantite) {
+        assertThrows(IllegalArgumentException.class, () -> prixPub.definirPrix(quantite, 15));
     }
+
+    // (test repris de la partie 1, Question 12) : definirPrix — prix unitaire invalide
+
+    @ParameterizedTest
+    @ValueSource(doubles = {-3, 0})
+    @DisplayName("Test de la méthode definirPrix avec une valeur < ou = à 0")
+    void definirPrix2(double valeur) {
+        assertThrows(IllegalArgumentException.class, () -> prixPub.definirPrix(15, valeur));
+    }
+
+    // (test repris de la partie 1, Question 13) : definirPrix — remplacement d'un palier existant
 
     @Test
-    @DisplayName("Test du remplacement de la valeur pour une quantité dèjà existante")
+    @DisplayName("Test du remplacement de la valeur pour une quantité déjà existante")
     void definirPrix3() {
         prixAucune.definirPrix(10, 6);
         assertEquals(6, prixAucune.getPrix(10));
     }
 
-    // Question 7 : Test de getPrix
+    // (test repris de la partie 1, Question 14) : getPrix — quantité invalide
 
     @ParameterizedTest
     @ValueSource(ints = {-1, 0})
     @DisplayName("Test de la méthode getPrix avec une quantité < ou = à 0")
     void testGetPrix1(int quantite) {
-        assertThrows(IllegalArgumentException.class, ()->prixPub.getPrix(quantite));
+        assertThrows(IllegalArgumentException.class, () -> prixPub.getPrix(quantite));
     }
+
+    // (test repris de la partie 1, Question 15) : getPrix — balayage des paliers
 
     @ParameterizedTest
     @CsvFileSource(resources = "paliers.csv", numLinesToSkip = 1)
@@ -143,19 +164,23 @@ class PrixTest {
         assertEquals(prixAttendu, prixAucune.getPrix(quantite));
     }
 
+    // (test repris de la partie 1, Question 16) : getPrix — seuil minimal d'une promo
+
     @Test
-    @DisplayName("Test de getPrix avec une quantite < à la plus petite quantité minimale")
+    @DisplayName("Test de getPrix avec une quantité sous la plus petite quantité de prixPub")
     void testGetPrix3() {
-        assertThrows(QuantiteNonAutoriseeException.class, ()->prixPub.getPrix(2));
+        assertThrows(QuantiteNonAutoriseeException.class, () -> prixPub.getPrix(2));
     }
+
+    // (test repris de la partie 1, Question 17) : getPrix — seuil minimal, deuxième cas
 
     @Test
-    @DisplayName("Test de getPrix s'il n'y a pas de prix défini")
+    @DisplayName("Test de getPrix avec une quantité sous la plus petite quantité de prixSolde")
     void testGetPrix4() {
-        assertThrows(QuantiteNonAutoriseeException.class, ()->prixSolde.getPrix(1));
+        assertThrows(QuantiteNonAutoriseeException.class, () -> prixSolde.getPrix(1));
     }
 
-    // Question 8 : Test de scénario sur plusieurs paliers
+    // (test repris de la partie 1, Question 18) : Test de scénario sur plusieurs paliers
 
     @Test
     @DisplayName("Test de scénario complet sur plusieurs paliers")

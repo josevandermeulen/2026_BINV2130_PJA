@@ -9,7 +9,8 @@ public class PizzaComposable extends Pizza {
     private Client createur;
 
     public PizzaComposable(Client createur) {
-        super("Pizza composable du client " + createur.getNumero(), "Pizza de " + createur.getNom() + " " + createur.getPrenom());
+        super("Pizza composable du client " + createur.getNumero(),
+                "Pizza de " + createur.getNom() + " " + createur.getPrenom());
 
         this.date = LocalDateTime.now();
         this.createur = createur;

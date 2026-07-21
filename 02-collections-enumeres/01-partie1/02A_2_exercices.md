@@ -15,6 +15,7 @@ L'objectif de cet atelier est de construire le socle d'une application de gestio
 7. Durées avec `Duration`
 8. Redéfinition de `toString`
 9. Énumérés internes
+10. `Comparator` et classes anonymes (partie optionnelle)
 
 ## Vidéos
 
@@ -173,7 +174,7 @@ public List<Instruction> instructions()
 ### La méthode `toString` de `Plat`
 
 **Question 4** :
-Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur la solution fournie, tout en mettant en commentaire la partie de cette méthode relative aux ingrédients. Cette partie sera traitée à la question sur la gestion des ingrédients.
+Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`01-code-java/affichage_Main.txt`), tout en mettant en commentaire la partie de cette méthode relative aux ingrédients. Cette partie sera traitée à la question sur la gestion des ingrédients.
 
 ### Exécution du programme
 

@@ -152,7 +152,7 @@ switch (date.getJourDeLaSemaine()) {
 
 Les notions essentielles sont reprises ci-dessous.
 
-### Les interfaces List et Set
+### Les interfaces `List` et `Set`
 
 Java fournit plusieurs types de collections. Le choix se fait selon les besoins :
 
@@ -166,7 +166,7 @@ List<String> etapes = new ArrayList<>();
 Set<String> participants = new HashSet<>();
 ```
 
-### Manipuler une List
+### Manipuler une `List`
 
 ```java
 etapes.add("préparer");             // ajoute en dernier
@@ -181,7 +181,7 @@ Attention : les positions d'une `List` commencent à 0. Si l'énoncé d'un exerc
 
 Un accès à une position invalide (négative ou trop grande) lance une `IndexOutOfBoundsException`. Si l'exercice demande une `IllegalArgumentException`, il faut tester la position soi-même avant d'accéder à la liste.
 
-### Manipuler un Set
+### Manipuler un `Set`
 
 ```java
 participants.add("Alice");      // renvoie false si l'élément est déjà présent

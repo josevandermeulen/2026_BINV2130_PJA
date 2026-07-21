@@ -8,7 +8,15 @@ import exceptions.ProduitNonPresentException;
 import exceptions.QuantiteNonAutoriseeException;
 
 import java.time.LocalDate;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.SortedSet;
+import java.util.TreeSet;
 
 import static util.Util.checkObject;
 import static util.Util.checkString;
@@ -71,7 +79,9 @@ public class ListeProduits {
     public Produit trouverProduit(String nom, String marque, String rayon) {
         Produit produit = new Produit(nom, marque, rayon);
         for (Produit p : produits) {
-            if (p.equals(produit)) return p;
+            if (p.equals(produit)) {
+                return p;
+            }
         }
         return null;
     }
@@ -131,8 +141,9 @@ public class ListeProduits {
     private Produit trouverProduit(Produit prod) throws ProduitNonPresentException {
         checkObject(prod);
         for (Produit p : produits) {
-            if (p.equals(prod))
+            if (p.equals(prod)) {
                 return p;
+            }
         }
         throw new ProduitNonPresentException("le produit ne se trouve pas dans la liste des produits.");
     }
@@ -159,7 +170,9 @@ public class ListeProduits {
 
         Map<Produit, Double> prixParProduit = new HashMap<>();
         for (Produit p : produits) {
-            if (!p.getRayon().equals(rayon)) continue;
+            if (!p.getRayon().equals(rayon)) {
+                continue;
+            }
             try {
                 prixParProduit.put(p, p.getPrix(date).getPrixPromo(quantite));
             } catch (PrixNonDisponibleException | QuantiteNonAutoriseeException e) {

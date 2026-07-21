@@ -52,7 +52,9 @@ public class Produit  {
     public void ajouterPrix(LocalDate date, Prix prix) throws DateDejaPresenteException {
         Util.checkObject(date);
         Util.checkObject(prix);
-        if (historiquePrix.containsKey(date)) throw new DateDejaPresenteException();
+        if (historiquePrix.containsKey(date)) {
+            throw new DateDejaPresenteException();
+        }
         historiquePrix.put(date, prix);
     }
 
@@ -67,7 +69,9 @@ public class Produit  {
     public Prix getPrix(LocalDate date) throws PrixNonDisponibleException {
         Util.checkObject(date);
         for (Entry<LocalDate, Prix> entry : historiquePrix.entrySet()) {
-            if (!entry.getKey().isAfter(date)) return entry.getValue();
+            if (!entry.getKey().isAfter(date)) {
+                return entry.getValue();
+            }
         }
         throw new PrixNonDisponibleException();
     }
@@ -85,13 +89,21 @@ public class Produit  {
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
 
         Produit produit = (Produit) o;
 
-        if (!nom.equals(produit.nom)) return false;
-        if (!rayon.equals(produit.rayon)) return false;
+        if (!nom.equals(produit.nom)) {
+            return false;
+        }
+        if (!rayon.equals(produit.rayon)) {
+            return false;
+        }
         return marque.equals(produit.marque);
     }
 

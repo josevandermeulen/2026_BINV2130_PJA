@@ -62,14 +62,11 @@ public class Main {
                             LocalDate.of(2019, 1, 3)));
 
         } catch (DateDejaPresenteException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException("Date déjà présente", e);
         } catch (PrixNonDisponibleException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException("Prix non disponible", e);
         } catch (ProduitNonPresentException e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            throw new RuntimeException("Produit non présent", e);
         }
 
     }

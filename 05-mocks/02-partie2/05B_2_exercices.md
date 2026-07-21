@@ -13,6 +13,7 @@ L'objectif de cet atelier est d'utiliser Mockito pour créer des mocks et tester
 5. Vérification d'interactions
 6. Injection de dépendances pour les tests
 7. Tests unitaires isolés
+8. Organisation des tests avec `@Nested` (vu à l'atelier 3 partie 2)
 
 ## Vidéos
 
@@ -41,6 +42,8 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier05_
 Le [tutoriel Maven](05B_3_tutoriel-maven.md) reprend ces étapes en détail et montre comment ajouter les dépendances JUnit 5 et Mockito au `pom.xml` puis vérifier que tout fonctionne.
 
 Nous allons reprendre les mêmes classes et interfaces que celles utilisées lors de la partie 1 de cet atelier 5 : copiez/collez les packages `be.vinci.mocks.domaine` et `be.vinci.mocks.util` (fournis dans `01-code-java/src/main/java/`, c'est l'état de la solution de la partie 1 — voir aussi `../01-partie1/02-solution/`) au sein de votre nouveau projet dans `/src/main/java`, en conservant l'arborescence `be/vinci/mocks/`.
+
+Comme à l'atelier 3 partie 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (la fixture et le `@BeforeEach` restant sur la classe externe).
 
 ### Ajout des dépendances à un projet Maven
 

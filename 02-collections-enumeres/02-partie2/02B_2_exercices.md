@@ -378,7 +378,7 @@ Dans l'énoncé, on vous demande de ne pas trier les plats de la méthode `tousL
 
 Exemple : les entrées en premier, et les entrées sont triées par niveau de difficulté ascendant, et pour les plus simples par exemple, on les trie par ordre alphabétique de nom.
 
-### Map triée ?
+### `Map` triée ?
 
 **Question 21** :
 On souhaiterait faire en sorte que lorsqu'on appelle la méthode `keySet` de la `Map` des plats de la classe `Livre`, on obtienne les clefs dans un ordre bien précis. À savoir, par ordre de service dans un restaurant. D'abord les entrées, puis les plats, puis les desserts.

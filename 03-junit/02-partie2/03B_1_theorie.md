@@ -10,8 +10,9 @@ Ce document reprend les notions utiles pour réaliser l'exercice. Il suppose acq
 4. [Tester des exceptions métier personnalisées](#tester-des-exceptions-métier-personnalisées)
 5. [Tester une méthode qui filtre et trie](#tester-une-méthode-qui-filtre-et-trie)
 6. [Plusieurs classes de test dans un même projet](#plusieurs-classes-de-test-dans-un-même-projet)
-7. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
-8. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+7. [Organiser les tests avec `@Nested`](#organiser-les-tests-avec-nested)
+8. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
+9. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
 
 ## Vidéos
 
@@ -91,6 +92,47 @@ Particularité de `produitsTriesParPrix` : un produit sans prix disponible à la
 ## Plusieurs classes de test dans un même projet
 
 Rien n'empêche d'avoir une classe de test par classe métier (`PrixTest`, `ProduitTest`, …) dans le même dossier `tests`, tant que chacune reste dans le package correspondant à la classe qu'elle teste (ici `domaine`). Chaque classe de test a sa propre fixture et son propre `@BeforeEach` : elles sont totalement indépendantes les unes des autres.
+
+## Organiser les tests avec `@Nested`
+
+Quand une classe de test grossit, on aime regrouper les tests qui vont ensemble (par exemple tous les tests d'une même méthode). `@Nested` permet de créer une **classe interne non statique** qui rassemble un groupe de tests ; JUnit l'exécute comme un sous-ensemble, et son `@DisplayName` apparaît comme un titre au-dessus de ses tests dans les résultats.
+
+```java
+class ListeProduitsTest {
+
+    private ListeProduits liste;
+
+    @BeforeEach
+    void setUp() {
+        liste = new ListeProduits();
+    }
+
+    @Nested
+    @DisplayName("Tests de contient")
+    class Contient {
+
+        @Test
+        void contientProduitPresent() {
+            // ...
+        }
+    }
+
+    @Nested
+    @DisplayName("Tests de ajouterProduit")
+    class AjouterProduit {
+
+        @Test
+        void refuseUnDoublon() {
+            // ...
+        }
+    }
+}
+```
+
+Points importants :
+
+- la classe interne doit être **non statique** (pas de `static`) : c'est ce qui lui donne accès à la fixture (`liste`, ici) construite dans le `@BeforeEach` de la classe externe ;
+- `@Nested` ne change **rien** au comportement des tests : c'est purement de l'organisation. On peut donc réorganiser une classe existante en groupes `@Nested` sans toucher au corps des tests, et vérifier que tout reste vert.
 
 ## Développer des tests avec l'IA
 

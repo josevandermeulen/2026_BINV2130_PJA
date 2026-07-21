@@ -28,7 +28,7 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 2. [Interface Comparator et classe anonyme en Java](https://www.youtube.com/watch?v=gLTAIkKdsK8)
 3. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)
 
-## L'interface Map
+## L'interface `Map`
 
 L'interface `Map` ne fait pas partie des `Collection` à proprement parler. Il s'agit d'un type de structure de données qui stocke les données sous forme de dictionnaire : clé – valeur.
 
@@ -71,7 +71,7 @@ public boolean inscrire(String cours, String etudiant) {
 
 La valeur associée à la clé peut être n'importe quel type : un `String`, un objet métier, ou même une autre collection (`Map<String, Set<String>>` dans l'exemple ci-dessus).
 
-## Parcourir une Map
+## Parcourir une `Map`
 
 Une `Map` ne se parcourt pas directement avec un foreach : il faut passer par une de ses trois vues.
 
@@ -105,7 +105,7 @@ for (String traduction : dictionnaire.values()) {
 
 Les vues sont des vues sur la `Map` et non des copies : une suppression faite via une vue supprime réellement dans la `Map`. En revanche, il n'est pas possible d'ajouter des éléments à une `Map` via une vue.
 
-## Les ensembles triés : SortedSet et TreeSet
+## Les ensembles triés : `SortedSet` et `TreeSet`
 
 `SortedSet` est une extension de l'interface `Set` : pas de doublons, mais en plus les éléments sont gardés triés de façon croissante. L'itérateur (et donc le foreach) parcourt les éléments dans l'ordre croissant.
 
@@ -126,7 +126,7 @@ mots.add("cerise");
 
 `SortedSet` ajoute aussi quelques méthodes, comme `first()` qui renvoie le plus petit élément de l'ensemble et `last()` qui renvoie le plus grand.
 
-## Ordre naturel : l'interface Comparable
+## Ordre naturel : l'interface `Comparable`
 
 Pour qu'une classe possède un ordre naturel, il faut qu'elle implémente l'interface `Comparable<T>` où `T` correspond à la classe elle-même. Cette interface ne contient qu'une seule méthode :
 
@@ -162,7 +162,7 @@ De nombreuses classes Java définissent un ordre naturel : les classes wrappers 
 
 C'est la classe elle-même qui décide de la manière dont elle se compare. Toutes les structures triées qui reposent sur l'ordre naturel de cette classe seront affectées si on modifie son `compareTo`.
 
-## L'interface Comparator
+## L'interface `Comparator`
 
 Lorsqu'il n'y a pas d'ordre naturel, ou si on veut trier dans un ordre qui ne correspond pas à l'ordre naturel, on passe un `Comparator<T>` lors de la construction du `TreeSet`. `Comparator<T>` est une interface qui ne contient qu'une seule méthode (abstraite) :
 
@@ -206,7 +206,7 @@ SortedSet<Boisson> boissons = new TreeSet<>(new Comparator<Boisson>() {
 
 La classe créée n'a pas de nom : elle sert uniquement à fournir cette implémentation de `compare` à cet endroit du code.
 
-## Égalité et ordre dans un TreeSet
+## Égalité et ordre dans un `TreeSet`
 
 Comme dans tout `Set`, il ne peut pas y avoir de doublons dans un `SortedSet`. Mais attention : dans un `TreeSet`, ce n'est pas la méthode `equals` qui détermine si deux éléments sont égaux, c'est la méthode `compareTo` (ou `compare` si un `Comparator` a été fourni). Si la méthode de comparaison renvoie 0, les éléments sont considérés comme égaux.
 
@@ -288,7 +288,7 @@ return builder.toString();
 
 La méthode `append` accepte tous les types courants (`String`, `int`, objet…) et renvoie le `StringBuilder` lui-même, ce qui permet d'enchaîner les appels. On récupère le résultat final avec `toString()`.
 
-## L'interface SortedMap
+## L'interface `SortedMap`
 
 Comme il existe un `Set` trié (`SortedSet`), il existe une `Map` triée par ordre de clés : `SortedMap`, dont l'implémentation habituelle est `TreeMap`.
 

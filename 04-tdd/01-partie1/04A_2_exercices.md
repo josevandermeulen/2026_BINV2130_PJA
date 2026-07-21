@@ -9,6 +9,7 @@ Découvrir le Test Driven Development en pratiquant le cycle *red-green-refactor
 1. Le cycle TDD : écrire un test qui échoue, écrire le code minimum pour le faire passer, refactorer
 2. Spécifier des scénarios de tests à partir des cas d'utilisation (UC)
 3. Cas positifs, cas négatifs, cas limites et classes d'équivalence
+4. Organisation des tests avec `@Nested` (vu à l'atelier 3 partie 2)
 
 ## Vidéos
 

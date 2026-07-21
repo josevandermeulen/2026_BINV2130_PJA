@@ -84,4 +84,3 @@ Ingrédients :
 5. (00:00) Ajouter la crème et servir
 6. (00:02) Étape ajoutée sur la copie
 
-Note : l'ordre des ingrédients et des usages dépend du HashSet/HashMap utilisé et peut varier d'une exécution à l'autre.

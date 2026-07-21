@@ -125,6 +125,20 @@ void testConstructeurPromoNull() {
 
 Si le constructeur ne lance pas d'exception (ou lance le mauvais type), le test échoue.
 
+`assertThrows` **renvoie** l'exception capturée. On peut donc la récupérer dans une variable pour vérifier en plus son message ou son contenu — utile quand une même méthode lève le même type d'exception pour plusieurs raisons et qu'on veut s'assurer qu'on tombe bien sur le bon cas :
+
+```java
+@Test
+void testConstructeurPromoNull() {
+    IllegalArgumentException e = assertThrows(
+            IllegalArgumentException.class,
+            () -> new Prix(null, 15));
+    assertEquals("L'objet ne peut pas être null", e.getMessage());
+}
+```
+
+Vérifier le message reste optionnel : le type d'exception suffit souvent. Ne le faites que si le message fait partie du comportement attendu — sinon un simple changement de texte casserait le test sans que le comportement ait changé.
+
 ## Tests paramétrés
 
 Quand on veut exécuter le même test avec plusieurs valeurs, `@ParameterizedTest` évite de dupliquer la méthode :

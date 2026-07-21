@@ -9,6 +9,7 @@ Appliquer le TDD à l'évolution d'un code existant : transformer les tâches de
 1. Les tests existants comme filet de sécurité lors d'un refactoring
 2. TDD lors de la mise à jour de fonctionnalités existantes
 3. TDD pour de nouvelles fonctionnalités à partir d'une spécification
+4. Organisation des tests avec `@Nested` (vu à l'atelier 3 partie 2)
 
 ## Vidéos
 

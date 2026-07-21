@@ -12,6 +12,7 @@ L'objectif de cet atelier est de tester une classe dépendante d'autres objets e
 4. Tests unitaires
 5. Associations entre objets
 6. Abstraction des dépendances
+7. Organisation des tests avec `@Nested` (vu à l'atelier 3 partie 2)
 
 ## Vidéos
 
@@ -49,6 +50,8 @@ Créez ensuite un dossier pour les tests :
 
 1. Créez, dans votre projet, un nouveau dossier intitulé `tests` (clic droit sur le projet et choisir New → Directory).
 2. Faites un clic droit sur le dossier `tests` et sélectionnez Mark Directory as → Test Sources Root.
+
+Comme à l'atelier 3 partie 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (par exemple : ajout valide, suppression, cas de refus), la fixture et le `@BeforeEach` restant sur la classe externe.
 
 ### Abstraction de l'implémentation des classes
 

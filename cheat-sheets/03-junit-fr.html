@@ -295,7 +295,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="02-collections-enumeres-fr.html">&larr; Semaine 2</a>
-    <span class="version-badge">v6 &middot; 20/07/2026</span>
+    <span class="version-badge">v7 &middot; 21/07/2026</span>
     <a href="04-tdd-fr.html">Semaine 4 &rarr;</a>
   </div>
 </div>
@@ -455,8 +455,37 @@ void testNonExecute() {
         <h3><code>@Nested</code></h3>
         <span class="tag">annotation</span>
         <span class="tag">organisation</span>
-        <p>Permet de regrouper des tests dans des classes internes non statiques. Les tests imbriqués peuvent partager le contexte de la classe externe.</p>
+        <p>Regroupe des tests dans une classe interne <strong>non statique</strong> (elle doit pouvoir accéder au contexte de la classe externe). Utile pour organiser les tests par méthode testée ou par scénario, tout en partageant les champs et <code>@BeforeEach</code> de la classe externe.</p>
         <span class="signature">@Nested</span>
+        <pre><code>class CalculatriceTest {
+
+    private Calculatrice calculatrice;
+
+    @BeforeEach
+    void initialise() {
+        calculatrice = new Calculatrice();
+    }
+
+    @Nested
+    @DisplayName("Question 1 : Addition")
+    class Question1 {
+
+        @Test
+        void additionneDeuxNombresPositifs() {
+            assertEquals(5, calculatrice.additionner(2, 3));
+        }
+    }
+
+    @Nested
+    @DisplayName("Question 2 : Division")
+    class Question2 {
+
+        @Test
+        void refuseUneDivisionParZero() {
+            assertThrows(ArithmeticException.class, () -> calculatrice.diviser(4, 0));
+        }
+    }
+}</code></pre>
       </div>
 
       <div class="api" id="api-repeated-test">

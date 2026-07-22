@@ -47,21 +47,37 @@ Ajoutez un test qui vérifie que `removeTask` sur une tâche qui a été clonée
 
 Si vous souhaitez exécuter tous les tests se trouvant dans les différentes classes de tests situées dans le dossier `tests` en une seule fois, vous pouvez le faire ainsi : clic droit sur `tests`, Run 'All Tests'.
 
-### À partir d'ici, faites du TDD avec l'IA
+### 🤖 À partir d'ici, faites du TDD avec l'IA
 
 À partir de la question 3, aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour faire du TDD : respectez scrupuleusement le cycle red-green-refactor étape par étape — demandez d'abord le test seul, vérifiez qu'il échoue pour de bonnes raisons, puis demandez le code minimal, vérifiez qu'il passe, puis le refactor si besoin.
 
 ### TDD pour les nouvelles fonctionnalités de la classe `TodoList`
 
-**Question 3** : Il est temps de s'occuper de l'opération permettant de retrouver une tâche au sein de la `TodoList` (`findTask`). Veuillez faire du TDD pour les nouveaux scénarios au sein de la classe `TodoListTest`.
+**Question 3** :
 
-**Question 4** : Il devrait aussi être possible de modifier une tâche par le biais de la `TodoList` (`updateTask`), en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche. Veuillez faire du TDD pour ces scénarios au sein de la classe `TodoListTest`.
+🤖 *À faire avec l'IA*
+
+Il est temps de s'occuper de l'opération permettant de retrouver une tâche au sein de la `TodoList` (`findTask`). Veuillez faire du TDD pour les nouveaux scénarios au sein de la classe `TodoListTest`.
+
+**Question 4** :
+
+🤖 *À faire avec l'IA*
+
+Il devrait aussi être possible de modifier une tâche par le biais de la `TodoList` (`updateTask`), en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche. Veuillez faire du TDD pour ces scénarios au sein de la classe `TodoListTest`.
 
 ### Compter et vider la liste
 
-**Question 5** : Reprenez les scénarios `countTasksEmpty`, `countTasksAfterAdd` et `countTasksAfterRemove` de la partie 1 et adaptez-les pour qu'ils utilisent des `Task` plutôt que de simples `String`.
+**Question 5** :
 
-**Question 6** : Faites de même pour `clearTasks` : adaptez `clearTasks` et `clearEmptyTasks` aux objets `Task`.
+🤖 *À faire avec l'IA*
+
+Reprenez les scénarios `countTasksEmpty`, `countTasksAfterAdd` et `countTasksAfterRemove` de la partie 1 et adaptez-les pour qu'ils utilisent des `Task` plutôt que de simples `String`.
+
+**Question 6** :
+
+🤖 *À faire avec l'IA*
+
+Faites de même pour `clearTasks` : adaptez `clearTasks` et `clearEmptyTasks` aux objets `Task`.
 
 ---
 

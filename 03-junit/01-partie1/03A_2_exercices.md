@@ -97,7 +97,7 @@ Il s'agit ici de tester qu'une méthode **lève une exception**. Le constructeur
 
 Sur `prixSolde`, vérifiez `getValeurPromo` et `getTypePromo` **dans une seule méthode de test**, en regroupant vos deux assertions avec `assertAll` — si l'une des deux échoue, vous voulez quand même voir le résultat de l'autre, plutôt que de vous arrêter à la première.
 
-### À partir d'ici, testez avec l'IA
+### 🤖 À partir d'ici, testez avec l'IA
 
 À partir de la question 5, aidez-vous d'un assistant IA pour écrire vos tests (voir la section « Développer des tests avec l'IA » de la théorie) : relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
 
@@ -105,23 +105,43 @@ Sur `prixSolde`, vérifiez `getValeurPromo` et `getTypePromo` **dans une seule m
 
 La classe `Prix` propose aussi `getPrixPromo`, qui applique la promotion en cours au prix de base. Le mode de calcul diffère selon le `TypePromo` (voir la javadoc de la classe) : les questions suivantes testent chaque branche séparément, plus le cas sans promo.
 
-**Question 5** : `getPrixPromo` sans promo
+**Question 5** :
+
+🤖 *À faire avec l'IA*
+
+`getPrixPromo` sans promo
 
 Sur `prixAucune` (pas de promo), vérifiez que `getPrixPromo` renvoie exactement le même résultat que `getPrix`, pour au moins une quantité.
 
-**Question 6** : `getPrixPromo` avec promo `PUB`
+**Question 6** :
+
+🤖 *À faire avec l'IA*
+
+`getPrixPromo` avec promo `PUB`
 
 Sur `prixPub` (promo `PUB`), vérifiez que le montant `valeurPromo` est bien soustrait du prix de base.
 
-**Question 7** : `getPrixPromo` avec promo `SOLDE`
+**Question 7** :
+
+🤖 *À faire avec l'IA*
+
+`getPrixPromo` avec promo `SOLDE`
 
 Sur `prixSolde` (promo `SOLDE`), vérifiez que la réduction appliquée correspond bien au pourcentage `valeurPromo`.
 
-**Question 8** : `getPrixPromo` et le plancher de `DESTOCKAGE`
+**Question 8** :
+
+🤖 *À faire avec l'IA*
+
+`getPrixPromo` et le plancher de `DESTOCKAGE`
 
 Créez un nouveau `Prix` avec `TypePromo.DESTOCKAGE` et une `valeurPromo` assez élevée pour que le prix calculé descende sous 1 euro : vérifiez que `getPrixPromo` renvoie bien 1 euro (le plancher), et non une valeur négative ou nulle.
 
-**Question 9** : `getPrixPromo` avec une quantité invalide
+**Question 9** :
+
+🤖 *À faire avec l'IA*
+
+`getPrixPromo` avec une quantité invalide
 
 Vérifiez qu'une quantité négative ou nulle lève une `IllegalArgumentException`, avec la même technique `assertThrows` qu'à la question 3.
 
@@ -129,19 +149,35 @@ Vérifiez qu'une quantité négative ou nulle lève une `IllegalArgumentExceptio
 
 Utilisez un **test paramétré** pour couvrir plusieurs valeurs invalides en une seule méthode de test.
 
-**Question 10** : Constructeur — valeur de promo invalide
+**Question 10** :
+
+🤖 *À faire avec l'IA*
+
+Constructeur — valeur de promo invalide
 
 Complétez le test du constructeur : une valeur de promo qui ne serait pas strictement positive doit aussi lever une `IllegalArgumentException`. Avec `@ParameterizedTest` et `@ValueSource`, couvrez plusieurs valeurs invalides (négative, nulle) en une seule méthode de test.
 
-**Question 11** : `definirPrix` — quantité invalide
+**Question 11** :
+
+🤖 *À faire avec l'IA*
+
+`definirPrix` — quantité invalide
 
 Utilisez le même outil pour `definirPrix` : une quantité nulle ou négative doit être rejetée par une `IllegalArgumentException`.
 
-**Question 12** : `definirPrix` — prix unitaire invalide
+**Question 12** :
+
+🤖 *À faire avec l'IA*
+
+`definirPrix` — prix unitaire invalide
 
 Un prix unitaire nul ou négatif doit également être rejeté par une `IllegalArgumentException`.
 
-**Question 13** : `definirPrix` — remplacement d'un palier existant
+**Question 13** :
+
+🤖 *À faire avec l'IA*
+
+`definirPrix` — remplacement d'un palier existant
 
 Cas nouveau, avec un **effet de bord** à vérifier : sur `prixAucune`, redéfinissez le prix à 10 unités avec une nouvelle valeur (6 euros), puis vérifiez via `getPrix` que l'ancien prix a bien été remplacé (pas juste ajouté à côté). Ici, il ne suffit plus de vérifier un rejet : il faut appeler la méthode, puis constater un changement d'état.
 
@@ -149,25 +185,45 @@ Cas nouveau, avec un **effet de bord** à vérifier : sur `prixAucune`, redéfin
 
 Les questions suivantes combinent tout ce qui précède et ajoutent le test paramétré **à plusieurs arguments liés** (entrée + résultat attendu), avec `@CsvSource`/`@CsvFileSource` plutôt que `@ValueSource`.
 
-**Question 14** : `getPrix` — quantité invalide
+**Question 14** :
+
+🤖 *À faire avec l'IA*
+
+`getPrix` — quantité invalide
 
 Une quantité négative ou nulle doit lever une `IllegalArgumentException` (`assertThrows`, comme aux questions 3 et 10).
 
-**Question 15** : `getPrix` — balayage des paliers
+**Question 15** :
+
+🤖 *À faire avec l'IA*
+
+`getPrix` — balayage des paliers
 
 Sur `prixAucune`, balayez les paliers définis en question 1 avec un test paramétré associant chaque quantité au prix attendu : 1, 5, 9, 10, 15, 20 et 25 unités. Le palier à 10 unités change le prix — une seule valeur ne suffirait pas à couvrir la logique de la `SortedMap`, d'où l'intérêt d'un test à plusieurs arguments liés pour les couvrir toutes en une méthode. Vous pouvez inscrire les paires quantité/prix directement dans `@CsvSource`, ou dans un fichier `.csv` à côté de la classe de test et lu via `@CsvFileSource`.
 
-**Question 16** : `getPrix` — seuil minimal d'une promo
+**Question 16** :
+
+🤖 *À faire avec l'IA*
+
+`getPrix` — seuil minimal d'une promo
 
 Une promo a un seuil minimal d'achat en-dessous duquel elle n'est pas applicable : demander le prix pour 2 unités sur `prixPub` doit lever une [`QuantiteNonAutoriseeException`](01-code-java/exceptions/QuantiteNonAutoriseeException.java) (package `exceptions`).
 
-**Question 17** : `getPrix` — seuil minimal, deuxième cas
+**Question 17** :
+
+🤖 *À faire avec l'IA*
+
+`getPrix` — seuil minimal, deuxième cas
 
 Même vérification côté `prixSolde`, cette fois pour 1 unité — à vous de retrouver, à partir des valeurs choisies en question 1, quelle quantité déclenche bien ce cas.
 
 ### Test de scénario sur plusieurs paliers
 
-**Question 18** : Test de scénario sur plusieurs paliers
+**Question 18** :
+
+🤖 *À faire avec l'IA*
+
+Test de scénario sur plusieurs paliers
 
 Dans une méthode de test dédiée, construisez un prix plus complet que ceux utilisés jusqu'ici. L'objectif est de tester un comportement métier sur plusieurs étapes, pas seulement une valeur isolée. Créez un nouveau `Prix` sans promo et définissez-y au moins trois paliers, par exemple 3 unités à 20 euros, 5 unités à 18 euros et 10 unités à 15 euros. Vérifiez ensuite avec `assertAll` que le bon prix est renvoyé pour une quantité exacte sur chaque palier, puis pour les quantités situées entre deux paliers : par exemple 4 unités doivent encore utiliser le palier de 3 unités, et 9 unités celui de 5 unités. Vérifiez aussi qu'une quantité inférieure au premier palier lance bien une `QuantiteNonAutoriseeException`. Redéfinissez enfin un des paliers déjà existants, puis vérifiez que les quantités concernées utilisent bien la nouvelle valeur.
 

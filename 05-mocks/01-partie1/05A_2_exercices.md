@@ -78,7 +78,7 @@ Les analystes ont mis en place un diagramme des différents états du `Moniteur`
 
 Par exemple, après avoir appelé deux fois, avec succès, la méthode `ajouterStage` sur un moniteur, celui-ci aura donc 2 stages : l'état de ce moniteur sera donc de 2 !
 
-Nous avons choisi de tester uniquement les méthodes `ajouterStage` et `supprimerStage` de la classe `MoniteurImpl`. Il est important de commencer par lire la JavaDoc de ces deux méthodes (elle se trouve dans la classe `MoniteurImpl`) avant de découvrir leur plan de test.
+Nous avons choisi de tester uniquement les méthodes `ajouterStage` et `supprimerStage` de la classe `MoniteurImpl`. Il est important de commencer par lire la [JavaDoc de ces deux méthodes](01-code-java/src/domaine/Moniteur.java) (elle se trouve dans la classe `MoniteurImpl`) avant de découvrir leur plan de test.
 
 Plan de tests :
 
@@ -127,7 +127,7 @@ Comme pour pouvoir ajouter un stage à un moniteur, il faut pouvoir vérifier qu
 **Question 2** :
 Quel est le second stub qu'il faudra créer, en plus de `SportStub` ? Justifiez à partir du code de `ajouterStage` ci-dessus.
 
-Réponses dans [`02-solution/05A_solutions-observations.md`](02-solution/05A_solutions-observations.md) : réfléchissez (et testez !) avant de la consulter.
+Réponses dans [`05A_reponses-observations.md`](05A_reponses-observations.md).
 
 **Question 3** :
 
@@ -164,33 +164,53 @@ Pour chaque scénario suivant, nommez la méthode de test d'après son cas (`tes
 **Question 8** :
 Écrivez le scénario TC4 (ajout depuis l'état 3).
 
-🤖 **À partir d'ici, place à l'IA.** Les scénarios restants (TC5 à TC13 : suppressions puis cas de refus) suivent tous le même moule que TC1 à TC4 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
+### 🤖 À partir d'ici, générez les tests avec l'IA
+
+Les scénarios restants (TC5 à TC13 : suppressions puis cas de refus) suivent tous le même moule que TC1 à TC4 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
 
 **Question 9** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC5 (suppression depuis l'état 4).
 
 **Question 10** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC6 (suppression depuis l'état 3).
 
 **Question 11** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC7 (suppression depuis l'état 2).
 
 **Question 12** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC8 (suppression depuis l'état 1).
 
 **Question 13** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC9 (ré-ajout d'un stage déjà présent : refusé).
 
 **Question 14** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC10 (ajout refusé : semaine déjà occupée).
 
 **Question 15** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC11 (suppression refusée : stage absent).
 
 **Question 16** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC12 (ajout refusé : stage appartenant à un autre moniteur).
 
 **Question 17** :
+
+🤖 *À faire avec l'IA*
 Écrivez le scénario TC13 (ajout refusé : sport hors compétence).
 
 ---

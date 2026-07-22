@@ -72,19 +72,27 @@ Faites ensuite varier un seul attribut à la fois (nom différent, puis marque d
 
 Ces mêmes deux instances égales (question 3) doivent aussi avoir le même `hashCode` — c'est l'autre moitié du contrat, à tester dans une méthode dédiée.
 
-### À partir d'ici, testez avec l'IA
+### 🤖 À partir d'ici, testez avec l'IA
 
 À partir de la question 6, aidez-vous d'un assistant IA pour écrire vos tests (voir la section « Développer des tests avec l'IA » de la théorie) : relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé. Attention en particulier au contrat `equals`/`hashCode` et à la distinction égalité/identité, deux pièges où l'IA se trompe facilement.
 
 ### Tests de la classe `ListeProduits`
 
-**Question 6** : Tests des méthodes de `ListeProduits`
+**Question 6** :
+
+🤖 *À faire avec l'IA*
+
+Tests des méthodes de `ListeProduits`
 
 Créez la classe `ListeProduitsTest` et testez-y la classe `ListeProduits` du package `usecase`. Pour chaque méthode, pensez à bien tester tous les cas où la méthode doit échouer (quand elle doit renvoyer faux ou lancer une exception) comme cela a été fait, par exemple, pour le test des prix de la classe `Produit`. Dans le cas où la méthode doit réussir, pensez à vérifier que ce qui devait être fait l'a bien été (par exemple, vérifiez la présence du produit après l'avoir ajouté).
 
 Le point le plus subtil, déjà entrevu aux questions 3 à 5 : **égalité n'est pas identité**. Pour la méthode permettant d'ajouter un prix à un produit, pensez à tester que le travail est bien fait sur le bon produit (celui stocké et non celui passé en paramètre) en passant en paramètre un produit égal (mêmes nom/marque/rayon) mais de référence différente à celui stocké. De même pour la méthode permettant de retrouver le prix.
 
-**Question 7** : Scénario complet sur `ListeProduits`
+**Question 7** :
+
+🤖 *À faire avec l'IA*
+
+Scénario complet sur `ListeProduits`
 
 Ajoutez un test de scénario complet dans `ListeProduitsTest`. Ce test doit enchaîner plusieurs actions dans une situation réaliste. Créez une `ListeProduits` vide, un produit `p1` et un autre produit `p2` égal à `p1`, mais créé avec `new` dans une autre variable. Ajoutez `p1` à la liste et vérifiez que l'ajout renvoie `true`, puis essayez d'ajouter `p2` et vérifiez que l'ajout renvoie `false`, puisque le produit est déjà présent au sens de `equals`. Ajoutez deux prix à deux dates différentes en passant `p2` à `ajouterPrix` : le test doit donc vérifier que la liste retrouve le produit stocké (`p1`) même si l'objet reçu en paramètre est une autre référence. Retrouvez ensuite le prix avec `trouverPrix`, toujours en passant `p2`, pour une date exacte et pour une date située entre les deux dates de prix, et vérifiez que le bon `Prix` est renvoyé dans les deux cas. Vérifiez enfin deux cas d'erreur, dans ce même scénario ou dans des méthodes séparées : rechercher le prix d'un produit absent doit lever [`ProduitNonPresentException`](01-code-java/src/exceptions/ProduitNonPresentException.java), et rechercher un prix à une date trop ancienne doit lever [`PrixNonDisponibleException`](01-code-java/src/exceptions/PrixNonDisponibleException.java) (package `exceptions`).
 
@@ -94,33 +102,61 @@ Ce scénario doit être plus conséquent qu'un test de getter : il doit montrer 
 
 `produitsTriesParPrix` combine filtrage, tri et gestion de plusieurs cas d'exclusion : les questions suivantes construisent un scénario avec plusieurs produits pour couvrir chaque branche. Vous pouvez enrichir un même scénario de question en question, ou écrire des méthodes de test séparées.
 
-**Question 8** : Tri par prix croissant
+**Question 8** :
+
+🤖 *À faire avec l'IA*
+
+Tri par prix croissant
 
 Créez au moins 3 produits dans un même rayon, avec des prix différents, et vérifiez que la méthode les renvoie triés par prix croissant.
 
-**Question 9** : Exclusion — pas de prix à la date demandée
+**Question 9** :
+
+🤖 *À faire avec l'IA*
+
+Exclusion — pas de prix à la date demandée
 
 Ajoutez un produit du même rayon sans aucun prix défini à la date demandée : vérifiez qu'il est exclu du résultat (pas d'exception).
 
-**Question 10** : Exclusion — quantité minimale trop élevée
+**Question 10** :
+
+🤖 *À faire avec l'IA*
+
+Exclusion — quantité minimale trop élevée
 
 Ajoutez un produit du même rayon dont le prix a une quantité minimale supérieure à celle demandée : vérifiez qu'il est également exclu.
 
-**Question 11** : Exclusion — autre rayon
+**Question 11** :
+
+🤖 *À faire avec l'IA*
+
+Exclusion — autre rayon
 
 Ajoutez un produit dans un autre rayon : vérifiez qu'il n'apparaît jamais dans le résultat, quel que soit son prix.
 
-**Question 12** : Rayon sans produit
+**Question 12** :
+
+🤖 *À faire avec l'IA*
+
+Rayon sans produit
 
 Vérifiez qu'un rayon sans aucun produit renvoie une liste vide, sans exception.
 
-**Question 13** : Paramètres invalides
+**Question 13** :
+
+🤖 *À faire avec l'IA*
+
+Paramètres invalides
 
 Vérifiez qu'un rayon `null`, une date `null` ou une quantité négative ou nulle lèvent une `IllegalArgumentException`.
 
 ### Réorganiser les tests avec `@Nested`
 
-**Question 14** : Regrouper les tests de `ListeProduitsTest` avec `@Nested`
+**Question 14** :
+
+🤖 *À faire avec l'IA*
+
+Regrouper les tests de `ListeProduitsTest` avec `@Nested`
 
 Votre `ListeProduitsTest` contient maintenant beaucoup de méthodes de test mélangées. Réorganisez-la en regroupant les tests de chaque méthode testée (`contient`, `ajouterProduit`, `supprimerProduit`, `trouverProduit`, `ajouterPrix`, `trouverPrix`, ainsi que le scénario complet et `produitsTriesParPrix`) dans une classe interne **non statique** annotée `@Nested` et `@DisplayName` (voir la section « Organiser les tests avec `@Nested` » de la théorie). Laissez les attributs et le `@BeforeEach` sur la classe externe : les classes `@Nested` y ont accès.
 

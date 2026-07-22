@@ -25,7 +25,7 @@ En partie 1, vous avez constaté que gérer l'état d'une tâche à côté d'une
 
 ### Consignes
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier04_partie2`. Récupérez les classes fournies dans `01-code-java/` : `TodoList.java` dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la partie 1 (voir aussi `../01-partie1/02-solution/`). Appuyez-vous sur votre spécification complétée de la partie 1 ; une solution de cette spécification est fournie dans `../01-partie1/02-solution/04A_solutions-scenarios-de-tests.md`.
+Dans IntelliJ, créez un projet intitulé `AJ_atelier04_partie2`. Récupérez les classes fournies dans `01-code-java/` : [`TodoList.java`](01-code-java/src/TodoList.java) dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la partie 1 (voir aussi `../01-partie1/02-solution/`). Appuyez-vous sur votre spécification complétée de la partie 1 ; une solution de cette spécification est fournie dans `../01-partie1/02-solution/04A_solutions-scenarios-de-tests.md`.
 
 ### TDD lors de la mise à jour de fonctionnalités existantes
 
@@ -33,7 +33,7 @@ Dans IntelliJ, créez un projet intitulé `AJ_atelier04_partie2`. Récupérez le
 
 ✏️ *A corriger au tableau*
 
-Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](01-code-java/tests/TodoListTest.java) associés à l'ajout de tâches au sein d'une TodoList. Comme une tâche est un objet très simple, il n'est pas utile de créer des Mock objects de ceux-ci. Vous pouvez créer et directement utiliser un constructeur de tâches…
+Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](01-code-java/tests/TodoListTest.java) associés à l'ajout de tâches au sein d'une `TodoList`. Comme une tâche est un objet très simple, il n'est pas utile de créer des Mock objects de ceux-ci. Vous pouvez créer et directement utiliser un constructeur de tâches…
 
 Faites cette mise à jour avec un assistant IA pour au moins un des scénarios existants, en respectant le cycle red-green-refactor : demandez d'abord uniquement l'adaptation du test à la nouvelle exigence, vérifiez qu'il échoue pour de bonnes raisons, puis seulement ensuite demandez la mise à jour du code.
 
@@ -53,17 +53,15 @@ Si vous souhaitez exécuter tous les tests se trouvant dans les différentes cla
 
 ### TDD pour les nouvelles fonctionnalités de la classe `TodoList`
 
-**Question 3** : Il est temps de s'occuper de l'opération permettant de retrouver une tâche au sein de la TodoList.
+**Question 3** : Il est temps de s'occuper de l'opération permettant de retrouver une tâche au sein de la `TodoList` (`findTask`). Veuillez faire du TDD pour les nouveaux scénarios au sein de la classe `TodoListTest`.
 
-De plus, il devrait être possible de modifier une tâche par le biais de la TodoList en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche.
-
-Veuillez faire du TDD pour les nouveaux scénarios au sein de la classe `TodoListTest`.
+**Question 4** : Il devrait aussi être possible de modifier une tâche par le biais de la `TodoList` (`updateTask`), en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche. Veuillez faire du TDD pour ces scénarios au sein de la classe `TodoListTest`.
 
 ### Compter et vider la liste
 
-**Question 4** : Reprenez les scénarios `countTasksEmpty`, `countTasksAfterAdd` et `countTasksAfterRemove` de la partie 1 et adaptez-les pour qu'ils utilisent des `Task` plutôt que de simples `String`.
+**Question 5** : Reprenez les scénarios `countTasksEmpty`, `countTasksAfterAdd` et `countTasksAfterRemove` de la partie 1 et adaptez-les pour qu'ils utilisent des `Task` plutôt que de simples `String`.
 
-**Question 5** : Faites de même pour `clearTasks` : adaptez `clearTasks` et `clearEmptyTasks` aux objets `Task`.
+**Question 6** : Faites de même pour `clearTasks` : adaptez `clearTasks` et `clearEmptyTasks` aux objets `Task`.
 
 ---
 

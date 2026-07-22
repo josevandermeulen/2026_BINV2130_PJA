@@ -18,7 +18,7 @@
 
 ## Introduction
 
-La partie 1 a utilisé la réflexion sur les **méthodes** : découvrir les méthodes annotées d'une classe et les invoquer dynamiquement. Cette partie applique le même mécanisme aux **champs** (attributs) : découvrir les champs annotés d'un objet et lire leur valeur dynamiquement. Les briques de base (déclaration d'une annotation, méta-annotations, éléments d'annotation) sont dans `11A_1_theorie.md` — seules les nouveautés sont reprises ici.
+La partie 1 a utilisé la réflexion sur les **méthodes** : découvrir les méthodes annotées d'une classe et les invoquer dynamiquement. Cette partie applique le même mécanisme aux **champs** (attributs) : découvrir les champs annotés d'un objet et lire leur valeur dynamiquement. Les briques de base (déclaration d'une annotation, méta-annotations, éléments d'annotation) sont dans [`11A_1_theorie.md`](../01-partie1/11A_1_theorie.md) — seules les nouveautés sont reprises ici.
 
 ## La réflexion sur les champs
 
@@ -51,7 +51,7 @@ public @interface MonAnnotationDeChamp {
 }
 ```
 
-La lecture est identique à celle vue en partie 1 : `isAnnotationPresent` pour tester la présence, `getAnnotation(X.class).valeur()` pour lire un élément (voir la section « Annotations à élément » de `11A_1_theorie.md`).
+La lecture est identique à celle vue en partie 1 : `isAnnotationPresent` pour tester la présence, `getAnnotation(X.class).valeur()` pour lire un élément (voir la section « Annotations à élément » de [`11A_1_theorie.md`](../01-partie1/11A_1_theorie.md)).
 
 ## La validation déclarative
 

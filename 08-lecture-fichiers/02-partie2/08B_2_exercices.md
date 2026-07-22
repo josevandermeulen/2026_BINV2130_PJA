@@ -2,11 +2,11 @@
 
 ## Objectif
 
-Cet atelier est un exercice récapitulatif : autour d'une implémentation simplifiée de l'algorithme **HyperLogLog** (dont le cœur vous est fourni — voir `08B_1_theorie.md`), il combine les streams et collections (ateliers 2, 6 et 7), la lecture de fichiers de la partie 1, et les tests unitaires avec stubs et mocks (ateliers 3 et 5).
+Cet atelier est un exercice récapitulatif : autour d'une implémentation simplifiée de l'algorithme **HyperLogLog** (dont le cœur vous est fourni — voir [`08B_1_theorie.md`](08B_1_theorie.md)), il combine les streams et collections (ateliers 2, 6 et 7), la lecture de fichiers de la partie 1, et les tests unitaires avec stubs et mocks (ateliers 3 et 5).
 
 ## Concepts
 
-1. HyperLogLog (théorie : `08B_1_theorie.md` — le cœur de l'algorithme est fourni)
+1. HyperLogLog (théorie : [`08B_1_theorie.md`](08B_1_theorie.md) — le cœur de l'algorithme est fourni)
 2. Streams (`IntStream`, `map`, `distinct`, agrégation numérique)
 3. Collections (`Map`, `Collectors.groupingBy`)
 4. Réutilisation de la lecture de fichiers de la partie 1
@@ -25,7 +25,7 @@ Cet atelier est un exercice récapitulatif : autour d'une implémentation simpli
 
 La plateforme web de la partie 1 a grandi : ses fichiers de logs contiennent maintenant des milliers d'accès par jour. L'équipe sécurité veut suivre le nombre d'**adresses IP uniques** qui se connectent. Une solution évidente serait de stocker toutes les adresses déjà vues dans un `Set`, mais si le trafic grandissait fortement, cela finirait par consommer beaucoup de mémoire pour ne connaître, au final, qu'un seul nombre.
 
-On va donc utiliser une version simplifiée de l'algorithme **HyperLogLog**, qui estime ce nombre à partir d'un petit tableau de compteurs (la précision est passée au constructeur ; l'atelier travaille partout avec 4 bits d'index, soit 16 compteurs), plutôt que de garder chaque adresse en mémoire. Lisez d'abord `08B_1_theorie.md` : le principe (registres, zéros de tête, rôle du hash) y est expliqué, et les méthodes qui relèvent de manipulations de bits (`DefaultHasher.hash`, `HyperLogLog.ajouter`) vous sont **fournies déjà implémentées**. Votre travail porte uniquement sur la matière des ateliers précédents : streams, lecture de fichiers, tests.
+On va donc utiliser une version simplifiée de l'algorithme **HyperLogLog**, qui estime ce nombre à partir d'un petit tableau de compteurs (la précision est passée au constructeur ; l'atelier travaille partout avec 4 bits d'index, soit 16 compteurs), plutôt que de garder chaque adresse en mémoire. Lisez d'abord [`08B_1_theorie.md`](08B_1_theorie.md) : le principe (registres, zéros de tête, rôle du hash) y est expliqué, et les méthodes qui relèvent de manipulations de bits (`DefaultHasher.hash`, `HyperLogLog.ajouter`) vous sont **fournies déjà implémentées**. Votre travail porte uniquement sur la matière des ateliers précédents : streams, lecture de fichiers, tests.
 
 L'estimation obtenue reste approximative, en particulier avec seulement 16 registres : ce n'est pas un défaut de votre code, c'est la nature même de l'algorithme.
 

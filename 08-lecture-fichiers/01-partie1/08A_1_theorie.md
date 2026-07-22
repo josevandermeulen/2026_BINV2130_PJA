@@ -1,6 +1,6 @@
 # Atelier 8 : Lecture de fichiers, try-with-resources – Concepts
 
-Les exercices associés à ces concepts se trouvent dans `08A_2_exercices.md`.
+Les exercices associés à ces concepts se trouvent dans [`08A_2_exercices.md`](08A_2_exercices.md).
 
 ## Table des matières
 

@@ -147,6 +147,10 @@ Implémentez ensuite un test par scénario du plan de tests ci-dessus, nommé en
 
 Écrivez `testMoniteurTC2`, qui utilise `preparerMoniteurAvecNStages` pour amener le moniteur à l'état 1, puis ajoute `stageValide`.
 
+### À partir d'ici, générez les tests avec l'IA
+
+À partir de la question 5, les scénarios restants (TC3 à TC9) suivent tous le même moule que TC1 et TC2 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
+
 **Question 5** : Écrivez `testMoniteurTC3`, qui amène le moniteur à l'état 2 avant d'ajouter `stageValide`.
 
 **Question 6** : Écrivez `testMoniteurTC4`, qui amène le moniteur à l'état 3 avant d'ajouter `stageValide`.

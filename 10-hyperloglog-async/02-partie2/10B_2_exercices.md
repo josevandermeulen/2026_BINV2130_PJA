@@ -26,7 +26,7 @@ L'objectif de cette partie est de passer à l'échelle : les logs proviennent ma
 
 La plateforme s'est agrandie : le trafic passe désormais par plusieurs **routeurs**, et chacun écrit son propre fichier de log (`routeur-00.log`, `routeur-01.log`, ..., listés dans `index.txt`). L'équipe sécurité veut toujours le nombre d'adresses IP uniques **global** — une même adresse peut apparaître chez plusieurs routeurs, additionner les comptages par routeur serait donc faux.
 
-La bonne nouvelle (voir `10B_1_theorie.md`) : deux HyperLogLog se **fusionnent** en prenant le maximum registre par registre, et le résultat est identique à celui d'un estimateur unique qui aurait tout vu. Chaque routeur peut donc être traité dans son propre `CompletableFuture`, les estimateurs locaux étant fusionnés au fur et à mesure.
+La bonne nouvelle (voir [`10B_1_theorie.md`](10B_1_theorie.md)) : deux HyperLogLog se **fusionnent** en prenant le maximum registre par registre, et le résultat est identique à celui d'un estimateur unique qui aurait tout vu. Chaque routeur peut donc être traité dans son propre `CompletableFuture`, les estimateurs locaux étant fusionnés au fur et à mesure.
 
 Les classes de la partie 1 vous sont fournies (elles reprennent celles de l'atelier 8), plus deux petites méthodes ajoutées à [`AnalyseLogs`](01-code-java/src/main/java/main/AnalyseLogs.java) (`listerFichiers`, `chargerAcces`) et un [`GenerateurLogs`](01-code-java/src/main/java/main/GenerateurLogs.java) adapté qui produit un fichier par routeur. Votre travail porte sur `HyperLogLog.fusionner` et la nouvelle classe [`AnalyseRouteurs`](01-code-java/src/main/java/main/AnalyseRouteurs.java) (package `main`).
 

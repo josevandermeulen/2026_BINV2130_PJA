@@ -50,7 +50,7 @@ Exécutez les tests fournis directement dans IntelliJ (bouton ▶) pour vérifie
 
 ✏️ *A corriger au tableau*
 
-Ouvrez l'annotation `NonNul` : elle est déclarée, mais il lui manque ses méta-annotations. Complétez-la pour qu'elle soit conservée à l'exécution et réservée aux **champs** — la cible n'est plus la même qu'en partie 1, voir la théorie (`11B_1_theorie.md`).
+Ouvrez l'annotation `NonNul` : elle est déclarée, mais il lui manque ses méta-annotations. Complétez-la pour qu'elle soit conservée à l'exécution et réservée aux **champs** — la cible n'est plus la même qu'en partie 1, voir la théorie ([`11B_1_theorie.md`](11B_1_theorie.md)).
 
 ### Découvrir les champs annotés
 

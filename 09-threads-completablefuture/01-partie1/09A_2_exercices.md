@@ -95,7 +95,7 @@ Corrigez ce problème.
 Le package `deadlock` contient une petite application bancaire fournie : des [`Compte`](01-code-java/src/main/java/deadlock/Compte.java), un [`GestionnaireTransferts`](01-code-java/src/main/java/deadlock/GestionnaireTransferts.java) dont la méthode `transferer` synchronise sur les deux comptes concernés, et un [`TestTransfertDeadlock`](01-code-java/src/main/java/deadlock/TestTransfertDeadlock.java) qui lance deux threads faisant chacun 1 000 transferts... en sens inverse l'un de l'autre.
 
 **Question 13** :
-Exécutez `TestTransfertDeadlock`. Le programme se fige : pas d'exception, pas de message, plus rien — c'est un **deadlock** (voir `09A_1_theorie.md`). En relisant `transferer`, expliquez précisément pourquoi les deux threads se bloquent mutuellement. Pendant que le programme est figé, faites un *thread dump* (bouton « Get thread dump » d'IntelliJ, dans l'onglet Run, ou la commande `jstack <pid>`) et retrouvez les deux threads bloqués et les verrous qu'ils détiennent/attendent.
+Exécutez `TestTransfertDeadlock`. Le programme se fige : pas d'exception, pas de message, plus rien — c'est un **deadlock** (voir [`09A_1_theorie.md`](09A_1_theorie.md)). En relisant `transferer`, expliquez précisément pourquoi les deux threads se bloquent mutuellement. Pendant que le programme est figé, faites un *thread dump* (bouton « Get thread dump » d'IntelliJ, dans l'onglet Run, ou la commande `jstack <pid>`) et retrouvez les deux threads bloqués et les verrous qu'ils détiennent/attendent.
 
 **Question 14** :
 Corrigez `transferer` **sans supprimer les blocs `synchronized`**. Relancez : le programme doit se terminer, et les soldes finaux doivent valoir 10 000 chacun.

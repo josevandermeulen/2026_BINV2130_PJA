@@ -127,6 +127,8 @@ Comme pour pouvoir ajouter un stage à un moniteur, il faut pouvoir vérifier qu
 **Question 2** :
 Quel est le second stub qu'il faudra créer, en plus de `SportStub` ? Justifiez à partir du code de `ajouterStage` ci-dessus.
 
+Réponses dans [`02-solution/05A_solutions-observations.md`](02-solution/05A_solutions-observations.md) : réfléchissez (et testez !) avant de la consulter.
+
 **Question 3** :
 
 ✏️ *A corriger au tableau*
@@ -151,13 +153,45 @@ D'après le plan de tests, les scénarios TC1 à TC4 demandent chacun d'amener d
 
 Écrivez le premier scénario de tests (TC1) correspondant au plan de tests, dans la classe JUnit `MoniteurImplTest`. Nommez votre méthode de test en fonction du cas décrit dans le plan de tests : `testMoniteurTC1`.
 
+Pour chaque scénario suivant, nommez la méthode de test d'après son cas (`testMoniteurTCn`), utilisez `preparerMoniteurAvecNStages` pour amener le `Moniteur` à l'état voulu, et vérifiez que le nouvel état (pour rappel, le nombre de stages) est atteint et que le résultat est bien celui attendu (valeur de retour et effets de l'appel).
+
 **Question 6** :
-Écrivez ensuite les 3 scénarios de tests suivants (TC2 à TC4), en utilisant cette méthode pour amener l'objet `Moniteur` à l'état à tester.
+Écrivez le scénario TC2 (ajout depuis l'état 1).
 
 **Question 7** :
-Veuillez maintenant implémenter tous les autres scénarios de tests (TC5 à TC13).
+Écrivez le scénario TC3 (ajout depuis l'état 2).
 
-N'oubliez pas que vous devez vérifier que le nouvel état (pour rappel, le nombre de stages) est atteint et que le résultat est bien celui attendu (valeur de retour et effets de l'appel).
+**Question 8** :
+Écrivez le scénario TC4 (ajout depuis l'état 3).
+
+🤖 **À partir d'ici, place à l'IA.** Les scénarios restants (TC5 à TC13 : suppressions puis cas de refus) suivent tous le même moule que TC1 à TC4 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
+
+**Question 9** :
+Écrivez le scénario TC5 (suppression depuis l'état 4).
+
+**Question 10** :
+Écrivez le scénario TC6 (suppression depuis l'état 3).
+
+**Question 11** :
+Écrivez le scénario TC7 (suppression depuis l'état 2).
+
+**Question 12** :
+Écrivez le scénario TC8 (suppression depuis l'état 1).
+
+**Question 13** :
+Écrivez le scénario TC9 (ré-ajout d'un stage déjà présent : refusé).
+
+**Question 14** :
+Écrivez le scénario TC10 (ajout refusé : semaine déjà occupée).
+
+**Question 15** :
+Écrivez le scénario TC11 (suppression refusée : stage absent).
+
+**Question 16** :
+Écrivez le scénario TC12 (ajout refusé : stage appartenant à un autre moniteur).
+
+**Question 17** :
+Écrivez le scénario TC13 (ajout refusé : sport hors compétence).
 
 ---
 

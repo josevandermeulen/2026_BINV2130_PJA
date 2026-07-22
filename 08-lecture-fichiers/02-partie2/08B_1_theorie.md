@@ -1,6 +1,6 @@
 # Atelier 8 : HyperLogLog – Concepts
 
-Les exercices associés à ces concepts se trouvent dans `08B_2_exercices.md`. Cette fiche reprend le contenu de la vidéo ci-dessous ; regardez-la d'abord, elle explique le principe en images en 8 minutes.
+Les exercices associés à ces concepts se trouvent dans [`08B_2_exercices.md`](08B_2_exercices.md). Cette fiche reprend le contenu de la vidéo ci-dessous ; regardez-la d'abord, elle explique le principe en images en 8 minutes.
 
 ## Table des matières
 

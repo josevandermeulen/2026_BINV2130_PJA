@@ -21,15 +21,15 @@ Découvrir le Test Driven Development en pratiquant le cycle *red-green-refactor
 
 ### Introduction
 
-Nous développons une application de gestion de tâches : une [`TodoList`](01-code-java/src/TodoList.java) contient des tâches (de simples `String` pour l'instant) qu'on peut ajouter et rechercher. La théorie (introduction au TDD, spécification des tests, tutoriel complet d'implémentation, résumé) se trouve dans `04A_1_theorie.md`. L'état du projet à la fin du tutoriel vous est fourni dans `01-code-java/`.
+Nous développons une application de gestion de tâches : une [`TodoList`](01-code-java/src/TodoList.java) contient des tâches (de simples `String` pour l'instant) qu'on peut ajouter et rechercher. La théorie (introduction au TDD, spécification des tests, tutoriel complet d'implémentation, résumé) se trouve dans [`04A_1_theorie.md`](04A_1_theorie.md). L'état du projet à la fin du tutoriel vous est fourni dans `01-code-java/`.
 
 ### Consignes
 
-Assurez-vous d'abord d'avoir lu l'intégralité de la théorie (`04A_1_theorie.md`) et visionné les vidéos ci-dessus. Dans IntelliJ, créez un projet intitulé `AJ_atelier04_partie1`. Récupérez les classes fournies dans `01-code-java/` : `TodoList.java` dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état où le tutoriel de la théorie les laisse. Pour chaque question, respectez scrupuleusement le cycle TDD : le test d'abord, il doit échouer pour de bonnes raisons, puis le code minimum, puis le refactor éventuel.
+Assurez-vous d'abord d'avoir lu l'intégralité de la théorie ([`04A_1_theorie.md`](04A_1_theorie.md)) et visionné les vidéos ci-dessus. Dans IntelliJ, créez un projet intitulé `AJ_atelier04_partie1`. Récupérez les classes fournies dans `01-code-java/` : `TodoList.java` dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état où le tutoriel de la théorie les laisse. Pour chaque question, respectez scrupuleusement le cycle TDD : le test d'abord, il doit échouer pour de bonnes raisons, puis le code minimum, puis le refactor éventuel.
 
 ### Supprimer une tâche
 
-**Question 1** : Veuillez faire du TDD pour ces deux scénarios de test :
+**Question 1** *(UC3 « Supprimer une tâche de la liste »)* : Veuillez faire du TDD pour ces deux scénarios de test :
 
 ✏️ *A corriger au tableau*
 
@@ -38,44 +38,48 @@ Assurez-vous d'abord d'avoir lu l'intégralité de la théorie (`04A_1_theorie.m
 
 ### Renommer une tâche
 
-**Question 2** : Nous voulons pouvoir renommer une tâche existante : `renameTask(String existingTask, String newTask)`. Veuillez faire du TDD pour ces scénarios :
+**Question 2** *(UC « Renommer une tâche » — deviendra l'UC4 « Modifier le titre d'une tâche » après l'évolution de la question 5)* : Nous voulons pouvoir renommer une tâche existante : `renameTask(String existingTask, String newTask)`. Veuillez faire du TDD pour ces scénarios :
 
 1. `renameTask` — la tâche est renommée : l'ancien nom n'est plus contenu dans la liste, le nouveau l'est, on informe du succès de l'opération
 2. `renameUnexistingTask` — on tente de renommer une tâche inexistante, on informe de l'échec de l'opération
 3. `renameTaskToExistingTask` — on tente de renommer une tâche vers un nom déjà présent dans la liste, la tâche d'origine reste inchangée, on informe de l'échec de l'opération
 4. `renameTaskToEmptyTask` — on tente de renommer une tâche vers un nom vide (constitué uniquement de caractères « blancs » ou nul), la tâche d'origine reste inchangée, on informe de l'échec de l'opération
 
+### À partir d'ici, faites du TDD avec l'IA
+
+À partir de la question 3, aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour faire du TDD : respectez scrupuleusement le cycle red-green-refactor étape par étape — demandez d'abord le test seul, vérifiez qu'il échoue pour de bonnes raisons, puis demandez le code minimal, vérifiez qu'il passe, puis le refactor si besoin.
+
 ### Terminer une tâche
 
-**Question 3** : Nous voulons pouvoir marquer une tâche comme terminée (`completeTask`) et vérifier si une tâche est terminée (`isCompleted`). Une tâche terminée ne peut plus être renommée. Cette fois, avant d'écrire le moindre code, identifiez vous-même les scénarios de tests (cas positifs, cas négatifs, cas limites — appuyez-vous sur les vidéos), puis faites du TDD pour chacun d'eux.
+**Question 3** *(UC « Terminer une tâche » — deviendra l'UC5 après l'évolution de la question 5)* : Nous voulons pouvoir marquer une tâche comme terminée (`completeTask`) et vérifier si une tâche est terminée (`isCompleted`). Une tâche terminée ne peut plus être renommée. Cette fois, avant d'écrire le moindre code, identifiez vous-même les scénarios de tests (cas positifs, cas négatifs, cas limites — appuyez-vous sur les vidéos), puis faites du TDD pour chacun d'eux.
 
 Pensez notamment à ce qui doit se passer quand on tente de terminer une tâche inexistante, de terminer une tâche déjà terminée, ou de renommer une tâche terminée.
 
-### À partir d'ici, faites du TDD avec l'IA
-
-À partir de la question 4, aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour faire du TDD : respectez scrupuleusement le cycle red-green-refactor étape par étape — demandez d'abord le test seul, vérifiez qu'il échoue pour de bonnes raisons, puis demandez le code minimal, vérifiez qu'il passe, puis le refactor si besoin.
-
 ### Classes d'équivalence
 
-**Question 4** : Pour l'argument `newTask` de `renameTask` (question 2), partitionnez les valeurs possibles en classes d'équivalence (par exemple : nom vide/blanc, nom valide et déjà présent dans la liste, nom valide et absent de la liste). Pour chaque classe, indiquez quel scénario de test de la question 2 la couvre déjà.
+**Question 4** *(pas une UC — technique de test appliquée aux UC déjà identifiées)* : Pour l'argument `newTask` de `renameTask` (question 2), partitionnez les valeurs possibles en classes d'équivalence (par exemple : nom vide/blanc, nom valide et déjà présent dans la liste, nom valide et absent de la liste). Pour chaque classe, indiquez quel scénario de test de la question 2 la couvre déjà.
 
 Faites de même pour l'argument `existingTask` de `removeTask` (question 1) : identifiez les classes d'équivalence de son domaine de valeurs, puis vérifiez qu'un scénario de test existe déjà pour chacune. S'il en manque un, ajoutez-le en TDD.
 
 ### Spécifier les tests
 
-**Question 5** : Dans cet exercice, vous n'allez pas écrire de code mais compléter la liste de scénarios de tests ci-dessous pour spécifier des nouvelles UCs & des scénarios de tests.
+**Question 5** : Dans cet exercice, vous n'allez pas écrire de code : vous allez uniquement compléter une spécification, sous la forme d'une liste de scénarios de tests regroupés par UC (cas d'utilisation).
 
-Nous souhaitons faire évoluer l'application de gestion de tâches. Il doit être possible :
+Nous souhaitons faire évoluer l'application de gestion de tâches. Pour chaque point, la correspondance avec les UC déjà identifiées (ci-dessous, ou aux questions 2 et 3) est indiquée entre parenthèses. Il doit être possible :
 
-1. De créer des tâches en donnant ces informations : un titre (ne peut pas être vide ou null), une description (ne peut pas être nulle).
-2. D'ajouter une tâche qui a un même titre au sein d'une TodoList. Cela revient à ajouter une tâche déjà présente, on informe de l'échec de l'opération.
-3. De terminer une tâche.
-4. De modifier le titre d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que le titre ne peut pas être vide ou nul…
-5. De modifier la description d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que la description peut être vide.
-6. De renvoyer une tâche qui se trouve au sein de la TodoList en donnant une tâche qui contiendrait son titre et sa description.
-7. De modifier une TodoList en indiquant une tâche à modifier et une nouvelle tâche incluant les nouvelles données.
+1. De créer des tâches en donnant ces informations : un titre (ne peut pas être vide ou null), une description (ne peut pas être nulle). *(UC nouvelle)*
+2. D'ajouter une tâche qui a un même titre au sein d'une TodoList. Cela revient à ajouter une tâche déjà présente, on informe de l'échec de l'opération. *(fait évoluer l'UC1 « Ajouter une tâche à la liste » ci-dessous)*
+3. De terminer une tâche. *(fait évoluer l'UC identifiée à la question 3)*
+4. De modifier le titre d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que le titre ne peut pas être vide ou nul… *(fait évoluer l'UC « renommer une tâche » identifiée à la question 2)*
+5. De modifier la description d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que la description peut être vide. *(UC nouvelle, à rapprocher du point précédent)*
+6. De renvoyer une tâche qui se trouve au sein de la TodoList en donnant une tâche qui contiendrait son titre et sa description. *(UC nouvelle)*
+7. De modifier une TodoList en indiquant une tâche à modifier et une nouvelle tâche incluant les nouvelles données. *(UC nouvelle)*
 
-Veuillez mettre à jour les scénarios de test existants en identifiant les changements, et en listant les nouvelles UCs ci-dessous :
+Pour chaque UC qui évolue (points 2, 3 et 4) : reprenez ses scénarios de tests existants et mettez-les à jour un par un — un scénario peut rester inchangé, être renommé, voir son comportement attendu modifié, ou devenir obsolète (à supprimer) si la vérification qu'il couvrait se fait désormais ailleurs. Ne recopiez pas un scénario tel quel sans vérifier qu'il reste correct : la validation d'un titre ou d'une description, par exemple, peut désormais avoir lieu à un autre endroit qu'avant.
+
+Pour chaque UC nouvelle (points 1, 5, 6 et 7) : donnez-lui un numéro à la suite des UC existantes, puis listez ses scénarios de tests — pour chacun, un nom de méthode et une description d'une ligne (préconditions, action, résultat attendu), sur le modèle des exemples ci-dessous.
+
+Les trois UC ci-dessous (UC1 à UC3) sont reprises telles qu'elles existaient avant cette évolution, à titre d'exemple de format — elles ne sont pas nécessairement encore correctes telles quelles, à vous de vérifier :
 
 1. **(UC1) Ajouter une tâche à la liste :**
    1. `addTask` : la tâche est contenue dans la liste, on informe du succès de l'opération
@@ -88,17 +92,22 @@ Veuillez mettre à jour les scénarios de test existants en identifiant les chan
    1. `removeTask` : la tâche n'est plus contenue dans la liste, on informe du succès de l'opération
    2. `removeUnexistingTask` : on tente de supprimer une tâche inexistante, on informe de l'échec de l'opération
 
-### Compter et vider la liste
+Complétez cette liste : corrigez UC1 à UC3 si besoin, ajoutez l'UC « terminer une tâche » (question 3) et l'UC « modifier le titre » (évolution de l'UC « renommer une tâche » de la question 2) en les adaptant aux nouvelles règles, puis ajoutez les UC entièrement nouvelles restantes (créer une tâche, modifier la description, retrouver une tâche, modifier une tâche via la TodoList). Vous devriez obtenir 9 UC au total (UC1 à UC9).
 
-**Question 6** : Vous allez implémenter deux nouvelles fonctionnalités sur la `TodoList`.
+### Compter les tâches
 
-1. **(UC4) Compter le nombre de tâches.** `countTasks` :
-   1. `countTasksEmpty` : sur une liste vide, `countTasks` renvoie `0`.
-   2. `countTasksAfterAdd` : après avoir ajouté 2 tâches, `countTasks` renvoie `2`.
-   3. `countTasksAfterRemove` : après avoir supprimé une tâche, `countTasks` diminue de 1.
-2. **(UC5) Vider la liste.** `clearTasks` :
-   1. `clearTasks` : après avoir ajouté des tâches puis appelé `clearTasks`, la liste ne contient plus aucune des tâches ajoutées.
-   2. `clearEmptyTasks` : appeler `clearTasks` sur une liste déjà vide ne lève pas d'erreur et la liste reste vide.
+**Question 6** *(UC10)* : Implémentez `countTasks`, qui renvoie le nombre de tâches de la `TodoList`. Faites du TDD pour ces scénarios :
+
+1. `countTasksEmpty` : sur une liste vide, `countTasks` renvoie `0`.
+2. `countTasksAfterAdd` : après avoir ajouté 2 tâches, `countTasks` renvoie `2`.
+3. `countTasksAfterRemove` : après avoir supprimé une tâche, `countTasks` diminue de 1.
+
+### Vider la liste
+
+**Question 7** *(UC11)* : Implémentez `clearTasks`, qui vide la `TodoList`. Faites du TDD pour ces scénarios :
+
+1. `clearTasks` : après avoir ajouté des tâches puis appelé `clearTasks`, la liste ne contient plus aucune des tâches ajoutées.
+2. `clearEmptyTasks` : appeler `clearTasks` sur une liste déjà vide ne lève pas d'erreur et la liste reste vide.
 
 ---
 

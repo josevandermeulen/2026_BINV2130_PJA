@@ -1,6 +1,6 @@
 # Atelier 6 : Streams – les bases – partie 2 – Concepts
 
-Les exercices associés à ces concepts se trouvent dans `06B_2_exercices.md`.
+Les exercices associés à ces concepts se trouvent dans [`06B_2_exercices.md`](06B_2_exercices.md).
 
 ## Table des matières
 

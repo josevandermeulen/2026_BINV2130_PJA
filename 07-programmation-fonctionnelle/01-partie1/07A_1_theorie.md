@@ -1,6 +1,6 @@
 # Atelier 7 : Programmation fonctionnelle – partie 1 – Concepts
 
-Les exercices associés à ces concepts se trouvent dans `07A_2_exercices.md`.
+Les exercices associés à ces concepts se trouvent dans [`07A_2_exercices.md`](07A_2_exercices.md).
 
 ## Table des matières
 

@@ -49,7 +49,7 @@ Chaque question est vérifiée par les tests JUnit fournis (`TestRunnerTest`) : 
 
 ✏️ *A corriger au tableau*
 
-Ouvrez l'annotation [`MonTest`](01-code-java/src/main/java/be/vinci/minijunit/MonTest.java) : elle est déclarée, mais il lui manque ses méta-annotations. Complétez-la pour qu'elle soit conservée à l'exécution (sans quoi la réflexion ne la verra jamais) et réservée aux méthodes. La théorie (`11A_1_theorie.md`) reprend la syntaxe exacte.
+Ouvrez l'annotation [`MonTest`](01-code-java/src/main/java/be/vinci/minijunit/MonTest.java) : elle est déclarée, mais il lui manque ses méta-annotations. Complétez-la pour qu'elle soit conservée à l'exécution (sans quoi la réflexion ne la verra jamais) et réservée aux méthodes. La théorie ([`11A_1_theorie.md`](11A_1_theorie.md)) reprend la syntaxe exacte.
 
 ### Découvrir les méthodes de test
 
@@ -78,7 +78,7 @@ L'annotation `AvantChaqueTest` (fournie, équivalent de `@BeforeEach`) marque un
 ### `@Affichage` : un libellé dans le rapport
 
 **Question 6** :
-L'annotation `Affichage` (fournie, équivalent de `@DisplayName`) porte un élément `String valeur` : un libellé lisible pour une méthode de test — la théorie (`11A_1_theorie.md`, section « Annotations à élément ») montre comment lire la valeur d'un élément. Modifiez `executerTests` pour que le rapport affiche ce libellé à la place du nom de la méthode quand l'annotation est présente : `ResultatTest` (fourni) a un constructeur à quatre paramètres qui reçoit le libellé en plus du nom de la méthode. Regardez `CalculatriceTest` : deux de ses méthodes portent déjà `@Affichage`, la sortie de `Main` doit maintenant montrer leurs libellés.
+L'annotation `Affichage` (fournie, équivalent de `@DisplayName`) porte un élément `String valeur` : un libellé lisible pour une méthode de test — la théorie ([`11A_1_theorie.md`](11A_1_theorie.md), section « Annotations à élément ») montre comment lire la valeur d'un élément. Modifiez `executerTests` pour que le rapport affiche ce libellé à la place du nom de la méthode quand l'annotation est présente : `ResultatTest` (fourni) a un constructeur à quatre paramètres qui reçoit le libellé en plus du nom de la méthode. Regardez `CalculatriceTest` : deux de ses méthodes portent déjà `@Affichage`, la sortie de `Main` doit maintenant montrer leurs libellés.
 
 ### `@Repeter` : répéter un test
 

@@ -54,10 +54,10 @@ Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub De
 
 ## Évaluation
 
-- **Évaluation continue (10 %)** : un QCM de 20 questions par chapitre sur mooVin, portant sur la théorie de la semaine (10 meilleurs sur 12).
-- **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Accès aux supports et à la Javadoc. IA générative interdite. En seconde session : examen à 100 %.
+- **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Accès aux supports et à la Javadoc. IA générative interdite. Mêmes modalités en seconde session.
+- **Évaluation continue (10 %)** : les QCM hebdomadaires sur mooVin, sans points négatifs. La note est calculée sur les **10 meilleurs résultats des 12 QCM** ; un QCM non réalisé est coté 0. Cette note ne peut faire l'objet ni d'une seconde session ni d'une remédiation : celle du premier quadrimestre est reportée telle quelle en seconde session.
 
-Les QCM hebdomadaires des 12 chapitres forment une **banque de questions** dans laquelle l'examen pourra puiser. Chaque questionnaire est publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) en même temps que la solution des exercices, avec les bonnes réponses et leur justification. Travailler les QCM au fil des semaines est donc utile bien au-delà de l'évaluation continue.
+Un QCM de 20 questions par chapitre est proposé sur mooVin, portant sur la théorie de la semaine. Il **ferme le mercredi à 20h**. Le questionnaire est ensuite publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) le mercredi à partir de 20h15, avec les bonnes réponses et leur justification. Ces QCM forment aussi une **banque de questions** dans laquelle l'examen pourra puiser : les travailler au fil des semaines est directement utile pour l'examen.
 
 ## Feedback
 

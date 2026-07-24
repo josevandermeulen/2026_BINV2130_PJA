@@ -175,6 +175,8 @@ Un test généré par IA doit donc être relu et compris ligne par ligne avant d
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 28/09/2026 à 20h.*
+
 *Passez aux [exercices](03A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

@@ -567,6 +567,8 @@ Avant de terminer, vérifiez que :
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le mercredi 16/09/2026 à 20h.*
+
 *Passez aux [exercices](01A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

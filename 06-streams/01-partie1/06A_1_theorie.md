@@ -246,6 +246,8 @@ Il y a deux grands types d'opérations :
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 19/10/2026 à 20h.*
+
 *Passez aux [exercices](06A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

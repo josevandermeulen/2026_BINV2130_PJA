@@ -161,8 +161,14 @@ Dans la classe [`Lambda`](01-code-java/src/main/java/lambda/Lambda.java) du pack
 **Question 15** :
 Implémentez de la même façon la méthode `transformAll` et testez-la via `TestLambda`.
 
+## Parties optionnelles
+
+### Généricité
+
 **Question 16** :
 Modifiez vos méthodes `allMatches` et `transformAll` pour qu'elles puissent maintenant accepter des `List` de n'importe quel type (au lieu de uniquement des `Integer`). Dans la classe `TestLambda`, décommentez la deuxième partie et complétez les expressions lambda.
+
+### Les mêmes traitements avec l'API Stream
 
 **Question 17** :
 Ajoutez à votre classe `Lambda` une méthode `filter` qui fait exactement la même chose que `allMatches`, mais en utilisant l'API Stream. Dans la classe `TestLambda`, effectuez les mêmes tests que pour `allMatches`.

@@ -291,7 +291,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="06-streams-fr.html">&larr; Semaine 6</a>
-    <span class="version-badge">v7 &middot; 21/07/2026</span>
+    <span class="version-badge">v8 &middot; 24/07/2026</span>
     <a href="08-lecture-fichiers-fr.html">Semaine 8 &rarr;</a>
   </div>
 </div>
@@ -529,7 +529,7 @@ List&lt;Employe&gt; copie = employes.stream()
       <h2>Predicate</h2>
       <p>Classe : <code>java.util.function.Predicate&lt;T&gt;</code>. Représente un test booléen sur une valeur de type <code>T</code>.</p>
 
-      <div class="api">
+      <div class="api" id="predicate-test">
         <h3>Méthode abstraite</h3>
         <span class="signature">boolean test(T t)</span>
         <pre><code>Predicate&lt;Integer&gt; estPositif = n -&gt; n &gt; 0;
@@ -626,7 +626,7 @@ int somme = addition.apply(3, 4); // 7</code></pre>
     <div class="doc-section" id="consumer-supplier">
       <h2>Consumer et Supplier</h2>
 
-      <div class="api">
+      <div class="api" id="consumer-accept">
         <h3>Consumer&lt;T&gt;</h3>
         <span class="signature">void accept(T t)</span>
         <span class="signature">Consumer&lt;T&gt; andThen(Consumer&lt;? super T&gt; after)</span>

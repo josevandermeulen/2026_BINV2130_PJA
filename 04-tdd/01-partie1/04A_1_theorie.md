@@ -373,6 +373,8 @@ Pour tirer parti de l'IA sans perdre les bénéfices du TDD, il faut continuer �
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 05/10/2026 à 20h.*
+
 *Passez aux [exercices](04A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

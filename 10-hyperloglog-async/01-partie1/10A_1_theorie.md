@@ -56,6 +56,8 @@ L'estimation elle-même ne change pas d'un iota par rapport à l'atelier 8 : mê
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 23/11/2026 à 20h.*
+
 *Passez aux [exercices](10A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

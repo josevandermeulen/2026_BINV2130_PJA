@@ -139,6 +139,8 @@ Casser une seule de ces conditions suffit à rendre le deadlock impossible. En p
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 16/11/2026 à 20h.*
+
 *Passez aux [exercices](09A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

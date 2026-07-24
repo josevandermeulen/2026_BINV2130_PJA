@@ -119,6 +119,8 @@ Les éléments ne sont pas limités aux `String` : `int fois();`, par exemple, s
 
 ---
 
+*QCM de cette semaine sur mooVin : à compléter pour le lundi 30/11/2026 à 20h.*
+
 *Passez aux [exercices](11A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

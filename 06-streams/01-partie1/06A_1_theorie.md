@@ -61,7 +61,7 @@ On peut résumer les streams par les points suivants :
 
 ### Lambda expression et filtrage
 
-La ligne `.filter(e -> e.getGenre() == Genre.HOMME)` passe en paramètre de la méthode `filter()` une condition de filtrage booléenne.
+La ligne `.filter(e -> e.getGenre() == Genre.HOMME)` passe en paramètre de la méthode `filter` une condition de filtrage booléenne.
 
 Nous pourrions écrire la méthode suivante représentant cette condition :
 
@@ -83,7 +83,7 @@ Nous verrons lors de la seconde fiche de cet atelier que les lambda expressions 
 
 L'exemple donné en introduction nous renvoie un entier après traitement. Souvent on voudrait retrouver une collection telle une liste.
 
-La méthode `collect()` nous permet de transformer notre stream en autre chose.
+La méthode `collect` nous permet de transformer notre stream en autre chose.
 
 Pour reprendre notre exemple, si nous voulons uniquement une liste des employés hommes, nous pourrions faire ceci :
 
@@ -94,7 +94,7 @@ List<Employe> listDesHommes = employes
         .collect(Collectors.toList());
 ```
 
-On passe en paramètre à `collect()` un `Collector` qui indique vers quoi on veut aller ; ici une liste.
+On passe en paramètre à `collect` un `Collector` qui indique vers quoi on veut aller ; ici une liste.
 
 ### Inférence de type à la compilation (var)
 
@@ -127,13 +127,13 @@ s.forEach(System.out::println);
 
 `System.out::println` est un raccourci pour la lambda expression `e -> System.out.println(e)`. C'est ce qu'on appelle une **référence de méthode**. Elle peut être utilisée quand la lambda expression se contente d'appeler une seule méthode.
 
-### Transformer (map)
+### Transformer (`map`)
 
 Attention : l'opération `map` des streams n'a rien à voir avec la structure de données `Map` !
 
 En programmation, il est courant de devoir sélectionner des informations de certains objets comme en SQL lorsque l'on sélectionne une colonne d'une table. Les méthodes `map` et `flatMap` de l'API Stream offrent ces possibilités.
 
-La méthode `map()` prend en argument une fonction. Cette fonction est alors appliquée à chaque élément pour créer un nouvel élément. `map` renvoie un autre stream dont le type des éléments correspond à celui du renvoi de la fonction en paramètre :
+La méthode `map` prend en argument une fonction. Cette fonction est alors appliquée à chaque élément pour créer un nouvel élément. `map` renvoie un autre stream dont le type des éléments correspond à celui du renvoi de la fonction en paramètre :
 
 ```java
 Stream<String> listeNom = employes.stream()
@@ -145,14 +145,14 @@ Ici nous aurons donc un Stream de `String`.
 
 ### Trier
 
-La méthode `sorted()` permet de trier les éléments d'un flux. Si l'on veut utiliser l'ordre « naturel », c'est-à-dire celui défini par le `compareTo`, on l'utilise sans paramètre comme dans cet exemple :
+La méthode `sorted` permet de trier les éléments d'un flux. Si l'on veut utiliser l'ordre « naturel », c'est-à-dire celui défini par le `compareTo`, on l'utilise sans paramètre comme dans cet exemple :
 
 ```java
 List<Integer> list = Arrays.asList(6, 2, 9, 1, 7);
 list.stream().sorted().forEach(System.out::println);
 ```
 
-Si on veut trier selon un autre ordre, il va falloir fournir un `Comparator` à cette méthode. On peut facilement créer un comparateur à l'aide de la méthode `comparing()` comme dans l'exemple suivant :
+Si on veut trier selon un autre ordre, il va falloir fournir un `Comparator` à cette méthode. On peut facilement créer un comparateur à l'aide de la méthode `comparing` comme dans l'exemple suivant :
 
 ```java
 var employeTries =
@@ -160,7 +160,7 @@ var employeTries =
                 .sorted(Comparator.comparingInt(Employe::getTaille));
 ```
 
-La méthode `comparing()` va créer un comparateur sur base de la valeur retournée par la méthode passée en paramètre.
+La méthode `comparing` va créer un comparateur sur base de la valeur retournée par la méthode passée en paramètre.
 
 On peut aussi inverser l'ordre de tri :
 
@@ -200,7 +200,7 @@ De même, tout comme les méthodes, il est possible d'avoir une lambda qui prend
 
 Ce code est équivalent à une méthode prenant deux paramètres et renvoyant leur somme. Les lambdas à plusieurs paramètres sont utilisées dans l'opération de réduction (`reduce`).
 
-### Réduire (reduce)
+### Réduire (`reduce`)
 
 Réduire un stream consiste à le… réduire à une seule valeur. Pour cela, les éléments contenus dans le stream vont être combinés deux à deux à l'aide d'un opérateur binaire, c'est-à-dire une expression lambda prenant deux paramètres.
 
@@ -220,7 +220,7 @@ for (int i : numbers) {
 }
 ```
 
-Nous voyons ici que la méthode `reduce()` prend deux paramètres : la lambda expression et une valeur neutre (ici 0). Cette valeur neutre permet d'éviter les erreurs si le stream est vide !
+Nous voyons ici que la méthode `reduce` prend deux paramètres : la lambda expression et une valeur neutre (ici 0). Cette valeur neutre permet d'éviter les erreurs si le stream est vide !
 
 Un autre exemple classique est la prise du maximum :
 

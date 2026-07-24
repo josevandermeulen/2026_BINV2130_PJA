@@ -3,6 +3,9 @@ package lambda;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Bac à sable : appelle les méthodes de Lambda avec les expressions lambda à compléter.
+ */
 public class TestLambda {
 
     public static void main(String[] args) {
@@ -36,7 +39,7 @@ public class TestLambda {
 
 */
 
-        //TODO: une fois arrivé au point 1.3, enlevez les commentaires et compélétez
+        //TODO: une fois arrivé au la Question 16, enlevez les commentaires et compélétez
         //      en remplaçant les ??? par des expression lambda appropriées
 
 //        List<String> list2 = Arrays.asList("hello", "bonjour", "goeiedag", "hallo", "hej");

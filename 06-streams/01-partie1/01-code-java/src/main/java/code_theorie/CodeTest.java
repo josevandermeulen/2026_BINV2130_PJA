@@ -3,22 +3,32 @@ package code_theorie;
 import domaine.Employe;
 import domaine.Genre;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Comparator;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * Reprend, sous forme exécutable, les extraits de code de la théorie.
+ */
 public class CodeTest {
 
-    boolean isHomme(Employe e){
+    boolean isHomme(Employe e) {
         return e.getGenre() == Genre.HOMME;
     }
 
+    /**
+     * Exécute les extraits de la théorie et affiche leurs résultats.
+     *
+     * @param args non utilisé.
+     */
     public static void main(String[] args) {
         List<Employe> employes = new ArrayList<>();
-
-
 
         double tailleMoyenneDesHommes = employes
                 .stream()
@@ -31,11 +41,6 @@ public class CodeTest {
                 .stream()
                 .filter(e -> e.getGenre() == Genre.HOMME)
                 .collect(toList ());
-
-
-
-
-
 
         List<Employe> listDesHommesFor = new ArrayList<>();
         for (Employe employe : employes) {
@@ -87,7 +92,6 @@ public class CodeTest {
                 .filter(n -> n>1000)
                 .collect(Collectors.averagingInt(Integer::intValue));
 
-
         Optional<Employe> geantEnOption = employes.stream()
                 .filter(e -> e.getTaille() > 210)
                 .findAny();
@@ -106,5 +110,4 @@ public class CodeTest {
     }
 
 }
-
 

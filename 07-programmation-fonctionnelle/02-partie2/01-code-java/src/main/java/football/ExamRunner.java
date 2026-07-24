@@ -17,30 +17,30 @@ public class ExamRunner {
     private static final List<Tournament> DATABASE = initDatabase();
 
     public static void main(String[] args) {
-        System.out.println("--- Q1: Tournaments with 'Cup' ---");
+        System.out.println("--- Question 11: Tournaments with 'Cup' ---");
         SERVICE.findTournamentsWithName(DATABASE).forEach(t -> System.out.println(t.getName()));
 
         // Champions League est à l'index 3
-        System.out.println("\n--- Q2: Goals per match (Champions League) ---");
+        System.out.println("\n--- Question 12: Goals per match (Champions League) ---");
         SERVICE.getMatchGoals(DATABASE.get(3)).forEach(g -> System.out.println(g + " goals"));
 
         // Mbappe marque dans le match 1 ET le match 2 -> il doit apparaître 2 fois ici
-        System.out.println("\n--- Q3: Scorers (Champions League) ---");
+        System.out.println("\n--- Question 13: Scorers (Champions League) ---");
         List<Player> scorersCl = SERVICE.getAllScorersInTournament(DATABASE.get(3));
         scorersCl.forEach(p -> System.out.println(p.getName() + " (" + p.getNationality() + ")"));
 
         // Malgré le doublon de Mbappe, on ne veut que les nationalités uniques
-        System.out.println("\n--- Q4: Distinct Nationalities ---");
+        System.out.println("\n--- Question 14: Distinct Nationalities ---");
         SERVICE.getDistinctNationalities(scorersCl).forEach(System.out::println);
 
-        System.out.println("\n--- Q5: Highest Goal Count ---");
+        System.out.println("\n--- Question 15: Highest Goal Count ---");
         List<Match> testMatches = new ArrayList<>();
         testMatches.addAll(DATABASE.get(3).getMatches()); // Champions League
         testMatches.addAll(DATABASE.get(6).getMatches()); // World Cup
         Optional<Integer> max = SERVICE.findHighestGoalCount(testMatches);
         System.out.println("Max goals: " + max.orElse(0));
 
-        System.out.println("\n--- Q6: Count by Competition ---");
+        System.out.println("\n--- Question 16: Count by Competition ---");
         Map<String, Long> groups = SERVICE.countTournamentsByCompetition(DATABASE);
         groups.forEach((competition, count) -> System.out.println(competition + " : " + count));
     }

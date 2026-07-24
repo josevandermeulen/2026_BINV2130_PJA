@@ -6,7 +6,11 @@ import domaine.Genre;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
+/**
+ * Exercices sur les interfaces fonctionnelles qui se cachent derrière les lambdas des streams.
+ */
 public class ExerciceFunctionalInterface {
 
     private final List<Employe> employes;
@@ -36,7 +40,7 @@ public class ExerciceFunctionalInterface {
                 .filter(e -> e.getGenre() == Genre.HOMME)
                 .sorted(Comparator.comparingInt(Employe::getTaille).reversed())
                 .map(e -> e.getNom())
-                .collect(java.util.stream.Collectors.toList());
+                .collect(Collectors.toList());
     }
 
     /**

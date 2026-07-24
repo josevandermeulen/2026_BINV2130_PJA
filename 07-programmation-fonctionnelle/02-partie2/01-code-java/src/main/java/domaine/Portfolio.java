@@ -2,6 +2,9 @@ package domaine;
 
 import java.util.List;
 
+/**
+ * Portefeuille d'un trader : le trader et les symboles des actions qu'il détient.
+ */
 public class Portfolio {
     private final Trader trader;
     private final List<String> actions;

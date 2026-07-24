@@ -24,13 +24,13 @@ Les Streams viennent de la programmation fonctionnelle. Or Java est à la base u
 
 Les collections Java se transforment en stream comme par magie. Notre liste de choses devient en un seul appel de méthode un fameux stream…
 
-Reprenons justement cet exemple : avant Java 8, `List<T>` ne contenait pas la méthode `stream()`.
+Reprenons justement cet exemple : avant Java 8, `List<T>` ne contenait pas la méthode `stream`.
 
-Ajouter une méthode abstraite `stream()` dans `Collection` et une méthode concrète dans `ArrayList` aurait pu convenir pour notre cas, mais quel cauchemar pour toutes les autres classes qui étendent `Collection` qu'il aurait alors fallu modifier. Il devenait impossible de faire évoluer les interfaces sans interrompre le fonctionnement des implémentations de celles-ci, quel dilemme ! C'est pour cela que Java 8 permet désormais d'avoir des méthodes `default` dans les interfaces ; les classes ne doivent pas fournir d'implémentation pour celles-ci. Il n'est donc plus obligatoire d'ajouter des implémentations dans toutes les classes qui implémentent des interfaces évoluant. Abracadabra !
+Ajouter une méthode abstraite `stream` dans `Collection` et une méthode concrète dans `ArrayList` aurait pu convenir pour notre cas, mais quel cauchemar pour toutes les autres classes qui étendent `Collection` qu'il aurait alors fallu modifier. Il devenait impossible de faire évoluer les interfaces sans interrompre le fonctionnement des implémentations de celles-ci, quel dilemme ! C'est pour cela que Java 8 permet désormais d'avoir des méthodes `default` dans les interfaces ; les classes ne doivent pas fournir d'implémentation pour celles-ci. Il n'est donc plus obligatoire d'ajouter des implémentations dans toutes les classes qui implémentent des interfaces évoluant. Abracadabra !
 
 Autrement dit, les interfaces permettent de faire comme si on ajoutait l'implémentation d'une méthode à une classe sans modifier celle-ci.
 
-Prenons un exemple concret. Il est possible d'invoquer la méthode `sort()` sur une `ArrayList`, pourtant, cette dernière n'en possède aucune implémentation directe. L'interface `List` propose une implémentation par défaut de celle-ci.
+Prenons un exemple concret. Il est possible d'invoquer la méthode `sort` sur une `ArrayList`, pourtant, cette dernière n'en possède aucune implémentation directe. L'interface `List` propose une implémentation par défaut de celle-ci.
 
 ### Petit détour par les Generics
 
@@ -137,11 +137,11 @@ List<Employe> listDesHommesBis = employes
         .filter(new PredicatGenreHomme())
 ```
 
-La lambda expression dans ce contexte n'est autre qu'un raccourci pour l'implémentation et l'instanciation de l'interface `Predicate` ! La méthode `filter` va appeler `test()` sur chacun des employés contenus dans le stream.
+La lambda expression dans ce contexte n'est autre qu'un raccourci pour l'implémentation et l'instanciation de l'interface `Predicate` ! La méthode `filter` va appeler `test` sur chacun des employés contenus dans le stream.
 
 L'interface `Predicate` est dite **interface fonctionnelle** car elle ne possède qu'une seule méthode abstraite. Elle représente donc la définition d'une fonction.
 
-### Function
+### `Function`
 
 La méthode `map` suit exactement le même principe. Regardez sa signature avec IntelliJ :
 
@@ -168,7 +168,7 @@ public class EmployeNomFunction implements Function<Employe, String> {
 
 et la passer à `map` : `.map(new EmployeNomFunction())`.
 
-### Consumer
+### `Consumer`
 
 Même raisonnement avec la méthode `forEach`, qui prend en paramètre un `Consumer`. Sa méthode abstraite est :
 
@@ -178,9 +178,9 @@ void accept(T t);
 
 Un `Consumer<T>` reçoit un objet de type `T` et ne renvoie rien : il « consomme » l'élément pour produire un effet — afficher, ajouter à une liste, écrire dans un fichier… La lambda `e -> System.out.println(e.getNom())` passée à un `forEach` sur des employés est un `Consumer<Employe>`.
 
-### Supplier
+### `Supplier`
 
-Une autre interface fonctionnelle très utile est l'interface `Supplier`. Celle-ci possède une méthode `get()` qui ne prend pas de paramètre et renvoie un élément d'un type donné. Comme son nom l'indique, l'interface `Supplier` sert à fournir des données comme, par exemple, lorsqu'on lit un fichier.
+Une autre interface fonctionnelle très utile est l'interface `Supplier`. Celle-ci possède une méthode `get` qui ne prend pas de paramètre et renvoie un élément d'un type donné. Comme son nom l'indique, l'interface `Supplier` sert à fournir des données comme, par exemple, lorsqu'on lit un fichier.
 
 ### Les lambdas dans un autre contexte
 

@@ -25,7 +25,7 @@ Les exercices associés à ces concepts se trouvent dans [`06B_2_exercices.md`](
 
 Il est possible de faire tout ce que l'on faisait en programmation classique avec l'API Stream. Dans la partie 1 vous avez vu les principes de base. Autour de ceux-ci vont se greffer une multitude de méthodes utilitaires et types. Nous n'allons lever qu'un tout petit coin du voile.
 
-### Gestion du vide (type Optional<>)
+### Gestion du vide (type `Optional`)
 
 Supposons par exemple que nous ayons besoin d'un employé mesurant au moins 2m10 pour changer une ampoule. Nous n'avons pas besoin d'une liste ici mais d'un seul objet.
 
@@ -53,9 +53,9 @@ if (geantEnOption.isPresent()) {
 }
 ```
 
-Notez que `get()` lève une exception s'il n'y a rien dans l'`Optional`.
+Notez que `get` lève une exception s'il n'y a rien dans l'`Optional`.
 
-La méthode `reduce()` renvoie également un `Optional` si elle est utilisée sans fournir de valeur neutre.
+La méthode `reduce` renvoie également un `Optional` si elle est utilisée sans fournir de valeur neutre.
 
 Si l'on veut rester en fonctionnel pur, on peut utiliser la méthode `orElse` qui renverra la valeur passée en paramètre si l'`Optional` est vide :
 

@@ -41,12 +41,19 @@ public class Actor {
         return nationality;
     }
 
-    // equals() et hashCode() sont implémentés correctement pour permettre la comparaison et l'utilisation dans des collections (comme Set pour distinct()).
+    // equals() et hashCode() sont implémentés correctement pour permettre la comparaison
+    // et l'utilisation dans des collections (comme Set pour distinct()).
 
     @Override
     public boolean equals(Object o) {
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
+        if (this == o) {
+            return true;
+        }
+
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
         Actor actor = (Actor) o;
         return Objects.equals(name, actor.name) && Objects.equals(nationality, actor.nationality);
     }

@@ -4,6 +4,9 @@ import java.util.List;
 import java.util.function.Function;
 import java.util.function.Predicate;
 
+/**
+ * Filtrage et transformation de listes via des Predicate et des Function, avec et sans l'API Stream.
+ */
 public class Lambda {
 
     /**

@@ -17,30 +17,30 @@ public class ExamRunner {
     private static final List<TvSeries> DATABASE = initDatabase();
 
     public static void main(String[] args) {
-        System.out.println("--- Q1: Series with 'Day' ---");
+        System.out.println("--- Question 3: Series with 'Day' ---");
         SERVICE.findSeriesWithTitle(DATABASE).forEach(s -> System.out.println(s.getTitle()));
 
         // Breaking Bad est à l'index 3
-        System.out.println("\n--- Q2: Durations (Breaking Bad) ---");
+        System.out.println("\n--- Question 4: Durations (Breaking Bad) ---");
         SERVICE.getEpisodeDurations(DATABASE.get(3)).forEach(d -> System.out.println(d + " min"));
 
         // Bryan joue dans l'épisode 1 ET l'épisode 2 -> il doit apparaître 2 fois ici
-        System.out.println("\n--- Q3: Actors (Breaking Bad) ---");
+        System.out.println("\n--- Question 5: Actors (Breaking Bad) ---");
         List<Actor> actorsBb = SERVICE.getAllActorsInSeries(DATABASE.get(3));
         actorsBb.forEach(a -> System.out.println(a.getName() + " (" + a.getNationality() + ")"));
 
         // Malgré le doublon de Bryan, on ne veut que les nationalités uniques
-        System.out.println("\n--- Q4: Distinct Nationalities ---");
+        System.out.println("\n--- Question 6: Distinct Nationalities ---");
         SERVICE.getDistinctNationalities(actorsBb).forEach(System.out::println);
 
-        System.out.println("\n--- Q5: Longest Episode Duration ---");
+        System.out.println("\n--- Question 7: Longest Episode Duration ---");
         List<Episode> testEpisodes = new ArrayList<>();
         testEpisodes.addAll(DATABASE.get(3).getEpisodes());
         testEpisodes.addAll(DATABASE.get(6).getEpisodes());
         Optional<Integer> max = SERVICE.findLongestEpisodeDuration(testEpisodes);
         System.out.println("Max duration: " + max.orElse(0));
 
-        System.out.println("\n--- Q6: Group by Genre ---");
+        System.out.println("\n--- Question 8: Group by Genre ---");
         Map<String, Long> groups = SERVICE.countSeriesByGenre(DATABASE);
         groups.forEach((genre, count) -> System.out.println(genre + " : " + count));
     }

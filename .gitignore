@@ -13,3 +13,8 @@ build/
 logs-grand-volume/
 logs-routeurs/
 __pycache__/
+# Rapports de vérification d'atelier : documents de travail temporaires, à
+# traiter puis supprimer. Ignorés pour qu'un « git add -A » ne les committe
+# pas — rien ne les exclut du sync, ils partiraient chez les étudiants.
+verification.md
+**/verification.md

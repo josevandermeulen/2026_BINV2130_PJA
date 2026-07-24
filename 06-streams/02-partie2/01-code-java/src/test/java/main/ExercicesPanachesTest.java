@@ -17,8 +17,26 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ExercicesPanachesTest {
 
-    private Trader raoul, mario, alan, brian;
-    private Transaction t1, t2, t3, t4, t5, t6;
+    private Trader raoul;
+
+    private Trader mario;
+
+    private Trader alan;
+
+    private Trader brian;
+
+    private Transaction t1;
+
+    private Transaction t2;
+
+    private Transaction t3;
+
+    private Transaction t4;
+
+    private Transaction t5;
+
+    private Transaction t6;
+
     private ExercicesPanaches exercices;
 
     @BeforeEach

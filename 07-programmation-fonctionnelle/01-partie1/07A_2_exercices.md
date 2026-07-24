@@ -11,8 +11,11 @@ L'objectif de cet atelier est d'approfondir la programmation fonctionnelle en Ja
 3. `Predicate`
 4. `Function`
 5. `Consumer`
-6. `Comparator`
-7. Références de méthodes
+6. `Supplier`
+7. `BinaryOperator`
+8. `Comparator`
+9. Généricité
+10. Références de méthodes
 
 ## Vidéos
 
@@ -37,9 +40,12 @@ Pour les huit questions suivantes, aucun code n'est à écrire : déterminez sur
 
 C'est un échauffement : comptez ~3 minutes par question, 30 minutes maximum pour la section. Si une réponse vous résiste, vérifiez-la dans IntelliJ, notez-la, et passez à la suivante — la correction au tableau y reviendra, et le reste de l'atelier (où vous écrivez du code) est plus important.
 
-✏️ *A corriger au tableau*
+Réponses dans [`07A_reponses-observations.md`](07A_reponses-observations.md), à consulter après avoir cherché et vérifié dans IntelliJ.
 
 **Question 1** :
+
+✏️ *A corriger au tableau*
+
 Quel est le type du paramètre de la méthode `filter` dans le code suivant ?
 
 ```java
@@ -113,11 +119,11 @@ var resultat = employes.stream()
 Ouvrez la classe [`ExerciceFunctionalInterface`](01-code-java/src/main/java/main/ExerciceFunctionalInterface.java) située dans le package `main` et dans laquelle se trouve la méthode `exMap` qui contient le code suivant :
 
 ```java
-Stream<String> listeNom = employes.stream()
+return employes.stream()
         .filter(e -> e.getGenre() == Genre.HOMME)
-        .sorted(Comparator.comparingInt(Employe::getTaille)
-                .reversed())
-        .map(e -> e.getNom());
+        .sorted(Comparator.comparingInt(Employe::getTaille).reversed())
+        .map(e -> e.getNom())
+        .collect(Collectors.toList());
 ```
 
 Trouvez le type du paramètre de la méthode `map`.
@@ -151,7 +157,7 @@ Faites le même raisonnement qu'au point précédent et transformez le code en i
 **Question 13** :
 Dans la classe `ExerciceFunctionalInterface`, prenez la méthode `exComparator`. Celle-ci utilise un `Comparator` en créant une classe et en l'instanciant. Modifiez le code pour remplacer le comparator par une lambda expression.
 
-### Quelques Predicate et Function
+### Quelques `Predicate` et `Function`
 
 Dans cet exercice, vous utiliserez des `Predicate` et des `Function`. N'utilisez pas de Stream pour les Questions 14 à 16 ! Vous devrez utiliser la méthode `test` des `Predicate` et la méthode `apply` des `Function`.
 
@@ -166,15 +172,15 @@ Implémentez de la même façon la méthode `transformAll` et testez-la via `Tes
 ### Généricité
 
 **Question 16** :
-Modifiez vos méthodes `allMatches` et `transformAll` pour qu'elles puissent maintenant accepter des `List` de n'importe quel type (au lieu de uniquement des `Integer`). Dans la classe `TestLambda`, décommentez la deuxième partie et complétez les expressions lambda.
+Les signatures fournies de `allMatches` et `transformAll` sont déjà génériques (`<T>` pour la première, `<P, R>` pour la seconde) : vérifiez que vos implémentations acceptent bien des `List` de n'importe quel type, et pas seulement des `Integer`. Dans la classe `TestLambda`, décommentez la deuxième partie et complétez les expressions lambda, qui travaillent cette fois sur des `String`.
 
 ### Les mêmes traitements avec l'API Stream
 
 **Question 17** :
-Ajoutez à votre classe `Lambda` une méthode `filter` qui fait exactement la même chose que `allMatches`, mais en utilisant l'API Stream. Dans la classe `TestLambda`, effectuez les mêmes tests que pour `allMatches`.
+La classe `Lambda` contient déjà la signature de la méthode `filter` : implémentez-la pour qu'elle fasse exactement la même chose que `allMatches`, mais en utilisant l'API Stream. Dans la classe `TestLambda`, effectuez les mêmes tests que pour `allMatches`.
 
 **Question 18** :
-Ajoutez de même une méthode `map` qui fait exactement la même chose que `transformAll`, mais en utilisant l'API Stream. Testez-la comme `transformAll`.
+Implémentez de même la méthode `map`, qui fait exactement la même chose que `transformAll`, mais en utilisant l'API Stream. Testez-la comme `transformAll`.
 
 ---
 

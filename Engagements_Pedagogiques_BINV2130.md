@@ -53,9 +53,9 @@ Il doit notamment être capable d'écrire et de lire du code orienté objet en J
 
 Les deux activités d'apprentissage se coordonnent : elles sont synchronisées et se référencent mutuellement. La théorie prépare directement les exercices des ateliers, ce qui justifie la cohérence pédagogique de leur regroupement au sein d'une même UE.
 
-Le dispositif suit une logique de classe inversée. Chaque semaine, un ou plusieurs thèmes théoriques sont communiqués aux étudiants en début de semaine. La théorie est préparée en autonomie à l'aide des ressources fournies : fiches théoriques, vidéos et codes sources.
+Le dispositif suit une logique de classe inversée. Chaque semaine, un ou plusieurs thèmes théoriques sont communiqués aux étudiants, qui les préparent en autonomie à l'aide des ressources fournies — fiches théoriques, vidéos et codes sources — lors d'un créneau fixé le vendredi matin, consacré au chapitre de la semaine suivante. La première semaine fait exception : ce créneau y est placé le lundi matin, pour le chapitre de la semaine en cours.
 
-Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue. Ces QCM incitent à une préparation régulière et renforcent l'efficacité des séances d'ateliers.
+Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue. Ces QCM incitent à une préparation régulière et renforcent l'efficacité des séances d'ateliers. Un treizième QCM, portant sur les chapitres déjà étudiés, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété : l'examen se déroulant sur machine avec les seuls documents Markdown du cours, cet exercice entraîne les étudiants au format de réponse attendu.
 
 Chaque séance hebdomadaire d'atelier (4h) est organisée en deux parties successives. Pour chacune de ces parties, les étudiants disposent, sur le dépôt GitHub du cours, d'une fiche théorique, d'une fiche d'exercices et, le cas échéant, d'un code de départ. La séance est consacrée à la réalisation des exercices sur machine. Les enseignants accompagnent les étudiants dans leur progression, répondent à leurs questions et corrigent collectivement au tableau certaines questions identifiées dans les fiches. Lorsque la seconde partie s'appuie sur la première, la solution nécessaire est mise à disposition afin de permettre la poursuite de l'atelier.
 
@@ -79,7 +79,7 @@ L'évaluation de cette unité d'enseignement est intégrée et partiellement con
 
 **Évaluation du premier quadrimestre (Q1)** — la note finale de l'UE se compose de deux parties :
 
-- **Évaluation continue — 10 % de la note finale** : chacun des 12 chapitres du cours de théorie donne lieu à un QCM de 20 questions, sans points négatifs, réalisé en ligne via la plateforme mooVin. Ces QCM sont répartis sur l'ensemble du quadrimestre, au rythme d'un par semaine, et sont constitués à partir d'une banque de questions. La note d'évaluation continue est calculée sur la base des 10 meilleurs résultats obtenus aux 12 QCM. Un QCM non réalisé est coté 0.
+- **Évaluation continue — 10 % de la note finale** : chacun des 12 chapitres du cours de théorie donne lieu à un QCM de 20 questions, sans points négatifs, réalisé en ligne via la plateforme mooVin. Ces QCM sont répartis sur l'ensemble du quadrimestre, au rythme d'un par semaine, et sont constitués à partir d'une banque de questions. S'y ajoute un treizième QCM de 20 questions, de mêmes forme et pondération, réalisé en autonomie et remis sous la forme d'un fichier Markdown complété : il familiarise les étudiants avec le format de réponse utilisé à l'examen. La note d'évaluation continue est calculée sur la base des 11 meilleurs résultats obtenus aux 13 QCM. Un QCM non réalisé est coté 0.
 - **Examen — 90 % de la note finale** : examen individuel écrit organisé lors de la session de janvier, en présentiel, sur machine (ordinateurs fournis par la Haute École). L'examen prend la forme de plusieurs exercices pratiques portant sur les thèmes étudiés dans l'unité d'enseignement. Il pourra également comporter des questions issues de la banque de questions utilisée pour constituer les QCM hebdomadaires. Durant l'examen, l'étudiant a accès uniquement à une copie des fichiers Markdown du cours (théorie, exercices et solutions, mais pas le code Java), des cheat sheets et des illustrations associées, mis à disposition sur les machines d'examen. **L'usage d'une intelligence artificielle générative (IAG) n'est pas autorisé.**
 
 La note de première session est donc constituée de la note d'évaluation continue acquise durant le quadrimestre (10 %) et de la note d'examen obtenue lors de la session de janvier (90 %).
@@ -153,7 +153,7 @@ Chaque thème théorique est abordé dans le cours de théorie correspondant. Le
 
 L'évaluation de l'unité d'enseignement *Programmation Java : avancé* est intégrée : cette activité d'apprentissage ne fait pas l'objet d'une évaluation distincte.
 
-En première session (Q1), la note finale de l'unité d'enseignement repose sur un examen individuel écrit organisé sur machine (90 % de la note finale), complété par une évaluation continue organisée dans le cadre du cours de théorie (10 % de la note finale), composée de 12 QCM hebdomadaires de 20 questions.
+En première session (Q1), la note finale de l'unité d'enseignement repose sur un examen individuel écrit organisé sur machine (90 % de la note finale), complété par une évaluation continue organisée dans le cadre du cours de théorie (10 % de la note finale), composée de 13 QCM de 20 questions : les 12 QCM hebdomadaires et un QCM remis sous la forme d'un fichier Markdown complété.
 
 En seconde session (Q3), l'évaluation continue ne peut faire l'objet ni d'une seconde session ni d'une remédiation. La note d'évaluation continue obtenue au Q1 est conservée et intervient pour 10 % de la note finale. L'examen individuel écrit intervient pour 90 % de la note finale.
 
@@ -204,9 +204,9 @@ Voir la fiche de l'unité d'enseignement *Programmation Java : avancé* (**BINV2
 
 ## Activités d'apprentissage prévues et méthodes d'enseignement
 
-Le cours est donné en autonomie : des ressources ainsi que des consignes sont mises à la disposition des étudiants. Chacun des 12 chapitres aborde un ou plusieurs concepts. Ceux-ci sont étudiés en autonomie à l'aide des fiches théoriques, des vidéos et des codes sources fournis par le professeur.
+Le cours est donné en autonomie : des ressources ainsi que des consignes sont mises à la disposition des étudiants. Chacun des 12 chapitres aborde un ou plusieurs concepts. Ceux-ci sont étudiés en autonomie à l'aide des fiches théoriques, des vidéos et des codes sources fournis par le professeur, lors d'un créneau hebdomadaire fixé le vendredi matin et consacré au chapitre de la semaine suivante — le lundi matin la première semaine, pour le chapitre de la semaine en cours.
 
-Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue de l'unité d'enseignement. Ce QCM permet à l'étudiant de valider sa préparation avant la séance d'exercices correspondante.
+Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue de l'unité d'enseignement. Ce QCM permet à l'étudiant de valider sa préparation avant la séance d'exercices correspondante. Un treizième QCM, portant sur les chapitres déjà étudiés, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété, afin d'entraîner les étudiants au format de réponse de l'examen.
 
 Les concepts étudiés chaque semaine sont directement mis en pratique lors de la séance d'exercices correspondante de l'AcAp *Ateliers Java : exercices*.
 
@@ -224,7 +224,7 @@ Les fiches théoriques, les vidéos et les codes sources fournis par le professe
 
 L'évaluation de l'unité d'enseignement *Programmation Java : avancé* est intégrée et partiellement continue. Cette activité d'apprentissage contribue à la note finale de l'UE au travers de l'évaluation continue.
 
-Chacun des 12 chapitres donne lieu à un QCM de 20 questions, sans points négatifs, réalisé en ligne via la plateforme mooVin. La note d'évaluation continue est calculée sur la base des 10 meilleurs résultats obtenus aux 12 QCM et intervient pour 10 % de la note finale de l'UE en première session. Un QCM non réalisé est coté 0. Les questions sont issues d'une banque de questions. L'examen intégré pourra également comporter des questions issues de cette banque.
+Chacun des 12 chapitres donne lieu à un QCM de 20 questions, sans points négatifs, réalisé en ligne via la plateforme mooVin. Un treizième QCM, de mêmes forme et pondération, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété. La note d'évaluation continue est calculée sur la base des 11 meilleurs résultats obtenus aux 13 QCM et intervient pour 10 % de la note finale de l'UE en première session. Un QCM non réalisé est coté 0. Les questions sont issues d'une banque de questions. L'examen intégré pourra également comporter des questions issues de cette banque.
 
 Les 90 % restants reposent sur l'examen intégré décrit dans la fiche de l'unité d'enseignement (**BINV2130**).
 

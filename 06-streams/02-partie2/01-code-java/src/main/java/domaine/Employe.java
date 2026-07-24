@@ -1,25 +1,39 @@
 package domaine;
 
-
+/**
+ * Représente un employé.
+ *
+ * Simple structure de donnée formée d'un genre, d'une taille et d'un nom.
+ */
 public class Employe {
-    Genre genre;
-    int taille;
 
+    /**
+     * Le genre de l'employé
+     */
+    private Genre genre;
+
+    /**
+     * La taille de l'employé, en centimètres
+     */
+    private int taille;
+
+    /**
+     * Le nom de l'employé
+     */
+    private String nom;
+
+    /**
+     * Crée un employé.
+     *
+     * @param genre le genre de l'employé.
+     * @param taille la taille de l'employé, en centimètres.
+     * @param nom le nom de l'employé.
+     */
     public Employe(Genre genre, int taille, String nom) {
         this.genre = genre;
         this.taille = taille;
         this.nom = nom;
     }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    String nom;
 
     public Genre getGenre() {
         return genre;
@@ -35,6 +49,14 @@ public class Employe {
 
     public void setTaille(int taille) {
         this.taille = taille;
+    }
+
+    public String getNom() {
+        return nom;
+    }
+
+    public void setNom(String nom) {
+        this.nom = nom;
     }
 
     @Override

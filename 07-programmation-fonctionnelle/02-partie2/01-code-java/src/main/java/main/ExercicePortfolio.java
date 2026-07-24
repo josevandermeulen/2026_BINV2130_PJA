@@ -8,6 +8,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * Exercices flatMap sur des portefeuilles d'actions et la table des prix PRICES.
+ */
 public class ExercicePortfolio {
 
     // ====== Table des prix (exemple pédagogique) ======

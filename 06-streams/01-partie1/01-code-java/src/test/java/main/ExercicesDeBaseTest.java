@@ -15,10 +15,25 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ExercicesDeBaseTest {
 
     private Trader raoul;
+
     private Trader mario;
+
     private Trader alan;
+
     private Trader brian;
-    private Transaction t1, t2, t3, t4, t5, t6;
+
+    private Transaction t1;
+
+    private Transaction t2;
+
+    private Transaction t3;
+
+    private Transaction t4;
+
+    private Transaction t5;
+
+    private Transaction t6;
+
     private ExercicesDeBase exercices;
 
     @BeforeEach

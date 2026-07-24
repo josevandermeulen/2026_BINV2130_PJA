@@ -11,7 +11,9 @@ L'objectif de cet atelier est d'approfondir l'API Stream : gérer l'absence de r
 3. `reduce` sans valeur neutre
 4. `groupingBy`
 5. `counting`
-6. Collectors
+6. `summingInt`
+7. `collectingAndThen`
+8. Collectors
 
 ## Vidéos
 
@@ -37,7 +39,7 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier06_
 
 Comme en partie 1, chaque méthode à compléter renvoie une valeur plutôt que de l'afficher : les tests JUnit fournis appellent ces méthodes et vérifient le résultat.
 
-### Gestion du vide (type Optional<>)
+### Gestion du vide (type `Optional`)
 
 Ouvrez la classe [`ExercicesOptional`](01-code-java/src/main/java/main/ExercicesOptional.java) (package `main`). Dans les exercices sur les reduce de la partie 1, on utilisait la version de `reduce` avec deux paramètres : une valeur neutre et un accumulateur. Copiez-collez vos solutions pour le `reduce1` et `reduce2` (ou reprenez-les dans `../01-partie1/02-solution/`), puis modifiez-les pour utiliser maintenant la version qui prend uniquement un accumulateur en paramètre et qui renvoie un objet `Optional`.
 
@@ -45,31 +47,26 @@ Ouvrez la classe [`ExercicesOptional`](01-code-java/src/main/java/main/Exercices
 Dans la méthode `optional1` (exercice trouvant la valeur max), utilisez `orElse` et renvoyez -1 s'il n'y a pas de transactions.
 
 **Question 2** :
-Dans la méthode `optional2` (transaction de valeur minimale), renvoyez directement l'`Optional<Transaction>` obtenu après réduction (vide s'il n'y a pas de transactions).
 
 ✏️ *A corriger au tableau*
+
+Dans la méthode `optional2` (transaction de valeur minimale), renvoyez directement l'`Optional<Transaction>` obtenu après réduction (vide s'il n'y a pas de transactions).
 
 ### Grouper
 
 Ouvrez la classe [`ExerciceGroupingBy`](01-code-java/src/main/java/main/ExerciceGroupingBy.java) et complétez les méthodes suivantes en utilisant les streams afin de construire et renvoyer les dictionnaires demandés à partir de la liste de transactions présente dans la classe.
 
 **Question 3** :
-Dans la méthode `groupBy1`, construire une `Map<Trader, List<Transaction>>` — transactions du trader.
 
 ✏️ *A corriger au tableau*
+
+Dans la méthode `groupBy1`, construire une `Map<Trader, List<Transaction>>` — transactions du trader.
 
 **Question 4** :
 Dans la méthode `groupBy2`, construire une `Map<Trader, Long>` — nombre de transactions de ce trader. Pour ceci il faudra utiliser la méthode `counting` dans le collector.
 
 **Question 5** :
-Dans la méthode `groupBy3`, construire une `Map<TransactionsLevel, List<Transaction>>` — considérant l'enum `TransactionsLevel {VERY_HI, HI, LO, ME}`, les transactions sont réparties selon les critères suivants :
-
-1. si valeur >= 1000, elle est `VERY_HI` ;
-2. si 800 <= valeur < 1000, elle est `HI` ;
-3. si 600 <= valeur < 800, elle est `ME` ;
-4. sinon elle est `LO`.
-
-La map ne doit pas être triée.
+Dans la méthode `groupBy3`, construire une `Map<TransactionsLevel, List<Transaction>>` — considérant l'enum `TransactionsLevel {VERY_HI, HI, LO, ME}`, les transactions sont réparties selon leur valeur : `VERY_HI` à partir de 1000, `HI` de 800 à moins de 1000, `ME` de 600 à moins de 800, et `LO` en dessous. La map ne doit pas être triée.
 
 ### Exercices panachés
 

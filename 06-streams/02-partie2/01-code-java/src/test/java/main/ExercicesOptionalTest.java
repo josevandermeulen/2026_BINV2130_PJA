@@ -17,11 +17,14 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 public class ExercicesOptionalTest {
 
     private final Trader brian = new Trader("Brian", "Cambridge");
+
     private final Transaction t1 = new Transaction(brian, 2011, 300);
+
     private final List<Transaction> transactions = Arrays.asList(
             t1,
             new Transaction(new Trader("Raoul", "Cambridge"), 2012, 1000)
     );
+
     private final ExercicesOptional exercices = new ExercicesOptional();
 
     @Nested

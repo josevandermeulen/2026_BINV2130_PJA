@@ -16,9 +16,9 @@ Les exercices associés à ces concepts se trouvent dans [`07B_2_exercices.md`](
 3. [Mise en pratique du design fonctionnel en Java partie 1 - L'immuabilité](https://www.youtube.com/watch?v=s6Zwdeg3NdI)
 4. [Programmation fonctionnelle cas pratique en Java partie 2 - Les exceptions](https://www.youtube.com/watch?v=g0EVQYClhtA)
 
-## Les flatMap
+## Les `flatMap`
 
-### map : une transformation 1 → 1
+### `map` : une transformation 1 → 1
 
 `map` prend chaque élément du stream et le transforme en **exactement un** élément de sortie. Le nombre d'éléments ne change jamais : un stream de 4 éléments reste un stream de 4 éléments après un `map`.
 
@@ -30,7 +30,7 @@ entrée (stream de carrés)      map(carré -> rond)      sortie (stream de rond
 
 Chaque `■` devient un `●` : une flèche par élément, jamais plus, jamais moins. C'est le cas par exemple de `.map(Trader::getNom)` : un `Trader` en entrée, un `String` en sortie, un-pour-un.
 
-### flatMap : une transformation 1 → 0..N
+### `flatMap` : une transformation 1 → 0..N
 
 `flatMap` prend chaque élément et le transforme en **un stream** d'éléments de sortie — potentiellement vide, avec un seul élément, ou avec plusieurs. Ces mini-streams sont ensuite concaténés (« aplatis ») en un seul stream de sortie. Contrairement à `map`, le nombre d'éléments en sortie n'a **aucun rapport garanti** avec le nombre d'éléments en entrée.
 
@@ -87,7 +87,7 @@ Pourquoi s'imposer cette discipline ?
 - **Partage sans risque** : le même objet peut être référencé par plusieurs structures sans copie défensive supplémentaire.
 - **Compatible avec les streams** : les opérations de l'API Stream ne modifient jamais la collection d'origine ; elles produisent de nouvelles valeurs. Travailler avec des objets immuables prolonge cette logique — et c'est ce qui rend les streams parallèles (voir plus bas) sûrs.
 
-Remarquez que vous connaissez déjà des classes immuables : `String`, les wrappers (`Integer`, `Double`…) et `LocalDate` le sont. `toUpperCase()` ne modifie pas la chaîne, elle en renvoie une nouvelle.
+Remarquez que vous connaissez déjà des classes immuables : `String`, les wrappers (`Integer`, `Double`…) et `LocalDate` le sont. `toUpperCase` ne modifie pas la chaîne, elle en renvoie une nouvelle.
 
 ### Les exceptions en style fonctionnel
 

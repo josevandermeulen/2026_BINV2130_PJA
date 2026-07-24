@@ -5,6 +5,9 @@ import domaine.Transaction;
 
 import java.util.List;
 
+/**
+ * Exercices de base sur les streams : filtrage, transformation, tri et réduction de transactions.
+ */
 public class ExercicesDeBase {
 
     /**

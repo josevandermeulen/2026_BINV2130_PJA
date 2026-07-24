@@ -11,9 +11,13 @@ L'objectif de cet atelier est de découvrir l'API Stream de Java pour filtrer, t
 3. Prédicats
 4. `filter`
 5. `map`
-6. `sorted`
-7. `collect`
-8. Agrégations et réductions
+6. `distinct`
+7. `sorted`
+8. `collect`
+9. `joining`
+10. `groupingBy`
+11. `summingInt`
+12. Agrégations et réductions
 
 ## Vidéos
 
@@ -41,8 +45,6 @@ Chaque méthode à compléter renvoie une valeur (liste, `Map`, `Optional`, …)
 
 ### Écrivons quelques prédicats
 
-✏️ *A corriger au tableau*
-
 Ouvrez la classe [`ExercicesDeBase`](01-code-java/src/main/java/main/ExercicesDeBase.java) (package `main`).
 
 Le projet contient les classes `Trader` et `Transaction` décrivant des transactions effectuées par des traders. [`ExercicesDeBaseTest`](01-code-java/src/test/java/main/ExercicesDeBaseTest.java) construit une liste de transactions et teste les méthodes ci-dessous.
@@ -50,6 +52,9 @@ Le projet contient les classes `Trader` et `Transaction` décrivant des transact
 On vous demande, en utilisant les streams, de filtrer ces transactions de différentes façons et de renvoyer le résultat.
 
 **Question 1** :
+
+✏️ *A corriger au tableau*
+
 Dans la méthode `predicats1`, construire la liste de toutes les transactions de 2011.
 
 **Question 2** :
@@ -58,10 +63,10 @@ Dans la méthode `predicats2`, construire la liste de toutes les transactions do
 **Question 3** :
 Dans la méthode `predicats3`, construire la liste de toutes les transactions de Raoul.
 
-### Comprendre la boucle implicite des Stream
+### Comprendre la boucle implicite des `Stream`
 
 **Question 4** :
-Ouvrez la classe [`ExercicesEmployes`](01-code-java/src/main/java/main/ExercicesEmployes.java). La méthode `listeDesHommes` contient le code suivant :
+Ouvrez la classe [`ExercicesEmployes`](01-code-java/src/main/java/main/ExercicesEmployes.java). La méthode `listeDesHommes` est à écrire ; en voici la version itérative :
 
 ```java
 List<Employe> listDesHommes = new ArrayList<>();
@@ -75,13 +80,14 @@ return listDesHommes;
 
 Réécrivez ce code en utilisant l'API Stream (`stream`, `filter`, `collect`) plutôt qu'une boucle.
 
-### Transformer (map)
-
-✏️ *A corriger au tableau*
+### Transformer (`map`)
 
 Reprenez les classes sur les transactions. Attention : ce sont bien des listes que l'on veut, pas des streams.
 
 **Question 5** :
+
+✏️ *A corriger au tableau*
+
 Dans la méthode `map1`, construire la liste des villes où travaillent les courtiers (sans doublon).
 
 Observation : vous avez des doublons ? Utilisez la méthode `distinct` après votre `map` !
@@ -100,7 +106,7 @@ Dans la méthode `sort1`, construire la liste de toutes les transactions triées
 **Question 9** :
 Dans la méthode `sort2`, construire une `String` contenant tous les noms de traders (sans doublon) triés par ordre alphabétique.
 
-### Réduire (reduce)
+### Réduire (`reduce`)
 
 **Question 10** :
 Dans la méthode `reduce1`, renvoyer la valeur max des transactions.

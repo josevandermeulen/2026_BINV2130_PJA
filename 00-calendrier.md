@@ -2,7 +2,7 @@
 
 | Semaine | Début | Fin | Chapitre | QCM (20h) | Responsable | Note |
 |---|---|---|---|---|---|---|
-| S1 | 14/09/2026 | 20/09/2026 | 01 - Rappels | **mer 16/09/2026** | José Vander Meulen + Jonathan Fallon | rentrée le lundi : QCM reporté au mercredi |
+| S1 | 14/09/2026 | 20/09/2026 | 01 - Rappels | **mer 16/09/2026** | José Vander Meulen + Jonathan Fallon | rentrée le lundi : QCM reporté au mercredi ; **deux séances de théorie** — lun 14/09 pour S1, ven 18/09 pour S2 |
 | S2 | 21/09/2026 | 27/09/2026 | 02 - Collections, énumérés | lun 21/09/2026 | José Vander Meulen + Jonathan Fallon | |
 | S3 | 28/09/2026 | 04/10/2026 | 03 - JUnit | lun 28/09/2026 | José Vander Meulen + Claude Michiels | |
 | S4 | 05/10/2026 | 11/10/2026 | 04 - TDD | lun 05/10/2026 | José Vander Meulen + Claude Michiels | |
@@ -16,7 +16,7 @@
 | S11 | 30/11/2026 | 06/12/2026 | 11 - Introspection | lun 30/11/2026 | José Vander Meulen + Jonathan Fallon | |
 | S12 | 07/12/2026 | 13/12/2026 | 12 - Injection de dépendances | lun 07/12/2026 | José Vander Meulen + Claude Michiels | |
 
-Le créneau de **théorie en autonomie** a lieu le vendredi matin et prépare le chapitre de la semaine suivante : vendredi 18/09 pour S2, 25/09 pour S3, 02/10 pour S4, 09/10 pour S5, 16/10 pour S6, 23/10 pour S7, 06/11 pour S8, 13/11 pour S9, 20/11 pour S10, 27/11 pour S11 et 04/12 pour S12. Exception à la rentrée : la théorie de S1 se prépare le lundi matin 14/09. À noter, la préparation de S7 tombe le vendredi 23/10, avant le congé d'automne — dix jours séparent donc cette préparation de la séance du 03/11.
+Le créneau de **théorie en autonomie** a lieu le vendredi matin et prépare le chapitre de la semaine suivante : vendredi 18/09 pour S2, 25/09 pour S3, 02/10 pour S4, 09/10 pour S5, 16/10 pour S6, 23/10 pour S7, 06/11 pour S8, 13/11 pour S9, 20/11 pour S10, 27/11 pour S11 et 04/12 pour S12. Exception à la rentrée : la théorie de S1 se prépare le lundi matin 14/09. La semaine 1 porte donc **deux séances de théorie** — celle du lundi pour elle-même, celle du vendredi pour S2 — et c'est la seule dans ce cas. À noter, la préparation de S7 tombe le vendredi 23/10, avant le congé d'automne — dix jours séparent donc cette préparation de la séance du 03/11.
 
 La colonne **QCM (20h)** donne la fermeture du QCM mooVin coté de la semaine (10 % de l'UE) : toujours 20h, le lundi sauf exception (rentrée, jour férié, congé : le QCM est alors reporté plus tard dans la semaine, la Note le signale). Elle doit rester cohérente avec la clé `quiz` de `scripts/dates.yml` (publication du corrigé à 20h15) et avec la ligne de rappel du `NNA_1_theorie.md` de la partie 1.
 

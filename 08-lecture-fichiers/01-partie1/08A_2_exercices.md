@@ -64,7 +64,7 @@ Complétez la méthode `lireLignes(String chemin)` de `LogReader` : ouvrez le fi
 Ouvrez la classe [`Acces`](01-code-java/src/main/java/domaine/Acces.java) (package `domaine`) : complétez son constructeur pour valider les trois paramètres via [`Util`](01-code-java/src/main/java/util/Util.java) (aucun ne peut être vide ou `null`).
 
 **Question 4** :
-Ouvrez ensuite la classe [`AnalyseLogs`](01-code-java/src/main/java/main/AnalyseLogs.java). Elle reçoit un `LecteurLogs` par injection de dépendance (constructeur). Complétez la méthode `parserLigne(String ligne)` : découpez la ligne avec `split(";")`, vérifiez qu'elle contient exactement trois champs (sinon, levez une `IllegalArgumentException`), et construisez l'`Acces` correspondant.
+Ouvrez ensuite la classe [`AnalyseLogs`](01-code-java/src/main/java/main/AnalyseLogs.java). Elle reçoit un `LecteurLogs` dans son constructeur. Complétez la méthode `parserLigne(String ligne)` : découpez la ligne avec `split(";")`, vérifiez qu'elle contient exactement trois champs (sinon, levez une `IllegalArgumentException`), et construisez l'`Acces` correspondant.
 
 ### Ignorer les lignes invalides
 

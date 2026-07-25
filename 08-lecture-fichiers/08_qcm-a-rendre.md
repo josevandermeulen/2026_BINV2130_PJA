@@ -1,8 +1,5 @@
 # Atelier 8 : QCM en Markdown — questionnaire à choix multiple
 
-**Nom :**
-**Prénom :**
-
 20 questions à réponse unique, portant sur la théorie et la pratique des ateliers 1 à 7.
 
 Ce questionnaire est le **treizième QCM** de l'évaluation continue. Il compte au même titre que
@@ -17,28 +14,26 @@ janvier — c'est la raison d'être de ce QCM-ci, et c'est pour ça qu'il ne se 
 
 1. Copiez ce fichier dans un dossier à vous. **Ne travaillez pas dans le dépôt cloné** : votre
    prochain `git pull` entrerait en conflit avec vos modifications.
-2. Renommez votre copie `NOM_Prenom.md` (votre nom en majuscules, votre prénom tel que dans
-   mooVin).
-3. Complétez-la : votre nom et votre prénom en tête, puis **une case cochée par question**.
-   Cocher, c'est remplacer l'espace entre les crochets par un `x` :
-
-   ```markdown
-   - [ ] A) Une proposition que vous ne retenez pas
-   - [x] B) Celle que vous choisissez
-   ```
-
-4. Déposez-la sur mooVin, activité *QCM en Markdown — atelier 8*, **pour le lundi 09/11/2026 à
+2. Complétez votre copie.
+3. Déposez-la sur mooVin, activité *QCM en Markdown — atelier 8*, **pour le lundi 09/11/2026 à
    20h**.
 
 **Comment ouvrir ce fichier ?** Dans IntelliJ, les trois icônes en haut à droite de l'éditeur
 basculent entre *Éditeur*, *Éditeur + aperçu* et *Aperçu* — l'aperçu affiche les cases à cocher
-et les blocs de code, sans connexion. Vous répondez dans l'éditeur, pas dans l'aperçu. Les
-autres options (VS Code, Bloc-notes) et les pièges à éviter sont dans le
-[README du dépôt](../README.md). N'utilisez pas Word : il enregistrerait votre copie en `.docx`.
+et les blocs de code, sans connexion. Vous répondez dans l'éditeur, pas dans l'aperçu. Pour
+grossir ou réduire l'affichage : `Alt+Maj+=` agrandit, `Alt+Maj+-` réduit — utile pour voir une
+question entière d'un coup d'œil. Les autres options (VS Code, Bloc-notes) et les pièges à éviter
+sont dans le [README du dépôt](../README.md). N'utilisez pas Word : il enregistrerait votre copie
+en `.docx`.
 
 **Une seule case cochée par question.** Une question sans case cochée, ou avec plusieurs, est
 comptée fausse. Ne modifiez ni les titres des questions, ni leur numérotation, ni le texte des
 propositions : c'est ce qui permet de corriger votre copie.
+
+```markdown
+- [ ] A) Une proposition que vous ne retenez pas
+- [x] B) Celle que vous choisissez
+```
 
 Pas de points négatifs : une réponse fausse et une absence de réponse valent zéro, autant
 répondre partout. Vous travaillez en autonomie, avec vos notes et le dépôt du cours.
@@ -61,13 +56,9 @@ public class Badge {
         numeroSuivant++;
     }
 
-    public int getNumero() {
-        return numero;
-    }
+    public int getNumero() { return numero; }
 }
-```
 
-```java
 Badge b1 = new Badge();
 Badge b2 = new Badge();
 Badge b3 = new Badge();

@@ -54,6 +54,23 @@ Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub De
 
 **Attention : travaillez toujours dans vos propres projets IntelliJ (`AJ_atelierNN_partieX`), en dehors du dossier cloné. Si vous modifiez les fichiers du dépôt, la prochaine mise à jour entrera en conflit avec vos changements.**
 
+## Évaluation
+
+- **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Sur la machine, sans connexion : les fichiers Markdown du cours (théorie, exercices et solutions, mais pas le code Java), les cheat sheets et les illustrations — rien d'autre. IA générative interdite. Mêmes modalités en seconde session.
+- **Évaluation continue (10 %)** : les QCM hebdomadaires sur mooVin, sans points négatifs, plus un QCM remis sous la forme d'un fichier Markdown complété (voir ci-dessous). La note est calculée sur les **11 meilleurs résultats des 13 QCM** ; un QCM non réalisé est coté 0. Cette note ne peut faire l'objet ni d'une seconde session ni d'une remédiation : celle du premier quadrimestre est reportée telle quelle en seconde session.
+
+Un QCM de 20 questions par chapitre est proposé sur mooVin, portant sur la théorie de la semaine. Il **ferme le lundi à 20h**, sauf les semaines où ce lundi ne s'y prête pas (rentrée, jour férié, congé) : la date exacte de chaque QCM est dans la colonne *QCM* du [calendrier](00-calendrier.md). Le questionnaire est ensuite publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) le jour même à partir de 20h15, avec les bonnes réponses et leur justification. Ces QCM forment aussi une **banque de questions** dans laquelle l'examen pourra puiser : les travailler au fil des semaines est directement utile pour l'examen.
+
+Un **treizième QCM** s'ajoute aux douze, en semaine 8. Il porte sur la théorie et la pratique des chapitres déjà étudiés et se fait en autonomie. Il est publié avec la théorie et les exercices de la semaine, sans date de sortie particulière ; vous copiez le fichier de l'énoncé, cochez une case par question et le déposez sur mooVin **pour le lundi 09/11/2026 à 20h**, en même temps que la fermeture du QCM mooVin de la semaine 8. Il compte comme les autres. Sa raison d'être : l'examen se déroule sur machine avec les seuls fichiers Markdown du cours, et rédiger ses réponses dans ce format est un geste qui vaut d'être répété avant janvier.
+
+## Feedback
+
+Votre retour sur le cours est le bienvenu. Trois canaux existent :
+
+1. **Directement au professeur** — venez lui parler pendant ou après une séance, ou envoyez-lui un mail. C'est le canal le plus rapide et le plus efficace.
+2. **Le conseil de département** — vos délégués y relaient les remarques de la classe. Il ne se réunit qu'une fois, au milieu du quadrimestre : utile pour les questions de fond, mais peu réactif.
+3. **Le questionnaire en ligne** — [remplissez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7). Vous choisissez d'y répondre de manière anonyme ou non.
+
 ## Lire et écrire du Markdown hors ligne
 
 Tout le cours est écrit en Markdown (`.md`), et l'examen de janvier se déroule sur machine avec
@@ -64,6 +81,8 @@ l'habitude tout de suite.
 - **IntelliJ IDEA** — le plus simple, puisque vous l'avez déjà. Ouvrez le `.md` : trois icônes en
   haut à droite de l'éditeur basculent entre *Éditeur*, *Éditeur + aperçu* et *Aperçu*. L'aperçu
   affiche les titres, les blocs de code, les tableaux et les cases à cocher, sans connexion.
+  `Alt+Maj+=` agrandit l'affichage, `Alt+Maj+-` le réduit — pratique pour faire tenir un énoncé
+  entier à l'écran.
 - **Visual Studio Code** — `Ctrl+Shift+V` pour l'aperçu, `Ctrl+K` puis `V` pour l'afficher à côté
   du texte.
 - **Bloc-notes ou Notepad++** — aucun rendu, vous voyez le texte source tel quel. C'est suffisant
@@ -75,23 +94,6 @@ Deux pièges :
   Markdown.
 - **Le navigateur ne rend rien.** Ouvrir un `.md` dans Edge ou Chrome affiche le texte brut, ou
   télécharge le fichier.
-
-## Évaluation
-
-- **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Accès aux supports et à la Javadoc. IA générative interdite. Mêmes modalités en seconde session.
-- **Évaluation continue (10 %)** : les QCM hebdomadaires sur mooVin, sans points négatifs, plus un QCM remis sous la forme d'un fichier Markdown complété (voir ci-dessous). La note est calculée sur les **11 meilleurs résultats des 13 QCM** ; un QCM non réalisé est coté 0. Cette note ne peut faire l'objet ni d'une seconde session ni d'une remédiation : celle du premier quadrimestre est reportée telle quelle en seconde session.
-
-Un QCM de 20 questions par chapitre est proposé sur mooVin, portant sur la théorie de la semaine. Il **ferme le lundi à 20h**, sauf les semaines où ce lundi ne s'y prête pas (rentrée, jour férié, congé) : la date exacte de chaque QCM est dans la colonne *QCM* du [calendrier](00-calendrier.md). Le questionnaire est ensuite publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) le jour même à partir de 20h15, avec les bonnes réponses et leur justification. Ces QCM forment aussi une **banque de questions** dans laquelle l'examen pourra puiser : les travailler au fil des semaines est directement utile pour l'examen.
-
-Un **treizième QCM** s'ajoute aux douze, en semaine 8. Il porte sur la théorie et la pratique des chapitres déjà étudiés et se fait en autonomie. Il est publié avec la théorie et les exercices de la semaine, sans date de sortie particulière ; vous copiez le fichier de l'énoncé, le renommez `NOM_Prenom.md`, cochez une case par question et le déposez sur mooVin **pour le lundi 09/11/2026 à 20h**, en même temps que la fermeture du QCM mooVin de la semaine 8. Il compte comme les autres. Sa raison d'être : l'examen se déroule sur machine avec les seuls fichiers Markdown du cours, et rédiger ses réponses dans ce format est un geste qui vaut d'être répété avant janvier.
-
-## Feedback
-
-Votre retour sur le cours est le bienvenu. Trois canaux existent :
-
-1. **Directement au professeur** — venez lui parler pendant ou après une séance, ou envoyez-lui un mail. C'est le canal le plus rapide et le plus efficace.
-2. **Le conseil de département** — vos délégués y relaient les remarques de la classe. Il ne se réunit qu'une fois, au milieu du quadrimestre : utile pour les questions de fond, mais peu réactif.
-3. **Le questionnaire en ligne** — [remplissez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7). Vous choisissez d'y répondre de manière anonyme ou non.
 
 ## Licence
 

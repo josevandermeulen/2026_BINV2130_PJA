@@ -33,7 +33,7 @@ Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare l
 | 11 | Introspection |
 | 12 | Injection de dépendances |
 
-Chaque chapitre se déroule en deux séances (`01-seance1`, `02-seance2`). Une séance contient un dossier `01-ressources` — la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`) et le code de départ, tout ce dont vous avez besoin au même endroit — et un dossier `02-solution`, publié après la séance. Le questionnaire d'auto-évaluation (`NN_quiz.md`) est à la racine du chapitre.
+Chaque chapitre se déroule en deux séances (`01-seance1`, `02-seance2`). Une séance contient un dossier portant le nom du projet IntelliJ à créer — `AJ_atelierNN_seanceX` — avec la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`) et le code de départ sous `src/`, tout ce dont vous avez besoin au même endroit ; plus un dossier `02-solution`, publié après la séance. Le questionnaire d'auto-évaluation (`NN_quiz.md`) est à la racine du chapitre.
 
 ![Structure d'un atelier](assets/structure-diagram.png)
 
@@ -61,7 +61,7 @@ Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub De
 
 Un QCM de 20 questions par chapitre est proposé sur mooVin, portant sur la théorie de la semaine. Il **ferme le lundi à 20h**, sauf les semaines où ce lundi ne s'y prête pas (rentrée, jour férié, congé) : la date exacte de chaque QCM est dans la colonne *QCM* du [calendrier](00-calendrier.md). Le questionnaire est ensuite publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) le jour même à partir de 20h15, avec les bonnes réponses et leur justification. Ces QCM forment aussi une **banque de questions** dans laquelle l'examen pourra puiser : les travailler au fil des semaines est directement utile pour l'examen.
 
-Un **treizième QCM** s'ajoute aux douze, en semaine 8. Il porte sur la théorie et la pratique des chapitres déjà étudiés et se fait en autonomie. Il est publié avec la théorie et les exercices de la semaine, sans date de sortie particulière ; vous copiez le fichier de l'énoncé, cochez une case par question et le déposez sur mooVin **pour le lundi 09/11/2026 à 20h**, en même temps que la fermeture du QCM mooVin de la semaine 8. Il compte comme les autres. Sa raison d'être : l'examen se déroule sur machine avec les seuls fichiers Markdown du cours, et rédiger ses réponses dans ce format est un geste qui vaut d'être répété avant janvier.
+Un **treizième QCM** s'ajoute aux douze, en semaine 8. Il porte sur la théorie et la pratique des chapitres déjà étudiés et se fait en autonomie : 10 questions cotées 2 points chacune, soit 20 points comme les QCM mooVin. Il est publié avec la théorie et les exercices de la semaine, sans date de sortie particulière ; vous copiez le fichier de l'énoncé, cochez une case par question et le déposez sur mooVin **pour le lundi 09/11/2026 à 20h**, en même temps que la fermeture du QCM mooVin de la semaine 8. Il compte comme les autres. Sa raison d'être : l'examen se déroule sur machine avec les seuls fichiers Markdown du cours, et rédiger ses réponses dans ce format est un geste qui vaut d'être répété avant janvier.
 
 ## Feedback
 

@@ -1,0 +1,54 @@
+package compteur_thread;
+
+import java.time.LocalDateTime;
+import java.util.stream.IntStream;
+
+// TODO Question 2 : faire hériter cette classe de Thread et implémenter la méthode run
+
+/**
+ * Un compteur exécutable en parallèle, écrit en héritant de {@link Thread}.
+ * <p>
+ * C'est la forme la plus directe, mais elle consomme l'unique héritage de la classe : la variante
+ * {@link CompteurRunnable} lui est généralement préférée.
+ */
+public class CompteurThread {
+
+    private final String nom;
+    private final int max;
+
+    /**
+     * Crée un compteur.
+     *
+     * @param nom le nom affiché devant chaque nombre
+     * @param max le nombre jusqu'auquel compter
+     */
+    public CompteurThread(String nom, int max) {
+        this.nom = nom;
+        this.max = max;
+    }
+
+    /**
+     * Renvoie le nom du compteur.
+     *
+     * @return le nom du compteur
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * Compte de 1 au maximum en affichant chaque valeur, avec une pause entre deux nombres.
+     */
+    public void count() {
+        IntStream.rangeClosed(1, max).forEach(i -> {
+            System.out.println(nom + " : " + i);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        });
+        System.out.println(nom + " a finit de compter jusqu'à " + max + " à " + LocalDateTime.now());
+    }
+
+}

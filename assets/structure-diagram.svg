@@ -26,15 +26,15 @@
     <text x="90" y="180" fill="#ffb787" font-weight="600">01-seance1/</text>
 
     <text x="70" y="208" fill="#6f6884">│   ├──</text>
-    <text x="150" y="208">01-ressources/</text>
+    <text x="150" y="208">AJ_atelier01_seance1/</text>
     <text x="90" y="234" fill="#4b4560">│   │     ├── 01A_1_theorie.md</text>
     <text x="90" y="260" fill="#4b4560">│   │     ├── 01A_2_exercices.md</text>
     <text x="90" y="286" fill="#4b4560">│   │     ├── 03_images/01A_3_*.png</text>
-    <text x="90" y="312" fill="#4b4560">│   │     └── &lt;package&gt;/*.java, affichage_*.txt</text>
+    <text x="90" y="312" fill="#4b4560">│   │     └── src/&lt;package&gt;/*.java, affichage_*.txt</text>
 
     <text x="70" y="352" fill="#6f6884">│   └──</text>
     <text x="150" y="352">02-solution/</text>
-    <text x="90" y="378" fill="#4b4560">│         └── &lt;package&gt;/*.java  (+ src/ · tests/ si JUnit)</text>
+    <text x="90" y="378" fill="#4b4560">│         └── src/&lt;package&gt;/*.java  (+ tests/ si JUnit)</text>
 
     <!-- seance2 -->
     <text x="40" y="420" fill="#6f6884">└──</text>
@@ -48,7 +48,7 @@
     <text x="24" y="36" font-family="Helvetica, Arial, sans-serif" font-size="16" font-weight="700" fill="#f5f3f7">Repères</text>
 
     <circle cx="32" cy="66" r="4" fill="url(#accent)"/>
-    <text x="48" y="71" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">01-ressources : énoncés + starter, à copier tel quel</text>
+    <text x="48" y="71" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">dossier projet = nom à donner dans IntelliJ</text>
 
     <circle cx="32" cy="98" r="4" fill="url(#accent)"/>
     <text x="48" y="103" font-family="Helvetica, Arial, sans-serif" font-size="14" fill="#c9c3d6">02-solution : compile et tourne toujours</text>

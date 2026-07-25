@@ -1,0 +1,45 @@
+package be.vinci.mocks.util;
+
+/**
+ * Boîte à outils de validation des paramètres, partagée par les classes du domaine.
+ * <p>
+ * Chaque méthode lève une {@link IllegalArgumentException} dès que la valeur reçue ne respecte pas
+ * la contrainte annoncée, ce qui évite de répéter le même test dans chaque constructeur.
+ */
+public interface Util {
+    static void checkObject(Object o) {
+        if (o == null) {
+            throw new IllegalArgumentException("L'objet ne peut pas être null");
+        }
+    }
+
+    static void checkString(String s) {
+        checkObject(s);
+        if (s.matches("\\s*")) {
+            throw new IllegalArgumentException(
+                    "La chaîne ne peut pas être vide");
+        }
+    }
+
+    static void checkNumerique(String s) {
+        checkString(s);
+        try {
+            Long.parseLong(s);
+        } catch (NumberFormatException e) {
+            throw new IllegalArgumentException(
+                    "La chaîne doit être un nombre valide");
+        }
+    }
+
+    static void checkStrictlyPositive(double nombre) {
+        if (nombre <= 0) {
+            throw new IllegalArgumentException(
+                    "La valeur ne peut pas être négative ou nulle");
+        }
+    }
+    static void checkPositiveOrZero(double nombre)  {
+        if (nombre < 0) {
+            throw new IllegalArgumentException();
+        }
+    }
+}

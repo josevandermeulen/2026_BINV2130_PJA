@@ -20,6 +20,6 @@ Le créneau de **théorie en autonomie** a lieu le vendredi matin et prépare le
 
 La colonne **QCM (20h)** donne la fermeture du QCM mooVin coté de la semaine (10 % de l'UE) : toujours 20h, le lundi sauf exception (rentrée, jour férié, congé : le QCM est alors reporté plus tard dans la semaine, la Note le signale). Elle doit rester cohérente avec la clé `quiz` de `scripts/dates.yml` (publication du corrigé à 20h15) et avec la ligne de rappel du `NNA_1_theorie.md` de la séance 1.
 
-Un **treizième QCM** s'ajoute aux douze QCM hebdomadaires. Il n'a pas de date de sortie propre : il est publié avec la théorie et les exercices de la semaine 8, comme le reste du contenu. Seule sa remise est datée — un fichier Markdown complété, déposé sur mooVin pour le lundi 09/11/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Il est coté au même titre que les autres (la note d'évaluation continue retient les 11 meilleurs résultats sur 13).
+Un **treizième QCM** s'ajoute aux douze QCM hebdomadaires. Il n'a pas de date de sortie propre : il est publié avec la théorie et les exercices de la semaine 8, comme le reste du contenu. Seule sa remise est datée — un fichier Markdown complété, déposé sur mooVin pour le lundi 09/11/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Il compte 10 questions cotées 2 points chacune et est coté au même titre que les autres (la note d'évaluation continue retient les 11 meilleurs résultats sur 13).
 
 Congé Noël FWB (~21/12/2026–03/01/2027) hors plage, pas d'impact sur ce calendrier.

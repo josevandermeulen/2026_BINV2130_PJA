@@ -33,7 +33,7 @@ Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare l
 | 11 | Introspection |
 | 12 | Injection de dépendances |
 
-Chaque chapitre contient la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`), le code de départ (`01-code-java`), la solution (`02-solution`) et le questionnaire d'auto-évaluation (`NN_quiz.md`).
+Chaque chapitre se déroule en deux séances (`01-seance1`, `02-seance2`). Une séance contient un dossier `01-ressources` — la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`) et le code de départ, tout ce dont vous avez besoin au même endroit — et un dossier `02-solution`, publié après la séance. Le questionnaire d'auto-évaluation (`NN_quiz.md`) est à la racine du chapitre.
 
 ![Structure d'un atelier](assets/structure-diagram.png)
 
@@ -52,7 +52,7 @@ git pull                                              # à refaire chaque semain
 
 Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub Desktop](https://desktop.github.com/) : *File > Clone repository > URL*, collez l'adresse ci-dessus, choisissez un dossier local et cliquez sur *Clone*. Ensuite, le bouton *Fetch origin* / *Pull origin* suffit pour récupérer les nouveautés.
 
-**Attention : travaillez toujours dans vos propres projets IntelliJ (`AJ_atelierNN_partieX`), en dehors du dossier cloné. Si vous modifiez les fichiers du dépôt, la prochaine mise à jour entrera en conflit avec vos changements.**
+**Attention : travaillez toujours dans vos propres projets IntelliJ (`AJ_atelierNN_seanceX`), en dehors du dossier cloné. Si vous modifiez les fichiers du dépôt, la prochaine mise à jour entrera en conflit avec vos changements.**
 
 ## Évaluation
 

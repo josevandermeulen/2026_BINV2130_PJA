@@ -57,7 +57,7 @@ Le dispositif suit une logique de classe inversée. Chaque semaine, un ou plusie
 
 Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue. Ces QCM incitent à une préparation régulière et renforcent l'efficacité des séances d'ateliers. Un treizième QCM, portant sur les chapitres déjà étudiés, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété : l'examen se déroulant sur machine avec les seuls documents Markdown du cours, cet exercice entraîne les étudiants au format de réponse attendu.
 
-Chaque séance hebdomadaire d'atelier (4h) est organisée en deux parties successives. Pour chacune de ces parties, les étudiants disposent, sur le dépôt GitHub du cours, d'une fiche théorique, d'une fiche d'exercices et, le cas échéant, d'un code de départ. La séance est consacrée à la réalisation des exercices sur machine. Les enseignants accompagnent les étudiants dans leur progression, répondent à leurs questions et corrigent collectivement au tableau certaines questions identifiées dans les fiches. Lorsque la seconde partie s'appuie sur la première, la solution nécessaire est mise à disposition afin de permettre la poursuite de l'atelier.
+Chaque atelier hebdomadaire (4h) est organisé en deux séances successives. Pour chacune de ces séances, les étudiants disposent, sur le dépôt GitHub du cours, d'une fiche théorique, d'une fiche d'exercices et, le cas échéant, d'un code de départ. L'atelier est consacré à la réalisation des exercices sur machine. Les enseignants accompagnent les étudiants dans leur progression, répondent à leurs questions et corrigent collectivement au tableau certaines questions identifiées dans les fiches. Lorsque la seconde séance s'appuie sur la première, la solution nécessaire est mise à disposition afin de permettre la poursuite de l'atelier.
 
 ## Mode d'enseignement (présentiel, à distance, hybride)
 
@@ -135,9 +135,9 @@ Voir la fiche de l'unité d'enseignement *Programmation Java : avancé* (**BINV2
 
 Chaque semaine, un ou plusieurs thèmes théoriques sont abordés. Les thèmes sont communiqués aux étudiants au début de la semaine et sont préparés en autonomie à l'aide des ressources du cours de théorie.
 
-Les séances hebdomadaires de mise en pratique (4h) sont organisées en deux parties successives. Chaque partie s'appuie sur une fiche théorique préparée en autonomie et comporte une fiche d'exercices ainsi que, le cas échéant, un code de départ. Les étudiants réalisent les exercices sur machine en consultant notamment la documentation officielle de Java.
+Les ateliers hebdomadaires de mise en pratique (4h) sont organisés en deux séances successives. Chaque séance s'appuie sur une fiche théorique préparée en autonomie et comporte une fiche d'exercices ainsi que, le cas échéant, un code de départ. Les étudiants réalisent les exercices sur machine en consultant notamment la documentation officielle de Java.
 
-Les enseignants accompagnent les étudiants dans leur progression et les aident à comprendre et à mettre en pratique les concepts étudiés. Certaines questions, identifiées dans les fiches, sont corrigées collectivement au tableau. Lorsque la seconde partie s'appuie sur la première, la solution nécessaire est mise à disposition afin de permettre la poursuite de l'atelier.
+Les enseignants accompagnent les étudiants dans leur progression et les aident à comprendre et à mettre en pratique les concepts étudiés. Certaines questions, identifiées dans les fiches, sont corrigées collectivement au tableau. Lorsque la seconde séance s'appuie sur la première, la solution nécessaire est mise à disposition afin de permettre la poursuite de l'atelier.
 
 ## Mode d'enseignement (présentiel, à distance, hybride)
 
@@ -206,9 +206,9 @@ Voir la fiche de l'unité d'enseignement *Programmation Java : avancé* (**BINV2
 
 Le cours est donné en autonomie : des ressources ainsi que des consignes sont mises à la disposition des étudiants. Chacun des 12 chapitres aborde un ou plusieurs concepts. Ceux-ci sont étudiés en autonomie à l'aide des fiches théoriques, des vidéos et des codes sources fournis par le professeur, lors d'un créneau hebdomadaire fixé le vendredi matin et consacré au chapitre de la semaine suivante — le lundi matin la première semaine, pour le chapitre de la semaine en cours.
 
-Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue de l'unité d'enseignement. Ce QCM permet à l'étudiant de valider sa préparation avant la séance d'exercices correspondante. Un treizième QCM, portant sur les chapitres déjà étudiés, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété, afin d'entraîner les étudiants au format de réponse de l'examen.
+Chaque semaine, le chapitre étudié donne lieu à un QCM de 20 questions, réalisé en ligne via la plateforme **mooVin** et comptant pour l'évaluation continue de l'unité d'enseignement. Ce QCM permet à l'étudiant de valider sa préparation avant l'atelier correspondant. Un treizième QCM, portant sur les chapitres déjà étudiés, est réalisé en autonomie et remis sous la forme d'un fichier Markdown complété, afin d'entraîner les étudiants au format de réponse de l'examen.
 
-Les concepts étudiés chaque semaine sont directement mis en pratique lors de la séance d'exercices correspondante de l'AcAp *Ateliers Java : exercices*.
+Les concepts étudiés chaque semaine sont directement mis en pratique lors de l'atelier correspondant de l'AcAp *Ateliers Java : exercices*.
 
 ## Mode d'enseignement (présentiel, à distance, hybride)
 

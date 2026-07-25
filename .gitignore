@@ -2,7 +2,7 @@ target/
 out/
 build/
 .idea/
-# Javadoc généré (atelier 12 partie 2, Question « Generate JavaDoc » — l'étudiant
+# Javadoc généré (atelier 12 séance 2, Question « Generate JavaDoc » — l'étudiant
 # le régénère lui-même, inutile de versionner la sortie)
 12-injection-dependances/**/doc/
 *.class
@@ -16,5 +16,12 @@ __pycache__/
 # Rapports de vérification d'atelier : documents de travail temporaires, à
 # traiter puis supprimer. Ignorés pour qu'un « git add -A » ne les committe
 # pas — rien ne les exclut du sync, ils partiraient chez les étudiants.
+# Motif volontairement large (insensible au préfixe et à la casse) : les
+# rapports arrivent sous des noms variés selon l'outil qui les produit
+# (verification.md, CODEX_VERIFICATION.md, …).
 verification.md
 **/verification.md
+*VERIFICATION*.md
+**/*VERIFICATION*.md
+*verification*.md
+**/*verification*.md

@@ -295,7 +295,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="09-threads-completablefuture-fr.html">&larr; Semaine 9</a>
-    <span class="version-badge">v8 &middot; 24/07/2026</span>
+    <span class="version-badge">v9 &middot; 25/07/2026</span>
     <a href="11-introspection-fr.html">Semaine 11 &rarr;</a>
   </div>
 </div>
@@ -304,10 +304,10 @@
   <div class="toc" aria-label="Sommaire">
     <h2>Sommaire</h2>
     <a href="#rappel">Rappel : HyperLogLog et CompletableFuture</a>
-    <a href="#chaine-async">Partie 1 - Chargement et estimation en asynchrone</a>
+    <a href="#chaine-async">Séance 1 - Chargement et estimation en asynchrone</a>
     <a href="#exceptions-checked">Le piège des exceptions checked</a>
     <a href="#chrono">Mesurer séquentiel vs asynchrone</a>
-    <a href="#fusion">Partie 2 - Fusionner deux HyperLogLog</a>
+    <a href="#fusion">Séance 2 - Fusionner deux HyperLogLog</a>
     <a href="#scatter-gather">Un CompletableFuture par routeur (scatter/gather)</a>
     <a href="#determinisme">Pourquoi le résultat est déterministe</a>
     <a href="#pieges">Pièges fréquents</a>
@@ -331,7 +331,7 @@
     </div>
 
     <div class="doc-section" id="chaine-async">
-      <h2>Partie 1 - Chargement et estimation en asynchrone</h2>
+      <h2>Séance 1 - Chargement et estimation en asynchrone</h2>
       <p>Lire des fichiers est une opération d'entrée/sortie : le programme passe l'essentiel de son temps à attendre le disque. C'est le cas d'école de l'asynchrone : pendant que le chargement s'exécute dans un thread du pool, le thread principal reste libre. Le schéma est une simple <strong>chaîne</strong> :</p>
       <pre><code>supplyAsync(charger les accès) ──thenApply──&gt; estimer les IP uniques ──join──&gt; résultat</code></pre>
       <p>L'estimation elle-même (<code>HyperLogLog</code>, <code>Hasher</code>, <code>AnalyseIp</code>) ne change pas d'un iota par rapport à la semaine 8. Seule la façon de <strong>lancer</strong> le traitement change :</p>
@@ -407,7 +407,7 @@ System.out.println("Asynchrone : " + dureeAsync + " ms");</code></pre>
     </div>
 
     <div class="doc-section" id="fusion">
-      <h2>Partie 2 - Fusionner deux HyperLogLog</h2>
+      <h2>Séance 2 - Fusionner deux HyperLogLog</h2>
       <p>Un HyperLogLog n'est qu'un tableau de registres, chacun retenant le <strong>maximum</strong> de zéros de tête observé pour les valeurs qui lui sont tombées dessus. Conséquence directe : pour fusionner deux estimateurs de même taille ayant vu des ensembles de valeurs différents, il suffit de prendre, registre par registre, le maximum des deux :</p>
       <pre><code>fusion.registres[i] = max(premier.registres[i], second.registres[i])</code></pre>
       <div class="api">
@@ -532,7 +532,7 @@ public CompletableFuture&lt;HyperLogLog&gt; hllPourFichierAsync(String dossier, 
 
     <div class="doc-section" id="reference-rapide">
       <h2>Référence rapide</h2>
-      <pre><code>// Chaîne asynchrone : charger puis estimer (partie 1)
+      <pre><code>// Chaîne asynchrone : charger puis estimer (séance 1)
 CompletableFuture&lt;List&lt;Acces&gt;&gt; futureAcces = CompletableFuture.supplyAsync(() -&gt; {
     try {
         return analyse.chargerTousLesAcces(dossier);
@@ -544,7 +544,7 @@ CompletableFuture&lt;Long&gt; futureEstimation =
     futureAcces.thenApply(acces -&gt; AnalyseIp.estimerIpUniques(acces, hyperLogLog));
 long estimation = futureEstimation.join();   // bloque en tout dernier
 
-// Fusion de deux HyperLogLog (partie 2)
+// Fusion de deux HyperLogLog (séance 2)
 hyperLogLogA.fusionner(hyperLogLogB);   // max registre par registre, commutatif et associatif
 
 // Scatter/gather : un CompletableFuture par fichier, fusionnés en cascade

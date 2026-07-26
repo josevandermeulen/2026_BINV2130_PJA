@@ -6,10 +6,10 @@ import java.util.stream.IntStream;
 // TODO Question 2 : faire hériter cette classe de Thread et implémenter la méthode run
 
 /**
- * Un compteur exécutable en parallèle, écrit en héritant de {@link Thread}.
- * <p>
+ * Un compteur exécutable en parallèle, écrit en héritant de Thread.
+ *
  * C'est la forme la plus directe, mais elle consomme l'unique héritage de la classe : la variante
- * {@link CompteurRunnable} lui est généralement préférée.
+ * CompteurRunnable lui est généralement préférée.
  */
 public class CompteurThread {
 

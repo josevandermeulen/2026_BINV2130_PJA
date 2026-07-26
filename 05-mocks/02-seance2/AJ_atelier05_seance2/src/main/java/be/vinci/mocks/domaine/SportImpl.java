@@ -16,7 +16,6 @@ public class SportImpl implements Sport {
      */
     private final String intitule;
     /**
-     *
      * Les moniteurs compétents dans la discipline sportive.
      */
     private final Set<Moniteur> moniteurs;
@@ -25,20 +24,14 @@ public class SportImpl implements Sport {
      * Crée un sport
      *
      * @param intitule L'intitulé du sport
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public SportImpl(String intitule) {
         Util.checkString(intitule);
         this.intitule = intitule;
         this.moniteurs = new HashSet<>();
     }
-
-    /**
-     * renvoie l'intitulé du sport
-     *
-     * @return L'intitulé du sport
-     */
 
     /**
      * Renvoie l'intitulé du sport.
@@ -55,8 +48,8 @@ public class SportImpl implements Sport {
      *
      * @param moniteur Le moniteur à ajouter à ceux compétents dans le sport.
      * @return true si le moniteur a été ajouté
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean ajouterMoniteur(Moniteur moniteur) {
@@ -72,8 +65,8 @@ public class SportImpl implements Sport {
      *
      * @return true si le moniteur a bien été supprimé
      * @param moniteur le moniteur à supprimer de la liste des compétents dans ce sport.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean supprimerMoniteur(Moniteur moniteur) {
@@ -89,8 +82,8 @@ public class SportImpl implements Sport {
      *
      * @return true si le moniteur est compétent.
      * @param moniteur le moniteur à tester.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean contientMoniteur(Moniteur moniteur) {

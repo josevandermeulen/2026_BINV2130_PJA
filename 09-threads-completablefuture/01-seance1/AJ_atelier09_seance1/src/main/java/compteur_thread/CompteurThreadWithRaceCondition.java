@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 /**
  * Le même compteur, doté d'une variable de classe retenant qui a fini le premier.
- * <p>
+ *
  * Cette variable partagée est le siège de la situation de compétition étudiée : sans
  * synchronisation, deux threads peuvent la lire vide au même instant et se déclarer tous deux
  * gagnants.
@@ -67,7 +67,7 @@ public class CompteurThreadWithRaceCondition extends Thread {
 
     /**
      * Renvoie le compteur qui a fini le premier.
-     * <p>
+     *
      * Sans synchronisation autour de son affectation, deux compteurs peuvent se croire gagnants :
      * c'est précisément le défaut que la question fait observer.
      *

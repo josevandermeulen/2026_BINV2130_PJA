@@ -22,9 +22,8 @@ public class EnfantImpl implements Enfant {
      *
      * @param nom       Le nom de l'enfant
      * @param telephone Le téléphone de l'enfant
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public EnfantImpl(String nom, String telephone) {
         Util.checkString(nom);

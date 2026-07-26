@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  * Signale l'ajout d'un prix à une date déjà présente dans l'historique d'un produit.
- * <p>
+ *
  * Non contrôlée : un même produit ne peut pas avoir deux prix valables à la même date.
  */
 public class DateDejaPresenteException extends RuntimeException {

@@ -5,7 +5,7 @@ import java.util.stream.IntStream;
 
 /**
  * Un compteur qui affiche les nombres de 1 à son maximum, en marquant une pause à chaque pas.
- * <p>
+ *
  * Cette pause est ce qui rend l'exécution séquentielle sensible : lancer plusieurs compteurs en
  * parallèle ne divise pas le travail, il recouvre les attentes.
  */

@@ -3,7 +3,7 @@ import java.util.Objects;
 // Question 1 : la classe Ingredient
 /**
  * Un ingrédient pouvant composer une pizza, avec le prix qu'il ajoute à celle-ci.
- * <p>
+ *
  * Deux ingrédients sont considérés comme identiques dès qu'ils portent le même nom : c'est ce qui
  * empêche une pizza de contenir deux fois le même ingrédient, quel qu'en soit le prix.
  */
@@ -70,7 +70,7 @@ public class Ingredient {
     }
 
     /**
-     * Renvoie un code de hachage calculé sur le nom, cohérent avec {@link #equals(Object)}.
+     * Renvoie un code de hachage calculé sur le nom, cohérent avec equals(Object).
      *
      * @return le code de hachage de l'ingrédient
      */

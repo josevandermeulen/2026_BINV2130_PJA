@@ -32,7 +32,7 @@ Contrairement à la séance 1, des tests JUnit sont fournis : ils sont rouges au
 
 ### Consignes
 
-Dans IntelliJ, créez un nouveau Projet **Maven** nommé `AJ_atelier12_seance2`, avec `be.vinci` comme *GroupId*. Récupérez ensuite le contenu de `AJ_atelier12_seance2/` : les sources (`src/main/java`) et les tests (`src/test/java`), en conservant les packages. Les packages `domaine`, `main` et `server` reprennent l'état final de la séance 1 (`../../01-seance1/02-solution/`) — vous pouvez aussi repartir de votre propre solution ; les packages `blacklist` et `injection` contiennent les squelettes à compléter dans cet atelier.
+Dans IntelliJ, créez un nouveau Projet **Maven** nommé `AJ_atelier12_seance2`, avec `be.vinci` comme *GroupId*. Récupérez ensuite le contenu de `AJ_atelier12_seance2/` : les sources (`src/main/java`) et les tests (`src/test/java`), en conservant les packages. Les packages `domaine`, `main` et `server` reprennent l'état final de la séance 1 (`../../01-seance1/AJ_atelier12_seance1_solution/`) — vous pouvez aussi repartir de votre propre solution ; les packages `blacklist` et `injection` contiennent les squelettes à compléter dans cet atelier.
 
 Reprenez dans le `pom.xml` les properties de compilation de la séance 1 (version de Java), et ajoutez la dépendance JUnit :
 

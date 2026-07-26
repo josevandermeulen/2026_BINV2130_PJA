@@ -17,6 +17,7 @@ public class StatsService {
      * @return Une liste filtrée de tournois.
      */
     public List<Tournament> findTournamentsWithName(List<Tournament> database) {
+        // TODO Question 11
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -28,6 +29,7 @@ public class StatsService {
      * @return Une liste d'entiers (nombre total de buts par match).
      */
     public List<Integer> getMatchGoals(Tournament tournament) {
+        // TODO Question 12
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -39,6 +41,7 @@ public class StatsService {
      * @return La liste complète des buteurs (avec doublons éventuels).
      */
     public List<Player> getAllScorersInTournament(Tournament tournament) {
+        // TODO Question 13
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -50,6 +53,7 @@ public class StatsService {
      * @return La liste des nationalités uniques (dans l'ordre d'apparition).
      */
     public List<String> getDistinctNationalities(List<Player> players) {
+        // TODO Question 14
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -60,6 +64,7 @@ public class StatsService {
      * @return Un `Optional` contenant le nombre de buts maximal (ou vide si la liste est vide).
      */
     public Optional<Integer> findHighestGoalCount(List<Match> matches) {
+        // TODO Question 15
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -70,6 +75,7 @@ public class StatsService {
      * @return Une `Map` où la clé est le type de compétition et la valeur le nombre de tournois de ce type.
      */
     public Map<String, Long> countTournamentsByCompetition(List<Tournament> database) {
+        // TODO Question 16
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

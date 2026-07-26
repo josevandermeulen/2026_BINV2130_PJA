@@ -96,8 +96,12 @@ public class ExercicePortfolio {
 
     /**
      * Renvoie la liste des actions de tous les portefeuilles (avec doublons).
+     *
+     * @param portfolios les portefeuilles à parcourir
+     * @return les symboles de toutes les actions détenues, doublons compris
      */
     static List<String> actions(List<Portfolio> portfolios) {
+        // TODO Question 1
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -108,23 +112,36 @@ public class ExercicePortfolio {
      * Au lieu de créer une classe ActionPrice, on utilise ici la classe utilitaire
      * Map.entry fournie par Java. Map.entry(k, v) construit un couple clé/valeur,
      * pratique pour manipuler des paires simples sans créer une nouvelle classe.
+     *
+     * @param portfolios les portefeuilles à parcourir
+     * @param prices     le prix de chaque action, par symbole
+     * @return les couples (symbole, prix) des actions uniques, triés par prix croissant
      */
     static List<Map.Entry<String, Double>> portfolioToAction(List<Portfolio> portfolios, Map<String, Double> prices) {
+        // TODO Question 2
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
      * Renvoie une liste de couples (action, trader). Chaque couple indique qu'un
      * trader possède une action donnée.
+     *
+     * @param portfolios les portefeuilles à parcourir
+     * @return un couple (action, trader) par action détenue
      */
     static List<Map.Entry<String, Trader>> actionTraderPairs(List<Portfolio> portfolios) {
+        // TODO Question 9
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
     /**
      * Renvoie une map associant à chaque action la liste des traders qui la possèdent.
+     *
+     * @param portfolios les portefeuilles à parcourir
+     * @return chaque action associée aux traders qui la détiennent
      */
     static Map<String, List<Trader>> tradersByAction(List<Portfolio> portfolios) {
+        // TODO Question 10
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -7,8 +7,6 @@ import java.util.Objects;
  *
  * Simple structure de donnée formée d'un nom et d'une ville.
  * Un Trader est un objet immutable.
- *
- * @author systho
  */
 public class Trader {
 

@@ -4,7 +4,7 @@ import util.Util;
 
 /**
  * Un ingrédient associé à la quantité et à l'unité dans lesquelles un plat l'emploie.
- * <p>
+ *
  * Le même ingrédient peut donc figurer en quantités différentes dans deux plats : c'est
  * l'association, pas l'ingrédient, qui porte la quantité.
  */

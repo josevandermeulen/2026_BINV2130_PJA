@@ -32,6 +32,7 @@ public class ExercicesPanaches {
      * @return la valeur maximale, ou un Optional vide s'il n'y a aucune transaction à Cambridge
      */
     public Optional<Integer> exercice1() {
+        // TODO Question 6
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -41,6 +42,7 @@ public class ExercicesPanaches {
      * @return une map associant à chaque trader de Cambridge son nombre de transactions
      */
     public Map<Trader, Long> exercice2() {
+        // TODO Question 7
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -50,6 +52,7 @@ public class ExercicesPanaches {
      * @return le nom le plus long, ou un Optional vide si aucune transaction ne dépasse 500
      */
     public Optional<String> exercice3() {
+        // TODO Question 8
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -59,6 +62,7 @@ public class ExercicesPanaches {
      * @return une map associant à chaque ville la moyenne des valeurs de ses transactions
      */
     public Map<String, Double> exercice4() {
+        // TODO Question 9
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -68,6 +72,7 @@ public class ExercicesPanaches {
      * @return la transaction minimale, ou un Optional vide s'il n'y a aucune transaction à Milan
      */
     public Optional<Transaction> exercice5() {
+        // TODO Question 10
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -77,6 +82,7 @@ public class ExercicesPanaches {
      * @return une map associant à chaque année la liste de ses transactions
      */
     public Map<Integer, List<Transaction>> exercice6() {
+        // TODO Question 11
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

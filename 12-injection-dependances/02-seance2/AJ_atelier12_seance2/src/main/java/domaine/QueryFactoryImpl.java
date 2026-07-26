@@ -5,12 +5,12 @@ package domaine;
  */
 public class QueryFactoryImpl implements QueryFactory {
 
-    @Override
     /**
      * Crée une requête vide, à compléter par son appelant.
      *
      * @return une nouvelle requête
      */
+    @Override
     public Query getQuery() {
         return new QueryImpl();
     }

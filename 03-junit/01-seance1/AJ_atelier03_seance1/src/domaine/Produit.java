@@ -14,9 +14,9 @@ import java.util.TreeMap;
 
 /**
  * Un produit du magasin et l'historique de ses prix successifs.
- * <p>
+ *
  * L'historique est daté : un prix vaut à partir de sa date et jusqu'à la suivante, de sorte que
- * {@link #getPrix(LocalDate)} rend le prix en vigueur à un jour donné. Deux produits sont
+ * getPrix(LocalDate) rend le prix en vigueur à un jour donné. Deux produits sont
  * identiques s'ils ont même nom, même marque et même rayon.
  */
 public class Produit  {
@@ -151,7 +151,7 @@ public class Produit  {
 
     /**
      * Renvoie un code de hachage calculé sur le nom, le rayon et la marque, cohérent avec
-     * {@link #equals(Object)}.
+     * equals(Object).
      *
      * @return le code de hachage du produit
      */

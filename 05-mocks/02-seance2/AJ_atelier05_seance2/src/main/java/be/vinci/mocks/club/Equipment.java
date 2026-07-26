@@ -2,7 +2,7 @@ package be.vinci.mocks.club;
 
 /**
  * Un équipement sportif du club, et son état d'emprunt.
- * <p>
+ *
  * Le code identifie l'équipement, le drapeau d'emprunt dit s'il est actuellement sorti du stock.
  */
 public class Equipment {

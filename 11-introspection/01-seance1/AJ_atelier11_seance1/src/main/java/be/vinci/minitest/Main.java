@@ -3,8 +3,8 @@ package be.vinci.minitest;
 import java.util.List;
 
 /**
- * Point d'entrée. Lance TestRunner sur SampleTests et affiche le rapport.
- * Fourni - aucune modification nécessaire.
+ * Programme de démonstration : exécute le mécanisme de la séance et affiche le rapport obtenu.
+ * Fourni — aucune modification nécessaire.
  *
  * Sortie attendue (ordre des tests peut varier) :
  *
@@ -17,9 +17,6 @@ import java.util.List;
  *          Erreur : Ce test échoue intentionnellement
  *
  *   Résultat : 3 réussi(s), 1 échoué(s), 4 au total
- */
-/**
- * Programme de démonstration : exécute le mécanisme de la séance et affiche le rapport obtenu.
  */
 public class Main {
 

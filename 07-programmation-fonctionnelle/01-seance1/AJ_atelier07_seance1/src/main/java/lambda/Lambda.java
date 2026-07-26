@@ -17,7 +17,7 @@ public class Lambda {
      * @return une liste contenant les éléments qui respectent match
      */
     public static <T> List<T> allMatches(List<T> list, Predicate<T> match) {
-        //TODO
+        // TODO Question 14
         return null;
     }
 
@@ -29,7 +29,7 @@ public class Lambda {
      * @return une liste contenant les éléments transformés par transform
      */
     public static <P, R> List<R> transformAll(List<P> list, Function<P, R> transform) {
-        //TODO
+        // TODO Question 15
         return null;
     }
 
@@ -41,7 +41,7 @@ public class Lambda {
      * @return une liste contenant les éléments qui respectent match
      */
     public static <T> List<T> filter(List<T> list, Predicate<T> match) {
-        //TODO
+        // TODO Question 17
         return null;
     }
 
@@ -53,7 +53,7 @@ public class Lambda {
      * @return une liste contenant les éléments transformés par transform
      */
     public static <P, R> List<R> map(List<P> list, Function<P, R> transform) {
-        //TODO
+        // TODO Question 18
         return null;
     }
 

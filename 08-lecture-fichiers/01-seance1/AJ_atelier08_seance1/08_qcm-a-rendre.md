@@ -4,8 +4,8 @@
 question vaut **2 points**, pour un total de 20 points.
 
 Ce questionnaire est le **treizième QCM** de l'évaluation continue. Il compte au même titre que
-les douze QCM mooVin : la note d'évaluation continue retient les 11 meilleurs résultats sur 13,
-pour 10 % de la note de l'unité d'enseignement. Un QCM non réalisé est coté 0.
+les douze QCM mooVin : la note d'évaluation continue retient les 12 meilleurs résultats sur 14,
+pour 10 % de la note de l'unité d'enseignement. Une évaluation non réalisée est cotée 0.
 
 ## Ce qu'on vous demande
 

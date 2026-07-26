@@ -2,7 +2,7 @@ package domaine;
 
 /**
  * La fabrique de requêtes, dépendance du serveur proxy.
- * <p>
+ *
  * Passer par une fabrique plutôt que d'instancier directement une requête est ce qui rend
  * l'implémentation interchangeable — et donc injectable.
  */

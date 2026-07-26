@@ -2,7 +2,7 @@ package deadlock;
 
 /**
  * Les virements entre comptes, verrouillés de façon à ne pas s'interbloquer.
- * <p>
+ *
  * Deux transferts croisés qui verrouilleraient chacun leur compte source puis leur compte
  * destination s'attendraient mutuellement pour toujours. La parade tient en une règle : acquérir
  * toujours les verrous dans le même ordre global, ici celui des numéros de compte.

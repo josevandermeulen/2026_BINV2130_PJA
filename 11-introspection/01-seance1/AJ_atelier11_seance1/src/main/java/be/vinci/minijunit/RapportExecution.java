@@ -40,12 +40,12 @@ public class RapportExecution {
         return resultats.stream().filter(r -> r.getStatut() == statut).count();
     }
 
-    @Override
     /**
      * Renvoie le détail des tests exécutés, suivi du total par statut.
      *
      * @return la représentation textuelle du rapport
      */
+    @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         for (ResultatTest resultat : resultats) {

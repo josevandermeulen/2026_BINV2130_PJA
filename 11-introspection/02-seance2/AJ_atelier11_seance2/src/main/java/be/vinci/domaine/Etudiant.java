@@ -6,14 +6,10 @@ import be.vinci.validation.Positif;
 import be.vinci.validation.Valide;
 
 /**
- * Un étudiant dont les contraintes sont déclarées par annotations sur les
- * champs — c'est le Validateur qui les fait respecter, pas le constructeur.
- */
-/**
  * Un étudiant, dont les contraintes de validité sont portées par des annotations sur ses champs
  * plutôt que par du code de contrôle.
- * <p>
- * C'est le {@link be.vinci.validation.Validateur} qui, par introspection, lit ces annotations et
+ *
+ * C'est le be.vinci.validation.Validateur qui, par introspection, lit ces annotations et
  * en tire les violations : la classe elle-même ne valide rien.
  */
 public class Etudiant {

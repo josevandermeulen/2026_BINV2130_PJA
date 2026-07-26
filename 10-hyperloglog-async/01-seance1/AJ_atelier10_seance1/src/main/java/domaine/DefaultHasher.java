@@ -2,7 +2,7 @@ package domaine;
 
 /**
  * L'empreinte par défaut employée par HyperLogLog.
- * <p>
+ *
  * Le calcul est fourni tout fait : il relève de l'algorithme, pas de l'exercice.
  */
 public class DefaultHasher implements Hasher {

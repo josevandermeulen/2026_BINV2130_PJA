@@ -4,7 +4,7 @@ import java.util.Set;
 
 /**
  * Un stage : son intitulé, son lieu, sa semaine, son sport, son moniteur et les enfants inscrits.
- * <p>
+ *
  * L'interface est extraite de l'implémentation à la Question 1 de la séance, précisément pour
  * qu'un test puisse lui substituer un stub ou un mock.
  */
@@ -53,7 +53,7 @@ public interface Stage {
 
     /**
      * Supprime le moniteur qui assure le stage.
-     * <p>
+     *
      * Attention il faut s'assurer que le moniteur supprime également le stage de sa liste des
      * stages.
      *

@@ -3,7 +3,7 @@ import java.util.Objects;
 // Question 1 : la classe Client — numéro attribué automatiquement
 /**
  * Un client de la pizzeria.
- * <p>
+ *
  * Chaque client reçoit à sa création un numéro unique, attribué automatiquement par un compteur
  * partagé par toutes les instances. C'est ce numéro, et lui seul, qui identifie un client : deux
  * homonymes restent deux clients distincts.
@@ -102,7 +102,7 @@ public class Client {
     }
 
     /**
-     * Renvoie un code de hachage calculé sur le numéro, cohérent avec {@link #equals(Object)}.
+     * Renvoie un code de hachage calculé sur le numéro, cohérent avec equals(Object).
      *
      * @return le code de hachage du client
      */

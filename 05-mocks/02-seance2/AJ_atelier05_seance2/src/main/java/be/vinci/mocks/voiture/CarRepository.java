@@ -6,7 +6,7 @@ import java.util.List;
 
 /**
  * A stand-in data source for cars and brands.
- * <p>
+ *
  * Every method deliberately sleeps before answering, to imitate a slow database. That delay is the
  * reason tests must mock this class rather than use it: it is what makes the difference between a
  * suite that runs instantly and one that takes seconds.
@@ -82,7 +82,7 @@ public class CarRepository {
     }
 
     /**
-     * Stores a car, without checking for duplicates — that check belongs to {@link CarService}.
+     * Stores a car, without checking for duplicates — that check belongs to CarService.
      *
      * @param car the car to store
      * @return true if the car was stored

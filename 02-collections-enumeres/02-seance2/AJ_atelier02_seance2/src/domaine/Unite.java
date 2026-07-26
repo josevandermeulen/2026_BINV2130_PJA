@@ -2,8 +2,8 @@ package domaine;
 
 /**
  * Les unités de mesure utilisables pour quantifier un ingrédient.
- * <p>
- * Chaque unité connaît son abréviation, seule forme affichée dans une recette. {@link #NEANT} est
+ *
+ * Chaque unité connaît son abréviation, seule forme affichée dans une recette. NEANT est
  * l'unité vide, pour les ingrédients qui se comptent sans unité (« 3 œufs »).
  */
 public enum Unite {

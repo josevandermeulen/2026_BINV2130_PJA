@@ -25,7 +25,7 @@ En partie 1, vous avez constaté que gérer l'état d'une tâche à côté d'une
 
 ### Consignes
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance2`. Récupérez les classes fournies dans `AJ_atelier04_seance2/` : [`TodoList.java`](src/TodoList.java) dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la séance 1 (voir aussi `../../01-seance1/02-solution/`). Appuyez-vous sur votre spécification complétée de la séance 1 ; une solution de cette spécification est fournie dans `../../01-seance1/02-solution/04A_solutions-scenarios-de-tests.md`.
+Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance2`. Récupérez les classes fournies dans `AJ_atelier04_seance2/` : [`TodoList.java`](src/TodoList.java) dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la séance 1 (voir aussi `../../01-seance1/AJ_atelier04_seance1_solution/`). Appuyez-vous sur votre spécification complétée de la séance 1 ; une solution de cette spécification est fournie dans `../../01-seance1/AJ_atelier04_seance1_solution/04A_solutions-scenarios-de-tests.md`.
 
 ### TDD lors de la mise à jour de fonctionnalités existantes
 

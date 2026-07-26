@@ -29,7 +29,7 @@ public class Prix {
     private SortedMap<Integer, Double> prixParQuantite = new TreeMap<Integer, Double>();
 
     /**
-     * Crée un prix sans promotion : {@link #getPrixPromo} y renverra toujours le prix de base.
+     * Crée un prix sans promotion : getPrixPromo y renverra toujours le prix de base.
      */
     public Prix() {
         typePromo = null;

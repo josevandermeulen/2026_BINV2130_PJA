@@ -1,7 +1,7 @@
 /**
  * Boîte à outils de validation des paramètres, partagée par les classes du domaine.
- * <p>
- * Chaque méthode lève une {@link IllegalArgumentException} dès que la valeur reçue ne respecte pas
+ *
+ * Chaque méthode lève une IllegalArgumentException dès que la valeur reçue ne respecte pas
  * la contrainte annoncée, ce qui évite de répéter le même test dans chaque constructeur.
  */
 public interface Util {

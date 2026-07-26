@@ -3,12 +3,10 @@ package domaine;
 import util.Util;
 
 /**
- * La classe Enfant représente un enfant. Elle connaît son nom et son numéro
+ * Un enfant susceptible d'être inscrit à des stages sportifs : il connaît son nom et son numéro
  * de téléphone.
+ *
  * Cette classe est immuable.
- */
-/**
- * Un enfant susceptible d'être inscrit à des stages sportifs.
  */
 public class Enfant {
     /**
@@ -25,9 +23,8 @@ public class Enfant {
      *
      * @param nom       Le nom de l'enfant
      * @param telephone Le téléphone de l'enfant
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public Enfant(String nom, String telephone) {
         Util.checkString(nom);

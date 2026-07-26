@@ -1,10 +1,10 @@
 package domaine;
 
 /**
- * Les formes de promotion applicables à un {@link Prix}.
- * <p>
+ * Les formes de promotion applicables à un Prix.
+ *
  * Le type détermine comment interpréter la valeur de la promo : montant fixe en euros pour
- * {@link #PUB}, pourcentage de réduction pour {@link #SOLDE} et {@link #DESTOCKAGE}, ce dernier
+ * PUB, pourcentage de réduction pour SOLDE et DESTOCKAGE, ce dernier
  * garantissant en outre un prix plancher d'un euro.
  */
 public enum TypePromo {

@@ -6,12 +6,20 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+/**
+ * Tests de HyperLogLog. Le hachage est neutralisé par un stub, de sorte que chaque test vise
+ * un registre connu d'avance plutôt que de dépendre d'un vrai hachage.
+ */
 class HyperLogLogTest {
 
     @Nested
     @DisplayName("Question 6 : ajouter met à jour le bon registre")
     class Question6 {
 
+        /**
+         * Vérifie qu'ajouter une valeur incrémente le registre désigné par l'index du hash,
+         * avec le nombre de zéros de tête attendu.
+         */
         @Test
         void ajouterMetAJourLeBonRegistreAvecLeBonNombreDeZeros() {
             // TODO Question 6 : HyperLogLog (4 bits d'index) avec un HasherStub fixé à 0x12345678,
@@ -24,6 +32,10 @@ class HyperLogLogTest {
     @DisplayName("Question 7 : ajouter ne diminue jamais un registre")
     class Question7 {
 
+        /**
+         * Vérifie qu'ajouter une valeur ne fait jamais baisser un registre déjà plus élevé :
+         * HyperLogLog ne retient que le maximum.
+         */
         @Test
         void ajouterNeDiminueJamaisUnRegistreDejaPlusGrand() {
             // TODO Question 7 : HasherStub fixé à 0x1FFFFFFF, registres[1] forcé à 5,
@@ -36,6 +48,10 @@ class HyperLogLogTest {
     @DisplayName("Question 8 : estimation proche de la réalité")
     class Question8 {
 
+        /**
+         * Vérifie que l'estimation reste dans la marge d'erreur attendue face à un nombre
+         * connu de valeurs distinctes.
+         */
         @Test
         void estimationProcheDuNombreReelDeValeursDistinctes() {
             // TODO Question 8 : un vrai DefaultHasher (4 bits d'index), 500 valeurs distinctes (avec

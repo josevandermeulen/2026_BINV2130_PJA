@@ -375,6 +375,8 @@ Pour tirer parti de l'IA sans perdre les bénéfices du TDD, il faut continuer �
 
 *QCM de cette semaine sur mooVin : à compléter pour le lundi 05/10/2026 à 20h.*
 
+*Remise cotée de cette semaine : l'archive zip du projet de cette séance, à déposer sur mooVin pour le lundi 05/10/2026 à 20h — consignes et barème dans [`04_zip-a-rendre.md`](04_zip-a-rendre.md).*
+
 *Passez aux [exercices](04A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

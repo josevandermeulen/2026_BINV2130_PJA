@@ -16,6 +16,7 @@ public class ExercicesEmployes {
      * @return la liste des employés dont le genre est HOMME
      */
     public List<Employe> listeDesHommes(List<Employe> employes) {
+        // TODO Question 4
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -3,8 +3,8 @@ package compteur_future;
 import java.util.concurrent.CompletableFuture;
 
 /**
- * Une course entre compteurs, orchestrée par des {@link CompletableFuture}.
- * <p>
+ * Une course entre compteurs, orchestrée par des CompletableFuture.
+ *
  * Tout l'intérêt est de lancer les compteurs sans les attendre un à un : la course dure le temps
  * du plus lent, non la somme des temps de chacun.
  */

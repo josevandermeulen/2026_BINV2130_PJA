@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Optional;
 
 /**
- * Permet de vérifier votre implémentation de {@link AnalyticsService} : lancez le `main`
+ * Permet de vérifier votre implémentation de AnalyticsService : lancez le `main`
  * et comparez la sortie avec celle donnée dans l'énoncé.
  */
 public class ExamRunner {

@@ -1,11 +1,8 @@
 package be.vinci.minitest;
 
 /**
- * Encapsule le résultat d'un seul cas de test.
- * Fourni - aucune modification nécessaire.
- */
-/**
  * Le résultat d'une méthode de test exécutée par le mini-framework.
+ * Fourni — aucune modification nécessaire.
  */
 public class TestResult {
 

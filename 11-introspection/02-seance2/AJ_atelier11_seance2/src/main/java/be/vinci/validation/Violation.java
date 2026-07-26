@@ -1,10 +1,6 @@
 package be.vinci.validation;
 
 /**
- * Une violation de validation : le nom du champ fautif et le message expliquant
- * la règle enfreinte.
- */
-/**
  * Une contrainte non respectée : le champ fautif et ce qu'on lui reproche.
  */
 public class Violation {
@@ -42,12 +38,12 @@ public class Violation {
         return message;
     }
 
-    @Override
     /**
      * Renvoie le champ fautif suivi de son message.
      *
      * @return la représentation textuelle de la violation
      */
+    @Override
     public String toString() {
         return champ + " : " + message;
     }

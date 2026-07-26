@@ -5,7 +5,7 @@
 | S1 | 14/09/2026 | 20/09/2026 | 01 - Rappels | **mer 16/09/2026** | José Vander Meulen + Jonathan Fallon | rentrée le lundi : QCM reporté au mercredi ; **deux séances de théorie** — lun 14/09 pour S1, ven 18/09 pour S2 |
 | S2 | 21/09/2026 | 27/09/2026 | 02 - Collections, énumérés | lun 21/09/2026 | José Vander Meulen + Jonathan Fallon | |
 | S3 | 28/09/2026 | 04/10/2026 | 03 - JUnit | lun 28/09/2026 | José Vander Meulen + Claude Michiels | |
-| S4 | 05/10/2026 | 11/10/2026 | 04 - TDD | lun 05/10/2026 | José Vander Meulen + Claude Michiels | |
+| S4 | 05/10/2026 | 11/10/2026 | 04 - TDD | lun 05/10/2026 | José Vander Meulen + Claude Michiels | double échéance le lun 05/10 20h : QCM mooVin de la semaine + remise du zip coté (14e évaluation) |
 | S5 | 12/10/2026 | 18/10/2026 | 05 - Mocks | lun 12/10/2026 | José Vander Meulen + Claude Michiels | |
 | S6 | 19/10/2026 | 25/10/2026 | 06 - Streams : les bases | lun 19/10/2026 | José Vander Meulen + Jonathan Fallon | |
 | — | 26/10/2026 | 02/11/2026 | **Congé d'Automne FWB (calendrier officiel HE Vinci), sautée** | | | contient Toussaint (dim 01/11) et Fête des morts (lun 02/11) |
@@ -20,6 +20,9 @@ Le créneau de **théorie en autonomie** a lieu le vendredi matin et prépare le
 
 La colonne **QCM (20h)** donne la fermeture du QCM mooVin coté de la semaine (10 % de l'UE) : toujours 20h, le lundi sauf exception (rentrée, jour férié, congé : le QCM est alors reporté plus tard dans la semaine, la Note le signale). Elle doit rester cohérente avec la clé `quiz` de `scripts/dates.yml` (publication du corrigé à 20h15) et avec la ligne de rappel du `NNA_1_theorie.md` de la séance 1.
 
-Un **treizième QCM** s'ajoute aux douze QCM hebdomadaires. Il n'a pas de date de sortie propre : il est publié avec la théorie et les exercices de la semaine 8, comme le reste du contenu. Seule sa remise est datée — un fichier Markdown complété, déposé sur mooVin pour le lundi 09/11/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Il compte 10 questions cotées 2 points chacune et est coté au même titre que les autres (la note d'évaluation continue retient les 11 meilleurs résultats sur 13).
+Deux remises hors mooVin s'ajoutent aux douze QCM hebdomadaires, portant l'évaluation continue à **quatorze résultats** dont la note retient les **12 meilleurs**. Ni l'une ni l'autre n'a de date de sortie propre : leur énoncé est publié avec la théorie et les exercices de leur semaine, comme le reste du contenu. Seule leur remise est datée.
+
+- **Treizième évaluation — le QCM en Markdown**, publié en semaine 8 : 10 questions cotées 2 points chacune, remises sous la forme d'un fichier Markdown complété, déposé sur mooVin pour le lundi 09/11/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine.
+- **Quatorzième évaluation — la remise d'un zip**, publiée en semaine 4 : les étudiants déposent le projet de la séance 1 sous la forme d'une archive zip, cotée sur 20 points sur sa seule **structure** (un dossier `src` à la racine de l'archive, le code Java n'est pas évalué), pour le lundi 05/10/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Comme le QCM en Markdown entraîne au format de réponse de l'examen, celle-ci entraîne au geste de dépôt de l'examen.
 
 Congé Noël FWB (~21/12/2026–03/01/2027) hors plage, pas d'impact sur ce calendrier.

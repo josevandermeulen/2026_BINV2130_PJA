@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * La lecture des fichiers de logs, isolée derrière une interface.
- * <p>
+ *
  * C'est cette abstraction qui rend l'analyse testable : un stub peut renvoyer des lignes en dur,
  * sans toucher au disque.
  */

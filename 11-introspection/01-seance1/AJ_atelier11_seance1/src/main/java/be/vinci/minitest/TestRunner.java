@@ -71,6 +71,11 @@ public class TestRunner {
      *
      * Note : la déclaration "throws" ici rend les catch de run() valides.
      *        method.invoke() emballe toute exception du test dans InvocationTargetException.
+     *
+     * @param method   la méthode de test à exécuter
+     * @param instance l'objet sur lequel l'exécuter
+     * @throws InvocationTargetException si le corps du test lève une exception
+     * @throws IllegalAccessException    si la méthode n'est pas accessible
      */
     private void invoque(Method method, Object instance)
             throws InvocationTargetException, IllegalAccessException {

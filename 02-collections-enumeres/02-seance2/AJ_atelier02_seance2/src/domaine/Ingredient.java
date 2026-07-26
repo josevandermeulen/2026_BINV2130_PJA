@@ -6,7 +6,7 @@ import java.util.Objects;
 
 /**
  * Un ingrédient, identifié par son seul nom.
- * <p>
+ *
  * L'égalité porte sur le nom : c'est ce qui permet à un plat de retrouver un ingrédient dans sa
  * liste, et d'en interdire deux exemplaires.
  */
@@ -63,7 +63,7 @@ public class Ingredient {
     }
 
     /**
-     * Renvoie un code de hachage calculé sur le nom, cohérent avec {@link #equals(Object)}.
+     * Renvoie un code de hachage calculé sur le nom, cohérent avec equals(Object).
      *
      * @return le code de hachage de l'ingrédient
      */

@@ -11,7 +11,7 @@ import java.util.Set;
 
 /**
  * Un plat de cuisine : sa fiche d'identité, ses ingrédients et sa recette.
- * <p>
+ *
  * La durée du plat n'est jamais fixée directement : elle est recalculée à chaque ajout, retrait ou
  * remplacement d'instruction, et vaut toujours la somme des durées de la recette. Un ingrédient ne
  * peut figurer qu'une fois dans un plat, quelle que soit sa quantité.
@@ -19,7 +19,7 @@ import java.util.Set;
 public class Plat {
 
     /**
-     * Le niveau de difficulté d'un plat, de {@code X} (le plus simple) à {@code XXXXX}, affiché
+     * Le niveau de difficulté d'un plat, de `X` (le plus simple) à `XXXXX`, affiché
      * sous forme d'étoiles.
      */
     public enum Difficulte {
@@ -36,7 +36,7 @@ public class Plat {
     }
 
     /**
-     * Le coût d'un plat, de {@code $} (le plus économique) à {@code $$$$$}, affiché en euros.
+     * Le coût d'un plat, de `$` (le plus économique) à `$$$$$`, affiché en euros.
      */
     public enum Cout {
         $, $$, $$$, $$$$, $$$$$;

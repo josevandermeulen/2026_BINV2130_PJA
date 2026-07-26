@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * La lecture réelle des fichiers de logs, sur le disque.
- * <p>
+ *
  * Chaque méthode ouvre le fichier dans un try-with-resources : le flux est refermé même si la
  * lecture échoue en cours de route.
  */

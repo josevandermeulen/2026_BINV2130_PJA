@@ -10,7 +10,7 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * L'envoi effectif d'une requête et l'affichage de la réponse.
- * <p>
+ *
  * L'appel part de façon asynchrone : le proxy reste disponible pour la requête suivante sans
  * attendre la réponse de la précédente.
  */

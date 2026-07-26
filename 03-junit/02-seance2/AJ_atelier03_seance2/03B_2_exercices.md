@@ -36,7 +36,7 @@ Cette séance poursuit le travail entamé sur l'application de gestion de prix d
 
 Pour cette séance, nous allons repartir de la solution de la séance 1.
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier03_seance2`. Ajoutez-y les classes de la solution de l'atelier 3 séance 1 (voir `../../01-seance1/02-solution/`), qui contiennent déjà la classe [`PrixTest`](tests/domaine/PrixTest.java). Faites attention aux packages !
+Dans IntelliJ, créez un projet intitulé `AJ_atelier03_seance2`. Ajoutez-y les classes de la solution de l'atelier 3 séance 1 (voir `../../01-seance1/AJ_atelier03_seance1_solution/`), qui contiennent déjà la classe [`PrixTest`](tests/domaine/PrixTest.java). Faites attention aux packages !
 
 Vérifiez que tout fonctionne bien en exécutant la classe [`Main`](src/main/Main.java) du package `main` et en relançant `PrixTest`.
 

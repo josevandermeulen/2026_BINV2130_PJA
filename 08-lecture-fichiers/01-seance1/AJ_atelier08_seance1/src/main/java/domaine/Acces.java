@@ -2,7 +2,7 @@ package domaine;
 
 /**
  * Une ligne de log analysée : qui s'est connecté, quand et depuis quelle adresse IP.
- * <p>
+ *
  * Les trois champs restent des chaînes brutes, telles que lues dans le fichier — l'horodatage
  * n'est pas converti en date, l'IP n'est pas validée à la construction.
  */

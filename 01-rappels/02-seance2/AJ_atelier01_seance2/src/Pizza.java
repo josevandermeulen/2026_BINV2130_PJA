@@ -4,10 +4,10 @@ import java.util.Iterator;
 // Question 3 : la classe abstraite Pizza — constructeurs (le second invoque le premier)
 /**
  * Une pizza, c'est-à-dire un titre, une description et les ingrédients qui la composent.
- * <p>
+ *
  * La classe est abstraite : elle porte le comportement commun aux pizzas de la carte
- * ({@link PizzaComposee}) et à celles que le client compose lui-même ({@link PizzaComposable}).
- * Elle est itérable, de sorte qu'une boucle {@code for} parcoure directement ses ingrédients.
+ * (PizzaComposee) et à celles que le client compose lui-même (PizzaComposable).
+ * Elle est itérable, de sorte qu'une boucle `for` parcoure directement ses ingrédients.
  */
 public abstract class Pizza implements Iterable<Ingredient> {
     /**

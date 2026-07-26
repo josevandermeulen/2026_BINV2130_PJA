@@ -6,8 +6,8 @@ import java.util.stream.IntStream;
 
 /**
  * Estime le nombre de valeurs distinctes vues, sans les mémoriser.
- * <p>
- * Là où un {@code Set} garde chaque valeur, cette structure ne retient qu'un tableau de registres
+ *
+ * Là où un `Set` garde chaque valeur, cette structure ne retient qu'un tableau de registres
  * de taille fixe : la mémoire consommée ne dépend pas du nombre de valeurs traitées, au prix d'un
  * résultat approché. La précision se règle au constructeur, par le nombre de bits d'index.
  */
@@ -50,7 +50,7 @@ public class HyperLogLog {
 
     /**
      * Prend en compte une valeur dans l'estimation.
-     * <p>
+     *
      * Ajouter deux fois la même valeur ne change rien : c'est ce qui permet de compter des
      * valeurs distinctes sans les stocker.
      *
@@ -82,7 +82,7 @@ public class HyperLogLog {
 
     /**
      * Fusionne un autre estimateur dans celui-ci, registre par registre.
-     * <p>
+     *
      * C'est ce qui permet d'estimer les valeurs distinctes de plusieurs sources sans jamais les
      * rassembler : chaque source est estimée séparément, puis les estimateurs sont fusionnés.
      *

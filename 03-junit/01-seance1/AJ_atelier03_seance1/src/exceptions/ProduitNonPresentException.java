@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  * Signale une opération sur un produit absent de la liste.
- * <p>
+ *
  * Non contrôlée : c'est une erreur d'usage, pas un cas de fonctionnement normal.
  */
 public class ProduitNonPresentException extends RuntimeException {

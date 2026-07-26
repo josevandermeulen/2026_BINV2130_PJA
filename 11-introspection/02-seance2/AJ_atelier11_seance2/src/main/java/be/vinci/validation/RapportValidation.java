@@ -5,12 +5,8 @@ import java.util.Collections;
 import java.util.List;
 
 /**
- * Rapport de validation d'un objet : la liste des violations relevées.
- * Un rapport sans violation signifie que l'objet est valide.
- */
-/**
  * Le bilan d'une validation : toutes les violations relevées sur un objet.
- * <p>
+ *
  * Le validateur ne s'arrête pas à la première faute : le rapport les rassemble toutes, pour que
  * l'appelant les voie d'un coup.
  */
@@ -54,12 +50,12 @@ public class RapportValidation {
         return Collections.unmodifiableList(violations);
     }
 
-    @Override
     /**
      * Renvoie « valide », ou la liste des violations relevées.
      *
      * @return la représentation textuelle du rapport
      */
+    @Override
     public String toString() {
         if (estValide()) {
             return "Aucune violation : objet valide.";

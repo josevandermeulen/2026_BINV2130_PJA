@@ -7,10 +7,6 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * La classe Sport représente un sport. Elle connaît son intitulé
- * et les moniteurs compétents dans ce sport.
- */
-/**
  * Un sport, et les moniteurs compétents pour l'encadrer.
  */
 public class Sport {
@@ -19,7 +15,6 @@ public class Sport {
      */
     private String intitule;
     /**
-     *
      * Les moniteurs compétents dans la discipline sportive.
      */
     private Set<Moniteur> moniteurs;
@@ -28,8 +23,8 @@ public class Sport {
      * Crée un sport
      *
      * @param intitule L'intitulé du sport
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public Sport(String intitule) {
         Util.checkString(intitule);
@@ -52,8 +47,8 @@ public class Sport {
      *
      * @param moniteur Le moniteur à ajouter à ceux compétents dans le sport.
      * @return true si le moniteur a été ajouté
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean ajouterMoniteur(Moniteur moniteur) {
         if (this.contientMoniteur(moniteur)) {
@@ -68,8 +63,8 @@ public class Sport {
      *
      * @return true si le moniteur a bien été supprimé
      * @param moniteur le moniteur à supprimer de la liste des compétents dans ce sport.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean supprimerMoniteur(Moniteur moniteur) {
         if (!this.contientMoniteur(moniteur)) {
@@ -84,8 +79,8 @@ public class Sport {
      *
      * @return true si le moniteur est compétent.
      * @param moniteur le moniteur à tester.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean contientMoniteur(Moniteur moniteur) {
         Util.checkObject(moniteur);

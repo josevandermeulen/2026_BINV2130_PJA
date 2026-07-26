@@ -27,6 +27,8 @@ Nous développons une application de gestion de tâches : une [`TodoList`](src/T
 
 Assurez-vous d'abord d'avoir lu l'intégralité de la théorie ([`04A_1_theorie.md`](04A_1_theorie.md)) et visionné les vidéos ci-dessus. Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance1`. Récupérez les classes fournies dans `AJ_atelier04_seance1/` : `TodoList.java` dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état où le tutoriel de la théorie les laisse. Pour chaque question, respectez scrupuleusement le cycle TDD : le test d'abord, il doit échouer pour de bonnes raisons, puis le code minimum, puis le refactor éventuel.
 
+À la fin de la séance, le projet obtenu fait l'objet d'une remise cotée : vous le déposez sur mooVin sous la forme d'une archive zip, dont la structure est décrite dans [`04_zip-a-rendre.md`](04_zip-a-rendre.md).
+
 ### Supprimer une tâche
 
 **Question 1** *(UC3 « Supprimer une tâche de la liste »)* : Veuillez faire du TDD pour ces deux scénarios de test :

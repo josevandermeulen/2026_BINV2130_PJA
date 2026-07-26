@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 /**
  * Comparaison des deux façons de compter des adresses IP distinctes : exactement, ou par
  * estimation.
- * <p>
+ *
  * Le comptage exact mémorise chaque adresse rencontrée ; l'estimation par HyperLogLog n'en retient
  * aucune. C'est l'écart de mémoire entre les deux qui fait l'intérêt de la séance, le résultat
  * approché étant le prix à payer.

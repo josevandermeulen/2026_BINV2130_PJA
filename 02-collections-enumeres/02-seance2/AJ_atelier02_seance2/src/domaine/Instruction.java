@@ -6,9 +6,9 @@ import java.time.Duration;
 
 /**
  * Une étape de la recette d'un plat : ce qu'il faut faire, et le temps que cela prend.
- * <p>
+ *
  * La durée est exprimée en minutes entières ; c'est en additionnant celles de ses instructions
- * qu'un {@link Plat} obtient sa durée totale.
+ * qu'un Plat obtient sa durée totale.
  */
 public class Instruction {
     private String description;
@@ -78,7 +78,7 @@ public class Instruction {
     }
 
     /**
-     * Renvoie la durée au format {@code (hh:mm)} suivie de la description.
+     * Renvoie la durée au format `(hh:mm)` suivie de la description.
      *
      * @return la représentation textuelle de l'instruction
      */

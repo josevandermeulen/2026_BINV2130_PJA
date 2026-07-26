@@ -2,7 +2,7 @@ package domaine;
 
 /**
  * Représente une transaction financière.
- * <p>
+ *
  * Simple structure de donnée liant un Trader, une année et une valeur.
  * Une transaction est un objet immutable.
  */

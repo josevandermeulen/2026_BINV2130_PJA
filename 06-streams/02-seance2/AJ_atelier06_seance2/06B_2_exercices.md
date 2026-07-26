@@ -41,7 +41,7 @@ Comme en séance 1, chaque méthode à compléter renvoie une valeur plutôt que
 
 ### Gestion du vide (type `Optional`)
 
-Ouvrez la classe [`ExercicesOptional`](src/main/java/main/ExercicesOptional.java) (package `main`). Dans les exercices sur les reduce de la séance 1, on utilisait la version de `reduce` avec deux paramètres : une valeur neutre et un accumulateur. Copiez-collez vos solutions pour le `reduce1` et `reduce2` (ou reprenez-les dans `../../01-seance1/02-solution/`), puis modifiez-les pour utiliser maintenant la version qui prend uniquement un accumulateur en paramètre et qui renvoie un objet `Optional`.
+Ouvrez la classe [`ExercicesOptional`](src/main/java/main/ExercicesOptional.java) (package `main`). Dans les exercices sur les reduce de la séance 1, on utilisait la version de `reduce` avec deux paramètres : une valeur neutre et un accumulateur. Copiez-collez vos solutions pour le `reduce1` et `reduce2` (ou reprenez-les dans `../../01-seance1/AJ_atelier06_seance1_solution/`), puis modifiez-les pour utiliser maintenant la version qui prend uniquement un accumulateur en paramètre et qui renvoie un objet `Optional`.
 
 **Question 1** :
 Dans la méthode `optional1` (exercice trouvant la valeur max), utilisez `orElse` et renvoyez -1 s'il n'y a pas de transactions.

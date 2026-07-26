@@ -2,7 +2,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Liste de tâches (de simples {@link String}) que l'on peut ajouter et rechercher.
+ * Liste de tâches (de simples String) que l'on peut ajouter et rechercher.
  */
 public class TodoList {
 
@@ -12,7 +12,7 @@ public class TodoList {
      * Ajoute une tâche à la liste.
      *
      * @param task tâche à ajouter
-     * @return {@code true} si la tâche a été ajoutée, {@code false} si elle est nulle, vide ou déjà présente
+     * @return `true` si la tâche a été ajoutée, `false` si elle est nulle, vide ou déjà présente
      */
     public boolean addTask(String task) {
         if (task == null) {
@@ -32,7 +32,7 @@ public class TodoList {
      * Indique si la tâche est présente dans la liste.
      *
      * @param task tâche recherchée
-     * @return {@code true} si la tâche est présente
+     * @return `true` si la tâche est présente
      */
     public boolean containsTask(String task) {
         return tasks.contains(task);

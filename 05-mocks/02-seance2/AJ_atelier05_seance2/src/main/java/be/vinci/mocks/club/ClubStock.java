@@ -5,7 +5,7 @@ import java.util.List;
 
 /**
  * Le stock d'équipements du club, tenant lieu de source de données.
- * <p>
+ *
  * Chaque méthode attend délibérément avant de répondre, pour imiter une base lente : c'est cette
  * lenteur qui justifie de la remplacer par un mock dans les tests plutôt que de s'en servir.
  */

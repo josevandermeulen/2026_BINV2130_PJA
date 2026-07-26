@@ -4,7 +4,7 @@ import java.util.Objects;
 
 /**
  * A car, identified by its brand and model.
- * <p>
+ *
  * Equality is based on both fields: two cars of the same brand and model are the same car, which is
  * how the repository detects duplicates.
  */
@@ -71,7 +71,7 @@ public class Car {
     }
 
     /**
-     * Returns a hash code based on model and brand, consistent with {@link #equals(Object)}.
+     * Returns a hash code based on model and brand, consistent with equals(Object).
      *
      * @return the hash code of the car
      */

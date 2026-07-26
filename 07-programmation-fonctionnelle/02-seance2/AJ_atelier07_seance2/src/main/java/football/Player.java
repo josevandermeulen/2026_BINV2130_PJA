@@ -66,7 +66,7 @@ public class Player {
 
     /**
      * Renvoie un code de hachage calculé sur le nom et la nationalité, cohérent avec
-     * {@link #equals(Object)}.
+     * equals(Object).
      *
      * @return le code de hachage du joueur
      */

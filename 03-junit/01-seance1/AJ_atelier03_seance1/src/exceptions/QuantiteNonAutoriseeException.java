@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  * Signale l'achat d'une quantité pour laquelle aucun palier de prix n'a été défini.
- * <p>
+ *
  * Non contrôlée : c'est une erreur d'usage, pas un cas de fonctionnement normal.
  */
 public class QuantiteNonAutoriseeException extends RuntimeException {

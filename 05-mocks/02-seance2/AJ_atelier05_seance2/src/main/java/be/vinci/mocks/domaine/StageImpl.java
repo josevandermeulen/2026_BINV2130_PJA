@@ -33,7 +33,6 @@ public class StageImpl implements Stage {
      */
     private Moniteur moniteur;
     /**
-     *
      * Les enfants inscrits au stage.
      */
     private final Set<Enfant> inscrits = new HashSet<>();
@@ -46,8 +45,8 @@ public class StageImpl implements Stage {
      * @param numeroDeSemaine Le numéro de la semaine durant laquelle a lieu le
      *                        stage (entre 1 et 8)
      * @param sport           Le sport concerné par le stage
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public StageImpl(String intitule, String lieu, int numeroDeSemaine, Sport sport) {
         Util.checkString(intitule);
@@ -110,9 +109,8 @@ public class StageImpl implements Stage {
      *
      * @return true si le moniteur a bien été enregistré
      * @param moniteur le moniteur qui va assurer le stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean enregistrerMoniteur(Moniteur moniteur) {
@@ -138,7 +136,6 @@ public class StageImpl implements Stage {
      * de sa liste des stages.
      *
      * @return true si le moniteur a pu être supprimé
-     *
      */
     @Override
     public boolean supprimerMoniteur() {
@@ -167,8 +164,8 @@ public class StageImpl implements Stage {
      *
      * @return true si l'enfant a pu être inscrit au stage.
      * @param enfant l'enfant qui veut s'inscrire au stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean ajouterEnfant(Enfant enfant) {
@@ -185,8 +182,8 @@ public class StageImpl implements Stage {
      *
      * @return true si l'enfant a pu être desinscrit au stage.
      * @param enfant l'enfant qui veut se desinscrire au stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean supprimerEnfant(Enfant enfant) {
@@ -199,8 +196,8 @@ public class StageImpl implements Stage {
      *
      * @return true si l'enfant est inscrit au stage.
      * @param enfant l'enfant qu'il faut tester.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     @Override
     public boolean contientEnfant(Enfant enfant) {

@@ -17,6 +17,7 @@ public class AnalyticsService {
      * @return Une liste filtrée de séries.
      */
     public List<TvSeries> findSeriesWithTitle(List<TvSeries> database) {
+        // TODO Question 3
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -27,6 +28,7 @@ public class AnalyticsService {
      * @return Une liste d'entiers (minutes).
      */
     public List<Integer> getEpisodeDurations(TvSeries series) {
+        // TODO Question 4
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -38,6 +40,7 @@ public class AnalyticsService {
      * @return La liste complète des acteurs.
      */
     public List<Actor> getAllActorsInSeries(TvSeries series) {
+        // TODO Question 5
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -49,6 +52,7 @@ public class AnalyticsService {
      * @return La liste des nationalités uniques.
      */
     public List<String> getDistinctNationalities(List<Actor> actors) {
+        // TODO Question 6
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -59,6 +63,7 @@ public class AnalyticsService {
      * @return Un `Optional` contenant la durée maximale (ou vide si la liste est vide).
      */
     public Optional<Integer> findLongestEpisodeDuration(List<Episode> episodes) {
+        // TODO Question 7
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -69,6 +74,7 @@ public class AnalyticsService {
      * @return Une `Map` où la clé est le genre et la valeur le nombre de séries de ce genre.
      */
     public Map<String, Long> countSeriesByGenre(List<TvSeries> database) {
+        // TODO Question 8
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

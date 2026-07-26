@@ -4,7 +4,7 @@ package injection;
 /**
  * L'injecteur de dépendances : il remplit les champs annotés d'un objet avec l'implémentation
  * qu'ils désignent.
- * <p>
+ *
  * C'est le point d'aboutissement de la séance : la classe qui reçoit les dépendances ne les
  * construit plus et ne les reçoit plus par constructeur ou setter — elle déclare ce qu'elle veut,
  * et l'injecteur le fournit par introspection.
@@ -19,6 +19,7 @@ public class Injector {
      *                          sans argument absent ou inaccessible
      */
     public static void inject(Object target) {
+        // TODO Question 6
         throw new UnsupportedOperationException();
     }
 

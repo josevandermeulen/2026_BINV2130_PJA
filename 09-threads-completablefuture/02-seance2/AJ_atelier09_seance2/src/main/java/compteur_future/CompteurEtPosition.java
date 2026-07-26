@@ -4,7 +4,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Un compteur qui retient, à l'arrivée, son rang dans la course.
- * <p>
+ *
  * Le rang vient d'un compteur d'arrivées partagé par toutes les instances : c'est ce partage qui
  * donne son sens à la course, et qui impose de le remettre à zéro entre deux exécutions.
  */
@@ -55,11 +55,6 @@ public class CompteurEtPosition {
         return null;
     }
 
-    /**
-     * Cette méthode permet de compter et de déterminer la position de manière asynchrone
-     *
-     * @return un CompletableFuture contenant la position
-     */
     /**
      * Lance le comptage en tâche de fond et rend la main aussitôt.
      *

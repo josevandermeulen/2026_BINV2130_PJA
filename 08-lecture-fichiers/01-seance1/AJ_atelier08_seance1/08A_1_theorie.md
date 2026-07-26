@@ -121,6 +121,8 @@ Par défaut, `new FileWriter(chemin)` **écrase** le fichier existant. Pour ajou
 
 *QCM de cette semaine sur mooVin : à compléter pour le lundi 09/11/2026 à 20h.*
 
+*Remise cotée de cette semaine : le QCM en Markdown portant sur les ateliers 1 à 7, à déposer complété sur mooVin pour le lundi 09/11/2026 à 20h — énoncé dans [`08_qcm-a-rendre.md`](08_qcm-a-rendre.md).*
+
 *Passez aux [exercices](08A_2_exercices.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

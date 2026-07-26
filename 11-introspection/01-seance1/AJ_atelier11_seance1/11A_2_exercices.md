@@ -68,7 +68,7 @@ Complétez `executerTests(Class<?>)` : pour chaque méthode de test trouvée à 
 **Question 4** :
 Exécutez ensuite [`Main`](src/main/java/be/vinci/main/Main.java) (package `be.vinci.main`) (fourni) : il lance votre `TestRunner` sur `CalculatriceTest`, la classe de tests écrite pour le mini-JUnit. Les trois tests doivent réussir... alors qu'aucune ligne de votre code ne mentionne `CalculatriceTest` ni ses méthodes. Qu'est-ce qui a permis cela ?
 
-Réponses aux Questions 4 et 8 dans [`02-solution/11A_solutions-observations.md`](../02-solution/11A_solutions-observations.md) : réfléchissez (et testez !) avant de les consulter.
+Réponses aux Questions 4 et 8 dans [`AJ_atelier11_seance1_solution/11A_solutions-observations.md`](../AJ_atelier11_seance1_solution/11A_solutions-observations.md) : réfléchissez (et testez !) avant de les consulter.
 
 ### `@AvantChaqueTest` : préparer chaque test
 

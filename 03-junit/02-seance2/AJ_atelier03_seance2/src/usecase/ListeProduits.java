@@ -24,8 +24,8 @@ import static util.Util.checkStrictlyPositive;
 
 /**
  * Le catalogue du magasin : les produits en vente et, pour chacun, son historique de prix.
- * <p>
- * Un produit n'y figure qu'une fois, au sens de {@link Produit#equals(Object)} : même nom, même
+ *
+ * Un produit n'y figure qu'une fois, au sens de Produit.equals(Object) : même nom, même
  * marque, même rayon. Les opérations de prix passent par le catalogue plutôt que par le produit,
  * afin de refuser celles qui portent sur un produit absent.
  */

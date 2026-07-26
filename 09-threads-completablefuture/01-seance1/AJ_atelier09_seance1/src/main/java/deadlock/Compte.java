@@ -2,9 +2,9 @@ package deadlock;
 
 /**
  * Un compte bancaire, réduit à son numéro et à son solde.
- * <p>
+ *
  * Le numéro sert aussi d'ordre global entre comptes : c'est lui qui permet à
- * {@link GestionnaireTransferts} de toujours verrouiller dans le même sens.
+ * GestionnaireTransferts de toujours verrouiller dans le même sens.
  */
 public class Compte {
 

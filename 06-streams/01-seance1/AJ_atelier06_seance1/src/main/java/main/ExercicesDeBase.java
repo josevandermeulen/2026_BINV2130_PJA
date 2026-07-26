@@ -30,6 +30,7 @@ public class ExercicesDeBase {
      * @return la liste des transactions dont l'année vaut 2011
      */
     public List<Transaction> predicats1() {
+        // TODO Question 1
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -39,6 +40,7 @@ public class ExercicesDeBase {
      * @return la liste des transactions dont la valeur est > 600
      */
     public List<Transaction> predicats2() {
+        // TODO Question 2
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -48,6 +50,7 @@ public class ExercicesDeBase {
      * @return la liste des transactions dont le trader se nomme Raoul
      */
     public List<Transaction> predicats3() {
+        // TODO Question 3
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -57,6 +60,7 @@ public class ExercicesDeBase {
      * @return la liste des villes distinctes
      */
     public List<String> map1() {
+        // TODO Question 5
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -66,6 +70,7 @@ public class ExercicesDeBase {
      * @return la liste des traders distincts dont la ville est Cambridge
      */
     public List<Trader> map2() {
+        // TODO Question 6
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -75,6 +80,7 @@ public class ExercicesDeBase {
      * @return les noms distincts séparés par une virgule et une espace
      */
     public String map3() {
+        // TODO Question 7
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -84,6 +90,7 @@ public class ExercicesDeBase {
      * @return la liste des transactions triées par ordre croissant de valeur
      */
     public List<Transaction> sort1() {
+        // TODO Question 8
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -93,6 +100,7 @@ public class ExercicesDeBase {
      * @return les noms distincts triés, séparés par une virgule et une espace
      */
     public String sort2() {
+        // TODO Question 9
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -102,6 +110,7 @@ public class ExercicesDeBase {
      * @return la valeur maximale, ou 0 si la liste est vide
      */
     public Integer reduce1() {
+        // TODO Question 10
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -111,6 +120,7 @@ public class ExercicesDeBase {
      * @return la transaction de valeur minimale, ou la transaction neutre si la liste est vide
      */
     public Transaction reduce2() {
+        // TODO Question 11
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -120,6 +130,7 @@ public class ExercicesDeBase {
      * @return le trader au total le plus élevé, ou null si la liste est vide
      */
     public Trader traderValeurTotaleMax() {
+        // TODO Question 12
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

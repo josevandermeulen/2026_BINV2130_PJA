@@ -10,8 +10,8 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * L'estimation d'adresses IP distinctes, menée de façon asynchrone.
- * <p>
- * Chaque méthode rend une {@link CompletableFuture} plutôt qu'un résultat : le chargement des logs
+ *
+ * Chaque méthode rend une CompletableFuture plutôt qu'un résultat : le chargement des logs
  * et l'estimation peuvent alors se recouvrir, et plusieurs dossiers être traités de front. La
  * variante séquentielle est là pour comparer ce que ce recouvrement fait gagner.
  */
@@ -45,9 +45,9 @@ public class AnalyseIpAsync {
 
     /**
      * Charge en tâche de fond tous les accès d'un dossier.
-     * <p>
+     *
      * Une erreur de lecture ne remonte pas telle quelle : elle est enveloppée dans une
-     * {@link RuntimeException} qui fait échouer la future.
+     * RuntimeException qui fait échouer la future.
      *
      * @param dossier le dossier contenant l'index et les fichiers de logs
      * @return une future portant les accès chargés
@@ -73,7 +73,7 @@ public class AnalyseIpAsync {
     }
 
     /**
-     * Comme {@link #estimerDepuisDossierAsync}, mais rend une valeur de repli au lieu d'échouer.
+     * Comme estimerDepuisDossierAsync, mais rend une valeur de repli au lieu d'échouer.
      *
      * @param dossier     le dossier à analyser
      * @param hyperLogLog l'estimateur à alimenter
@@ -118,9 +118,9 @@ public class AnalyseIpAsync {
 
     /**
      * Analyse les mêmes dossiers l'un après l'autre, en attendant chaque résultat.
-     * <p>
+     *
      * Sert de point de comparaison : le résultat est identique à celui de
-     * {@link #estimerPlusieursDossiersAsync}, la durée ne l'est pas.
+     * estimerPlusieursDossiersAsync, la durée ne l'est pas.
      *
      * @param dossiers les dossiers à analyser
      * @param hasher   la fonction d'empreinte confiée à chaque estimateur

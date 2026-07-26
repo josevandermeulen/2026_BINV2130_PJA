@@ -9,7 +9,7 @@ import java.util.concurrent.CompletableFuture;
 
 /**
  * L'estimation des IP distinctes vues par un parc de routeurs, chacun avec son fichier de logs.
- * <p>
+ *
  * Chaque routeur est estimé séparément, puis les estimateurs sont fusionnés : aucune liste d'IP
  * n'est jamais rassemblée en mémoire. La variante asynchrone traite les routeurs de front.
  */

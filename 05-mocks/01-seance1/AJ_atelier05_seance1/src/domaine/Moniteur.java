@@ -27,8 +27,8 @@ public class Moniteur{
     /**
      * crée un moniteur
      * @param nom Le nom du moniteur
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public Moniteur(String nom) {
         Util.checkString(nom);
@@ -49,8 +49,8 @@ public class Moniteur{
      *
      * @param numeroDeSemaine Le numéro de la semaine
      * @return true si le moniteur est libre durant la semaine passée en paramètre.
-     * @exception IllegalArgumentException Exception lancée si le numéro de semaine
-     *                        n'est pas compris entre 1 et 8.
+     * @throws IllegalArgumentException Exception lancée si le numéro de semaine
+     *                     n'est pas compris entre 1 et 8.
      */
     public boolean estLibre(int numeroDeSemaine) {
         if (numeroDeSemaine < 1 || numeroDeSemaine > 8) {
@@ -69,9 +69,8 @@ public class Moniteur{
      * @param stage le stage à ajouter au moniteur.
      * @return true si le moniteur peut effectuer ce stage. Le stage est stocké dans
      *         ses stages.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean ajouterStage(Stage stage) {
         if (this.contientStage(stage)) {
@@ -104,9 +103,8 @@ public class Moniteur{
      * @param stage le stage à supprimer du moniteur.
      * @return true si le stage peut être enlevé du moniteur. false si le stage ne
      *         fait pas partie des stages du moniteur.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean supprimerStage(Stage stage) {
         if (!this.contientStage(stage)) {
@@ -123,9 +121,8 @@ public class Moniteur{
      * @param stage le stage à tester.
      * @return true si le stage est bien un stage du moniteur. false si le stage ne
      *         fait pas partie des stages du moniteur.
-     * @exception IllegalArgumentException Exception lanc"e si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lanc"e si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean contientStage(Stage stage) {
         Util.checkObject(stage);

@@ -38,6 +38,7 @@ public class ExerciceGroupingBy {
      * @return une map associant à chaque trader la liste de ses transactions
      */
     public Map<Trader, List<Transaction>> groupBy1() {
+        // TODO Question 3
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -47,6 +48,7 @@ public class ExerciceGroupingBy {
      * @return une map associant à chaque trader son nombre de transactions
      */
     public Map<Trader, Long> groupBy2() {
+        // TODO Question 4
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -56,6 +58,7 @@ public class ExerciceGroupingBy {
      * @return une map associant à chaque niveau la liste des transactions correspondantes
      */
     public Map<TransactionsLevel, List<Transaction>> groupBy3() {
+        // TODO Question 5
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -65,6 +68,7 @@ public class ExerciceGroupingBy {
      * @return une map associant à chaque ville le trader au total le plus élevé
      */
     public Map<String, Trader> villeTraderMaxTotal() {
+        // TODO Question 12
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

@@ -32,7 +32,7 @@ Ci-dessous, se trouve le diagramme de classes complété de l'application. Les c
 
 Comme à la séance précédente, vous allez devoir implémenter les classes présentées ci-dessus.
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier01_seance2`. Récupérez les classes fournies dans `AJ_atelier01_seance2/` (package par défaut) et mettez-les dans le répertoire `src` de votre projet — c'est l'état où la solution de la séance 1 (`../../01-seance1/02-solution/`) vous laisse.
+Dans IntelliJ, créez un projet intitulé `AJ_atelier01_seance2`. Récupérez les classes fournies dans `AJ_atelier01_seance2/` (package par défaut) et mettez-les dans le répertoire `src` de votre projet — c'est l'état où la solution de la séance 1 (`../../01-seance1/AJ_atelier01_seance1_solution/`) vous laisse.
 
 Votre code doit exploiter au mieux les richesses d'une découpe orientée Objet :
 

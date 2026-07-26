@@ -3,9 +3,9 @@ import java.util.ArrayList;
 // Question 4 : la sous-classe PizzaComposee
 /**
  * Une pizza de la carte, dont la composition est fixée par la pizzeria.
- * <p>
- * Ses ingrédients sont donnés à la construction et ne peuvent plus changer : {@link #ajouter} et
- * {@link #supprimer} lèvent une exception plutôt que de modifier la recette. En contrepartie de
+ *
+ * Ses ingrédients sont donnés à la construction et ne peuvent plus changer : ajouter et
+ * supprimer lèvent une exception plutôt que de modifier la recette. En contrepartie de
  * cette composition imposée, son prix bénéficie d'une remise.
  */
 public class PizzaComposee extends Pizza {

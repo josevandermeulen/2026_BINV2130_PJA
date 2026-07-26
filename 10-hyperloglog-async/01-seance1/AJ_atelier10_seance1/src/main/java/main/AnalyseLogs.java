@@ -15,9 +15,9 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 /**
- * L'analyse des fichiers de logs : lecture, conversion en {@link Acces} et statistiques.
- * <p>
- * La lecture proprement dite est déléguée au {@link LecteurLogs} reçu à la construction, ce qui
+ * L'analyse des fichiers de logs : lecture, conversion en Acces et statistiques.
+ *
+ * La lecture proprement dite est déléguée au LecteurLogs reçu à la construction, ce qui
  * permet de tester l'analyse sans toucher au disque. Les lignes malformées et les fichiers
  * introuvables sont signalés puis ignorés : un log abîmé ne doit pas interrompre l'analyse.
  */
@@ -54,7 +54,7 @@ public class AnalyseLogs {
 
     /**
      * Convertit un ensemble de lignes en accès, en ignorant celles qui sont malformées.
-     * <p>
+     *
      * Une ligne rejetée est signalée sur la sortie standard, mais n'interrompt pas la conversion
      * des suivantes.
      *
@@ -75,7 +75,7 @@ public class AnalyseLogs {
 
     /**
      * Charge tous les accès des fichiers de logs référencés par l'index du dossier.
-     * <p>
+     *
      * Un fichier annoncé par l'index mais introuvable est signalé puis ignoré ; en revanche, un
      * index illisible interrompt le chargement.
      *

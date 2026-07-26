@@ -17,6 +17,7 @@ public class ExercicesOptional {
      * @return la valeur maximale, ou -1 si la liste est vide
      */
     public Integer optional1(List<Transaction> transactions) {
+        // TODO Question 1
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -27,6 +28,7 @@ public class ExercicesOptional {
      * @return la transaction de valeur minimale, ou un Optional vide si la liste est vide
      */
     public Optional<Transaction> optional2(List<Transaction> transactions) {
+        // TODO Question 2
         throw new UnsupportedOperationException("Not yet implemented");
     }
 

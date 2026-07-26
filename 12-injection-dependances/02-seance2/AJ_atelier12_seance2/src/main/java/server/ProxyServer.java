@@ -9,7 +9,7 @@ import domaine.QueryFactory;
 /**
  * Le serveur proxy : il lit des URL sur l'entrée standard, écarte celles qui visent un domaine
  * interdit et transmet les autres.
- * <p>
+ *
  * Ses deux dépendances — la fabrique de requêtes et le service de liste noire — ne sont jamais
  * construites ici : c'est tout l'objet de la séance, qui les fait passer du constructeur au setter
  * puis à l'injection par annotation.

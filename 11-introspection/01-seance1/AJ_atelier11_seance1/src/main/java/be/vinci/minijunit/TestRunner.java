@@ -25,7 +25,7 @@ public class TestRunner {
 
     /**
      * Exécute les tests d'une classe et en dresse le rapport.
-     * <p>
+     *
      * Les méthodes désactivées sont ignorées, celles qui demandent des répétitions sont relancées
      * autant de fois, et un test qui lève une exception est consigné en échec sans interrompre les
      * suivants.

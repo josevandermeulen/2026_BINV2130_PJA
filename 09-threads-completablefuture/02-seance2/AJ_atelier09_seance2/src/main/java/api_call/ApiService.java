@@ -8,8 +8,8 @@ import java.util.concurrent.CompletableFuture;
 
 
 /**
- * Les appels à l'API REST distante, rendus asynchrones par {@link CompletableFuture}.
- * <p>
+ * Les appels à l'API REST distante, rendus asynchrones par CompletableFuture.
+ *
  * Chaque méthode rend immédiatement la main : le résultat n'arrive que plus tard, quand le réseau
  * a répondu. Enchaîner ces futures évite d'attendre chaque appel avant de lancer le suivant.
  */

@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Set;
 
 /**
- * Liste de tâches (de simples {@link String}) que l'on peut ajouter, supprimer, renommer,
+ * Liste de tâches (de simples String) que l'on peut ajouter, supprimer, renommer,
  * marquer comme terminées, compter et vider.
  */
 public class TodoList {
@@ -17,7 +17,7 @@ public class TodoList {
      * Ajoute une tâche à la liste.
      *
      * @param task tâche à ajouter
-     * @return {@code true} si la tâche a été ajoutée, {@code false} si elle est nulle, vide ou déjà présente
+     * @return `true` si la tâche a été ajoutée, `false` si elle est nulle, vide ou déjà présente
      */
     public boolean addTask(String task) {
         if (task == null) {
@@ -37,7 +37,7 @@ public class TodoList {
      * Indique si la tâche est présente dans la liste.
      *
      * @param task tâche recherchée
-     * @return {@code true} si la tâche est présente
+     * @return `true` si la tâche est présente
      */
     public boolean containsTask(String task) {
         return tasks.contains(task);
@@ -49,7 +49,7 @@ public class TodoList {
      * Supprime une tâche de la liste.
      *
      * @param task tâche à supprimer
-     * @return {@code true} si la tâche était présente et a été supprimée
+     * @return `true` si la tâche était présente et a été supprimée
      */
     public boolean removeTask(String task) {
         completedTasks.remove(task);
@@ -63,7 +63,7 @@ public class TodoList {
      *
      * @param existingTask tâche à renommer
      * @param newTask nouveau nom (ne peut être ni nul ni vide)
-     * @return {@code true} si la tâche a été renommée, {@code false} sinon
+     * @return `true` si la tâche a été renommée, `false` sinon
      */
     public boolean renameTask(String existingTask, String newTask) {
         if (newTask == null || newTask.isBlank()) {
@@ -89,7 +89,7 @@ public class TodoList {
      * Marque une tâche existante comme terminée.
      *
      * @param task tâche à terminer
-     * @return {@code true} si la tâche vient d'être terminée, {@code false} si elle est absente ou déjà terminée
+     * @return `true` si la tâche vient d'être terminée, `false` si elle est absente ou déjà terminée
      */
     public boolean completeTask(String task) {
         if (!containsTask(task)) {
@@ -103,7 +103,7 @@ public class TodoList {
      * Indique si une tâche est terminée.
      *
      * @param task tâche testée
-     * @return {@code true} si la tâche est terminée
+     * @return `true` si la tâche est terminée
      */
     public boolean isCompleted(String task) {
         return completedTasks.contains(task);

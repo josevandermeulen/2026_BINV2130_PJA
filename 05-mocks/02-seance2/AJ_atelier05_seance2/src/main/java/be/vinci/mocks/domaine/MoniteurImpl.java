@@ -100,7 +100,7 @@ public class MoniteurImpl implements Moniteur {
     /**
      * supprime le stage du moniteur. Ce stage doit se trouver dans ses stages afin de pouvoir le
      * supprimer.
-     * <p>
+     *
      * La méthode s'assure aussi que le stage supprime aussi le moniteur associé.
      *
      * @param stage le stage à supprimer du moniteur.

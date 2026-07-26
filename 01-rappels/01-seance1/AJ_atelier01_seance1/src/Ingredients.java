@@ -1,6 +1,6 @@
 /**
  * Le catalogue des ingrédients proposés par la pizzeria, avec leur prix.
- * <p>
+ *
  * L'interface ne sert qu'à héberger ces constantes : elle n'est pas destinée à être implémentée.
  * Chaque ingrédient y est déclaré une seule fois, ce qui garantit qu'une même garniture porte
  * partout le même prix.

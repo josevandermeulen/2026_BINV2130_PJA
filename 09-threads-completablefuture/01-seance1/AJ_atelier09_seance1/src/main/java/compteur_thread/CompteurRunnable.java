@@ -7,9 +7,9 @@ import java.util.stream.IntStream;
 //  et implémenter la méthode run
 
 /**
- * Un compteur exécutable en parallèle, écrit en implémentant {@link Runnable}.
- * <p>
- * Variante à préférer à {@link CompteurThread} : implémenter Runnable laisse la classe libre
+ * Un compteur exécutable en parallèle, écrit en implémentant Runnable.
+ *
+ * Variante à préférer à CompteurThread : implémenter Runnable laisse la classe libre
  * d'hériter d'autre chose, et sépare ce qui est exécuté du fil qui l'exécute.
  */
 public class CompteurRunnable {

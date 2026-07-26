@@ -5,10 +5,9 @@ import be.vinci.validation.NonNul;
 import be.vinci.validation.Positif;
 
 /**
- * Adresse d'un étudiant — sert de champ objet à valider récursivement (@Valide).
- */
-/**
  * L'adresse d'un étudiant, validée par annotations comme le reste du domaine.
+ *
+ * Elle sert aussi de champ objet à valider récursivement, via @Valide sur le champ qui la porte.
  */
 public class Adresse {
 

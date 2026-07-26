@@ -5,8 +5,8 @@ import java.time.format.FormatStyle;
 // Question 5 : la sous-classe PizzaComposable
 /**
  * Une pizza composée par un client, qui choisit lui-même ses ingrédients.
- * <p>
- * Contrairement à une {@link PizzaComposee}, elle part sans aucun ingrédient et reste modifiable.
+ *
+ * Contrairement à une PizzaComposee, elle part sans aucun ingrédient et reste modifiable.
  * Elle retient son créateur et l'instant de sa création, tous deux repris dans son titre et sa
  * description.
  */

@@ -41,7 +41,7 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier05_
 
 Le [tutoriel Maven](05B_3_tutoriel-maven.md) reprend ces étapes en détail et montre comment ajouter les dépendances JUnit 5 et Mockito au `pom.xml` puis vérifier que tout fonctionne.
 
-Nous allons reprendre les mêmes classes et interfaces que celles utilisées lors de la séance 1 de cet atelier 5 : copiez/collez les packages `be.vinci.mocks.domaine` et `be.vinci.mocks.util` (fournis dans `AJ_atelier05_seance2/src/main/java/`, c'est l'état de la solution de la séance 1 — voir aussi `../../01-seance1/02-solution/`) au sein de votre nouveau projet dans `/src/main/java`, en conservant l'arborescence `be/vinci/mocks/`.
+Nous allons reprendre les mêmes classes et interfaces que celles utilisées lors de la séance 1 de cet atelier 5 : copiez/collez les packages `be.vinci.mocks.domaine` et `be.vinci.mocks.util` (fournis dans `AJ_atelier05_seance2/src/main/java/`, c'est l'état de la solution de la séance 1 — voir aussi `../../01-seance1/AJ_atelier05_seance1_solution/`) au sein de votre nouveau projet dans `/src/main/java`, en conservant l'arborescence `be/vinci/mocks/`.
 
 Comme à l'atelier 3 séance 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (la fixture et le `@BeforeEach` restant sur la classe externe).
 

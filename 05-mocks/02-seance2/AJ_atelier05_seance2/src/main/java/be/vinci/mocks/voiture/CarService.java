@@ -3,8 +3,8 @@ package be.vinci.mocks.voiture;
 import java.util.List;
 
 /**
- * The business layer above {@link CarRepository}: it holds the rules the repository does not.
- * <p>
+ * The business layer above CarRepository: it holds the rules the repository does not.
+ *
  * The repository stores whatever it is given; this service is what refuses invalid or duplicate
  * cars, and what registers an unknown brand before storing a car that uses it.
  */
@@ -44,21 +44,19 @@ public class CarService {
 
     /**
      * Adds a car to the repository.
-     * <p>
+     *
      * The car is added only if it does not already exist in the repository.
      * A car is considered identical if another car with the same brand and model
      * is already present.
-     * </p>
-     * <p>
+     *
      * If the car's brand is not yet registered in the repository, it is added
      * automatically before adding the car.
-     * </p>
      *
-     * @param car the car to add; must not be {@code null}. Its brand and model
+     * @param car the car to add; must not be `null`. Its brand and model
      *            must be non-null and non-empty.
-     * @return {@code true} if the car was successfully added, {@code false} otherwise
-     * @throws IllegalArgumentException if {@code car} is {@code null}, if its brand
-     *         or model is {@code null} or empty, or if a car with the same brand
+     * @return `true` if the car was successfully added, `false` otherwise
+     * @throws IllegalArgumentException if `car` is `null`, if its brand
+     *         or model is `null` or empty, or if a car with the same brand
      *         and model already exists in the repository
      */
     public boolean addCar(Car car) {

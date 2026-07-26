@@ -5,13 +5,9 @@ import java.lang.reflect.Field;
 import java.util.List;
 
 /**
- * Le cœur du validateur : découvre par réflexion les champs annotés d'un objet,
- * lit leur valeur et produit un RapportValidation.
- */
-/**
  * Le validateur générique : il contrôle n'importe quel objet à partir des annotations portées par
  * ses champs.
- * <p>
+ *
  * Il ne connaît aucune classe du domaine. Tout passe par l'introspection : lire les champs
  * déclarés, repérer ceux qui portent une annotation, forcer leur accès puis lire leur valeur.
  * Ajouter une contrainte au domaine ne demande donc pas de le modifier.
@@ -88,7 +84,7 @@ public class Validateur {
 
     /**
      * Valide les champs annotés « à valider » en descendant dans l'objet qu'ils portent.
-     * <p>
+     *
      * C'est ce qui permet de contrôler l'adresse d'un étudiant en même temps que l'étudiant
      * lui-même, sans que le validateur connaisse l'une ou l'autre classe.
      *

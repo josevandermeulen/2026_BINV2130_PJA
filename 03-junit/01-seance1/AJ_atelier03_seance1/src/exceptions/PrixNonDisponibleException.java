@@ -2,7 +2,7 @@ package exceptions;
 
 /**
  * Signale qu'aucun prix n'était en vigueur à la date demandée.
- * <p>
+ *
  * Non contrôlée : elle survient quand la date interrogée précède le premier prix connu du produit.
  */
 public class PrixNonDisponibleException extends RuntimeException {

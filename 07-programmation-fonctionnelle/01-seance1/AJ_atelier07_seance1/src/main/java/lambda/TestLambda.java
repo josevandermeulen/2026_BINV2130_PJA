@@ -39,8 +39,8 @@ public class TestLambda {
 
 */
 
-        //TODO: une fois arrivé au la Question 16, enlevez les commentaires et compélétez
-        //      en remplaçant les ??? par des expression lambda appropriées
+        // TODO Question 16 : enlevez les commentaires et complétez
+        //  en remplaçant les ??? par des expressions lambda appropriées
 
 //        List<String> list2 = Arrays.asList("hello", "bonjour", "goeiedag", "hallo", "hej");
 //

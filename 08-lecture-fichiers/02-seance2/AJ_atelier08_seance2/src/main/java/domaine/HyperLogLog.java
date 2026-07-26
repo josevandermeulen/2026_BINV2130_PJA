@@ -4,8 +4,8 @@ import util.Util;
 
 /**
  * Estime le nombre de valeurs distinctes vues, sans les mémoriser.
- * <p>
- * Là où un {@code Set} garde chaque valeur, cette structure ne retient qu'un tableau de registres
+ *
+ * Là où un `Set` garde chaque valeur, cette structure ne retient qu'un tableau de registres
  * de taille fixe : la mémoire consommée ne dépend pas du nombre de valeurs traitées, au prix d'un
  * résultat approché. La précision se règle au constructeur, par le nombre de bits d'index.
  */
@@ -48,7 +48,7 @@ public class HyperLogLog {
 
     /**
      * Prend en compte une valeur dans l'estimation.
-     * <p>
+     *
      * Ajouter deux fois la même valeur ne change rien : c'est ce qui permet de compter des
      * valeurs distinctes sans les stocker.
      *

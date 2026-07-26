@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Un moniteur, ses compétences sportives et les stages qu'il assure.
- * <p>
+ *
  * Un moniteur ne peut assurer qu'un stage par semaine, et seulement dans un sport pour lequel il
  * est compétent. Les deux côtés de l'association moniteur/stage sont tenus en cohérence : ajouter
  * un stage à un moniteur enregistre ce moniteur auprès du stage, et réciproquement.
@@ -43,7 +43,7 @@ public interface Moniteur {
     /**
      * supprime le stage du moniteur. Ce stage doit se trouver dans ses stages afin de pouvoir le
      * supprimer.
-     * <p>
+     *
      * La méthode s'assure aussi que le stage supprime aussi le moniteur associé.
      *
      * @param stage le stage à supprimer du moniteur.

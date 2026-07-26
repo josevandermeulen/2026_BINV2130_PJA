@@ -33,7 +33,7 @@ Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare l
 | 11 | Introspection |
 | 12 | Injection de dépendances |
 
-Chaque chapitre se déroule en deux séances (`01-seance1`, `02-seance2`). Une séance contient un dossier portant le nom du projet IntelliJ à créer — `AJ_atelierNN_seanceX` — avec la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`) et le code de départ sous `src/`, tout ce dont vous avez besoin au même endroit ; plus un dossier `02-solution`, publié après la séance. Le questionnaire d'auto-évaluation (`NN_quiz.md`) est à la racine du chapitre.
+Chaque chapitre se déroule en deux séances (`01-seance1`, `02-seance2`). Une séance contient un dossier portant le nom du projet IntelliJ à créer — `AJ_atelierNN_seanceX` — avec la théorie (`*_1_theorie.md`), les exercices (`*_2_exercices.md`) et le code de départ sous `src/`, tout ce dont vous avez besoin au même endroit ; plus un dossier `AJ_atelierNN_seanceX_solution`, publié après la séance. Le questionnaire d'auto-évaluation (`NN_quiz.md`) est à la racine du chapitre.
 
 ![Structure d'un atelier](assets/structure-diagram.png)
 
@@ -57,11 +57,13 @@ Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub De
 ## Évaluation
 
 - **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Sur la machine, sans connexion : les fichiers Markdown du cours (théorie, exercices et solutions, mais pas le code Java), les cheat sheets et les illustrations — rien d'autre. IA générative interdite. Mêmes modalités en seconde session.
-- **Évaluation continue (10 %)** : les QCM hebdomadaires sur mooVin, sans points négatifs, plus un QCM remis sous la forme d'un fichier Markdown complété (voir ci-dessous). La note est calculée sur les **11 meilleurs résultats des 13 QCM** ; un QCM non réalisé est coté 0. Cette note ne peut faire l'objet ni d'une seconde session ni d'une remédiation : celle du premier quadrimestre est reportée telle quelle en seconde session.
+- **Évaluation continue (10 %)** : les QCM hebdomadaires sur mooVin, sans points négatifs, plus un QCM remis sous la forme d'un fichier Markdown complété et une remise de code en archive zip (voir ci-dessous). La note est calculée sur les **12 meilleurs résultats des 14 évaluations** ; une évaluation non réalisée est cotée 0. Cette note ne peut faire l'objet ni d'une seconde session ni d'une remédiation : celle du premier quadrimestre est reportée telle quelle en seconde session.
 
 Un QCM de 20 questions par chapitre est proposé sur mooVin, portant sur la théorie de la semaine. Il **ferme le lundi à 20h**, sauf les semaines où ce lundi ne s'y prête pas (rentrée, jour férié, congé) : la date exacte de chaque QCM est dans la colonne *QCM* du [calendrier](00-calendrier.md). Le questionnaire est ensuite publié dans ce dépôt (`NN_quiz.md`, à la racine du chapitre) le jour même à partir de 20h15, avec les bonnes réponses et leur justification. Ces QCM forment aussi une **banque de questions** dans laquelle l'examen pourra puiser : les travailler au fil des semaines est directement utile pour l'examen.
 
 Un **treizième QCM** s'ajoute aux douze, en semaine 8. Il porte sur la théorie et la pratique des chapitres déjà étudiés et se fait en autonomie : 10 questions cotées 2 points chacune, soit 20 points comme les QCM mooVin. Il est publié avec la théorie et les exercices de la semaine, sans date de sortie particulière ; vous copiez le fichier de l'énoncé, cochez une case par question et le déposez sur mooVin **pour le lundi 09/11/2026 à 20h**, en même temps que la fermeture du QCM mooVin de la semaine 8. Il compte comme les autres. Sa raison d'être : l'examen se déroule sur machine avec les seuls fichiers Markdown du cours, et rédiger ses réponses dans ce format est un geste qui vaut d'être répété avant janvier.
+
+Une **quatorzième évaluation** complète la série, en semaine 4 : la remise d'une archive zip contenant le projet de la séance 1. Elle est cotée sur 20 points, uniquement sur la **structure de l'archive** — un dossier `src` à la racine, les classes attendues à l'intérieur, le bon nom de fichier. Le code Java que l'archive contient n'entre pas en compte. Consignes détaillées et barème : [`04_zip-a-rendre.md`](04-tdd/01-seance1/AJ_atelier04_seance1/04_zip-a-rendre.md), à déposer sur mooVin **pour le lundi 05/10/2026 à 20h**. Sa raison d'être : l'examen se termine par un dépôt de ce type, et une archive mal formée y coûte cher.
 
 ## Feedback
 

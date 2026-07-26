@@ -7,13 +7,8 @@ import java.util.HashSet;
 import java.util.Set;
 
 /**
- * La classe Stage représente un stage. Elle connaît son intitulé,
- * le lieu de déroulement du stage, le numéro de semaine du stage,
- * son moniteur et les enfants qui y sont inscrits
- */
-/**
  * Un stage : son intitulé, son lieu, sa semaine, son sport, son moniteur et les enfants inscrits.
- * <p>
+ *
  * L'interface est extraite de l'implémentation à la Question 1 de la séance, précisément pour
  * qu'un test puisse lui substituer un stub ou un mock.
  */
@@ -39,7 +34,6 @@ public class Stage {
      */
     private Moniteur moniteur;
     /**
-     *
      * Les enfants inscrits au stage.
      */
     private Set<Enfant> inscrits = new HashSet<>();
@@ -52,8 +46,8 @@ public class Stage {
      * @param numeroDeSemaine Le numéro de la semaine durant laquelle a lieu le
      *                        stage (entre 1 et 8)
      * @param sport           Le sport concerné par le stage
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public Stage(String intitule, String lieu, int numeroDeSemaine, Sport sport) {
         Util.checkString(intitule);
@@ -112,9 +106,8 @@ public class Stage {
      *
      * @return true si le moniteur a bien été enregistré
      * @param moniteur le moniteur qui va assurer le stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
-     *
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean enregistrerMoniteur(Moniteur moniteur) {
         Util.checkObject(moniteur);
@@ -139,7 +132,6 @@ public class Stage {
      * de sa liste des stages.
      *
      * @return true si le moniteur a pu être supprimé
-     *
      */
     public boolean supprimerMoniteur() {
         if (moniteur == null) {
@@ -166,8 +158,8 @@ public class Stage {
      *
      * @return true si l'enfant a pu être inscrit au stage.
      * @param enfant l'enfant qui veut s'inscrire au stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean ajouterEnfant(Enfant enfant) {
         if (contientEnfant(enfant)) {
@@ -183,8 +175,8 @@ public class Stage {
      *
      * @return true si l'enfant a pu être desinscrit au stage.
      * @param enfant l'enfant qui veut se desinscrire au stage.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean supprimerEnfant(Enfant enfant) {
         Util.checkObject(enfant);
@@ -196,8 +188,8 @@ public class Stage {
      *
      * @return true si l'enfant est inscrit au stage.
      * @param enfant l'enfant qu'il faut tester.
-     * @exception IllegalArgumentException Exception lancée si l'un des paramètres
-     *                                     n'est pas spécifié ou vide.
+     * @throws IllegalArgumentException Exception lancée si l'un des paramètres
+     *                                  n'est pas spécifié ou vide.
      */
     public boolean contientEnfant(Enfant enfant) {
         Util.checkObject(enfant);

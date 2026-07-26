@@ -4,12 +4,18 @@ Les exercices associés à ces concepts se trouvent dans [`08A_2_exercices.md`](
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Lire un fichier texte](#lire-un-fichier-texte)
-3. [Exceptions vérifiées et E/S](#exceptions-vérifiées-et-es)
-4. [try-with-resources](#try-with-resources)
-5. [Écrire un fichier texte](#écrire-un-fichier-texte)
-6. [Petit résumé](#petit-résumé)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Lire un fichier texte](#lire-un-fichier-texte)
+4. [Exceptions vérifiées et E/S](#exceptions-vérifiées-et-es)
+5. [try-with-resources](#try-with-resources)
+6. [Écrire un fichier texte](#écrire-un-fichier-texte)
+7. [Petit résumé](#petit-résumé)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 09/11/2026 à 20h.
+- **Le QCM en Markdown sur les ateliers 1 à 7** — à déposer complété sur mooVin pour le lundi 09/11/2026 à 20h. Énoncé : [`08_qcm-a-rendre.md`](08_qcm-a-rendre.md).
 
 ## Vidéos
 
@@ -118,10 +124,6 @@ Par défaut, `new FileWriter(chemin)` **écrase** le fichier existant. Pour ajou
 4. Une donnée invalide dans un fichier par ailleurs lisible n'est pas une erreur d'E/S : c'est une erreur de validation, à traiter séparément.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 09/11/2026 à 20h.*
-
-*Remise cotée de cette semaine : le QCM en Markdown portant sur les ateliers 1 à 7, à déposer complété sur mooVin pour le lundi 09/11/2026 à 20h — énoncé dans [`08_qcm-a-rendre.md`](08_qcm-a-rendre.md).*
 
 *Passez aux [exercices](08A_2_exercices.md).*
 

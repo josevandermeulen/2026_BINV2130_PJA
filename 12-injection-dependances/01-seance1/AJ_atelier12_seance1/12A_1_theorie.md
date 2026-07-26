@@ -2,12 +2,17 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [Qu'est-ce qu'un proxy ?](#quest-ce-quun-proxy-)
-4. [Le problème : les dépendances concrètes](#le-problème--les-dépendances-concrètes)
-5. [Le pattern Factory](#le-pattern-factory)
-6. [L'injection de dépendances](#linjection-de-dépendances)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Introduction](#introduction)
+4. [Qu'est-ce qu'un proxy ?](#quest-ce-quun-proxy-)
+5. [Le problème : les dépendances concrètes](#le-problème--les-dépendances-concrètes)
+6. [Le pattern Factory](#le-pattern-factory)
+7. [L'injection de dépendances](#linjection-de-dépendances)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 07/12/2026 à 20h.
 
 ## Vidéos
 
@@ -91,8 +96,6 @@ public static void main(String[] args) {
 Pour remplacer l'implémentation (une factory de test, une variante...), une seule ligne du `main` change — plus rien dans `ProxyServer`. C'est exactement le mécanisme que vous avez pratiqué avec les stubs et mocks de l'atelier 5 (injecter un faux `Hasher` dans `HyperLogLog`...), et c'est le principe de base des frameworks comme Spring, où l'injection est automatisée.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 07/12/2026 à 20h.*
 
 *Passez aux [exercices](12A_2_exercices.md).*
 

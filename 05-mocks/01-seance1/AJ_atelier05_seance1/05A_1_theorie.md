@@ -2,10 +2,15 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Réalisation de tests unitaires](#réalisation-de-tests-unitaires)
-3. [Abstraction de l'implémentation des classes](#abstraction-de-limplémentation-des-classes)
-4. [Les stubs](#les-stubs)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Réalisation de tests unitaires](#réalisation-de-tests-unitaires)
+4. [Abstraction de l'implémentation des classes](#abstraction-de-limplémentation-des-classes)
+5. [Les stubs](#les-stubs)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 12/10/2026 à 20h.
 
 ## Vidéos
 
@@ -146,8 +151,6 @@ Dans cet exemple :
 Cela illustre comment structurer un test unitaire en Java avec un stub en utilisant le modèle AAA pour tester la classe `Calculator`.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 12/10/2026 à 20h.*
 
 *Passez aux [exercices](05A_2_exercices.md).*
 

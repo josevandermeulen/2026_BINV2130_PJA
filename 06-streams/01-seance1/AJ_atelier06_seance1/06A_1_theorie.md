@@ -4,8 +4,13 @@ Les exercices associés à ces concepts se trouvent dans [`06A_2_exercices.md`](
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Concepts de base](#concepts-de-base)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Concepts de base](#concepts-de-base)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 19/10/2026 à 20h.
 
 ## Vidéos
 
@@ -245,8 +250,6 @@ Il y a deux grands types d'opérations :
 2. Les opérations **terminales** : elles produisent un résultat à partir d'un pipeline. Ce résultat n'est pas un stream, il peut s'agir d'un nombre, d'une liste ou même `void`. Il s'agit des opérations comme `collect`, `forEach` ou `count`.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 19/10/2026 à 20h.*
 
 *Passez aux [exercices](06A_2_exercices.md).*
 

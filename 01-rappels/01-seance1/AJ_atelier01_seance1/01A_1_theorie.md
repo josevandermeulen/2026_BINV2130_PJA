@@ -6,28 +6,33 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Classe et objet](#classe-et-objet)
-3. [Représentation UML d'une classe](#représentation-uml-dune-classe)
-4. [Encapsulation](#encapsulation)
-5. [Attributs d'instance et attributs statiques](#attributs-dinstance-et-attributs-statiques)
-6. [Constructeurs](#constructeurs)
-7. [Surcharge](#surcharge)
-8. [Chaîner des constructeurs avec `this(...)`](#chaîner-des-constructeurs-avec-this)
-9. [Égalité référentielle et égalité structurelle](#égalité-référentielle-et-égalité-structurelle)
-10. [`ArrayList`](#arraylist)
-11. [Copie d'une liste](#copie-dune-liste)
-12. [Classes abstraites](#classes-abstraites)
-13. [Héritage](#héritage)
-14. [Appeler le constructeur parent avec `super(...)`](#appeler-le-constructeur-parent-avec-super)
-15. [Redéfinition de méthode](#redéfinition-de-méthode)
-16. [Appeler une méthode parent avec `super`](#appeler-une-méthode-parent-avec-super)
-17. [Exceptions unchecked](#exceptions-unchecked)
-18. [`try` / `catch`](#try--catch)
-19. [Méthodes statiques](#méthodes-statiques)
-20. [Constantes dans une interface](#constantes-dans-une-interface)
-21. [`toString`](#tostring)
-22. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Classe et objet](#classe-et-objet)
+4. [Représentation UML d'une classe](#représentation-uml-dune-classe)
+5. [Encapsulation](#encapsulation)
+6. [Attributs d'instance et attributs statiques](#attributs-dinstance-et-attributs-statiques)
+7. [Constructeurs](#constructeurs)
+8. [Surcharge](#surcharge)
+9. [Chaîner des constructeurs avec `this(...)`](#chaîner-des-constructeurs-avec-this)
+10. [Égalité référentielle et égalité structurelle](#égalité-référentielle-et-égalité-structurelle)
+11. [`ArrayList`](#arraylist)
+12. [Copie d'une liste](#copie-dune-liste)
+13. [Classes abstraites](#classes-abstraites)
+14. [Héritage](#héritage)
+15. [Appeler le constructeur parent avec `super(...)`](#appeler-le-constructeur-parent-avec-super)
+16. [Redéfinition de méthode](#redéfinition-de-méthode)
+17. [Appeler une méthode parent avec `super`](#appeler-une-méthode-parent-avec-super)
+18. [Exceptions unchecked](#exceptions-unchecked)
+19. [`try` / `catch`](#try--catch)
+20. [Méthodes statiques](#méthodes-statiques)
+21. [Constantes dans une interface](#constantes-dans-une-interface)
+22. [`toString`](#tostring)
+23. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le mercredi 16/09/2026 à 20h.
 
 ## Vidéos
 
@@ -566,8 +571,6 @@ Avant de terminer, vérifiez que :
 10. Le programme principal donne le même affichage que le fichier attendu.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le mercredi 16/09/2026 à 20h.*
 
 *Passez aux [exercices](01A_2_exercices.md).*
 

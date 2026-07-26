@@ -4,16 +4,21 @@ Ce document reprend les notions utiles pour réaliser l'exercice.
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Pourquoi tester ?](#pourquoi-tester-)
-3. [Une classe de test JUnit 5](#une-classe-de-test-junit-5)
-4. [`@BeforeEach` et les fixtures de test](#beforeeach-et-les-fixtures-de-test)
-5. [Assertions courantes](#assertions-courantes)
-6. [Grouper des assertions avec `assertAll`](#grouper-des-assertions-avec-assertall)
-7. [Tester qu'une exception est lancée](#tester-quune-exception-est-lancée)
-8. [Tests paramétrés](#tests-paramétrés)
-9. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
-10. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Pourquoi tester ?](#pourquoi-tester-)
+4. [Une classe de test JUnit 5](#une-classe-de-test-junit-5)
+5. [`@BeforeEach` et les fixtures de test](#beforeeach-et-les-fixtures-de-test)
+6. [Assertions courantes](#assertions-courantes)
+7. [Grouper des assertions avec `assertAll`](#grouper-des-assertions-avec-assertall)
+8. [Tester qu'une exception est lancée](#tester-quune-exception-est-lancée)
+9. [Tests paramétrés](#tests-paramétrés)
+10. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
+11. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 28/09/2026 à 20h.
 
 ## Vidéos
 
@@ -174,8 +179,6 @@ Un test généré par IA doit donc être relu et compris ligne par ligne avant d
 5. Après avoir écrit un test, il faut l'exécuter et vérifier qu'il passe (vert) avant de passer au suivant.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 28/09/2026 à 20h.*
 
 *Passez aux [exercices](03A_2_exercices.md).*
 

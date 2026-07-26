@@ -2,12 +2,18 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Introduction au Test Driven Development](#introduction-au-test-driven-development)
-3. [Spécifier les tests](#spécifier-les-tests)
-4. [Implémenter les tests et le code de l'application](#implémenter-les-tests-et-le-code-de-lapplication)
-5. [TDD en résumé](#tdd-en-résumé)
-6. [TDD assisté par IA](#tdd-assisté-par-ia)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Introduction au Test Driven Development](#introduction-au-test-driven-development)
+4. [Spécifier les tests](#spécifier-les-tests)
+5. [Implémenter les tests et le code de l'application](#implémenter-les-tests-et-le-code-de-lapplication)
+6. [TDD en résumé](#tdd-en-résumé)
+7. [TDD assisté par IA](#tdd-assisté-par-ia)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 05/10/2026 à 20h.
+- **L'archive zip du projet de cette séance** — à déposer sur mooVin pour le lundi 05/10/2026 à 20h. Consignes et barème : [`04_zip-a-rendre.md`](04_zip-a-rendre.md).
 
 ## Vidéos
 
@@ -372,10 +378,6 @@ Pour tirer parti de l'IA sans perdre les bénéfices du TDD, il faut continuer �
 **Point-clé : ne jamais valider un test et son implémentation générés ensemble sans être passé par l'étape red.** Un test qui n'a jamais échoué peut être un test qui ne teste rien (mauvais setup, assertion toujours vraie, etc.) — le risque est le même qu'avec du code écrit à la main, mais plus facile à manquer quand tout est généré d'un coup.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 05/10/2026 à 20h.*
-
-*Remise cotée de cette semaine : l'archive zip du projet de cette séance, à déposer sur mooVin pour le lundi 05/10/2026 à 20h — consignes et barème dans [`04_zip-a-rendre.md`](04_zip-a-rendre.md).*
 
 *Passez aux [exercices](04A_2_exercices.md).*
 

@@ -2,10 +2,15 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [Rappel : CompletableFuture](#rappel--completablefuture)
-4. [Appliquer l'asynchrone à un traitement de fichiers](#appliquer-lasynchrone-à-un-traitement-de-fichiers)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Introduction](#introduction)
+4. [Rappel : CompletableFuture](#rappel--completablefuture)
+5. [Appliquer l'asynchrone à un traitement de fichiers](#appliquer-lasynchrone-à-un-traitement-de-fichiers)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 23/11/2026 à 20h.
 
 ## Vidéos
 
@@ -55,8 +60,6 @@ supplyAsync(charger les accès) ──thenApply──> estimer les IP uniques �
 L'estimation elle-même ne change pas d'un iota par rapport à l'atelier 8 : mêmes classes `HyperLogLog`, `Hasher`, `AnalyseIp`. Seule la façon de **lancer** le traitement change.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 23/11/2026 à 20h.*
 
 *Passez aux [exercices](10A_2_exercices.md).*
 

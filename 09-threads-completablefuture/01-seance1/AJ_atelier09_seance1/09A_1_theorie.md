@@ -2,12 +2,17 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [Thread](#thread)
-4. [Créer un thread en Java](#créer-un-thread-en-java)
-5. [Race condition](#race-condition)
-6. [Deadlock](#deadlock)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Introduction](#introduction)
+4. [Thread](#thread)
+5. [Créer un thread en Java](#créer-un-thread-en-java)
+6. [Race condition](#race-condition)
+7. [Deadlock](#deadlock)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 16/11/2026 à 20h.
 
 ## Vidéos
 
@@ -138,8 +143,6 @@ Casser une seule de ces conditions suffit à rendre le deadlock impossible. En p
 À noter : un deadlock n'est pas propre aux threads Java — on retrouve exactement le même phénomène entre transactions dans une base de données. Et contrairement à une race condition (résultat faux, mais le programme continue), un deadlock se **voit** : le programme est suspendu. Un *thread dump* (`jstack`, ou le bouton de dump de threads d'IntelliJ) montre alors explicitement quels threads se bloquent mutuellement et sur quels verrous.
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 16/11/2026 à 20h.*
 
 *Passez aux [exercices](09A_2_exercices.md).*
 

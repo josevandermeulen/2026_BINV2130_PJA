@@ -2,10 +2,15 @@
 
 ## Table des matières
 
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [Rappels de réflexion](#rappels-de-réflexion)
-4. [Les annotations](#les-annotations)
+1. [À rendre cette semaine](#à-rendre-cette-semaine)
+2. [Vidéos](#vidéos)
+3. [Introduction](#introduction)
+4. [Rappels de réflexion](#rappels-de-réflexion)
+5. [Les annotations](#les-annotations)
+
+## À rendre cette semaine
+
+- **Le QCM de la semaine sur mooVin** — ferme le lundi 30/11/2026 à 20h.
 
 ## Vidéos
 
@@ -118,8 +123,6 @@ if (methode.isAnnotationPresent(MonAnnotation.class)) {
 Les éléments ne sont pas limités aux `String` : `int fois();`, par exemple, se lit de la même façon (`getAnnotation(Repeter.class).fois()`).
 
 ---
-
-*QCM de cette semaine sur mooVin : à compléter pour le lundi 30/11/2026 à 20h.*
 
 *Passez aux [exercices](11A_2_exercices.md).*
 

@@ -3,9 +3,9 @@
 Une remise cotée sur 20 points, qui porte sur la **structure de l'archive que vous déposez**, et non
 sur le code Java qu'elle contient.
 
-Cette remise est la **quatorzième évaluation continue**. Elle compte au même titre que les treize
-QCM : la note d'évaluation continue retient les 12 meilleurs résultats sur 14, pour 10 % de la note
-de l'unité d'enseignement. Une remise non faite est cotée 0.
+Cette remise **compte dans l'évaluation continue**, au même titre que les QCM : la note retient les
+12 meilleurs résultats sur 14, pour 10 % de la note de l'unité d'enseignement. Une remise non faite
+est cotée 0.
 
 ## Pourquoi cet exercice
 

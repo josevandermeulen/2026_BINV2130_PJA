@@ -59,7 +59,7 @@ Complétez `estimerDepuisDossierAsync(String dossier, HyperLogLog)` : elle chaî
 **Question 4** :
 Exécutez [`Main`](src/main/java/main/Main.java) (fourni) : il lance `estimerDepuisDossierAsync` sur le dossier `logs/`, affiche immédiatement un message montrant que le programme principal n'est pas bloqué, puis appelle `join` pour afficher l'estimation. Pourquoi le premier message s'affiche-t-il après quelques millisecondes seulement, alors que l'estimation n'arrive que plus tard ?
 
-Réponse dans [`AJ_atelier10_seance1_solution/10A_solutions-observations.md`](../AJ_atelier10_seance1_solution/10A_solutions-observations.md) : réfléchissez (et testez !) avant de la consulter.
+Réponse dans [`10A_reponses-observations.md`](10A_reponses-observations.md) : réfléchissez (et testez !) avant de la consulter.
 
 ### Gérer les erreurs avec une valeur de repli
 

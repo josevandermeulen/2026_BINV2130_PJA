@@ -31,7 +31,7 @@ L'objectif de cette séance est de comprendre ce qu'est un flux d'exécution (th
 
 On va implémenter une classe dont l'objectif est de faire une course de compteurs. Un compteur a un nom et permet de compter de 1 à max, avec une pause de 10 ms entre chaque nombre (par exemple, `"Bolt : 7"`). À la fin, il affiche `"Bolt a fini de compter jusqu'à xx à 2024-10-25T14:44:55.317850"`.
 
-Réponses aux questions de réflexion dans [`AJ_atelier09_seance1_solution/09A_solutions-observations.md`](../AJ_atelier09_seance1_solution/09A_solutions-observations.md) : réfléchissez (et testez !) avant de la consulter.
+Réponses aux questions de réflexion dans [`09A_reponses-observations.md`](09A_reponses-observations.md) : réfléchissez (et testez !) avant de la consulter.
 
 ### Consignes
 

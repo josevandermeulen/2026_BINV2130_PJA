@@ -111,7 +111,7 @@ Récupérer une propriété d'un `JsonNode` représentant un objet :
 int userId = post.get("userId").asInt();
 ```
 
-Réponses dans [`AJ_atelier09_seance2_solution/09B_solutions-observations.md`](../AJ_atelier09_seance2_solution/09B_solutions-observations.md) : réfléchissez (et testez !) avant de la consulter.
+Réponses dans [`09B_reponses-observations.md`](09B_reponses-observations.md) : réfléchissez (et testez !) avant de la consulter.
 
 **Question 7** :
 Est-ce que votre affichage est correct ? Il est fort probable que l'affichage dans le terminal se fasse aussi de manière asynchrone… Et que donc vous n'ayez pas les commentaires et les détails d'un utilisateur toujours liés au bon post… Comment pourriez-vous corriger ça ?

@@ -62,7 +62,7 @@ Complétez `hllPourFichierAsync(String dossier, String nomFichier)` : elle lance
 **Question 5** :
 Complétez `fusionnerTousLesRouteursAsync(String dossier)` : un `CompletableFuture` par fichier routeur (Question 4), toutes les futures combinées en cascade avec `thenCombine` pour fusionner les estimateurs locaux dans un seul résultat — sans jamais appeler `join`. Partez d'une future déjà complétée contenant un estimateur vide (`CompletableFuture.completedFuture(...)`), comme montré dans la théorie.
 
-Réponses aux Questions 6 à 8 dans [`AJ_atelier10_seance2_solution/10B_solutions-observations.md`](../AJ_atelier10_seance2_solution/10B_solutions-observations.md) : réfléchissez (et testez !) avant de les consulter.
+Réponses aux Questions 6 à 8 dans [`10B_reponses-observations.md`](10B_reponses-observations.md) : réfléchissez (et testez !) avant de les consulter.
 
 **Question 6** :
 Le test `resultatDeterministeSurPlusieursExecutions` passe alors que l'ordre de fin des futures change d'une exécution à l'autre. Pourquoi ?

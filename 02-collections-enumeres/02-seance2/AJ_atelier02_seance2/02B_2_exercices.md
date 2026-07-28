@@ -41,7 +41,7 @@ Dans IntelliJ, créez un projet intitulé `AJ_atelier02_seance2`. Ajoutez-y les 
 
 Vérifiez qu'il fonctionne correctement en démarrant le main.
 
-Certaines questions ci-dessous sont des questions de réflexion (rien à coder) : leurs réponses se trouvent dans [`AJ_atelier02_seance2_solution/02B_solutions-observations.md`](../AJ_atelier02_seance2_solution/02B_solutions-observations.md) — réfléchissez (et testez !) avant de les consulter.
+Certaines questions ci-dessous sont des questions de réflexion (rien à coder) : leurs réponses se trouvent dans [`02B_reponses-observations.md`](02B_reponses-observations.md) — réfléchissez (et testez !) avant de les consulter.
 
 ### L'énuméré `Type`
 

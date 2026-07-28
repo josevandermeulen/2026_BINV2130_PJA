@@ -80,7 +80,7 @@ Retirez (temporairement) l'appel `setAccessible(true)` de votre Question 3 et re
 **Question 7** :
 Comparez ce validateur au `Util.checkObject`/`checkString` que vos constructeurs appellent depuis l'atelier 1 : qu'est-ce qui change dans la façon d'exprimer la règle ? Cherchez « Jakarta Bean Validation » (`@NotNull`, `@Size`) : que reconnaissez-vous ?
 
-Réponses aux Questions 6 et 7 dans [`AJ_atelier11_seance2_solution/11B_solutions-observations.md`](../AJ_atelier11_seance2_solution/11B_solutions-observations.md) : réfléchissez (et testez !) avant de les consulter.
+Réponses aux Questions 6 et 7 dans [`11B_reponses-observations.md`](11B_reponses-observations.md) : réfléchissez (et testez !) avant de les consulter.
 
 ## Parties optionnelles
 

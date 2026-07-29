@@ -1,15 +1,5 @@
 # Atelier 4 – séance 1 : TDD – Concepts
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Introduction au Test Driven Development](#introduction-au-test-driven-development)
-4. [Spécifier les tests](#spécifier-les-tests)
-5. [Implémenter les tests et le code de l'application](#implémenter-les-tests-et-le-code-de-lapplication)
-6. [TDD en résumé](#tdd-en-résumé)
-7. [TDD assisté par IA](#tdd-assisté-par-ia)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 05/10/2026 à 20h.

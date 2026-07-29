@@ -2,18 +2,6 @@
 
 Ce document reprend les notions utiles pour réaliser l'exercice. Il suppose acquises les notions de la séance 1 (`@Test`, `@BeforeEach`, assertions de base, `assertThrows`, tests paramétrés).
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Tester `equals` et `hashCode`](#tester-equals-et-hashcode)
-3. [Fixtures avec des dates](#fixtures-avec-des-dates)
-4. [Tester des exceptions métier personnalisées](#tester-des-exceptions-métier-personnalisées)
-5. [Tester une méthode qui filtre et trie](#tester-une-méthode-qui-filtre-et-trie)
-6. [Plusieurs classes de test dans un même projet](#plusieurs-classes-de-test-dans-un-même-projet)
-7. [Organiser les tests avec `@Nested`](#organiser-les-tests-avec-nested)
-8. [Développer des tests avec l'IA](#développer-des-tests-avec-lia)
-9. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
-
 ## Vidéos
 
 1. [Tests unitaires introduction](https://www.youtube.com/watch?v=UKUbHaxJjRw)

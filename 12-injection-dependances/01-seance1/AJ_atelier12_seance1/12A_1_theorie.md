@@ -1,15 +1,5 @@
 # Atelier 12 : Injection de dépendances – séance 1 – Concepts
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Introduction](#introduction)
-4. [Qu'est-ce qu'un proxy ?](#quest-ce-quun-proxy-)
-5. [Le problème : les dépendances concrètes](#le-problème--les-dépendances-concrètes)
-6. [Le pattern Factory](#le-pattern-factory)
-7. [L'injection de dépendances](#linjection-de-dépendances)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 07/12/2026 à 20h.

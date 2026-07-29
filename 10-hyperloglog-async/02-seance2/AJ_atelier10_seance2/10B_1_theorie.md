@@ -1,13 +1,5 @@
 # Atelier 10 : HyperLogLog appliqué (programmation asynchrone) – séance 2 – Concepts
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [Fusionner deux HyperLogLog](#fusionner-deux-hyperloglog)
-4. [Un CompletableFuture par routeur](#un-completablefuture-par-routeur)
-5. [Pourquoi le résultat est déterministe](#pourquoi-le-résultat-est-déterministe)
-
 ## Vidéos
 
 1. [Threads - Completable Future](https://www.youtube.com/watch?v=EE6a93t2c3E)

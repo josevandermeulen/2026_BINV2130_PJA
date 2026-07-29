@@ -1,13 +1,5 @@
 # Atelier 5 – séance 1 : Concepts (stubs)
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Réalisation de tests unitaires](#réalisation-de-tests-unitaires)
-4. [Abstraction de l'implémentation des classes](#abstraction-de-limplémentation-des-classes)
-5. [Les stubs](#les-stubs)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 12/10/2026 à 20h.

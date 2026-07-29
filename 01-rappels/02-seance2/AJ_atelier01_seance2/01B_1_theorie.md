@@ -6,23 +6,6 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 
 Il s'agit de rappels : la théorie correspondante a été vue dans les cours précédents (COO). Pas de nouvelle matière pour cet atelier.
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Association entre objets](#association-entre-objets)
-3. [Association bidirectionnelle](#association-bidirectionnelle)
-4. [Multiplicités en UML](#multiplicités-en-uml)
-5. [Collection d'objets](#collection-dobjets)
-6. [Méthodes renvoyant un boolean](#méthodes-renvoyant-un-boolean)
-7. [Interface `Iterable` et méthode `iterator`](#interface-iterable-et-méthode-iterator)
-8. [Parcours avec un foreach](#parcours-avec-un-foreach)
-9. [Numérotation automatique avec un attribut statique](#numérotation-automatique-avec-un-attribut-statique)
-10. [Dates avec `LocalDateTime`](#dates-avec-localdatetime)
-11. [Égalité structurelle sur plusieurs attributs](#égalité-structurelle-sur-plusieurs-attributs)
-12. [`IllegalArgumentException` dans un constructeur](#illegalargumentexception-dans-un-constructeur)
-13. [Construire une chaîne de caractères](#construire-une-chaîne-de-caractères)
-14. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
-
 ## Vidéos
 
 1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)

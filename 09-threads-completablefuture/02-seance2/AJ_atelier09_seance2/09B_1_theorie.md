@@ -1,15 +1,5 @@
 # Atelier 9 : Threads & CompletableFuture – séance 2 – Concepts
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [CompletableFuture](#completablefuture)
-4. [Chaîner des traitements](#chaîner-des-traitements)
-5. [Combiner et attendre plusieurs futures](#combiner-et-attendre-plusieurs-futures)
-6. [Gérer les erreurs](#gérer-les-erreurs)
-7. [ExecutorService](#executorservice)
-
 ## Vidéos
 
 1. [Les Threads - Bases](https://www.youtube.com/watch?v=4cYaMxE5a58)

@@ -2,11 +2,6 @@
 
 Les exercices associés à ces concepts se trouvent dans [`06B_2_exercices.md`](06B_2_exercices.md).
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Concepts (un peu) plus avancés](#concepts-un-peu-plus-avancés)
-
 ## Vidéos
 
 1. [Les Streams Java - Introduction](https://www.youtube.com/watch?v=q0zMS0_XRSs)

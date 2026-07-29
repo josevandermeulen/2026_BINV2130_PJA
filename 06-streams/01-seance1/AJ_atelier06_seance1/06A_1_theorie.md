@@ -2,12 +2,6 @@
 
 Les exercices associés à ces concepts se trouvent dans [`06A_2_exercices.md`](06A_2_exercices.md).
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Concepts de base](#concepts-de-base)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 19/10/2026 à 20h.

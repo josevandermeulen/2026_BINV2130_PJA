@@ -4,17 +4,6 @@ Ce document reprend les notions utiles pour réaliser l'exercice.
 
 Les exemples ci-dessous sont volontairement différents de l'exercice. Ils servent à rappeler les mécanismes Java sans donner directement la structure de la solution.
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Package](#package)
-4. [Énumérés](#énumérés)
-5. [Collections](#collections)
-6. [Classes internes](#classes-internes)
-7. [Durées avec `Duration`](#durées-avec-duration)
-8. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 21/09/2026 à 20h.

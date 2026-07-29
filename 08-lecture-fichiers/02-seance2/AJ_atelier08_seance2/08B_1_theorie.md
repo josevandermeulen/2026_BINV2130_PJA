@@ -2,18 +2,6 @@
 
 Les exercices associés à ces concepts se trouvent dans [`08B_2_exercices.md`](08B_2_exercices.md). Cette fiche reprend le contenu de la vidéo ci-dessous ; regardez-la d'abord, elle explique le principe en images en 8 minutes.
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Le problème : compter des vues uniques](#le-problème--compter-des-vues-uniques)
-3. [L'idée : la rareté d'un hash](#lidée--la-rareté-dun-hash)
-4. [Les buckets](#les-buckets)
-5. [L'estimation : moyenne harmonique](#lestimation--moyenne-harmonique)
-6. [Précision et mémoire figée](#précision-et-mémoire-figée)
-7. [L'importance du hash](#limportance-du-hash)
-8. [Fusionner des compteurs](#fusionner-des-compteurs)
-9. [Petit résumé](#petit-résumé)
-
 ## Vidéos
 
 1. [Comment compter des millions de vues ? HyperLogLog](https://www.youtube.com/watch?v=OWBT86qoEqk) (Grafikart — l'[article compagnon](https://grafikart.fr/tutoriels/hyperloglog-2345) reprend le contenu par écrit)

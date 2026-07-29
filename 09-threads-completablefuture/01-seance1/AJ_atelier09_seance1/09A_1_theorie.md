@@ -1,15 +1,5 @@
 # Atelier 9 : Threads & CompletableFuture – séance 1 – Concepts
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Introduction](#introduction)
-4. [Thread](#thread)
-5. [Créer un thread en Java](#créer-un-thread-en-java)
-6. [Race condition](#race-condition)
-7. [Deadlock](#deadlock)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 16/11/2026 à 20h.

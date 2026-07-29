@@ -2,13 +2,6 @@
 
 Les exercices associés à ces concepts se trouvent dans [`07B_2_exercices.md`](07B_2_exercices.md).
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Les flatMap](#les-flatmap)
-3. [Le design fonctionnel](#le-design-fonctionnel)
-4. [Pour aller plus loin](#pour-aller-plus-loin)
-
 ## Vidéos
 
 1. [Comment aplatir les collections imbriquées en Java avec flatMap](https://www.youtube.com/watch?v=aZHDUchqjyk)

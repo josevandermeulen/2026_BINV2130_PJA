@@ -2,16 +2,6 @@
 
 Les exercices associés à ces concepts se trouvent dans [`08A_2_exercices.md`](08A_2_exercices.md).
 
-## Table des matières
-
-1. [À rendre cette semaine](#à-rendre-cette-semaine)
-2. [Vidéos](#vidéos)
-3. [Lire un fichier texte](#lire-un-fichier-texte)
-4. [Exceptions vérifiées et E/S](#exceptions-vérifiées-et-es)
-5. [try-with-resources](#try-with-resources)
-6. [Écrire un fichier texte](#écrire-un-fichier-texte)
-7. [Petit résumé](#petit-résumé)
-
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 09/11/2026 à 20h.

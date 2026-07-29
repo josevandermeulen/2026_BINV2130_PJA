@@ -4,24 +4,6 @@ Ce document reprend les notions utiles pour réaliser l'exercice.
 
 Les exemples ci-dessous sont volontairement différents de l'exercice. Ils servent à rappeler les mécanismes Java sans donner directement la structure de la solution.
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [L'interface Map](#linterface-map)
-3. [Parcourir une Map](#parcourir-une-map)
-4. [Les ensembles triés : SortedSet et TreeSet](#les-ensembles-triés--sortedset-et-treeset)
-5. [Ordre naturel : l'interface Comparable](#ordre-naturel--linterface-comparable)
-6. [L'interface Comparator](#linterface-comparator)
-7. [Classes anonymes](#classes-anonymes)
-8. [Égalité et ordre dans un TreeSet](#égalité-et-ordre-dans-un-treeset)
-9. [Comparaison d'énumérés](#comparaison-dénumérés)
-10. [Renvoyer une collection non modifiable](#renvoyer-une-collection-non-modifiable)
-11. [StringBuilder](#stringbuilder)
-12. [L'interface SortedMap](#linterface-sortedmap)
-13. [Wrapper classes et autoboxing](#wrapper-classes-et-autoboxing)
-14. [Clonage d'objets](#clonage-dobjets)
-15. [Points d'attention pour l'exercice](#points-dattention-pour-lexercice)
-
 ## Vidéos
 
 1. [Interface Comparable en Java](https://www.youtube.com/watch?v=PCjAg07fivY)

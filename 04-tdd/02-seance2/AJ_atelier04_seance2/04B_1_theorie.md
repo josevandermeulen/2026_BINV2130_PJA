@@ -1,14 +1,5 @@
 # Atelier 4 – séance 2 : TDD et évolution du code – Concepts
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Les tests comme filet de sécurité](#les-tests-comme-filet-de-sécurité)
-3. [TDD lors de la mise à jour de fonctionnalités existantes](#tdd-lors-de-la-mise-à-jour-de-fonctionnalités-existantes)
-4. [Quand créer de nouveaux tests ?](#quand-créer-de-nouveaux-tests-)
-5. [TDD assisté par IA lors d'une évolution](#tdd-assisté-par-ia-lors-dune-évolution)
-6. [En résumé](#en-résumé)
-
 ## Vidéos
 
 1. [Conception de cas de test - cas positifs et négatifs](https://www.youtube.com/watch?v=_3N1241ywmY)

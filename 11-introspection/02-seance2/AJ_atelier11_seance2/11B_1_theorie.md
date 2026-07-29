@@ -1,13 +1,5 @@
 # Atelier 11 : Introspection – séance 2 – Concepts
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [La réflexion sur les champs](#la-réflexion-sur-les-champs)
-4. [Annotations sur les champs](#annotations-sur-les-champs)
-5. [La validation déclarative](#la-validation-déclarative)
-
 ## Vidéos
 
 1. [Introspection - Machine Virtuelle Java JVM](https://www.youtube.com/watch?v=hozaDXJ7J2Y)

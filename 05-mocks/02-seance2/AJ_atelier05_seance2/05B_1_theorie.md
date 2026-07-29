@@ -1,11 +1,5 @@
 # Atelier 5 – séance 2 : Concepts (mocks, Mockito, dépendances)
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Les mocks](#les-mocks)
-3. [Gestion des dépendances d'une application Java](#gestion-des-dépendances-dune-application-java)
-
 ## Vidéos
 
 1. [Tests unitaires - les stubs](https://www.youtube.com/watch?v=aBwQRyDWl1Y)

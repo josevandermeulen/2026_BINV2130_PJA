@@ -1,13 +1,5 @@
 # Atelier 12 : Injection de dépendances – séance 2 – Concepts
 
-## Table des matières
-
-1. [Vidéos](#vidéos)
-2. [Introduction](#introduction)
-3. [La configuration par fichiers `.properties`](#la-configuration-par-fichiers-properties)
-4. [L'injection par setter](#linjection-par-setter)
-5. [L'injection automatique par annotations et réflexion](#linjection-automatique-par-annotations-et-réflexion)
-
 ## Vidéos
 
 1. [Interfaces](https://www.youtube.com/watch?v=tLvlrRXwyUk)

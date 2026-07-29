@@ -34,7 +34,7 @@ Les classes de la séance 1 vous sont fournies (elles reprennent celles de l'ate
 
 Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier10_seance2` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Récupérez les classes fournies dans `AJ_atelier10_seance2/src/main/java/` (packages `domaine`, `util`, `main`) et les tests fournis dans `AJ_atelier10_seance2/src/test/java/` en conservant l'arborescence. Ajoutez la dépendance JUnit 5 à votre `pom.xml` (voir le `pom.xml` fourni). Aucun dossier de logs à copier : les tests créent leurs propres fichiers temporaires, et [`MainGrandeEchelleRouteurs`](src/main/java/main/MainGrandeEchelleRouteurs.java) génère les siens au premier lancement.
 
-Chaque question est vérifiée par les tests JUnit fournis ([`HyperLogLogTest`](src/test/java/domaine/HyperLogLogTest.java), [`AnalyseRouteursTest`](src/test/java/main/AnalyseRouteursTest.java)) : exécutez-les directement dans IntelliJ (bouton ▶) pour vérifier votre implémentation au fur et à mesure.
+Les Questions 1 à 8 sont vérifiées par les tests JUnit fournis ([`HyperLogLogTest`](src/test/java/domaine/HyperLogLogTest.java), [`AnalyseRouteursTest`](src/test/java/main/AnalyseRouteursTest.java)) : exécutez-les directement dans IntelliJ (bouton ▶) pour vérifier votre implémentation au fur et à mesure. La question d'examen, en fin de fiche, se vérifie autrement — voir ses consignes.
 
 ### Fusionner deux `HyperLogLog`
 
@@ -76,6 +76,49 @@ Exécutez `MainGrandeEchelleRouteurs` (fourni) : au premier lancement, il génè
 
 **Question 8** :
 Comparez les deux estimations et les deux temps affichés. Pourquoi les estimations sont-elles identiques, et pourquoi la version asynchrone est-elle nettement plus rapide alors que le travail total effectué est exactement le même ?
+
+## Parties optionnelles
+
+### Question d'examen : agrégateur de profils utilisateur
+
+Les Questions 9 et 10 sont issues de l'examen de janvier 2026 (question « Programmation Asynchrone », 6 points, ± 40 minutes). Récupérez le package `profil` (fourni dans `AJ_atelier10_seance2/src/main/java/`) et mettez-le dans vos packages, en conservant l'arborescence `profil/domaine/` et `profil/service/`. Aucun test JUnit ici : vous vérifiez votre implémentation en lançant le `main` de `UserProfileAggregator` (fourni).
+
+Vous développez [`UserProfileAggregator`](src/main/java/profil/UserProfileAggregator.java) (package `profil`), un service de profil qui récupère des données depuis plusieurs services backend et les combine en un profil complet. Deux services simulés, déjà implémentés, vous sont fournis dans le package `profil.service` : [`UserBasicInfoService`](src/main/java/profil/service/UserBasicInfoService.java) renvoie les informations de base (nom, e-mail) en ~200 ms, [`UserPreferencesService`](src/main/java/profil/service/UserPreferencesService.java) renvoie les préférences (thème, langue) en ~150 ms. Le modèle de données est dans `profil.domaine` : [`CompleteUserProfile`](src/main/java/profil/domaine/CompleteUserProfile.java) agrège un [`BasicInfo`](src/main/java/profil/domaine/BasicInfo.java) et un [`Preferences`](src/main/java/profil/domaine/Preferences.java).
+
+Les deux services s'exécutant en parallèle, le profil complet s'obtient en ~200 ms au lieu des ~350 ms d'un enchaînement séquentiel.
+
+**Question 9** :
+Complétez `fetchCompleteProfile(String userId)` : récupérez les données des deux services **en parallèle** et combinez-les en un `CompleteUserProfile`. La méthode renvoie un `CompletableFuture<CompleteUserProfile>` et ne contient **aucun appel bloquant** (ni `get`, ni `join`).
+
+**Question 10** :
+Complétez `fetchMultipleProfiles(List<String> userIds)` : récupérez les profils complets de plusieurs utilisateurs, tous traités **en parallèle**, et renvoyez une `List<CompleteUserProfile>`. Ici, `join` est attendu : lancez une future par utilisateur (via la Question 9), attendez-les toutes avec `CompletableFuture.allOf`, puis extrayez chaque résultat.
+
+Exécutez le `main` de `UserProfileAggregator` : il affiche un profil unique, puis trois profils d'un coup. Le thème et la langue étant tirés au hasard par `UserPreferencesService`, ils changent à chaque exécution — c'est la **forme** de la sortie qui doit correspondre :
+
+```
+=== Test 1: Récupération d'un Profil Unique ===
+
+Profil Complet pour user123:
+  Info de base : Utilisateur user123 (user123@example.com)
+  Préférences : Thème=light, Langue=de
+
+=== Test 2: Récupération de Plusieurs Profils ===
+Récupéré 3 profils :
+
+Profil Complet pour alice:
+  Info de base : Utilisateur alice (alice@example.com)
+  Préférences : Thème=auto, Langue=es
+
+Profil Complet pour bob:
+  Info de base : Utilisateur bob (bob@example.com)
+  Préférences : Thème=dark, Langue=de
+
+Profil Complet pour charlie:
+  Info de base : Utilisateur charlie (charlie@example.com)
+  Préférences : Thème=dark, Langue=en
+
+=== Tous les tests sont terminés ===
+```
 
 ---
 

@@ -16,7 +16,8 @@ public class QuantiteNonAutoriseeException extends RuntimeException {
     }
 
     /**
-     * Crée l'exception avec un message précisant en quoi la quantité achetée est inférieure au plus petit palier défini.
+     * Crée l'exception avec un message précisant en quoi la quantité achetée est
+     * inférieure au plus petit palier défini.
      *
      * @param message le message décrivant la situation rencontrée
      */

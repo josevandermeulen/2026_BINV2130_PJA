@@ -51,6 +51,12 @@ public class CompleteUserProfile {
         return preferences;
     }
 
+    /**
+     * Renvoie une description lisible du profil complet : identifiant, informations
+     * de base et préférences, sur plusieurs lignes.
+     *
+     * @return description lisible du profil complet
+     */
     @Override
     public String toString() {
         return "\nProfil Complet pour " + userId + ":\n"

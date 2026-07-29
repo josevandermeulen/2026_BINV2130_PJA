@@ -287,11 +287,10 @@
 <div class="site-header" id="top">
   <h1>Semaine 7 — Programmation fonctionnelle</h1>
   <p>Document autonome en français sur la programmation fonctionnelle en Java. Il ouvre le capot des Streams : interfaces fonctionnelles standard, lambdas, références de méthode, <code>flatMap</code>, comparateurs fonctionnels, immuabilité et gestion des exceptions dans un style fonctionnel.</p>
-  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard (<code>java.util.function</code>, <code>java.util.Comparator</code>).</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="06-streams-fr.html">&larr; Semaine 6</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="08-lecture-fichiers-fr.html">Semaine 8 &rarr;</a>
   </div>
 </div>
@@ -832,7 +831,7 @@ Comparator&lt;String&gt; c = Comparator.naturalOrder();</code></pre>
         <ul>
           <li>Tous les champs sont <code>private final</code>.</li>
           <li>Aucun setter : les valeurs sont fixées uniquement dans le constructeur.</li>
-          <li>La classe n'est pas <code>extends</code>ible de façon incontrôlée (idéalement <code>final</code>), pour éviter qu'une sous-classe n'introduise de la mutabilité.</li>
+          <li>La classe ne peut pas être étendue de façon incontrôlée (idéalement <code>final</code>), pour éviter qu'une sous-classe n'introduise de la mutabilité.</li>
           <li>Si un champ est une référence vers un objet mutable (une <code>List</code>, un <code>Date</code>, un tableau), il faut en faire une <strong>copie défensive</strong> — à la construction et/ou dans le getter — pour empêcher l'appelant de modifier l'état interne via la référence obtenue.</li>
         </ul>
       </div>

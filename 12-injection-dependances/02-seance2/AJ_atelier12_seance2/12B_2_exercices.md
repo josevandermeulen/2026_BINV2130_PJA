@@ -60,7 +60,7 @@ blacklistedDomains=google.be;facebook.com;instagram.com
 ```
 
 **Question 2** :
-L'interface [`BlacklistService`](src/main/java/blacklist/BlacklistService.java) (package `blacklist`) est fournie : sa méthode `check` renvoie `true` si l'URL de la `Query` contient un domaine blacklisté. Complétez la classe [`BlacklistServiceImpl`](src/main/java/blacklist/BlacklistServiceImpl.java) : chargez le fichier `blacklist.properties` **une seule fois** (au chargement de la classe) à l'aide de [`java.util.Properties`](https://docs.oracle.com/en/java/javase/21/docs/api/java.base/java/util/Properties.html), puis implémentez `check`.
+L'interface [`BlacklistService`](src/main/java/blacklist/BlacklistService.java) (package `blacklist`) est fournie : sa méthode `check` renvoie `true` si l'URL de la `Query` contient un domaine blacklisté. Complétez la classe [`BlacklistServiceImpl`](src/main/java/blacklist/BlacklistServiceImpl.java) : chargez le fichier `blacklist.properties` **une seule fois** (au chargement de la classe) à l'aide de [`java.util.Properties`](https://docs.oracle.com/en/java/javase/17/docs/api/java.base/java/util/Properties.html), puis implémentez `check`.
 
 Astuces :
 

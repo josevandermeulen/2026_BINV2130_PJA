@@ -50,8 +50,8 @@ Si Maven configure une vieille version de Java, ajoutez dans le `pom.xml`, dans 
 
 ```xml
 <properties>
-    <maven.compiler.source>21</maven.compiler.source>
-    <maven.compiler.target>21</maven.compiler.target>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
 </properties>
 ```
 

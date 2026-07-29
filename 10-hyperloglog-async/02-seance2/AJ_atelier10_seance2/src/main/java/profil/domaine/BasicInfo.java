@@ -38,6 +38,12 @@ public class BasicInfo {
         return email;
     }
 
+    /**
+     * Renvoie une description lisible de l'utilisateur : son nom suivi de son
+     * adresse e-mail entre parenthèses.
+     *
+     * @return description lisible de l'utilisateur
+     */
     @Override
     public String toString() {
         return name + " (" + email + ")";

@@ -295,7 +295,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="04-tdd-fr.html">&larr; Semaine 4</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="06-streams-fr.html">Semaine 6 &rarr;</a>
   </div>
 </div>
@@ -479,7 +479,8 @@ Mockito.when(emailGateway.envoyer("alice@example.com", "Bonjour")).thenReturn(tr
       <p>Pour une méthode <code>void</code>, on utilise la famille <code>doXxx</code>.</p>
       <span class="signature">doNothing().when(mock).methodeVoid(...)</span>
       <span class="signature">doThrow(Throwable...).when(mock).methodeVoid(...)</span>
-      <span class="signature">doReturn(Object).when(mock).methode(...)</span>
+      <p><code>doReturn</code> appartient à la même famille mais vise l'inverse : une méthode qui <em>renvoie</em> une valeur. On y recourt surtout sur un spy, où <code>when(spy.methode())</code> appellerait réellement la méthode avant de la stuber.</p>
+      <span class="signature">doReturn(Object).when(spy).methode(...)</span>
       <pre><code>Mockito.doThrow(new IllegalStateException())
        .when(notificationService)
        .envoyer("alice@example.com");</code></pre>

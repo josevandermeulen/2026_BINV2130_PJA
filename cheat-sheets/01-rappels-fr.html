@@ -294,7 +294,7 @@
   <p>Couvre : classes et objets, encapsulation, constructeurs, héritage, classes abstraites, égalité, listes et associations.</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="02-collections-enumeres-fr.html">Semaine 2 &rarr;</a>
   </div>
 </div>
@@ -660,8 +660,9 @@ public class Etudiant extends Personne {
       <pre><code>// Constructeur avec validation et chaînage
 public Compte(String numero) { this(numero, 0); }
 public Compte(String numero, double solde) {
-    if (numero == null || numero.isBlank())
+    if (numero == null || numero.isBlank()) {
         throw new IllegalArgumentException("numero obligatoire");
+    }
     this.numero = numero;
     this.solde = solde;
 }

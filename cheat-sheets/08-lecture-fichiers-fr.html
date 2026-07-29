@@ -287,11 +287,10 @@
 <div class="site-header" id="top">
   <h1>Semaine 8 — Lecture de fichiers</h1>
   <p>Document autonome en français sur la lecture et l'écriture de fichiers texte en Java. Il couvre <code>FileReader</code>/<code>BufferedReader</code>, <code>FileWriter</code>/<code>BufferedWriter</code>, le bloc <code>try-with-resources</code>, les exceptions vérifiées liées aux entrées/sorties, ainsi que les utilitaires <code>java.nio.file.Files</code>.</p>
-  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard (<code>java.io</code>, <code>java.nio.file</code>).</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="07-programmation-fonctionnelle-fr.html">&larr; Semaine 7</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="09-threads-completablefuture-fr.html">Semaine 9 &rarr;</a>
   </div>
 </div>
@@ -769,7 +768,7 @@ hash ^= (hash &gt;&gt;&gt; 16);</code></pre>
           <td>Utiliser <code>new FileWriter(chemin, true)</code> pour ajouter à la suite du contenu existant.</td>
         </tr>
         <tr>
-          <td><code>IllegalStateException</code> en essayant de réutiliser le <code>Stream&lt;String&gt;</code> renvoyé par <code>lines()</code> après le bloc try-with-resources.</td>
+          <td><code>UncheckedIOException</code> (<code>IOException: Stream closed</code>) en essayant de réutiliser le <code>Stream&lt;String&gt;</code> renvoyé par <code>lines()</code> après le bloc try-with-resources.</td>
           <td>Le <code>BufferedReader</code> sous-jacent a déjà été fermé à la sortie du bloc, or <code>lines()</code> est paresseux et lit depuis ce reader à la demande.</td>
           <td>Consommer le stream (<code>collect</code>, <code>toList</code>...) à l'intérieur du bloc try-with-resources, avant la fermeture.</td>
         </tr>

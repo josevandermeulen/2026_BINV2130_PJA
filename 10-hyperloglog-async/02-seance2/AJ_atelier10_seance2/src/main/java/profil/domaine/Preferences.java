@@ -38,6 +38,11 @@ public class Preferences {
         return language;
     }
 
+    /**
+     * Renvoie une description lisible des préférences : le thème puis la langue.
+     *
+     * @return description lisible des préférences
+     */
     @Override
     public String toString() {
         return "Thème=" + theme + ", Langue=" + language;

@@ -287,11 +287,10 @@
 <div class="site-header" id="top">
   <h1>Semaine 6 — Streams Java</h1>
   <p>Document autonome en français sur l'API Stream de Java. Il couvre la création de streams, les opérations intermédiaires, les opérations terminales, les Collectors et la classe Optional.</p>
-  <p>Version Java visée : Java 17. Toutes les API présentées font partie de la bibliothèque standard.</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="05-mocks-fr.html">&larr; Semaine 5</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="07-programmation-fonctionnelle-fr.html">Semaine 7 &rarr;</a>
   </div>
 </div>
@@ -420,7 +419,7 @@ Stream&lt;String&gt; stream = Arrays.stream(tableau);</code></pre>
         <h3><code>filter</code></h3>
         <span class="signature">Stream&lt;T&gt; filter(Predicate&lt;? super T&gt; predicate)</span>
         <p>Retient uniquement les éléments pour lesquels le prédicat est vrai.</p>
-        <pre><code>List&lt;Produit&gt; cheers = produits.stream()
+        <pre><code>List&lt;Produit&gt; chers = produits.stream()
     .filter(p -&gt; p.getPrix() &gt; 100)
     .collect(Collectors.toList());
 
@@ -779,7 +778,7 @@ List&lt;String&gt; longues = villes.stream()
     .filter(v -&gt; v.length() &gt; 4)
     .sorted()
     .collect(Collectors.toList());
-// ["Lyon", "Paris", "Périgueux"]</code></pre>
+// ["Paris", "Périgueux"] — "Lyon" et "Laon" font exactement 4 lettres, ils sont écartés</code></pre>
 
       <h3>Pipeline sur une liste d'entiers</h3>
       <pre><code>List&lt;Integer&gt; notes = List.of(12, 8, 15, 12, 9, 15, 18);

@@ -295,7 +295,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="09-threads-completablefuture-fr.html">&larr; Semaine 9</a>
-    <span class="version-badge">v9 &middot; 25/07/2026</span>
+    <span class="version-badge">v11 &middot; 29/07/2026</span>
     <a href="11-introspection-fr.html">Semaine 11 &rarr;</a>
   </div>
 </div>
@@ -415,9 +415,10 @@ System.out.println("Asynchrone : " + dureeAsync + " ms");</code></pre>
         <span class="signature">public void fusionner(HyperLogLog autre)</span>
         <pre><code>public void fusionner(HyperLogLog autre) {
     Util.checkObject(autre);
-    if (autre.registres.length != registres.length)
+    if (autre.registres.length != registres.length) {
         throw new IllegalArgumentException(
-            "Les deux HyperLogLog doivent avoir le même nombre de registres");
+                "Les deux HyperLogLog doivent avoir le même nombre de registres");
+    }
     for (int i = 0; i &lt; registres.length; i++) {
         registres[i] = Math.max(registres[i], autre.registres[i]);
     }

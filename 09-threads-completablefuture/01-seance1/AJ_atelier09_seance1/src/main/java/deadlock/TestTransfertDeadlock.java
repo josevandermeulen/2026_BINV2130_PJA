@@ -1,7 +1,8 @@
 package deadlock;
 
 /**
- * Programme de démonstration : lance deux transferts croisés, qui s'interbloquent tant que les verrous ne sont pas ordonnés.
+ * Programme de démonstration : lance deux transferts croisés, qui s'interbloquent
+ * tant que les verrous ne sont pas ordonnés.
  */
 public class TestTransfertDeadlock {
 

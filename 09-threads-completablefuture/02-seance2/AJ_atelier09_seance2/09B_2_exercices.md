@@ -38,11 +38,11 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier09_
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
-    <version>2.17.0</version>
+    <version>2.18.9</version>
 </dependency>
 ```
 
-NB : le `pom.xml` fourni a été configuré pour la version 21 du JDK. Cette version se change facilement pour correspondre à la version présente sur votre laptop, en mettant à jour `pom.xml`. Si vous souhaitez installer une nouvelle version du JDK, vous pouvez le faire via : File → Project Structure… → Project → SDK → Download JDK…
+NB : le `pom.xml` fourni a été configuré pour la version 17 du JDK. Cette version se change facilement pour correspondre à la version présente sur votre laptop, en mettant à jour `pom.xml`. Si vous souhaitez installer une nouvelle version du JDK, vous pouvez le faire via : File → Project Structure… → Project → SDK → Download JDK…
 
 ### Programmation asynchrone moderne
 

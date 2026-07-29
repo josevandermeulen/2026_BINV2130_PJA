@@ -16,7 +16,7 @@
 
 La théorie sur l'introspection a été vue en cours de Concepts Orientés Objet et ne sera pas détaillée ici. Cependant, n'hésitez pas à utiliser également les ressources à votre disposition, à savoir :
 
-1. La javadoc officielle : https://docs.oracle.com/javase/8/docs/api/java/lang/reflect/package-summary.html
+1. La javadoc officielle : https://docs.oracle.com/javase/17/docs/api/java/lang/reflect/package-summary.html
 2. Les guides techniques fournis par Oracle : https://www.oracle.com/technical-resources/articles/java/javareflection.html
 
 Les rappels ci-dessous se limitent aux briques utilisées dans l'exercice : inspecter une classe, invoquer une méthode dynamiquement, instancier un objet, et créer une annotation personnalisée.

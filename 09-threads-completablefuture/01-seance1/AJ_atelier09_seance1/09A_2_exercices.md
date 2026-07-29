@@ -37,7 +37,7 @@ Réponses aux questions de réflexion dans [`09A_reponses-observations.md`](09A_
 
 Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier09_seance1` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Récupérez les classes fournies dans `AJ_atelier09_seance1/src/main/java/` (packages `sync`, `compteur_thread` et `deadlock`) et les tests fournis dans `AJ_atelier09_seance1/src/test/java/` en conservant l'arborescence. Ajoutez la dépendance JUnit 5 à votre `pom.xml` (voir le `pom.xml` fourni).
 
-NB : le `pom.xml` fourni a été configuré pour la version 21 du JDK. Cette version se change facilement pour correspondre à la version présente sur votre laptop, en mettant à jour `pom.xml`. Si vous souhaitez installer une nouvelle version du JDK, vous pouvez le faire via : File → Project Structure… → Project → SDK → Download JDK…
+NB : le `pom.xml` fourni a été configuré pour la version 17 du JDK. Cette version se change facilement pour correspondre à la version présente sur votre laptop, en mettant à jour `pom.xml`. Si vous souhaitez installer une nouvelle version du JDK, vous pouvez le faire via : File → Project Structure… → Project → SDK → Download JDK…
 
 ### Démarrage en synchrone
 

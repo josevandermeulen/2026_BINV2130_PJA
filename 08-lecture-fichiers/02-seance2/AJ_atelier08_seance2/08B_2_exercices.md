@@ -31,9 +31,11 @@ L'estimation obtenue reste approximative, en particulier avec seulement 16 regis
 
 ### Consignes
 
-Récupérez le dossier `AJ_atelier08_seance2/` complet, renommez-le `AJ_atelier08_seance2` et ouvrez-le dans IntelliJ : c'est un projet Maven prêt à l'emploi, dont les dépendances JUnit 5 et Mockito sont **embarquées** dans son dossier `repo/` — il fonctionne donc aussi sans connexion internet (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin).
+Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier08_seance2` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Reprenez tel quel le `pom.xml` fourni **avec le dossier `repo/` qui l'accompagne**, à placer à la racine de votre projet : les dépendances JUnit 5 et Mockito y sont **embarquées**, si bien que le projet se construit aussi sans connexion internet.
 
-Reprenez ensuite votre solution de la séance 1 (ou celle fournie dans [`../../01-seance1/AJ_atelier08_seance1_solution/`](../../01-seance1/AJ_atelier08_seance1_solution/)) : copiez les classes des packages `domaine`, `util` et `main` dans `src/main/java/`, à côté des nouvelles classes fournies ([`Hasher`](src/main/java/domaine/Hasher.java), [`DefaultHasher`](src/main/java/domaine/DefaultHasher.java), [`HyperLogLog`](src/main/java/domaine/HyperLogLog.java), [`AnalyseIp`](src/main/java/main/AnalyseIp.java), le nouveau [`Main`](src/main/java/main/Main.java)). Les tests sont déjà dans `src/test/java/`, et le dossier `logs/` (2 000 accès sur quatre journées) est déjà à la racine du projet.
+Récupérez les classes fournies dans `AJ_atelier08_seance2/src/main/java/` ([`Hasher`](src/main/java/domaine/Hasher.java), [`DefaultHasher`](src/main/java/domaine/DefaultHasher.java), [`HyperLogLog`](src/main/java/domaine/HyperLogLog.java), [`AnalyseIp`](src/main/java/main/AnalyseIp.java), le nouveau [`Main`](src/main/java/main/Main.java)), les tests fournis dans `AJ_atelier08_seance2/src/test/java/` en conservant l'arborescence, et le dossier `logs/` (2 000 accès sur quatre journées), lui aussi à la racine du projet.
+
+Complétez enfin avec votre solution de la séance 1 (ou celle fournie dans `08-lecture-fichiers/01-seance1/AJ_atelier08_seance1_solution/`, publiée après la séance 1) : copiez les classes des packages `domaine`, `util` et `main` dans `src/main/java/`, à côté des nouvelles classes ci-dessus.
 
 Exécutez les tests directement dans IntelliJ (clic droit sur `src/test/java` → *Run 'All Tests'*) pour vérifier votre implémentation au fur et à mesure, et comparez la sortie de `Main` à `affichage_Main.txt`.
 

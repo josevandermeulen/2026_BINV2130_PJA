@@ -1,7 +1,8 @@
 package compteur_thread;
 
 /**
- * Programme de démonstration : fait courir plusieurs compteurs pour faire apparaître la situation de compétition sur le gagnant.
+ * Programme de démonstration : fait courir plusieurs compteurs pour faire
+ * apparaître la situation de compétition sur le gagnant.
  */
 public class TestCompteurThreadWithRaceCondition {
     public static void main(String[] args) {

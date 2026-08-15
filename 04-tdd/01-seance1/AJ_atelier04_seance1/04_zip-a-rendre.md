@@ -4,7 +4,7 @@ Une remise cotée sur 20 points, qui porte sur la **structure de l'archive que v
 sur le code Java qu'elle contient.
 
 Cette remise **compte dans l'évaluation continue**, au même titre que les QCM : la note retient les
-12 meilleurs résultats sur 14, pour 10 % de la note de l'unité d'enseignement. Une remise non faite
+12 meilleurs résultats sur 15, pour 10 % de la note de l'unité d'enseignement. Une remise non faite
 est cotée 0.
 
 ## Pourquoi cet exercice

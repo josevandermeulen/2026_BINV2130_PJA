@@ -4,7 +4,7 @@
 question vaut **2 points**, pour un total de 20 points.
 
 Ce questionnaire **compte dans l'évaluation continue**, au même titre que les douze QCM mooVin :
-la note retient les 12 meilleurs résultats sur 14, pour 10 % de la note de l'unité d'enseignement.
+la note retient les 12 meilleurs résultats sur 15, pour 10 % de la note de l'unité d'enseignement.
 Une évaluation non réalisée est cotée 0.
 
 ## Ce qu'on vous demande

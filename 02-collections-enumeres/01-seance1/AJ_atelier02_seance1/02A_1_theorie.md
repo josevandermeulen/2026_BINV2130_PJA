@@ -7,6 +7,7 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 ## À rendre cette semaine
 
 - **Le QCM de la semaine sur mooVin** — ferme le lundi 21/09/2026 à 20h.
+- **Le QCM « Cheat sheets hors ligne » sur mooVin** — ferme le lundi 21/09/2026 à 20h. Cinq questions pour vérifier que vous savez ouvrir les cheat sheets depuis votre clone, **sans connexion Internet** : c'est dans ces conditions que vous les consulterez à l'examen de janvier.
 
 ## Vidéos
 

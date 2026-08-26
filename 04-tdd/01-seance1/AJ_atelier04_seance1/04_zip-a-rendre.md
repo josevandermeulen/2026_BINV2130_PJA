@@ -5,7 +5,7 @@ sur le code Java qu'elle contient.
 
 Cette remise **compte dans l'évaluation continue**, au même titre que les QCM : la note retient les
 12 meilleurs résultats sur 15, pour 10 % de la note de l'unité d'enseignement. Une remise non faite
-est cotée 0.
+est cotée 0. Si vous déposez plusieurs fois, c'est la **dernière** version déposée qui est cotée.
 
 ## Pourquoi cet exercice
 

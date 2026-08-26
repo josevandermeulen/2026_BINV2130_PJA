@@ -3,7 +3,7 @@
 | Semaine | Début | Fin | Chapitre | QCM (20h) | Responsable | Note |
 |---|---|---|---|---|---|---|
 | S1 | 14/09/2026 | 20/09/2026 | 01 - Rappels | **mer 16/09/2026** | José Vander Meulen + Jonathan Fallon | rentrée le lundi : QCM reporté au mercredi ; **deux séances de théorie** — lun 14/09 pour S1, ven 18/09 pour S2 |
-| S2 | 21/09/2026 | 27/09/2026 | 02 - Collections, énumérés | lun 21/09/2026 | José Vander Meulen + Jonathan Fallon | |
+| S2 | 21/09/2026 | 27/09/2026 | 02 - Collections, énumérés | lun 21/09/2026 | José Vander Meulen + Jonathan Fallon | double échéance le lun 21/09 20h : QCM mooVin de la semaine + QCM « Cheat sheets hors ligne » coté |
 | S3 | 28/09/2026 | 04/10/2026 | 03 - JUnit | lun 28/09/2026 | José Vander Meulen + Claude Michiels | |
 | S4 | 05/10/2026 | 11/10/2026 | 04 - TDD | lun 05/10/2026 | José Vander Meulen + Claude Michiels | double échéance le lun 05/10 20h : QCM mooVin de la semaine + remise du zip coté |
 | S5 | 12/10/2026 | 18/10/2026 | 05 - Mocks | lun 12/10/2026 | José Vander Meulen + Claude Michiels | |
@@ -20,8 +20,9 @@ Le créneau de **théorie en autonomie** a lieu le vendredi matin et prépare le
 
 La colonne **QCM (20h)** donne la fermeture du QCM mooVin coté de la semaine (10 % de l'UE) : toujours 20h, le lundi sauf exception (rentrée, jour férié, congé : le QCM est alors reporté plus tard dans la semaine, la Note le signale). Elle doit rester cohérente avec la clé `quiz` de `scripts/dates.yml` (publication du corrigé à 20h15) et avec la ligne de rappel du `NNA_1_theorie.md` de la séance 1.
 
-Deux remises hors mooVin et un QCM mooVin supplémentaire s'ajoutent aux douze QCM hebdomadaires, portant l'évaluation continue à **quinze résultats** dont la note retient les **12 meilleurs**. Ni l'une ni l'autre n'a de date de sortie propre : leur énoncé est publié avec la théorie et les exercices de leur semaine, comme le reste du contenu. Seule leur remise est datée.
+Deux remises hors mooVin et un QCM mooVin supplémentaire s'ajoutent aux douze QCM hebdomadaires, portant l'évaluation continue à **quinze résultats** dont la note retient les **12 meilleurs**. Aucune des trois n'a de date de sortie propre : les deux remises ont leur énoncé publié avec la théorie et les exercices de leur semaine, comme le reste du contenu, et le QCM supplémentaire vit entièrement sur mooVin. Seule leur remise est datée.
 
+- **Le QCM « Cheat sheets hors ligne »**, en semaine 2 : QCM mooVin autonome, distinct du QCM hebdomadaire, 5 questions cotées 4 points chacune, sans points négatifs, à réaliser pour le lundi 21/09/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Il vérifie que l'étudiant sait ouvrir les cheat sheets depuis son clone **sans connexion Internet**, les conditions de l'examen de janvier. Il n'a pas d'énoncé dans le dépôt : seule une puce du `À rendre cette semaine` de la théorie de S2 le rappelle.
 - **La remise d'un zip**, publiée en semaine 4 : les étudiants déposent le projet de la séance 1 sous la forme d'une archive zip, cotée sur 20 points sur sa seule **structure** (un dossier `src` à la racine de l'archive, le code Java n'est pas évalué), pour le lundi 05/10/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Elle entraîne au geste de dépôt de l'examen.
 - **Le QCM en Markdown**, publié en semaine 8 : 10 questions cotées 2 points chacune, remises sous la forme d'un fichier Markdown complété, déposé sur mooVin pour le lundi 09/11/2026 à 20h, en même temps que la fermeture du QCM mooVin de la semaine. Comme la remise du zip entraîne au geste de dépôt, celui-ci entraîne au format de réponse de l'examen.
 

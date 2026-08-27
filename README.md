@@ -67,11 +67,12 @@ La seconde, en semaine 8, est un **QCM en Markdown**. Il porte sur la théorie e
 
 ## Feedback
 
-Votre retour sur le cours est le bienvenu. Trois canaux existent :
+Votre retour sur le cours est le bienvenu. Quatre canaux existent :
 
 1. **Directement au professeur** — venez lui parler pendant ou après une séance, ou envoyez-lui un mail. C'est le canal le plus rapide et le plus efficace.
 2. **Le conseil de département** — vos délégués y relaient les remarques de la classe. Il ne se réunit qu'une fois, au milieu du quadrimestre : utile pour les questions de fond, mais peu réactif.
 3. **Le questionnaire en ligne** — [remplissez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7). Vous choisissez d'y répondre de manière anonyme ou non.
+4. **Le chef de département** — si vous préférez en parler à quelqu'un d'extérieur au cours, c'est votre interlocuteur : pour ce qui ne se règle pas avec le professeur.
 
 ## Lire et écrire du Markdown hors ligne
 

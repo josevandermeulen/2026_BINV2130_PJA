@@ -8,7 +8,7 @@ Ressources du cours **BINV2130** (Haute École Léonard de Vinci) : théorie, ex
 
 ## Organisation
 
-Classe inversée : la théorie de chaque chapitre se prépare en autonomie (fiches, vidéos, codes sources), puis est mise en pratique lors d'une séance d'atelier hebdomadaire de 4h en présentiel. Une solution des exercices est publiée en fin de semaine.
+Classe inversée : la théorie de chaque chapitre se prépare en autonomie (fiches, vidéos, codes sources), puis est mise en pratique lors d'une séance d'atelier hebdomadaire de 4h en présentiel. Le corrigé de chaque séance est publié dans le dépôt le soir même, donc avant l'atelier suivant.
 
 Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare le chapitre de la **semaine suivante** — sauf à la rentrée, où il a lieu le lundi matin 14/09/2026 pour le chapitre de cette semaine-là. Le rythme d'une semaine est donc : préparation le vendredi matin, QCM sur mooVin le lundi à 20h, atelier en présentiel dans la foulée.
 

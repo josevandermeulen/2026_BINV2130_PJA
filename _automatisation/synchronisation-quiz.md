@@ -2,7 +2,7 @@
 
 Ce fichier est remplacé automatiquement à chaque contrôle de synchronisation du site de révision.
 
-- **Dernier contrôle :** 29/08/2026 à 18:04:17 (Europe/Brussels)
+- **Dernier contrôle :** 30/08/2026 à 00:07:23 (Europe/Brussels)
 - **Résultat :** aucun changement du quiz ni du calendrier
 - **XML Moodle :** valide — 245 questions
 - **Répartition :** 12 ateliers de 20 questions et 5 questions « Fiches hors ligne »

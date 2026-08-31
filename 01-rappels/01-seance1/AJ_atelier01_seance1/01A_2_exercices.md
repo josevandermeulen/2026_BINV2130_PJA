@@ -22,6 +22,7 @@ L'objectif de cet atelier est de réactiver les notions fondamentales de la prog
 ## Vidéos
 
 1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+2. [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw)
 
 ## Exercices
 

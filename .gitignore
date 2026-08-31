@@ -25,3 +25,10 @@ verification.md
 **/*VERIFICATION*.md
 *verification*.md
 **/*verification*.md
+# Rushes et exports vidéo du dossier _youtube : les vidéos du cours vivent sur
+# YouTube, qui est leur hébergeur. Un fichier de ce type pèse plus de 100 Mo,
+# la limite par fichier de GitHub — un commit le portant fait rejeter le push,
+# et il faut réécrire l'historique pour s'en défaire. Seules les descriptions
+# (_youtube/descriptions.md) sont versionnées.
+_youtube/*.mp4
+_youtube/*.mov

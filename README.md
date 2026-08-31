@@ -50,7 +50,7 @@ git clone https://github.com/josevandermeulen/2026_BINV2130_PJA.git
 git pull                                              # à refaire chaque semaine
 ```
 
-Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub Desktop](https://desktop.github.com/) : *File > Clone repository > URL*, collez l'adresse ci-dessus, choisissez un dossier local et cliquez sur *Clone*. Ensuite, le bouton *Fetch origin* / *Pull origin* suffit pour récupérer les nouveautés.
+Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub Desktop](https://desktop.github.com/) : *File > Clone repository > URL*, collez l'adresse ci-dessus, choisissez un dossier local et cliquez sur *Clone*. Ensuite, le bouton *Fetch origin* / *Pull origin* suffit pour récupérer les nouveautés. La vidéo [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw) montre le geste de bout en bout.
 
 **Attention : travaillez toujours dans vos propres projets IntelliJ (`AJ_atelierNN_seanceX`), en dehors du dossier cloné. Si vous modifiez les fichiers du dépôt, la prochaine mise à jour entrera en conflit avec vos changements.**
 

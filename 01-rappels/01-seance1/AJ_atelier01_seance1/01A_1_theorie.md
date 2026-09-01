@@ -11,6 +11,7 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 ## Vidéos
 
 1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
+2. [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw)
 
 ## Classe et objet
 

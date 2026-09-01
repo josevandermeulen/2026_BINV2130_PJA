@@ -8,7 +8,7 @@ Il s'agit de rappels : la théorie correspondante a été vue dans les cours pr�
 
 ## Vidéos
 
-1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
 
 ## Association entre objets
 

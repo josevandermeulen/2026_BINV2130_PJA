@@ -12,6 +12,7 @@ Classe inversée : la théorie de chaque chapitre se prépare en autonomie (fich
 
 Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare le chapitre de la **semaine suivante** — sauf à la rentrée, où il a lieu le lundi matin 14/09/2026 pour le chapitre de cette semaine-là. Le rythme d'une semaine est donc : préparation le vendredi matin, QCM sur mooVin le lundi à 20h, atelier en présentiel dans la foulée.
 
+- 🎬 [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs) — le dispositif en quelques minutes, à regarder en premier
 - ▶️ [Playlist YouTube](01-playlist-youtube.md)
 - 📅 [Calendrier](00-calendrier.md)
 - 📄 [Cheat sheets](cheat-sheets/)

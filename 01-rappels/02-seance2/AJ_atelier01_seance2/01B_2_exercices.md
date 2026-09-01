@@ -16,7 +16,7 @@ L'objectif de cet atelier est de compléter l'application de pizzeria en ligne e
 
 ## Vidéos
 
-1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
 2. [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw)
 
 ## Exercices
@@ -28,6 +28,8 @@ Il s'agit de compléter l'application de gestion de commandes de pizzas entamée
 Ci-dessous, se trouve le diagramme de classes complété de l'application. Les classes qui s'y trouvent sont volontairement incomplètes. Dans la classe [`Client`](src/Client.java), ce qui a été mis en bleu est ce qu'il faut ajouter à celle-ci par rapport à la séance précédente.
 
 ![Diagramme de classes](03_images/01B_3_UML.png)
+
+Le diagramme couvre les questions obligatoires : ce que demandent les `## Parties optionnelles` en fin d'énoncé ne s'y trouve pas.
 
 ### Consignes
 

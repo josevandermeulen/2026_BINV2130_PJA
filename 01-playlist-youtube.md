@@ -5,7 +5,7 @@ Playlist: https://www.youtube.com/playlist?list=PLYYzDB0QZ4xc
 ## Semaine 1
 
 ### Introduction
-1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
 2. [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw)
 
 ## Semaine 2

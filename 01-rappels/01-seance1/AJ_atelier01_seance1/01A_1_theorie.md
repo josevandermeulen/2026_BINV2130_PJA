@@ -10,7 +10,7 @@ Les exemples ci-dessous sont volontairement différents de l'exercice. Ils serve
 
 ## Vidéos
 
-1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
 
 ## Classe et objet
 
@@ -284,6 +284,36 @@ for (String participant : participants) {
 
 Cette technique permet de mieux protéger l'état interne de l'objet.
 
+## Interface `Iterable` et méthode `iterator`
+
+Une classe qui contient une liste peut permettre de la parcourir sans donner accès à la liste elle-même. Pour cela, elle implémente l'interface `Iterable` et fournit une méthode `iterator`.
+
+```java
+public class Equipe implements Iterable<String> {
+
+    private ArrayList<String> participants = new ArrayList<>();
+
+    @Override
+    public Iterator<String> iterator() {
+        return participants.iterator();
+    }
+}
+```
+
+La méthode `iterator` se contente de renvoyer l'itérateur de la liste interne. Le code extérieur peut parcourir les participants, mais il ne peut ni ajouter ni supprimer d'élément directement dans la liste : l'encapsulation est préservée.
+
+Il faut importer `java.util.Iterator`.
+
+Un objet `Iterable` se parcourt alors avec un foreach :
+
+```java
+for (String participant : equipe) {
+    System.out.println(participant);
+}
+```
+
+Derrière ce code, Java utilise la méthode `iterator` de l'objet parcouru.
+
 ## Classes abstraites
 
 Une classe abstraite est une classe qui ne sert pas à créer directement des objets.
@@ -478,6 +508,29 @@ LocalDateTime.now()
 ```
 
 Dans l'exercice, une méthode statique est utilisée pour obtenir la date et l'heure courantes.
+
+## Dates avec `LocalDateTime`
+
+La classe `LocalDateTime` (package `java.time`) représente une date et une heure.
+
+```java
+LocalDateTime maintenant = LocalDateTime.now();
+```
+
+`now` est une méthode statique : elle renvoie la date et l'heure courantes. On l'utilise souvent pour initialiser un attribut au moment de la création d'un objet.
+
+```java
+public class Reservation {
+
+    private LocalDateTime date;
+
+    public Reservation() {
+        date = LocalDateTime.now();
+    }
+}
+```
+
+Il faut importer `java.time.LocalDateTime`.
 
 ## Constantes dans une interface
 

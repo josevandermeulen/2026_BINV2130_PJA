@@ -13,15 +13,17 @@ L'objectif de cet atelier est de réactiver les notions fondamentales de la prog
 5. Égalité référentielle et égalité structurelle
 6. Redéfinition de `equals` et `hashCode`
 7. Utilisation d'une `ArrayList`
-8. Héritage et classes abstraites
-9. Appel aux constructeurs et méthodes de la classe parent avec `super`
-10. Redéfinition de méthodes (`overriding`)
-11. Utilisation d'une méthode statique existante
-12. Exceptions unchecked
+8. Interface `Iterable` et parcours avec un foreach
+9. Héritage et classes abstraites
+10. Appel aux constructeurs et méthodes de la classe parent avec `super`
+11. Redéfinition de méthodes (`overriding`)
+12. Utilisation d'une méthode statique existante
+13. Dates avec `LocalDateTime`
+14. Exceptions unchecked
 
 ## Vidéos
 
-1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=c69iGzsd1Pc)
+1. [Introduction au cours de Java avancé](https://www.youtube.com/watch?v=-31P_jow9bs)
 2. [GitHub Desktop - cloner et mettre à jour le dépôt du cours](https://www.youtube.com/watch?v=5TTjgaTZnCw)
 
 ## Exercices

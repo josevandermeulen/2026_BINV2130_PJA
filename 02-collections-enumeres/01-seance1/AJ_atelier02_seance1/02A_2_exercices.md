@@ -174,12 +174,14 @@ public List<Instruction> instructions()
 ### La méthode `toString` de `Plat`
 
 **Question 4** :
-Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`AJ_atelier02_seance1/affichage_Main.txt`), tout en mettant en commentaire la partie de cette méthode relative aux ingrédients. Cette séance sera traitée à la question sur la gestion des ingrédients.
+Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`affichage_Main.txt`), tout en mettant en commentaire la partie de cette méthode relative aux ingrédients. Cette partie sera traitée à la question sur la gestion des ingrédients.
 
-### Exécution du programme
+### Le programme de démonstration
 
 **Question 5** :
-On vous fournit une classe `Main` (dans `AJ_atelier02_seance1/main/`) que vous devez copier dans votre projet (à vous de voir dans quel package la mettre) et exécuter. La sortie de ce programme doit être identique à celle attendue dans `AJ_atelier02_seance1/affichage_Main.txt` (excepté le format des durées).
+Copiez la classe `Main` fournie dans votre projet (à vous de voir dans quel package la mettre). Elle exerce toute l'API du plat, gestion des ingrédients comprise : elle ne compilera donc qu'une fois la question suivante terminée. Son exécution et la comparaison de sa sortie font l'objet de la section `Test`, en fin d'énoncé.
+
+Trois de ses opérations sont volontairement invalides — une insertion en position 0, une insertion hors bornes, une suppression via l'itérateur de `instructions()` — et chacune affiche le refus qu'elle provoque. Ces trois lignes font partie de la sortie attendue : si l'une manque, c'est que la validation correspondante n'a pas été écrite.
 
 ### Gestion des ingrédients dans `Plat`
 
@@ -214,7 +216,7 @@ Modifiez la méthode `toString` de la classe `Plat` en dé-commentant la partie 
 
 ### Test
 
-Exécutez la classe `Main`. La sortie doit correspondre à celle attendue dans `AJ_atelier02_seance1/affichage_Main.txt`, à l'ordre des ingrédients près (il dépend du `HashSet` utilisé) et au format des durées près (traité dans les parties optionnelles).
+Exécutez la classe `Main`. La sortie doit correspondre à celle attendue dans `affichage_Main.txt`, à l'ordre des ingrédients près (il dépend du `HashSet` utilisé) et au format des durées près (traité dans les parties optionnelles).
 
 ## Parties optionnelles
 

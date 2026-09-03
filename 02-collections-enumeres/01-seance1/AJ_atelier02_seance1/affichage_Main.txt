@@ -1,3 +1,9 @@
+Insertion refusée en position 0 : les positions commencent à 1
+Insertion refusée en position 4 : la recette ne compte que 2 instructions
+Suppression refusée : la liste des instructions est en lecture seule
+
+Quantité de blanc de poulet nécessaire : 600 gr
+
 Waterzooi
 
 Pour 4 personnes
@@ -6,6 +12,11 @@ Coût : €€€
 Durée : 1 h 27 m
 
 Ingrédients :
+2  Carottes
+200 gr Céleri
+1 pincée Sel
+10 cl Crème fraiche
+600 gr Blanc de poulet
 
 Instructions :
 1. (00:15) Couper les légumes

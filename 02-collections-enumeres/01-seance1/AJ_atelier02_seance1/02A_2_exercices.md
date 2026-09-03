@@ -126,7 +126,7 @@ L'énuméré `Cout` doit :
 4. `cout`, de type `Cout`.
 5. `dureeEnMinutes`, de type `Duration`.
 
-De plus, la classe garde deux collections. Respectez bien les rôles présentés dans le diagramme de classes :
+De plus, la classe garde deux collections. Respectez bien les rôles présentés dans le diagramme de classes : dans un diagramme UML, le *rôle* est le nom écrit à l'extrémité d'une association (précédé de `-` pour `private`), et c'est le nom que doit porter l'attribut correspondant dans la classe — ici `recette` du côté des instructions et `ingredients` du côté des ingrédients quantifiés.
 
 1. La première, de type `List`, gardant toutes les instructions de la recette. Le type `List` a été choisi afin de pouvoir facilement garder les instructions dans l'ordre (séquentiel) dans lequel il faut les exécuter.
 2. La deuxième, de type `Set`, gardant tous les ingrédients quantifiés de la recette. Ici, l'ordre des ingrédients quantifiés n'a pas d'importance. C'est pourquoi on peut utiliser le type `Set`.

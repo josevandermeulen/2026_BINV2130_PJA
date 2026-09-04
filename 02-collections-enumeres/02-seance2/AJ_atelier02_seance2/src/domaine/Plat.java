@@ -220,14 +220,9 @@ public class Plat {
      * @throws IllegalArgumentException en cas de paramètres invalides
      */
     public boolean ajouterIngredient(Ingredient ingredient, int quantite, Unite unite) {
-        Util.checkObject(unite);
-        Util.checkStrictlyPositive(quantite);
-        if (trouverIngredientQuantifie(ingredient) != null) {
-            return false;
-        }
-
-        ingredients.add(new IngredientQuantifie(ingredient, quantite, unite));
-        return true;
+        // IngredientQuantifie compare sur son seul ingrédient : le Set refuse donc lui-même un
+        // ingrédient déjà présent, et add renvoie exactement le booléen attendu.
+        return ingredients.add(new IngredientQuantifie(ingredient, quantite, unite));
     }
 
     /**

@@ -13,6 +13,7 @@ Playlist: https://www.youtube.com/playlist?list=PLYYzDB0QZ4xc
 ### Interfaces et comparaison d'objets
 1. [Interface Comparable en Java](https://www.youtube.com/watch?v=PCjAg07fivY)
 2. [Interface Comparator et classe anonyme en Java](https://www.youtube.com/watch?v=gLTAIkKdsK8)
+3. [Interview Question | Comparable vs Comparator in Java](https://www.youtube.com/watch?v=oAp4GYprVHM)
 
 ### Types et manipulation d'objets
 1. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)

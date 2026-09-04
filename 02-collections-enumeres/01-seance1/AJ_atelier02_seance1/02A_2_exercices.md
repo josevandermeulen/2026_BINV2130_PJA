@@ -21,7 +21,8 @@ L'objectif de cet atelier est de construire le socle d'une application de gestio
 
 1. [Interface Comparable en Java](https://www.youtube.com/watch?v=PCjAg07fivY)
 2. [Interface Comparator et classe anonyme en Java](https://www.youtube.com/watch?v=gLTAIkKdsK8)
-3. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)
+3. [Interview Question | Comparable vs Comparator in Java](https://www.youtube.com/watch?v=oAp4GYprVHM)
+4. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)
 
 ## Exercices
 
@@ -213,6 +214,8 @@ public IngredientQuantifie trouverIngredientQuantifie(Ingredient ingredient)
 // renvoie l'ingrédient quantifié correspondant à l'ingrédient.
 // Renvoie null si l'ingrédient n'est pas présent.
 ```
+
+La classe [`IngredientQuantifie`](src/domaine/IngredientQuantifie.java) fournie compare deux ingrédients quantifiés sur leur seul ingrédient (`equals` et `hashCode` y sont redéfinis) : un même ingrédient ne peut donc pas figurer deux fois dans le `HashSet` du plat, celui-ci refusant le doublon lui-même.
 
 Complétez la méthode `toString` de la classe `Plat` avec la partie relative aux ingrédients, laissée de côté à la Question 4, afin qu'elle affiche également les ingrédients d'un plat.
 

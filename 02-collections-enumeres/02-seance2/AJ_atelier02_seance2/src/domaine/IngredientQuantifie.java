@@ -2,11 +2,21 @@ package domaine;
 
 import util.Util;
 
+import java.util.Objects;
+
 /**
  * Un ingrédient associé à la quantité et à l'unité dans lesquelles un plat l'emploie.
  *
  * Le même ingrédient peut donc figurer en quantités différentes dans deux plats : c'est
  * l'association, pas l'ingrédient, qui porte la quantité.
+ *
+ * L'égalité porte sur le seul ingrédient : au sein d'un plat, un ingrédient n'est employé qu'une
+ * fois, c'est donc lui qui identifie l'association. La quantité et l'unité, elles, changent au
+ * cours de la vie de l'objet (setQuantite, setUnite) : les inclure rendrait le hashCode instable,
+ * et un ingrédient quantifié déjà rangé dans un HashSet deviendrait introuvable dès qu'on le
+ * modifie. Conséquence à connaître : deux ingrédients quantifiés du même ingrédient sont égaux
+ * même si leurs quantités diffèrent — ne mettez pas dans un même ensemble ceux de deux plats
+ * différents.
  */
 public class IngredientQuantifie {
     private Ingredient ingredient;
@@ -83,6 +93,34 @@ public class IngredientQuantifie {
         Util.checkObject(unite);
 
         this.unite = unite;
+    }
+
+    /**
+     * Compare deux ingrédients quantifiés sur leur seul ingrédient.
+     *
+     * @param o l'objet à comparer à cet ingrédient quantifié
+     * @return true si o est un ingrédient quantifié portant le même ingrédient
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        IngredientQuantifie that = (IngredientQuantifie) o;
+        return ingredient.equals(that.ingredient);
+    }
+
+    /**
+     * Renvoie un code de hachage calculé sur l'ingrédient, cohérent avec equals(Object).
+     *
+     * @return le code de hachage de l'ingrédient quantifié
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(ingredient);
     }
 
     /**

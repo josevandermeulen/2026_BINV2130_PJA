@@ -21,7 +21,8 @@ L'objectif de cet atelier est d'étendre l'application de recettes en ajoutant u
 
 1. [Interface Comparable en Java](https://www.youtube.com/watch?v=PCjAg07fivY)
 2. [Interface Comparator et classe anonyme en Java](https://www.youtube.com/watch?v=gLTAIkKdsK8)
-3. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)
+3. [Interview Question | Comparable vs Comparator in Java](https://www.youtube.com/watch?v=oAp4GYprVHM)
+4. [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)
 
 ## Exercices
 

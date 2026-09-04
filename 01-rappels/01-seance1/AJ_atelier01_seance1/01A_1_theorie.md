@@ -234,7 +234,24 @@ public int hashCode() {
 
 La classe `Objects` se trouve dans le package `java.util` : il faut donc ajouter l'import `java.util.Objects`.
 
-C'est important pour que l'objet fonctionne correctement dans certaines collections Java.
+Cette redéfinition est indispensable pour les collections qui reposent sur le hachage : `HashSet`, et `HashMap` pour ses clés. Ces collections ne comparent pas un objet à tous les autres. Elles calculent d'abord son `hashCode` pour choisir un casier, puis n'appellent `equals` que sur les objets déjà rangés dans ce casier.
+
+Si `hashCode` n'est pas redéfini, celui hérité d'`Object` renvoie une valeur propre à chaque objet créé. Deux objets pourtant égaux selon `equals` tombent alors dans deux casiers différents et ne se rencontrent jamais.
+
+```java
+Etudiant e1 = new Etudiant(12345);
+Etudiant e2 = new Etudiant(12345);   // même matricule : e1.equals(e2) vaut true
+
+Set<Etudiant> inscrits = new HashSet<>();
+inscrits.add(e1);
+
+inscrits.contains(e2);  // sans hashCode redéfini : false
+inscrits.add(e2);       // sans hashCode redéfini : le Set contient 2 étudiants
+```
+
+La règle à retenir : deux objets égaux selon `equals` doivent renvoyer le même `hashCode`. L'inverse n'est pas exigé — deux objets différents peuvent partager un `hashCode`, ils se retrouvent alors dans le même casier, où `equals` les départage.
+
+`HashSet` et `HashMap` sont vus en détail à l'atelier 2.
 
 ## `ArrayList`
 

@@ -148,6 +148,8 @@ La classe `Plat` fournit des getters triviaux pour le `nom`, le `nbPersonnes`, l
 
 La gestion des instructions se fait via les méthodes publiques suivantes (les méthodes ayant une position en paramètre lancent une `IllegalArgumentException` si la position passée est inférieure ou égale à 0 ou est trop grande par rapport au nombre d'instructions déjà présentes) :
 
+Chacune de ces quatre méthodes met aussi à jour la durée totale du plat : l'ajout et l'insertion l'augmentent de la durée de l'instruction concernée, la suppression la diminue, et le remplacement fait les deux. Sans cela, le plat affichera `0 h 00 m`.
+
 ```java
 public void insererInstruction(int position, Instruction instruction)
 // insère l'instruction à la position précisée, position commençant à 1.
@@ -174,7 +176,7 @@ public List<Instruction> instructions()
 ### La méthode `toString` de `Plat`
 
 **Question 4** :
-Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`affichage_Main.txt`), tout en mettant en commentaire la partie de cette méthode relative aux ingrédients. Cette partie sera traitée à la question sur la gestion des ingrédients.
+Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`affichage_Main.txt`), en laissant de côté la partie relative aux ingrédients : elle sera traitée à la question sur la gestion des ingrédients. À ce stade, la section `Ingrédients :` de la sortie se réduit donc à son titre.
 
 ### Le programme de démonstration
 
@@ -212,7 +214,7 @@ public IngredientQuantifie trouverIngredientQuantifie(Ingredient ingredient)
 // Renvoie null si l'ingrédient n'est pas présent.
 ```
 
-Modifiez la méthode `toString` de la classe `Plat` en dé-commentant la partie relative aux ingrédients afin que cette méthode affiche également les ingrédients d'un plat.
+Complétez la méthode `toString` de la classe `Plat` avec la partie relative aux ingrédients, laissée de côté à la Question 4, afin qu'elle affiche également les ingrédients d'un plat.
 
 ### Test
 

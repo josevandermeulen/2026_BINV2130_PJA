@@ -1,6 +1,6 @@
 Insertion refusée en position 0 : les positions commencent à 1
 Insertion refusée en position 4 : la recette ne compte que 2 instructions
-Suppression refusée : la liste des instructions est en lecture seule
+Suppression refusée (comportement attendu) : la liste des instructions est en lecture seule
 
 Quantité de blanc de poulet nécessaire : 600 gr
 

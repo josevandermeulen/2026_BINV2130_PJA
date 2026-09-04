@@ -68,7 +68,8 @@ public class Main {
             instructionIterator.remove();
             System.out.println("ANOMALIE : suppression acceptée sur la liste des instructions");
         } catch (UnsupportedOperationException uoe) {
-            System.out.println("Suppression refusée : la liste des instructions est en lecture seule");
+            System.out.println("Suppression refusée (comportement attendu) : "
+                    + "la liste des instructions est en lecture seule");
         }
 
         System.out.println();

@@ -295,7 +295,7 @@
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="01-rappels-fr.html">&larr; Semaine 1</a>
-    <span class="version-badge">v11 &middot; 29/07/2026</span>
+    <span class="version-badge">v12 &middot; 05/09/2026</span>
     <a href="03-junit-fr.html">Semaine 3 &rarr;</a>
   </div>
 </div>
@@ -644,6 +644,11 @@ for (Article article : this.articles) {
           <td>Doublons dans un <code>HashSet</code></td>
           <td><code>equals</code>/<code>hashCode</code> non redéfinis.</td>
           <td>Redéfinir les deux ensemble.</td>
+        </tr>
+        <tr>
+          <td>Élément « disparu » d'un <code>HashSet</code></td>
+          <td>Champ mutable entrant dans le <code>hashCode</code> : l'objet a été modifié après son rangement, il est cherché dans un autre seau.</td>
+          <td>Ne calculer <code>equals</code>/<code>hashCode</code> que sur les champs stables (ceux sans setter), ou retirer l'élément avant de le modifier et le réinsérer.</td>
         </tr>
         <tr>
           <td>Élément « disparu » d'un <code>TreeSet</code></td>

@@ -1,10 +1,11 @@
 # Atelier 8 : HyperLogLog – Concepts
 
-Les exercices associés à ces concepts se trouvent dans [`08B_2_exercices.md`](08B_2_exercices.md). Cette fiche reprend le contenu de la vidéo ci-dessous ; regardez-la d'abord, elle explique le principe en images en 8 minutes.
+Les exercices associés à ces concepts se trouvent dans [`08B_2_exercices.md`](08B_2_exercices.md). Cette fiche reprend le contenu de la vidéo HyperLogLog ci-dessous ; regardez-la d'abord, elle explique le principe en images en 8 minutes. Son [article compagnon](https://grafikart.fr/tutoriels/hyperloglog-2345), chez Grafikart, en reprend le contenu par écrit.
 
 ## Vidéos
 
-1. [Comment compter des millions de vues ? HyperLogLog](https://www.youtube.com/watch?v=OWBT86qoEqk) (Grafikart — l'[article compagnon](https://grafikart.fr/tutoriels/hyperloglog-2345) reprend le contenu par écrit)
+1. [Apprendre Java #15 Fichier (File / Reader / Writer / Buffer)](https://www.youtube.com/watch?v=iCobhKfvf3M)
+2. [Comment compter des millions de vues ? HyperLogLog](https://www.youtube.com/watch?v=OWBT86qoEqk)
 
 ## Le problème : compter des vues uniques
 

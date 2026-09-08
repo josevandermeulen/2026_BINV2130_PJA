@@ -1,0 +1,56 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="675" viewBox="0 0 1200 675">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#161221"/>
+      <stop offset="100%" stop-color="#231a35"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#ff8c42"/>
+      <stop offset="100%" stop-color="#ff5f6d"/>
+    </linearGradient>
+    <linearGradient id="fade" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#ffffff" stop-opacity="0"/>
+      <stop offset="100%" stop-color="#ffffff" stop-opacity="0.10"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="1200" height="675" fill="url(#bg)"/>
+
+  <!-- soft glow right -->
+  <circle cx="1120" cy="130" r="300" fill="url(#fade)" opacity="0.5"/>
+
+  <!-- dot texture -->
+  <g fill="#ffffff" opacity="0.05">
+    <circle cx="70" cy="70" r="3"/><circle cx="180" cy="150" r="3"/><circle cx="60" cy="330" r="3"/>
+    <circle cx="130" cy="600" r="3"/><circle cx="1130" cy="600" r="3"/><circle cx="1040" cy="90" r="3"/>
+  </g>
+
+  <!-- left accent bar -->
+  <rect x="0" y="0" width="16" height="675" fill="url(#accent)"/>
+
+  <!-- background code pipeline, decorative -->
+  <g font-family="DejaVu Sans Mono, Liberation Mono, monospace" font-size="26" fill="#ffffff" opacity="0.07">
+    <text x="700" y="250">ateliers.stream()</text>
+    <text x="740" y="292">.filter(Atelier::pratique)</text>
+    <text x="740" y="334">.map(Atelier::solution)</text>
+    <text x="740" y="376">.forEach(System.out::println);</text>
+  </g>
+
+  <!-- title block -->
+  <text x="90" y="240" font-family="Helvetica, Arial, sans-serif" font-size="118" font-weight="700" fill="#f5f3f7" letter-spacing="2">BINV2130</text>
+  <text x="94" y="310" font-family="Helvetica, Arial, sans-serif" font-size="48" font-weight="400" fill="#c9c3d6">Programmation Java : avancé</text>
+
+  <rect x="94" y="356" width="90" height="8" rx="4" fill="url(#accent)"/>
+
+  <text x="94" y="424" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#9891a8">Classe inversée · 12 ateliers hebdomadaires</text>
+  <text x="94" y="466" font-family="Helvetica, Arial, sans-serif" font-size="28" fill="#9891a8">Haute École Léonard de Vinci — 2026</text>
+
+  <!-- topic chips -->
+  <g font-family="Helvetica, Arial, sans-serif" font-size="24" font-weight="600" fill="#c9c3d6">
+    <g transform="translate(94,540)"><rect width="150" height="56" rx="12" fill="#2c2340" stroke="#3c3153"/><text x="75" y="36" text-anchor="middle">JUnit</text></g>
+    <g transform="translate(258,540)"><rect width="130" height="56" rx="12" fill="#2c2340" stroke="#3c3153"/><text x="65" y="36" text-anchor="middle">TDD</text></g>
+    <g transform="translate(402,540)"><rect width="180" height="56" rx="12" fill="#2c2340" stroke="#3c3153"/><text x="90" y="36" text-anchor="middle">Streams</text></g>
+    <g transform="translate(596,540)"><rect width="200" height="56" rx="12" fill="#2c2340" stroke="#3c3153"/><text x="100" y="36" text-anchor="middle">Threads</text></g>
+    <g transform="translate(810,540)"><rect width="296" height="56" rx="12" fill="#382a52" stroke="url(#accent)" stroke-width="2"/><text x="148" y="36" text-anchor="middle" fill="#ffd9c2">Injection de dép.</text></g>
+  </g>
+</svg>

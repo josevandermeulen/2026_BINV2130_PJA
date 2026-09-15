@@ -196,6 +196,8 @@ public class Livre {
 
 L'appel à `this(...)` doit être la première instruction du constructeur.
 
+L'ordre de déclaration des constructeurs n'a pas d'importance : le compilateur analyse toute la classe avant de résoudre les appels. Dans l'exemple, `Livre(String, String)` appelle un constructeur déclaré plus bas, et cela compile.
+
 ## Égalité référentielle et égalité structurelle
 
 L'égalité référentielle vérifie si deux variables référencent exactement le même objet en mémoire.

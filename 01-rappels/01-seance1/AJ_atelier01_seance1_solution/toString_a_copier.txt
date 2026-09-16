@@ -1,0 +1,26 @@
+toString de la classe Client :
+
+    @Override
+    public String toString() {
+        return "client n° " + numero + " (" + prenom + " " + nom + ", telephone : " + telephone + ")";
+    }
+
+toString de la classe Pizza :
+
+    @Override
+    public String toString() {
+        String infos = titre + "\n" + description + "\nIngrédients : ";
+        for (Ingredient ingredient : ingredients) {
+            infos += "\n" + ingredient.getNom();
+        }
+        infos += "\nprix : " + calculerPrix() + " euros";
+        return infos;
+    }
+
+toString de la classe PizzaComposable :
+
+    @Override
+    public String toString() {
+        DateTimeFormatter formater = DateTimeFormatter.ofLocalizedDateTime(FormatStyle.MEDIUM);
+        return super.toString() + "\nPizza créée le " + formater.format(date);
+    }

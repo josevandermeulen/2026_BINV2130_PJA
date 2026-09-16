@@ -1,0 +1,27 @@
+Il ne peut pas y avoir deux fois le même ingrédient dans une pizza.
+
+4 fromages
+le mélange généreux des fromages italiens
+Ingrédients : 
+Tomate
+Gorgonzola
+Pecorino
+Mozzarella
+Parmesan
+prix : 13.0 euros
+
+Les ingrédients d'une pizza composée ne peuvent pas être modifiés
+
+Ajout d'une tomate déjà présente : false
+Suppression des scampis absents : false
+
+Pizza composable du client 1
+Pizza de Leconte Emmeline
+Ingrédients : 
+Jambon
+Salami
+Tomate
+Mozzarella
+Olives
+prix : 13.2 euros
+Pizza créée le ... (la date et l'heure de création doit apparaître)

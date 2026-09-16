@@ -37,4 +37,6 @@ même si celui-ci est déclaré juste en dessous.
 
 La seule contrainte concernant `this(...)` est qu'il doit être la première instruction du constructeur. Il n'y a aucune contrainte concernant la position, dans le fichier, du constructeur appelé.
 
+> **Remarque (Java 25)** : depuis Java 25 (JEP 513, *Flexible Constructor Bodies*), un constructeur peut contenir des instructions *avant* l'appel à `this(...)` ou `super(...)` — par exemple valider un argument —, tant qu'elles n'utilisent pas `this`.
+
 Ce qui peut éventuellement prêter à confusion, c'est que dans certains langages ou certains contextes, l'ordre de déclaration peut avoir son importance. Ce n'est pas le cas ici en Java, à l'intérieur d'une classe.

@@ -196,7 +196,7 @@ public class Livre {
 
 L'appel à `this(...)` doit être la première instruction du constructeur.
 
-> **Remarque (Java 25)** : depuis Java 25, un constructeur peut contenir des instructions *avant* l'appel à `this(...)` ou `super(...)` — par exemple valider un argument —, tant qu'elles n'utilisent pas `this`. Le cours cible Java 17 : on s'en tient à la règle « première instruction ».
+> **Remarque (Java 25)** : depuis Java 25, un constructeur peut contenir des instructions *avant* l'appel à `this(...)` ou `super(...)` — par exemple valider un argument —, tant qu'elles n'utilisent pas `this`.
 
 L'ordre de déclaration des constructeurs n'a pas d'importance : le compilateur analyse toute la classe avant de résoudre les appels. Dans l'exemple, `Livre(String, String)` appelle un constructeur déclaré plus bas, et cela compile.
 
@@ -415,7 +415,7 @@ public class Rectangle extends Forme {
 
 L'appel à `super(...)` doit être la première instruction du constructeur.
 
-> **Remarque (Java 25)** : même assouplissement que pour `this(...)` — des instructions peuvent précéder `super(...)` depuis Java 25. On reste sur la règle « première instruction » en Java 17.
+> **Remarque (Java 25)** : même assouplissement que pour `this(...)` — des instructions peuvent précéder `super(...)` depuis Java 25.
 
 ## Redéfinition de méthode
 

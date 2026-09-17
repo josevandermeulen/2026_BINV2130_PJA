@@ -294,7 +294,7 @@
   <p>Couvre : classes et objets, encapsulation, constructeurs, héritage, classes abstraites, égalité, listes et associations.</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
-    <span class="version-badge">v12 &middot; 05/09/2026</span>
+    <span class="version-badge">v13 &middot; 17/09/2026</span>
     <a href="02-collections-enumeres-fr.html">Semaine 2 &rarr;</a>
   </div>
 </div>
@@ -356,6 +356,9 @@
 }</code></pre>
       <div class="warning">
         Valider les paramètres dans le constructeur le plus complet et y faire déléguer les autres : la validation n'est écrite qu'une seule fois.
+      </div>
+      <div class="note">
+        <strong>Remarque (Java 25)</strong> : depuis Java 25 (JEP&nbsp;513, <em>Flexible Constructor Bodies</em>), un constructeur peut contenir des instructions <em>avant</em> l'appel à <code>this(...)</code> ou <code>super(...)</code> &mdash; par exemple valider un argument &mdash;, tant qu'elles n'utilisent pas <code>this</code>.
       </div>
       <a class="toplink" href="#top">Retour au sommaire</a>
     </div>
@@ -428,6 +431,9 @@ public class Voiture extends Vehicule {
         <li><code>@Override</code> est fortement recommandé : le compilateur vérifie qu'on redéfinit bien une méthode existante.</li>
         <li>Le polymorphisme permet de manipuler une <code>Voiture</code> via une référence de type <code>Vehicule</code> : l'appel <code>v.calculerTaxe()</code> exécute la version de la classe réelle de l'objet.</li>
       </ul>
+      <div class="note">
+        <strong>Remarque (Java 25)</strong> : même assouplissement que pour <code>this(...)</code> &mdash; des instructions peuvent précéder <code>super(...)</code> depuis Java 25, tant qu'elles n'utilisent pas <code>this</code>.
+      </div>
       <a class="toplink" href="#top">Retour au sommaire</a>
     </div>
 
@@ -632,8 +638,8 @@ public class Etudiant extends Personne {
         </tr>
         <tr>
           <td><code>super(...)</code> ne compile pas</td>
-          <td>Pas en première instruction du constructeur.</td>
-          <td>Placer <code>super(...)</code> (ou <code>this(...)</code>) en tout premier.</td>
+          <td>Le constructeur utilise <code>this</code> (lecture d'un attribut, appel de méthode) avant l'appel à <code>super(...)</code>.</td>
+          <td>N'utiliser <code>this</code> qu'après <code>super(...)</code> (ou <code>this(...)</code>). Depuis Java 25, du code sans <code>this</code> peut le précéder.</td>
         </tr>
         <tr>
           <td>Objet créé avec un état invalide</td>

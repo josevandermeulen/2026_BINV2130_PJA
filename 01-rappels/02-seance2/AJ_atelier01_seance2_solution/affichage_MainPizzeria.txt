@@ -1,0 +1,21 @@
+Commande en cours d'Emmeline : Commande n° 1 (en cours) du client n° 1 (Emmeline Leconte, telephone : 0488/98.23.85)
+date : ... (date et heure de création de la commande)
+
+impossible de créer une commande pour un client ayant encore une commande en cours
+
+Commande n° 1 du client n° 1 (Emmeline Leconte, telephone : 0488/98.23.85)
+date : (date et heure de création de la commande)
+2 du chef  à 13.0
+
+Commande en cours d'Emmeline : null
+
+ajout d'une pizza à une commande clôturée : false
+
+Commande n° 2 (en cours) du client n° 2 (Stéphanie Ferneeuw, telephone : 0475/51.30.80)
+date : (date et heure de création de la commande)
+2 margarita  à 7.0
+3 marinière  à 10.0
+Montant de la commande de Stéphanie : 44.0
+
+Commande n° 3 (en cours) du client n° 1 (Emmeline Leconte, telephone : 0488/98.23.85)
+date :(date et heure de création de la commande)

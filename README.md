@@ -55,6 +55,8 @@ Si vous n'êtes pas à l'aise avec Git en ligne de commande, utilisez [GitHub De
 
 **Attention : travaillez toujours dans vos propres projets IntelliJ (`AJ_atelierNN_seanceX`), en dehors du dossier cloné. Si vous modifiez les fichiers du dépôt, la prochaine mise à jour entrera en conflit avec vos changements.**
 
+**Si plus rien ne fonctionne** — le `pull` refuse, GitHub Desktop parle de conflit, la mise à jour n'arrive plus —, la cause la plus probable est justement celle-là : un fichier du dépôt a été modifié dans votre copie locale, et la synchronisation ne passe plus. Ne cherchez pas à réparer. Copiez ailleurs ce que vous voulez conserver, supprimez le dossier cloné en entier et reclonez-le avec la commande (ou le geste GitHub Desktop) ci-dessus. Ça prend une minute, et vous repartez d'une copie propre.
+
 ## Évaluation
 
 - **Examen (90 %)** : examen sur machine en janvier, portant sur des exercices pratiques de programmation. Il pourra également comporter des questions de théorie tirées de la banque décrite ci-dessous. Sur la machine, sans connexion : les fichiers Markdown du cours (théorie, exercices et solutions, mais pas le code Java), les cheat sheets et les illustrations — rien d'autre. IA générative interdite. Mêmes modalités en seconde session.

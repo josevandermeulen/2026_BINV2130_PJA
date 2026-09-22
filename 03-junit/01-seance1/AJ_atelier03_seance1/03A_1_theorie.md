@@ -144,6 +144,36 @@ void testConstructeurValeurInvalide(double valeur) {
 
 JUnit exécute cette méthode une fois par valeur de `@ValueSource`, comme trois tests distincts. `@ValueSource` accepte aussi `ints`, `strings`, etc.
 
+## Tests paramétrés à plusieurs arguments liés (`@CsvSource`, `@CsvFileSource`)
+
+`@ValueSource` ne convient que pour une seule valeur d'entrée par exécution. Quand il faut associer une entrée à un résultat attendu (par exemple une quantité et le prix qui doit en résulter), `@CsvSource` fournit directement les lignes de données, sous forme de chaînes `"entrée,résultat"` :
+
+```java
+@ParameterizedTest
+@CsvSource({
+        "1, 20",
+        "9, 20",
+        "10, 10"
+})
+void testGetPrix(int quantite, double prixAttendu) {
+    assertEquals(prixAttendu, prixAucune.getPrix(quantite));
+}
+```
+
+Chaque ligne devient un jeu de paramètres, dans l'ordre des paramètres de la méthode.
+
+Quand les données sont plus nombreuses ou réutilisées ailleurs, on les extrait plutôt dans un fichier `.csv` placé à côté de la classe de test (même package, même dossier), lu via `@CsvFileSource` :
+
+```java
+@ParameterizedTest
+@CsvFileSource(resources = "paliers.csv", numLinesToSkip = 1)
+void testGetPrix(int quantite, double prixAttendu) {
+    assertEquals(prixAttendu, prixAucune.getPrix(quantite));
+}
+```
+
+`resources` pointe vers le fichier CSV (chemin relatif à la classe de test) et `numLinesToSkip = 1` ignore sa ligne d'en-tête (`quantite,prixAttendu`).
+
 ## Développer des tests avec l'IA
 
 Un assistant IA (Claude, ChatGPT, Copilot, …) peut faire gagner du temps sur les tests : proposer des cas limites auxquels on n'a pas pensé, générer la répétition mécanique d'un test paramétré, ou reformuler un `@DisplayName` plus clair. C'est un bon usage : l'IA complète la réflexion, elle ne la remplace pas.

@@ -160,7 +160,7 @@ class PrixTest {
     @ParameterizedTest
     @CsvFileSource(resources = "paliers.csv", numLinesToSkip = 1)
     @DisplayName("Test de la méthode getPrix pour prixAucune sur les paliers de la question 1")
-    void testGetPrix2(int quantite, double prixAttendu) throws QuantiteNonAutoriseeException {
+    void testGetPrix2(int quantite, double prixAttendu) {
         assertEquals(prixAttendu, prixAucune.getPrix(quantite));
     }
 

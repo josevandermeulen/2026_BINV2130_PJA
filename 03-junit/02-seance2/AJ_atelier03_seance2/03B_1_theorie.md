@@ -79,7 +79,7 @@ Particularité de `produitsTriesParPrix` : un produit sans prix disponible à la
 
 ## Plusieurs classes de test dans un même projet
 
-Rien n'empêche d'avoir une classe de test par classe métier (`PrixTest`, `ProduitTest`, …) dans le même dossier `tests`, tant que chacune reste dans le package correspondant à la classe qu'elle teste (ici `domaine`). Chaque classe de test a sa propre fixture et son propre `@BeforeEach` : elles sont totalement indépendantes les unes des autres.
+Rien n'empêche d'avoir une classe de test par classe métier (`PrixTest`, `ProduitTest`, …) dans le même dossier `test`, tant que chacune reste dans le package correspondant à la classe qu'elle teste (ici `domaine`). Chaque classe de test a sa propre fixture et son propre `@BeforeEach` : elles sont totalement indépendantes les unes des autres.
 
 ## Organiser les tests avec `@Nested`
 

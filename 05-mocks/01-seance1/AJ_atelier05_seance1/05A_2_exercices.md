@@ -48,8 +48,8 @@ Dans IntelliJ, créez un projet intitulé `AJ_atelier05_seance1`. Récupérez le
 
 Créez ensuite un dossier pour les tests :
 
-1. Créez, dans votre projet, un nouveau dossier intitulé `tests` (clic droit sur le projet et choisir New → Directory).
-2. Faites un clic droit sur le dossier `tests` et sélectionnez Mark Directory as → Test Sources Root.
+1. Créez, dans votre projet, un nouveau dossier intitulé `test` (clic droit sur le projet et choisir New → Directory).
+2. Faites un clic droit sur le dossier `test` et sélectionnez Mark Directory as → Test Sources Root.
 
 Comme à l'atelier 3 séance 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (par exemple : ajout valide, suppression, cas de refus), la fixture et le `@BeforeEach` restant sur la classe externe.
 
@@ -98,7 +98,7 @@ Plan de tests :
 | 12 | 4 | ajouterStage | stage possède déjà un autre moniteur | 4 | stage non ajouté | false |
 | 13 | 4 | ajouterStage | stage sans moniteur pour un sport pour lequel le moniteur n'est pas compétent | 4 | stage non ajouté | false |
 
-Afin d'implémenter ces tests de façon vraiment unitaire, on va utiliser des stubs. Les tests se trouveront dans le répertoire `tests` créé dans les consignes (marqué comme Test Sources Root).
+Afin d'implémenter ces tests de façon vraiment unitaire, on va utiliser des stubs. Les tests se trouveront dans le répertoire `test` créé dans les consignes (marqué comme Test Sources Root).
 
 Créez une classe de tests JUnit `MoniteurImplTest` pour la classe `MoniteurImpl` de cette façon-ci :
 
@@ -108,7 +108,7 @@ Créez une classe de tests JUnit `MoniteurImplTest` pour la classe `MoniteurImpl
 4. Dans Testing Library, il faut choisir « JUnit5 ». Si le message « JUnit5 library not found in the module » apparaît, cliquez sur Fix et ensuite sur OK.
 5. Vérifiez que le package de destination indiqué est bien le même que le package de la classe à tester (package `domaine`).
 6. Dans Generate, sélectionnez setUp/@Before.
-7. Sélectionnez ensuite les méthodes que vous voulez tester (`ajouterStage` et `supprimerStage`) et cliquez sur OK. Cela devrait générer votre classe de test dans `tests/domaine/MoniteurImplTest`.
+7. Sélectionnez ensuite les méthodes que vous voulez tester (`ajouterStage` et `supprimerStage`) et cliquez sur OK. Cela devrait générer votre classe de test dans `test/domaine/MoniteurImplTest`.
 
 Commencez par jeter un œil au code de la première méthode que nous souhaitons tester de façon unitaire : `ajouterStage` de `MoniteurImpl`. Cette méthode reçoit un objet de type `Stage`.
 
@@ -122,7 +122,7 @@ Voici le code qui répondrait à la question :
 if (!stage.getSport().contientMoniteur(this))
 ```
 
-Comme pour pouvoir ajouter un stage à un moniteur, il faut pouvoir vérifier qu'il est compétent dans le sport du stage et que c'est l'interface `Sport` qui contient une méthode (`contientMoniteur`) permettant de savoir si un moniteur est compétent dans un sport ou non, il faut aussi créer un stub pour l'interface `Sport`. Ce stub vous est déjà fourni à titre d'exemple : récupérez la classe [`SportStub`](tests/domaine/SportStub.java) (fournie dans `AJ_atelier05_seance1/tests/domaine/`) et placez-la dans le package `domaine` de votre module de test. Vous pouvez constater que la classe `SportStub` contient un unique attribut (`contientMoniteur`) qui sera initialisé dans le constructeur et que la méthode `contientMoniteur` renvoie la valeur de cet attribut. Ainsi, on pourra, en fonction de l'initialisation, créer un sport dans lequel le moniteur est compétent (`contientMoniteur` vaut `true`) ou non (`false`).
+Comme pour pouvoir ajouter un stage à un moniteur, il faut pouvoir vérifier qu'il est compétent dans le sport du stage et que c'est l'interface `Sport` qui contient une méthode (`contientMoniteur`) permettant de savoir si un moniteur est compétent dans un sport ou non, il faut aussi créer un stub pour l'interface `Sport`. Ce stub vous est déjà fourni à titre d'exemple : récupérez la classe [`SportStub`](test/domaine/SportStub.java) (fournie dans `AJ_atelier05_seance1/test/domaine/`) et placez-la dans le package `domaine` de votre module de test. Vous pouvez constater que la classe `SportStub` contient un unique attribut (`contientMoniteur`) qui sera initialisé dans le constructeur et que la méthode `contientMoniteur` renvoie la valeur de cet attribut. Ainsi, on pourra, en fonction de l'initialisation, créer un sport dans lequel le moniteur est compétent (`contientMoniteur` vaut `true`) ou non (`false`).
 
 **Question 2** :
 Quel est le second stub qu'il faudra créer, en plus de `SportStub` ? Justifiez à partir du code de `ajouterStage` ci-dessus.

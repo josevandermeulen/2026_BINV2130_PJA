@@ -21,13 +21,13 @@ réponses aux questions de [`04A_2_exercices.md`](04A_2_exercices.md).
 
 ### Structure exacte de l'archive
 
-À l'ouverture du zip, on doit voir **directement** un dossier `src` et un dossier `tests` :
+À l'ouverture du zip, on doit voir **directement** un dossier `src` et un dossier `test` :
 
 ```
 AJ_atelier04_seance1_NOM-Prenom.zip
 ├── src/
 │   └── TodoList.java
-└── tests/
+└── test/
     └── TodoListTest.java
 ```
 
@@ -38,10 +38,10 @@ pour le compresser, vous obtenez ceci, qui n'est **pas** conforme :
 AJ_atelier04_seance1_NOM-Prenom.zip
 └── AJ_atelier04_seance1/
     ├── src/
-    └── tests/
+    └── test/
 ```
 
-Ce sont bien `src` et `tests` qui doivent se trouver à la racine de l'archive.
+Ce sont bien `src` et `test` qui doivent se trouver à la racine de l'archive.
 
 ### Nom du fichier
 
@@ -55,21 +55,21 @@ Une archive **`.zip`**. Ni `.rar`, ni `.7z`, ni `.tar.gz` : le correcteur ne les
 
 ## Comment créer l'archive
 
-Le principe est le même partout : on sélectionne les dossiers `src` et `tests`, et on compresse
+Le principe est le même partout : on sélectionne les dossiers `src` et `test`, et on compresse
 **la sélection**, pas le dossier qui les contient.
 
 **Windows** — ouvrez le dossier `AJ_atelier04_seance1` dans l'Explorateur, sélectionnez `src` et
-`tests` (clic sur le premier, `Ctrl` enfoncé, clic sur le second), puis clic droit → *Compresser
+`test` (clic sur le premier, `Ctrl` enfoncé, clic sur le second), puis clic droit → *Compresser
 dans un fichier ZIP*. Renommez ensuite l'archive obtenue.
 
-**macOS** — ouvrez le dossier dans le Finder, sélectionnez `src` et `tests`, clic droit →
+**macOS** — ouvrez le dossier dans le Finder, sélectionnez `src` et `test`, clic droit →
 *Compresser les 2 éléments*. Vous obtenez `Archive.zip`, à renommer.
 
 **Linux** — dans un terminal, placez-vous dans le dossier du projet :
 
 ```bash
 cd AJ_atelier04_seance1
-zip -r AJ_atelier04_seance1_DUPONT-Marie.zip src tests
+zip -r AJ_atelier04_seance1_DUPONT-Marie.zip src test
 ```
 
 ## Vérifiez avant de déposer
@@ -79,9 +79,9 @@ la décompresser — et cochez :
 
 - [ ] Le fichier porte l'extension `.zip`.
 - [ ] Son nom est `AJ_atelier04_seance1_NOM-Prenom.zip`, avec votre nom et votre prénom.
-- [ ] `src` et `tests` apparaissent dès l'ouverture, sans dossier intermédiaire.
+- [ ] `src` et `test` apparaissent dès l'ouverture, sans dossier intermédiaire.
 - [ ] `src` contient `TodoList.java`.
-- [ ] `tests` contient `TodoListTest.java`.
+- [ ] `test` contient `TodoListTest.java`.
 - [ ] Aucun dossier `out`, `.idea` ou `target` ne traîne dans l'archive.
 
 ## Barème
@@ -89,9 +89,9 @@ la décompresser — et cochez :
 | Critère | Points |
 |---|---|
 | L'archive est un `.zip` valide, qui s'ouvre | 4 |
-| `src` et `tests` sont à la racine de l'archive, sans dossier parent | 4 |
+| `src` et `test` sont à la racine de l'archive, sans dossier parent | 4 |
 | `src/TodoList.java` est présent | 4 |
-| `tests/TodoListTest.java` est présent | 4 |
+| `test/TodoListTest.java` est présent | 4 |
 | Le nom du fichier respecte le format demandé | 4 |
 
 Le contenu des classes n'est pas coté ici : un `TodoList` incomplet ne vous fait perdre aucun point

@@ -25,7 +25,7 @@ En partie 1, vous avez constaté que gérer l'état d'une tâche à côté d'une
 
 ### Consignes
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance2`. Récupérez les classes fournies dans `AJ_atelier04_seance2/` : [`TodoList.java`](src/TodoList.java) dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `tests`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la séance 1 (voir aussi `../../01-seance1/AJ_atelier04_seance1_solution/`). Appuyez-vous sur votre spécification complétée de la séance 1 ; une solution de cette spécification est fournie dans `../../01-seance1/AJ_atelier04_seance1_solution/04A_solutions-scenarios-de-tests.md`.
+Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance2`. Récupérez les classes fournies dans `AJ_atelier04_seance2/` : [`TodoList.java`](src/TodoList.java) dans un dossier `src` (package par défaut) et `TodoListTest.java` dans un dossier `test`, tous deux marqués respectivement Sources Root et Test Sources Root — c'est l'état de la solution de la séance 1 (voir aussi `../../01-seance1/AJ_atelier04_seance1_solution/`). Appuyez-vous sur votre spécification complétée de la séance 1 ; une solution de cette spécification est fournie dans `../../01-seance1/AJ_atelier04_seance1_solution/04A_solutions-scenarios-de-tests.md`.
 
 ### TDD lors de la mise à jour de fonctionnalités existantes
 
@@ -33,7 +33,7 @@ Dans IntelliJ, créez un projet intitulé `AJ_atelier04_seance2`. Récupérez le
 
 ✏️ *A corriger au tableau*
 
-Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](tests/TodoListTest.java) associés à l'ajout de tâches au sein d'une `TodoList`. Comme une tâche est un objet très simple, il n'est pas utile de créer des Mock objects de ceux-ci. Vous pouvez créer et directement utiliser un constructeur de tâches…
+Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](test/TodoListTest.java) associés à l'ajout de tâches au sein d'une `TodoList`. Comme une tâche est un objet très simple, il n'est pas utile de créer des Mock objects de ceux-ci. Vous pouvez créer et directement utiliser un constructeur de tâches…
 
 Faites cette mise à jour avec un assistant IA pour au moins un des scénarios existants, en respectant le cycle red-green-refactor : demandez d'abord uniquement l'adaptation du test à la nouvelle exigence, vérifiez qu'il échoue pour de bonnes raisons, puis seulement ensuite demandez la mise à jour du code.
 
@@ -45,7 +45,7 @@ Ajoutez un test qui vérifie que `removeTask` sur une tâche qui a été clonée
 
 **Question 2** : Veuillez faire du TDD pour les scénarios identifiés lors de la spécification de la séance 1 (« nouveaux scénarios de tests »). Vous aurez besoin d'une nouvelle classe `TaskTest`.
 
-Si vous souhaitez exécuter tous les tests se trouvant dans les différentes classes de tests situées dans le dossier `tests` en une seule fois, vous pouvez le faire ainsi : clic droit sur `tests`, Run 'All Tests'.
+Si vous souhaitez exécuter tous les tests se trouvant dans les différentes classes de tests situées dans le dossier `test` en une seule fois, vous pouvez le faire ainsi : clic droit sur `test`, Run 'All Tests'.
 
 ### 🤖 À partir d'ici, faites du TDD avec l'IA
 

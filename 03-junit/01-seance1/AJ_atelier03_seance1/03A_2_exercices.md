@@ -60,12 +60,12 @@ Vérifiez que tout fonctionne bien en exécutant la classe `Main` du package `ma
 
 **Créer un dossier pour les tests :**
 
-1. Créez, dans votre projet, un nouveau dossier intitulé `tests` (clic droit sur le projet et choisir New → Directory).
-2. Faites un clic droit sur le dossier `tests` et sélectionnez Mark Directory as → Test Sources Root.
+1. Créez, dans votre projet, un nouveau dossier intitulé `test` (clic droit sur le projet et choisir New → Directory).
+2. Faites un clic droit sur le dossier `test` et sélectionnez Mark Directory as → Test Sources Root.
 
 **Créer une classe de test :**
 
-Suivez le [tutoriel pas à pas avec captures d'écran](03A_3_tutoriel-creer-test.md) pour créer une classe de test JUnit 5 pour la classe `Prix`. Elle doit s'appeler `PrixTest`, être placée dans le package `domaine` du répertoire `tests`, et contenir une méthode `setUp` annotée avec `@BeforeEach`.
+Suivez le [tutoriel pas à pas avec captures d'écran](03A_3_tutoriel-creer-test.md) pour créer une classe de test JUnit 5 pour la classe `Prix`. Elle doit s'appeler `PrixTest`, être placée dans le package `domaine` du répertoire `test`, et contenir une méthode `setUp` annotée avec `@BeforeEach`.
 
 ### Tests de la classe `Prix`
 

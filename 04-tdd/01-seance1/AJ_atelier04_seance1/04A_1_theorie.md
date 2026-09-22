@@ -95,7 +95,7 @@ Commençons par le scénario de tests que nous trouvons le plus important : « (
 
 Nous allons d'abord créer la classe de tests `TodoListTest` :
 
-1. Dans le dossier `tests` (marqué Test Sources Root) : clic droit, New | Java Class
+1. Dans le dossier `test` (marqué Test Sources Root) : clic droit, New | Java Class
 2. Mettre son curseur dans le corps de la classe, `Alt+Insert`, Test…
 3. Cliquer une fois sur *Fix* si JUnit5 n'est pas trouvé. Cela ajoutera la bibliothèque JUnit5 au projet. Attention : le message *Fix* reste même si vous avez ajouté la dépendance.
 4. *Class name* doit garder le nom `TodoListTest` (cela fait en sorte de ne pas créer une nouvelle classe mais de mettre à jour la classe existante)

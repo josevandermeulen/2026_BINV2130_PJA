@@ -34,7 +34,7 @@
 
     <text x="70" y="352" fill="#6f6884">│   └──</text>
     <text x="150" y="352">AJ_atelier01_seance1_solution/</text>
-    <text x="90" y="378" fill="#4b4560">│         └── src/&lt;package&gt;/*.java  (+ tests/ si JUnit)</text>
+    <text x="90" y="378" fill="#4b4560">│         └── src/&lt;package&gt;/*.java  (+ test/ si JUnit)</text>
 
     <!-- seance2 -->
     <text x="40" y="420" fill="#6f6884">└──</text>

@@ -32,7 +32,3 @@ verification.md
 # (_youtube/descriptions.md) sont versionnées.
 _youtube/*.mp4
 _youtube/*.mov
-# Exports de notes mooVin (_resultats/) : noms, matricules, adresses de
-# courriel et cotes des étudiants. Données à caractère personnel — hors du
-# dépôt, même privé. mooVin est la source : un export se retélécharge.
-_resultats/

@@ -38,7 +38,7 @@ On souhaiterait également pouvoir récupérer facilement tous les plats d'un ce
 
 Pour cette séance, nous allons repartir de la solution de la séance 1.
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier02_seance2`. Ajoutez-y les classes de la solution de l'atelier 2 séance 1 (voir `../../01-seance1/AJ_atelier02_seance1_solution/`). Faites attention aux packages !
+Dans IntelliJ, ouvrez le projet `AJ_atelier02_seance2`. Ses classes (packages `domaine`, `main` et `util`) correspondent à la solution de la séance 1 (`../../01-seance1/AJ_atelier02_seance1_solution/`), sans la partie optionnelle (Question 7).
 
 Vérifiez qu'il fonctionne correctement en démarrant le main.
 

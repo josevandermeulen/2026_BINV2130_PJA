@@ -71,15 +71,11 @@ Faites de même pour l'argument de `removeTask` (question 1) : identifiez les cl
 
 Dans cet exercice et le suivant, vous n'écrivez pas de code : vous complétez une spécification, sous la forme d'une liste de scénarios de tests regroupés par UC (cas d'utilisation).
 
-Nous souhaitons faire évoluer l'application de gestion de tâches. Il doit être possible :
+Nous souhaitons faire évoluer l'application de gestion de tâches. Les tâches ne sont plus de simples `String` : une tâche a désormais un titre et une description (sa création est spécifiée à la question 6). Les règles qui suivent font évoluer des UC existantes ; il doit être possible :
 
-1. De créer des tâches en donnant ces informations : un titre (ne peut pas être vide ou null), une description (ne peut pas être nulle). *(UC nouvelle)*
-2. De refuser d'ajouter une tâche qui a le même titre et la même description qu'une tâche de la TodoList. Cela revient à ajouter une tâche déjà présente, on informe de l'échec de l'opération. *(fait évoluer l'UC1 « Ajouter une tâche à la liste » ci-dessous)*
-3. De terminer une tâche. *(fait évoluer l'UC identifiée à la question 3)*
-4. De modifier le titre d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que le titre ne peut pas être vide ou nul… *(fait évoluer l'UC « renommer une tâche » identifiée à la question 2)*
-5. De modifier la description d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que la description peut être vide. *(UC nouvelle, à rapprocher du point précédent)*
-6. De renvoyer une tâche qui se trouve au sein de la TodoList en donnant une tâche qui contiendrait son titre et sa description. *(UC nouvelle)*
-7. De modifier une TodoList en indiquant une tâche à modifier et une nouvelle tâche incluant les nouvelles données. *(UC nouvelle)*
+1. De refuser d'ajouter une tâche qui a le même titre et la même description qu'une tâche de la TodoList. Cela revient à ajouter une tâche déjà présente, on informe de l'échec de l'opération. *(fait évoluer l'UC1 « Ajouter une tâche à la liste » ci-dessous)*
+2. De terminer une tâche. *(fait évoluer l'UC identifiée à la question 3)*
+3. De modifier le titre d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que le titre ne peut pas être vide ou nul… *(fait évoluer l'UC « renommer une tâche » identifiée à la question 2)*
 
 Voici les trois premières UC telles qu'elles existaient avant cette évolution — elles montrent le format attendu, mais ne sont pas nécessairement encore correctes :
 
@@ -94,7 +90,10 @@ Voici les trois premières UC telles qu'elles existaient avant cette évolution 
    1. `removeTask` : la tâche n'est plus contenue dans la liste, on informe du succès de l'opération
    2. `removeUnexistingTask` : on tente de supprimer une tâche inexistante, on informe de l'échec de l'opération
 
-Mettez à jour la spécification des UC existantes : corrigez UC1 à UC3, puis ajoutez l'UC4 « modifier le titre d'une tâche » (évolution de la question 2) et l'UC5 « terminer une tâche » (question 3), en les adaptant aux nouvelles règles. Reprenez chaque scénario existant un par un : il peut rester inchangé, être renommé, voir son comportement attendu modifié, ou devenir obsolète si la vérification qu'il couvrait se fait désormais ailleurs — la validation d'un titre, par exemple, n'a plus forcément lieu dans la `TodoList`.
+Mettez à jour la spécification des UC existantes : corrigez UC1 à UC3, puis ajoutez l'UC4 « modifier le titre d'une tâche » (évolution de la question 2) et l'UC5 « terminer une tâche » (question 3), en les adaptant aux nouvelles règles. Reprenez chaque scénario existant un par un : il peut rester inchangé, être renommé, voir son comportement attendu modifié, ou devenir obsolète si la vérification qu'il couvrait se fait désormais ailleurs. Quelques pistes :
+
+- **UC1** : un titre vide est désormais refusé dès la création de la tâche (question 6). Que reste-t-il à vérifier dans `addTask` ?
+- **UC4 et UC5** : on modifie le titre et on termine une tâche sur la tâche elle-même, et non plus en passant par la `TodoList`. Parmi les scénarios des questions 2 et 3, lesquels gardent un sens ?
 
 ### 🤖 À partir d'ici, travaillez avec l'IA
 
@@ -104,7 +103,14 @@ Mettez à jour la spécification des UC existantes : corrigez UC1 à UC3, puis a
 
 **Question 6** :
 
-Spécifiez les UC nouvelles (points 1, 5, 6 et 7 de la question 5), numérotées UC6 à UC9, dans le même format. Donnez à l'assistant IA ces quatre points et votre spécification de la question 5 comme exemple de format, et demandez-lui la liste des scénarios de tests. Relisez ensuite chaque scénario proposé en le confrontant à l'énoncé — en particulier ce que l'énoncé dit des valeurs vides et nulles, des tâches terminées et des tâches absentes de la liste —, et vérifiez qu'aucune règle n'est restée sans scénario. Corrigez la liste obtenue, en marquant d'une courte note chaque scénario que vous avez dû corriger, ajouter ou supprimer.
+L'évolution de l'application comporte aussi des fonctionnalités nouvelles. Il doit être possible :
+
+1. De créer des tâches en donnant ces informations : un titre (ne peut pas être vide ou null), une description (ne peut pas être nulle).
+2. De modifier la description d'une tâche seulement si cette tâche n'est pas déjà terminée ; notons que la description peut être vide. *(à rapprocher du point 3 de la question 5)*
+3. De renvoyer une tâche qui se trouve au sein de la TodoList en donnant une tâche qui contiendrait son titre et sa description.
+4. De modifier une TodoList en indiquant une tâche à modifier et une nouvelle tâche incluant les nouvelles données.
+
+Spécifiez ces UC nouvelles, numérotées UC6 à UC9 dans l'ordre des points ci-dessus, dans le même format. Donnez à l'assistant IA ces quatre points et votre spécification de la question 5 comme exemple de format, et demandez-lui la liste des scénarios de tests. Relisez ensuite chaque scénario proposé en le confrontant à l'énoncé — en particulier ce que l'énoncé dit des valeurs vides et nulles, des tâches terminées et des tâches absentes de la liste —, et vérifiez qu'aucune règle n'est restée sans scénario. Corrigez la liste obtenue, en marquant d'une courte note chaque scénario que vous avez dû corriger, ajouter ou supprimer.
 
 ### Compter les tâches
 

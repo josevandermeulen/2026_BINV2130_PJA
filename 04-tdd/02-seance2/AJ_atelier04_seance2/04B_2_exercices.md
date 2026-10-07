@@ -33,7 +33,7 @@ Dans IntelliJ, ouvrez le dossier `AJ_atelier04_seance2` (File → Open…). Il c
 
 ✏️ *A corriger au tableau*
 
-Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](test/TodoListTest.java) associés à l'ajout de tâches au sein d'une `TodoList`. Comme une tâche est un objet très simple, il n'est pas utile de créer des Mock objects de ceux-ci. Vous pouvez créer et directement utiliser un constructeur de tâches…
+Tips : commencez par mettre à jour les scénarios de tests de [`TodoListTest`](test/TodoListTest.java) associés à l'ajout de tâches au sein d'une `TodoList`. Une tâche est un objet très simple : créez-la directement avec son constructeur.
 
 *(UC1) Ajouter une tâche à la liste :*
 

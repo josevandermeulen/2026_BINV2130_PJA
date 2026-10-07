@@ -47,7 +47,7 @@ Des librairies ont donc été conçues pour rendre la création de ces objets fi
 
 ### Exemple avec Mockito
 
-Reprenons l'exemple de la fiche précédente avec la classe `Calculator` et le cycle de vie d'un test donné ci-dessus. Nous allons utiliser Mockito pour créer un stub pour la classe `DataService`. Nous ne devons donc plus créer de stub personnalisé et l'ancienne classe `DataServiceStub` va donc être remplacée par un mock object.
+Reprenons l'exemple de la fiche précédente avec la classe `Calculator` et le cycle de vie d'un test donné ci-dessus. Nous allons utiliser Mockito pour créer un mock de l'interface `DataService`. Nous ne devons donc plus créer de stub personnalisé et l'ancienne classe `DataServiceStub` va donc être remplacée par un mock object.
 
 La classe `Calculator` reste la même. Pour rappel, voici son contenu :
 
@@ -86,28 +86,27 @@ class CalculatorTest {
 
   @BeforeEach
   void setUp() {
-    // Arrange and Configure the Mock
+    // Arrange - Set Context
     dataService = Mockito.mock(DataService.class); // Crée un mock de DataService
     calculator = new Calculator(dataService);
   }
 
   @Test
   void testAddToX() {
-    // Arrange
     int a = 3;
     int b = 4;
     int x = 5; // Valeur simulée pour getData
+    // Arrange - Configure the Mock
     Mockito.when(dataService.getData())
         .thenReturn(x); // Configuration du mock pour renvoyer la valeur x
 
     // Act
     int result = calculator.addToX(a, b);
 
-    // Interact with Collaborators & Mock Remembers its Interactions
+    // Interact with Collaborators & Mock remembers its interactions (nothing to do)
 
+    // Assert expectations
     Mockito.verify(dataService).getData(); // Vérifie que la méthode getData du mock a été appelée
-
-    // Assert
     assertEquals(12, result); // Vérifie que le résultat est correct
   }
 }
@@ -115,12 +114,12 @@ class CalculatorTest {
 
 Dans cet exemple :
 
-1. **Arrange** : on prépare le contexte du test, la préparation de l'objet à tester (`calculator`), et des paramètres qui seront donnés à la méthode testée `addToX`.
-2. **Configure the Mock** : dans la méthode `setUp`, nous utilisons la méthode `Mockito.mock(DataService.class)` pour créer le mock, que nous stockons dans la variable `dataService`. Ensuite, nous configurons le comportement du mock en utilisant `Mockito.when` pour qu'il renvoie une valeur simulée lors de l'appel à `getData`.
+1. **Arrange – Set context** : on prépare le contexte du test, la préparation de l'objet à tester (`calculator`), et des paramètres qui seront donnés à la méthode testée `addToX`. Dans la méthode `setUp`, nous utilisons la méthode `Mockito.mock(DataService.class)` pour créer le mock, que nous stockons dans la variable `dataService`.
+2. **Arrange – Configure the Mock** : dans le test `testAddToX`, nous configurons le comportement du mock en utilisant `Mockito.when` pour qu'il renvoie une valeur simulée lors de l'appel à `getData`.
 3. **Act** : dans notre test `testAddToX`, nous appelons la méthode `addToX` de `Calculator` avec les valeurs `a` et `b`.
-4. **Interact with Collaborators** : nous utilisons `Mockito.verify` pour vérifier que la méthode `getData` du mock a bien été appelée.
+4. **Interact with Collaborators** : `calculator` appelle `getData` sur le mock ; il n'y a rien à écrire dans le test.
 5. **Mock Remembers its Interactions** : cette étape est vide car Mockito se souvient automatiquement des interactions avec les mocks.
-6. **Assert** : enfin, nous utilisons une assertion pour vérifier que le résultat de la méthode `addToX` correspond à nos attentes.
+6. **Assert expectations** : enfin, nous utilisons `Mockito.verify` pour vérifier que la méthode `getData` du mock a bien été appelée, et une assertion pour vérifier que le résultat de la méthode `addToX` correspond à nos attentes.
 
 ### Mockito
 

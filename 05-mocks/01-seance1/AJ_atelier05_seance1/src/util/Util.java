@@ -7,6 +7,7 @@ package util;
  * la contrainte annoncée, ce qui évite de répéter le même test dans chaque constructeur.
  */
 public interface Util {
+
     static void checkObject(Object o) {
         if (o == null) {
             throw new IllegalArgumentException("L'objet ne peut pas être null");
@@ -16,30 +17,20 @@ public interface Util {
     static void checkString(String s) {
         checkObject(s);
         if (s.matches("\\s*")) {
-            throw new IllegalArgumentException(
-                    "La chaîne ne peut pas être vide");
+            throw new IllegalArgumentException("La chaîne ne peut pas être vide");
         }
     }
 
-    static void checkNumerique(String s) {
-        checkString(s);
-        try {
-            Long.parseLong(s);
-        } catch (NumberFormatException e) {
-            throw new IllegalArgumentException(
-                    "La chaîne doit être un nombre valide");
-        }
-    }
-
-    static void checkStrictlyPositive(double nombre) {
-        if (nombre <= 0) {
-            throw new IllegalArgumentException(
-                    "La valeur ne peut pas être négative ou nulle");
-        }
-    }
-    static void checkPositiveOrZero(double nombre)  {
-        if (nombre < 0) {
-            throw new IllegalArgumentException();
+    /**
+     * Vérifie qu'une chaîne est un code postal belge : exactement quatre chiffres.
+     *
+     * @param codePostal la chaîne à vérifier
+     * @throws IllegalArgumentException si la chaîne est `null` ou n'est pas formée de quatre chiffres
+     */
+    static void checkCodePostal(String codePostal) {
+        checkObject(codePostal);
+        if (!codePostal.matches("\\d{4}")) {
+            throw new IllegalArgumentException("Le code postal doit comporter quatre chiffres");
         }
     }
 }

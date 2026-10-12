@@ -2,17 +2,16 @@
 
 ## Objectif
 
-L'objectif de cet atelier est de tester une classe dépendante d'autres objets en réduisant le couplage grâce aux interfaces et en utilisant des stubs.
+L'objectif de cet atelier est de tester unitairement une classe qui dépend d'un service extérieur — ici une API d'open data interrogée par Internet — en remplaçant ce service par un stub.
 
 ## Concepts
 
 1. Interfaces
 2. Couplage faible
-3. Stubs
-4. Tests unitaires
-5. Associations entre objets
-6. Abstraction des dépendances
-7. Organisation des tests avec `@Nested` (vu à l'atelier 3 séance 2)
+3. Abstraction des dépendances
+4. Stubs
+5. Tests unitaires
+6. Organisation des tests avec `@Nested` (vu à l'atelier 3 séance 2)
 
 ## Vidéos
 
@@ -25,175 +24,150 @@ L'objectif de cet atelier est de tester une classe dépendante d'autres objets e
 
 ### Introduction
 
-Une ASBL organise des stages sportifs pour les enfants pendant les vacances d'été. Afin de faciliter l'organisation, elle désire se munir d'un logiciel de gestion de ces stages.
+La Fédération Wallonie-Bruxelles publie la liste de ses bibliothèques publiques sur ODWB, son portail d'open data (https://www.odwb.be) : nom, adresse, catégorie, thématiques de recherche, fonds spécialisés et coordonnées GPS de plus de 400 bibliothèques. Ces données sont librement réutilisables (licence CC BY) et interrogeables par Internet.
 
-L'analyse a déterminé les classes [`Stage`](src/domaine/Stage.java), [`Moniteur`](src/domaine/Moniteur.java) (package `domaine`), [`Sport`](src/domaine/Sport.java), [`Enfant`](src/domaine/Enfant.java) :
+Une petite application exploite ces données pour aider un lecteur à trouver une bibliothèque près de chez lui. Elle est fournie entièrement écrite et commentée en javadoc :
 
-![Diagramme de classes](03_images/05A_3_class_diagram.png)
+- la classe [`Bibliotheque`](src/domaine/Bibliotheque.java) (package `domaine`) est une simple donnée : le nom, le code postal, la ville, les thématiques et les coordonnées d'une bibliothèque ;
+- l'interface [`SourceBibliotheques`](src/source/SourceBibliotheques.java) (package `source`) représente « quelque chose à qui l'on peut demander des bibliothèques » ; sa seule méthode, `rechercher`, reçoit un filtre (par exemple `cp="5000"`) et renvoie les bibliothèques qui y répondent ;
+- la classe [`OdwbClient`](src/source/OdwbClient.java) implémente cette interface en interrogeant réellement l'API d'ODWB par Internet ; si l'API ne peut pas répondre, elle lève une [`SourceIndisponibleException`](src/source/SourceIndisponibleException.java) ;
+- la classe [`BibliothequeService`](src/domaine/BibliothequeService.java) offre les recherches utiles au lecteur : les bibliothèques d'un code postal (`parCodePostal`), la plus proche d'un point (`plusProche`) et celles qui traitent d'une thématique (`parThematique`). Elle reçoit sa source dans son constructeur.
 
-En plus des champs liés aux associations, on a que :
+```
+BibliothequeService ──utilise──► SourceBibliotheques (interface)
+                                        ▲
+                                        │ implémente
+                                   OdwbClient ──► API d'ODWB (Internet)
+```
 
-1. Un stage stocke un intitulé (« stage d'initiation à la natation »), un lieu (« piscine du Blocry à LLN ») et un numéro de semaine (les semaines de vacances d'été ont été numérotées de 1 à 8).
-2. Un moniteur stocke son nom.
-3. Un sport stocke son intitulé.
-4. Un enfant stocke son nom et son numéro de téléphone.
+Votre travail aujourd'hui consiste à tester la classe `BibliothequeService`, et elle seule : ni `OdwbClient`, ni l'API d'ODWB.
 
-Une implémentation du domaine est fournie (`AJ_atelier05_seance1/`). Elle est commentée en javadoc.
-
-Votre travail aujourd'hui consiste à tester la classe `Moniteur`. Pour des raisons de temps, nous testons uniquement l'association entre la classe `Moniteur` et la classe `Stage` dans le sens Moniteur vers Stage.
+Vous pouvez lancer la classe [`Main`](src/main/Main.java) (package `main`) pour voir l'application tourner sur les vraies données de Namur. Il vous faut pour cela une connexion Internet.
 
 ### Consignes
 
-Dans IntelliJ, créez un projet intitulé `AJ_atelier05_seance1`. Récupérez les classes fournies dans `AJ_atelier05_seance1/src/` (packages `domaine` et `util`) dans un dossier `src` de votre projet, marqué Sources Root.
+Dans IntelliJ, créez un projet intitulé `AJ_atelier05_seance1`. Récupérez les classes fournies dans `AJ_atelier05_seance1/src/` (packages `domaine`, `source`, `main` et `util`) dans un dossier `src` de votre projet, marqué Sources Root.
 
 Créez ensuite un dossier pour les tests :
 
 1. Créez, dans votre projet, un nouveau dossier intitulé `test` (clic droit sur le projet et choisir New → Directory).
 2. Faites un clic droit sur le dossier `test` et sélectionnez Mark Directory as → Test Sources Root.
 
-Comme à l'atelier 3 séance 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (par exemple : ajout valide, suppression, cas de refus), la fixture et le `@BeforeEach` restant sur la classe externe.
+Comme à l'atelier 3 séance 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (par exemple : recherche par code postal, bibliothèque la plus proche, recherche par thématique), la fixture et le `@BeforeEach` restant sur la classe externe.
 
-### Abstraction de l'implémentation des classes
+### Pourquoi ne pas tester avec la vraie source ?
 
 **Question 1** :
 
 ✏️ *A corriger au tableau*
 
-Dans un premier temps, il est demandé de modifier le code afin de limiter le couplage entre les objets. Il s'agit de rendre le code indépendant et maintenable en ne dépendant pas de choix d'implémentation limitatifs. Il faut donc extraire les interfaces de chaque classe du domaine.
+Lisez le constructeur et la méthode `parCodePostal` de `BibliothequeService`, puis la javadoc de la classe `OdwbClient`. Donnez au moins trois raisons pour lesquelles des tests de `BibliothequeService` qui utiliseraient un `OdwbClient` ne seraient pas de bons tests unitaires.
 
-Par convention, il est demandé que les interfaces conservent le nom métier : `Stage`, `Sport`, etc. Les classes qui implémentent celles-ci portent le nom de l'interface suivi de `Impl`.
+Réponses aux questions 1 et 13 dans [`05A_reponses-observations.md`](05A_reponses-observations.md).
 
-Pour extraire une interface d'une classe avec IntelliJ, veuillez suivre les étapes ci-dessous :
+### Le stub de la source
 
-1. faites un clic droit sur le nom de la classe et choisissez Refactor → Extract Interface… ;
-2. choisissez « Rename original class and use interface where possible » ;
-3. entrez le bon nom pour la classe (nom de l'interface suivi de `Impl`) dans le champ « Rename implementation class to: » ;
-4. sélectionnez toutes les méthodes afin qu'elles soient mises dans l'interface ;
-5. sélectionnez copy pour que la javadoc soit copiée dans l'interface tout en restant dans la classe ;
-6. cliquez sur Refactor.
+Pour tester `BibliothequeService` sans Internet, nous allons lui donner une autre implémentation de `SourceBibliotheques` : un stub, qui renvoie une réponse fixée à l'avance par le test, sans rien calculer.
 
-### Les stubs
+**Question 2** :
 
-Les analystes ont mis en place un diagramme des différents états du `Moniteur`. Ce diagramme est relativement simplifié par le fait que l'état correspond au nombre de stages de celui-ci.
+✏️ *A corriger au tableau*
 
-Par exemple, après avoir appelé deux fois, avec succès, la méthode `ajouterStage` sur un moniteur, celui-ci aura donc 2 stages : l'état de ce moniteur sera donc de 2 !
+Dans le package `domaine` du dossier `test`, écrivez la classe `SourceStub`, qui implémente `SourceBibliotheques`. Elle doit pouvoir être créée de deux façons : avec une liste de bibliothèques, que `rechercher` renverra à chaque appel quel que soit le filtre reçu ; ou avec une `SourceIndisponibleException`, que `rechercher` lèvera à chaque appel, pour simuler une panne de l'API. Respectez la définition d'un stub donnée dans la théorie : aucune logique, aucun filtrage.
 
-Nous avons choisi de tester uniquement les méthodes `ajouterStage` et `supprimerStage` de la classe `MoniteurImpl`. Il est important de commencer par lire la [JavaDoc de ces deux méthodes](src/domaine/Moniteur.java) (elle se trouve dans la classe `MoniteurImpl`) avant de découvrir leur plan de test.
+Créez maintenant la classe de tests JUnit `BibliothequeServiceTest` pour la classe `BibliothequeService` de cette façon-ci :
 
-Plan de tests :
-
-| TC# | État | Méthode | Paramètres | État suivant | Résultat attendu | Valeur retour |
-|---|---|---|---|---|---|---|
-| 1 | 0 | ajouterStage | stage valide (sport dans lequel le moniteur est compétent, stage sans moniteur) | 1 | Le stage est ajouté | true |
-| 2 | 1 | ajouterStage | stage valide semaine libre | 2 | Le stage est ajouté | true |
-| 3 | 2 | ajouterStage | stage valide semaine libre | 3 | Le stage est ajouté | true |
-| 4 | 3 | ajouterStage | stage valide semaine libre | 4 | Le stage est ajouté | true |
-| 5 | 4 | supprimerStage | déjà présent | 3 | Le stage n'est plus présent | true |
-| 6 | 3 | supprimerStage | déjà présent | 2 | Le stage n'est plus présent | true |
-| 7 | 2 | supprimerStage | déjà présent | 1 | Le stage n'est plus présent | true |
-| 8 | 1 | supprimerStage | déjà présent | 0 | Il n'y a plus aucun stage | true |
-| 9 | 4 | ajouterStage | stage déjà présent | 4 | stage non ajouté | false |
-| 10 | 4 | ajouterStage | semaine déjà prise | 4 | stage non ajouté | false |
-| 11 | 4 | supprimerStage | stage non présent | 4 | Tous les stages sont présents, rien n'a été supprimé | false |
-| 12 | 4 | ajouterStage | stage possède déjà un autre moniteur | 4 | stage non ajouté | false |
-| 13 | 4 | ajouterStage | stage sans moniteur pour un sport pour lequel le moniteur n'est pas compétent | 4 | stage non ajouté | false |
-
-Afin d'implémenter ces tests de façon vraiment unitaire, on va utiliser des stubs. Les tests se trouveront dans le répertoire `test` créé dans les consignes (marqué comme Test Sources Root).
-
-Créez une classe de tests JUnit `MoniteurImplTest` pour la classe `MoniteurImpl` de cette façon-ci :
-
-1. Ouvrir la classe `MoniteurImpl` que vous voulez tester.
+1. Ouvrir la classe `BibliothequeService` que vous voulez tester.
 2. Se positionner sur le nom de la classe au sein du code, faire un clic droit et choisir « Show Context Actions ».
 3. Choisir « Create Test ».
 4. Dans Testing Library, il faut choisir « JUnit5 ». Si le message « JUnit5 library not found in the module » apparaît, cliquez sur Fix et ensuite sur OK.
 5. Vérifiez que le package de destination indiqué est bien le même que le package de la classe à tester (package `domaine`).
 6. Dans Generate, sélectionnez setUp/@Before.
-7. Sélectionnez ensuite les méthodes que vous voulez tester (`ajouterStage` et `supprimerStage`) et cliquez sur OK. Cela devrait générer votre classe de test dans `test/domaine/MoniteurImplTest`.
-
-Commencez par jeter un œil au code de la première méthode que nous souhaitons tester de façon unitaire : `ajouterStage` de `MoniteurImpl`. Cette méthode reçoit un objet de type `Stage`.
-
-Comme cet objet ne fait pas partie du type de la classe testée, nous découvrons que nous allons devoir prochainement créer un stub pour l'interface `Stage`.
-
-De plus, dans le code de `ajouterStage` de `MoniteurImpl`, on voit que nous allons devoir créer un autre stub. Vous l'avez découvert ?
-
-Voici le code qui répondrait à la question :
-
-```java
-if (!stage.getSport().contientMoniteur(this))
-```
-
-Comme pour pouvoir ajouter un stage à un moniteur, il faut pouvoir vérifier qu'il est compétent dans le sport du stage et que c'est l'interface `Sport` qui contient une méthode (`contientMoniteur`) permettant de savoir si un moniteur est compétent dans un sport ou non, il faut aussi créer un stub pour l'interface `Sport`. Ce stub vous est déjà fourni à titre d'exemple : récupérez la classe [`SportStub`](test/domaine/SportStub.java) (fournie dans `AJ_atelier05_seance1/test/domaine/`) et placez-la dans le package `domaine` de votre module de test. Vous pouvez constater que la classe `SportStub` contient un unique attribut (`contientMoniteur`) qui sera initialisé dans le constructeur et que la méthode `contientMoniteur` renvoie la valeur de cet attribut. Ainsi, on pourra, en fonction de l'initialisation, créer un sport dans lequel le moniteur est compétent (`contientMoniteur` vaut `true`) ou non (`false`).
-
-**Question 2** :
-Quel est le second stub qu'il faudra créer, en plus de `SportStub` ? Justifiez à partir du code de `ajouterStage` ci-dessus.
-
-Réponses dans [`05A_reponses-observations.md`](05A_reponses-observations.md).
+7. Sélectionnez ensuite les méthodes que vous voulez tester (`parCodePostal`, `plusProche` et `parThematique`) et cliquez sur OK. Cela devrait générer votre classe de test dans `test/domaine/BibliothequeServiceTest`.
 
 **Question 3** :
+Écrivez la méthode `setUp` de `BibliothequeServiceTest`. Elle crée trois bibliothèques de Namur, inspirées des données réelles d'ODWB (simplifiées pour l'exercice), qui serviront dans la plupart des scénarios, puis un `BibliothequeService` qui utilise un `SourceStub` renvoyant ces trois bibliothèques **dans le désordre** (dans l'ordre du tableau ci-dessous) :
 
-✏️ *A corriger au tableau*
+| Dénomination | Code postal | Ville | Catégorie | Thématiques | Fonds spécialisés | Latitude | Longitude |
+|---|---|---|---|---|---|---|---|
+| Réseau Namurois de Lecture publique | 5000 | Namur | réseau de bibliothèques | Arts du spectacle, Bandes dessinées | Fonds Cinéma, Mangas | 50.4652 | 4.8666 |
+| Baie des tecks | 5000 | Namur | bibliothèque locale | *(aucune)* | *(aucun)* | 50.4728 | 4.8628 |
+| Bibliothèque libre de Bomel | 5000 | Namur | bibliothèque locale | Fonds d'histoire locale | *(aucun)* | 50.4717 | 4.8669 |
 
-Vous devez maintenant écrire le stub `StageStub` pour l'interface `Stage`. Avant d'écrire le stub, il faut déterminer les méthodes pour lesquelles il faut pouvoir configurer le retour. Cela se fait en fonction des tests qu'on désire effectuer. On veut pouvoir créer un stage pour un sport dans lequel le moniteur est compétent ou non, …
+La province de ces trois bibliothèques est Namur. Une thématique ou un fonds « aucun » se passe au constructeur sous la forme `null`.
 
-Avec IntelliJ, générez le stub `StageStub` pour l'interface `Stage` (une simple classe implémentant `Stage` et définissant déjà toutes ses méthodes) et veillez à ce qu'elle se situe bien dans le package `domaine` du module de tests. De manière analogue à ce qui a été fait dans `SportStub`, vous devrez aussi définir des attributs afin de pouvoir configurer les valeurs de retour des méthodes de la classe `Stage` utilisées pour les tests. En lisant attentivement le plan de tests et le code de la méthode `ajouterStage` de `MoniteurImpl`, on constate qu'il faudra pouvoir configurer les valeurs de retour des méthodes `getNumeroDeSemaine`, `getSport` et `getMoniteur`.
+### Le plan de tests
 
-Concernant la redondance, n'y a-t-il pas aussi des objets que vous recréez et utilisez dans différents scénarios de tests ? Par exemple, vous avez besoin d'un moniteur que vous allez utiliser dans chaque scénario de test… N'hésitez pas à créer des attributs et utiliser la méthode `setUp` pour réinitialiser automatiquement ces objets avant chaque test.
+Lisez la javadoc des trois méthodes publiques de `BibliothequeService` avant de découvrir le plan de tests. Sauf mention contraire, le service utilise le stub du `setUp`.
+
+| TC# | Méthode | Réponse du stub | Paramètres | Résultat attendu |
+|---|---|---|---|---|
+| 1 | `parCodePostal` | les trois bibliothèques du `setUp` | `"5000"` | les trois bibliothèques, triées par ordre alphabétique de dénomination |
+| 2 | `parCodePostal` | une liste vide | `"5000"` | une liste vide |
+| 3 | `parCodePostal` | une panne (`SourceIndisponibleException`) | `"5000"` | `SourceIndisponibleException` |
+| 4 | `plusProche` | les trois bibliothèques du `setUp` | `"5000"`, point situé juste à côté de Bomel (50.4718, 4.8670) | la bibliothèque libre de Bomel |
+| 5 | `parCodePostal` | les trois bibliothèques du `setUp` | `"50A0"` | `IllegalArgumentException` |
+| 6 | `plusProche` | Bomel, puis une « Annexe de Bomel » située exactement au même endroit | `"5000"`, même point qu'au TC4 | l'Annexe de Bomel (à égalité de distance, la première par ordre alphabétique) |
+| 7 | `plusProche` | une liste vide | `"5000"`, un point quelconque | `null` |
+| 8 | `parThematique` | les trois bibliothèques du `setUp` | `"5000"`, `"BANDES DESSINÉES"` | le Réseau Namurois seul (majuscules et minuscules ignorées) |
+| 9 | `parThematique` | les trois bibliothèques du `setUp` | `"5000"`, `"astronomie"` | une liste vide |
+
+Nommez chaque méthode de test d'après son cas : `testServiceTC1`, `testServiceTC2`, …
+
+Les quatre premiers scénarios couvrent chacun une façon différente de préparer le stub ou une méthode différente du service : écrivez-les vous-même.
 
 **Question 4** :
 
 ✏️ *A corriger au tableau*
 
-D'après le plan de tests, les scénarios TC1 à TC4 demandent chacun d'amener d'abord le moniteur à un état donné (0, 1, 2 puis 3 stages déjà présents) en lui ajoutant les mêmes stages, avant de tester l'ajout d'un stage supplémentaire. Plutôt que de dupliquer ce code de préparation dans chaque test, on va d'abord en extraire une méthode.
-
-Écrivez, en haut de votre classe de test, une méthode privée `preparerMoniteurAvecNStages(int nombreDeStages)` qui amène le moniteur à l'état voulu : elle doit lui ajouter `nombreDeStages` stages, un par semaine (semaines 1 à `nombreDeStages`), tous dans un sport où le moniteur est compétent.
+Écrivez le scénario TC1 (le résultat est trié).
 
 **Question 5** :
+Écrivez le scénario TC2 (aucune bibliothèque). Il faut pour cela un service qui utilise un autre stub que celui du `setUp`.
+
+**Question 6** :
 
 ✏️ *A corriger au tableau*
 
-Écrivez le premier scénario de tests (TC1) correspondant au plan de tests, dans la classe JUnit `MoniteurImplTest`. Nommez votre méthode de test en fonction du cas décrit dans le plan de tests : `testMoniteurTC1`.
-
-Pour chaque scénario suivant, nommez la méthode de test d'après son cas (`testMoniteurTCn`), utilisez `preparerMoniteurAvecNStages` pour amener le `Moniteur` à l'état voulu, et vérifiez que le nouvel état (pour rappel, le nombre de stages) est atteint et que le résultat est bien celui attendu (valeur de retour et effets de l'appel).
-
-**Question 6** :
-Écrivez le scénario TC2 (ajout depuis l'état 1).
+Écrivez le scénario TC3 (la source est en panne). C'est le second constructeur de votre `SourceStub` qui sert ici.
 
 **Question 7** :
-Écrivez le scénario TC3 (ajout depuis l'état 2).
-
-**Question 8** :
-Écrivez le scénario TC4 (ajout depuis l'état 3).
+Écrivez le scénario TC4 (la bibliothèque la plus proche).
 
 ### 🤖 À partir d'ici, générez les tests avec l'IA
 
-Les scénarios restants (TC5 à TC13 : suppressions puis cas de refus) suivent tous le même moule que TC1 à TC4 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
+Les scénarios restants reprennent les façons de préparer le stub que vous venez d'écrire : une liste de bibliothèques (celle du `setUp` ou une autre), puis un appel au service et une vérification du résultat. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour les générer à partir du plan de tests, mais relisez et exécutez chaque test généré : vérifiez qu'il teste bien le cas décrit, et qu'il échouerait si le service se trompait.
+
+**Question 8** :
+Écrivez le scénario TC5 (code postal invalide).
 
 **Question 9** :
-Écrivez le scénario TC5 (suppression depuis l'état 4).
+Écrivez le scénario TC6 (égalité de distance).
 
 **Question 10** :
-Écrivez le scénario TC6 (suppression depuis l'état 3).
+Écrivez le scénario TC7 (aucune bibliothèque, donc aucune plus proche).
 
 **Question 11** :
-Écrivez le scénario TC7 (suppression depuis l'état 2).
+Écrivez le scénario TC8 (recherche par thématique, majuscules et minuscules ignorées).
 
 **Question 12** :
-Écrivez le scénario TC8 (suppression depuis l'état 1).
+Écrivez le scénario TC9 (aucune bibliothèque pour cette thématique).
+
+### Et le cache ?
+
+La javadoc de `BibliothequeService` annonce un cache : une fois les bibliothèques d'un code postal obtenues, le service ne redemande plus jamais ce code postal à la source.
 
 **Question 13** :
-Écrivez le scénario TC9 (ré-ajout d'un stage déjà présent : refusé).
+Aucun des scénarios TC1 à TC9 ne vérifie ce cache. Que faudrait-il ajouter à `SourceStub` pour pouvoir écrire un test qui vérifie qu'un deuxième appel à `parCodePostal("5000")` n'interroge pas la source ? Pourquoi est-ce déjà un pas au-delà de ce qu'est un stub ?
+
+## Parties optionnelles
+
+### Données incomplètes
+
+Dans les vraies données d'ODWB, près de trois bibliothèques sur quatre ne déclarent ni thématique ni fonds spécialisé.
 
 **Question 14** :
-Écrivez le scénario TC10 (ajout refusé : semaine déjà occupée).
-
-**Question 15** :
-Écrivez le scénario TC11 (suppression refusée : stage absent).
-
-**Question 16** :
-Écrivez le scénario TC12 (ajout refusé : stage appartenant à un autre moniteur).
-
-**Question 17** :
-Écrivez le scénario TC13 (ajout refusé : sport hors compétence).
+Écrivez un scénario TC10 qui vérifie qu'une recherche `parThematique("5000", "histoire")` sur les trois bibliothèques du `setUp` renvoie uniquement la bibliothèque libre de Bomel : la Baie des tecks, qui n'a ni thématique ni fonds, doit être simplement ignorée.
 
 ---
 

@@ -26,7 +26,7 @@ L'objectif de cet atelier est d'utiliser Mockito pour créer des mocks et tester
 
 ### Introduction
 
-Nous continuons l'application de gestion de stages sportifs de la séance 1. Cette fois, plutôt que d'écrire des stubs à la main, nous utilisons le framework Mockito (https://site.mockito.org/) pour créer les mock objects et vérifier les interactions entre le moniteur et ses stages.
+Nous continuons l'application de recherche de bibliothèques de la séance 1. En séance 1, le stub permettait de vérifier ce que `BibliothequeService` **renvoie**. Mais la javadoc du service promet aussi quelque chose sur la façon dont il **utilise** sa source : un cache, qui évite de réinterroger l'API d'ODWB pour un code postal déjà demandé. Pour le vérifier, il faut compter les appels à la source et contrôler leurs arguments : c'est le rôle des mock objects, que nous créons avec le framework Mockito (https://site.mockito.org/).
 
 ### Consignes
 
@@ -41,7 +41,9 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier05_
 
 Le [tutoriel Maven](05B_3_tutoriel-maven.md) reprend ces étapes en détail et montre comment ajouter les dépendances JUnit 5 et Mockito au `pom.xml` puis vérifier que tout fonctionne.
 
-Nous allons reprendre les mêmes classes et interfaces que celles utilisées lors de la séance 1 de cet atelier 5 : copiez/collez les packages `be.vinci.mocks.domaine` et `be.vinci.mocks.util` (fournis dans `AJ_atelier05_seance2/src/main/java/`, c'est l'état de la solution de la séance 1 — voir aussi `../../01-seance1/AJ_atelier05_seance1_solution/`) au sein de votre nouveau projet dans `/src/main/java`, en conservant l'arborescence `be/vinci/mocks/`.
+Votre projet est vide : récupérez les classes fournies dans `AJ_atelier05_seance2/src/main/java/` et copiez-les dans le dossier `src/main/java` de votre projet, en conservant l'arborescence `be/vinci/mocks/` (packages `domaine`, `source`, `main` et `util`). Ce sont les mêmes classes qu'en séance 1, seul le nom des packages change.
+
+La classe à tester est toujours [`BibliothequeService`](src/main/java/be/vinci/mocks/domaine/BibliothequeService.java) (package `be.vinci.mocks.domaine`), et la dépendance à remplacer est l'interface [`SourceBibliotheques`](src/main/java/be/vinci/mocks/source/SourceBibliotheques.java) (package `be.vinci.mocks.source`).
 
 Comme à l'atelier 3 séance 2, regroupez vos méthodes de test par thème dans des classes internes `@Nested` (la fixture et le `@BeforeEach` restant sur la classe externe).
 
@@ -78,106 +80,60 @@ Cliquez sur le symbole apparu en haut à droite pour charger les changements dan
 
 ### Les mocks via Mockito
 
-Les tests que nous allons maintenant effectuer portent sur les transitions d'états ; l'état correspond toujours au nombre de stages associés à un moniteur ! Il faut tester si les méthodes interagissent correctement avec les autres objets et leur donnent les valeurs attendues. Il faut implémenter ces tests avec des mock objects.
+Les exemples de syntaxe de la théorie portent sur un autre domaine (des stages sportifs, avec `Stage` et `enregistrerMoniteur`) : transposez-les à `SourceBibliotheques` et à sa méthode `rechercher`. La [cheat sheet de la semaine](https://astounding-queijadas-0f428a.netlify.app/05-mocks-fr.html) rassemble les mêmes appels, ainsi que `Mockito.anyString()`, qui accepte n'importe quel argument de type `String`.
 
-Nous avons déjà établi un plan de tests pour la méthode `ajouterStage(Stage stage)` :
+Rappel : pour le code postal `5000`, le service appelle `rechercher` avec le filtre `cp="5000"`, c'est-à-dire la chaîne Java `"cp=\"5000\""`.
 
-| TC# | État | Méthode | Paramètres | État suivant | Résultat attendu | Valeur retour | Interaction attendue sur le mock stage |
-|---|---|---|---|---|---|---|---|
-| 1 | 0 | ajouterStage | stage valide | 1 | Le stage est ajouté | true | `enregistrerMoniteur` appelée avec le moniteur |
-| 2 | 1 | ajouterStage | stage valide semaine libre | 2 | Le stage est ajouté | true | `enregistrerMoniteur` appelée avec le moniteur |
-| 3 | 2 | ajouterStage | stage valide semaine libre | 3 | Le stage est ajouté | true | `enregistrerMoniteur` appelée avec le moniteur |
-| 4 | 3 | ajouterStage | stage valide semaine libre | 4 | Le stage est ajouté | true | `enregistrerMoniteur` appelée avec le moniteur |
-| 5 | 4 | ajouterStage | stage déjà présent | 4 | stage non ajouté | false | `enregistrerMoniteur` appelée une seule fois |
-| 6 | 4 | ajouterStage | semaine déjà prise | 4 | stage non ajouté | false | `enregistrerMoniteur` jamais appelée |
-| 7 | 4 | ajouterStage | stage possédant déjà un autre moniteur | 4 | stage non ajouté | false | `enregistrerMoniteur` jamais appelée |
-| 8 | 4 | ajouterStage | stage non présent avec comme moniteur celui auquel on veut ajouter le stage (semaine libre, …) | 5 | stage ajouté | true | `enregistrerMoniteur` jamais appelée |
-| 9 | 0 | ajouterStage | stage sans moniteur pour un sport pour lequel le moniteur n'est pas compétent | 0 | stage non ajouté | false | `enregistrerMoniteur` jamais appelée |
+Plan de tests de `BibliothequeService`. Sauf mention contraire, le mock de la source renvoie, pour le filtre `cp="5000"`, les deux bibliothèques du `setUp` :
 
-Comme nous devons vérifier que la méthode `ajouterStage` de la classe [`MoniteurImpl`](src/main/java/be/vinci/mocks/domaine/MoniteurImpl.java) (package `be.vinci.mocks.domaine`) met bien en place les deux côtés de l'association en appelant la méthode `enregistrerMoniteur` de l'objet stage, nous allons devoir construire un (ou plusieurs) mock(s) object(s) pour la classe [`Stage`](src/main/java/be/vinci/mocks/domaine/Stage.java). La raison principale d'un mock object est de vérifier que l'on appelle bien la ou les méthodes attendues avec le ou les bons paramètres.
+| TC# | Scénario | Résultat attendu | Interaction attendue sur le mock |
+|---|---|---|---|
+| 1 | Une première recherche `parCodePostal("5000")` | les deux bibliothèques, triées | `rechercher` appelée une fois, avec `cp="5000"` |
+| 2 | Deux recherches `parCodePostal("5000")` de suite | la seconde renvoie les deux bibliothèques, triées | `rechercher` appelée une seule fois, avec `cp="5000"` |
+| 3 | La source tombe en panne au premier appel, puis répond normalement ; deux recherches `parCodePostal("5000")` | la première lève `SourceIndisponibleException`, la seconde renvoie les deux bibliothèques, triées | `rechercher` appelée deux fois, avec `cp="5000"` |
+| 4 | Une recherche `parCodePostal("5000")` puis une recherche `parCodePostal("1000")` (le mock renvoie une liste vide pour `cp="1000"`) | — | `rechercher` appelée une fois avec `cp="5000"` et une fois avec `cp="1000"` |
+| 5 | Une recherche `parCodePostal("50A0")` | `IllegalArgumentException` | `rechercher` jamais appelée, quel que soit l'argument |
+| 6 | `parCodePostal("5000")`, puis `plusProche("5000", …)`, puis `parThematique("5000", …)` | — | `rechercher` appelée une seule fois, avec `cp="5000"` |
+| 7 | La source tombe en panne pour `cp="1000"` ; recherches `parCodePostal("5000")`, `parCodePostal("1000")`, puis à nouveau `parCodePostal("5000")` | la recherche `1000` lève `SourceIndisponibleException`, la dernière renvoie les deux bibliothèques, triées | `rechercher` appelée une seule fois avec `cp="5000"` |
 
-Créez une classe JUnit `MoniteurImplTest`.
+Créez une classe JUnit `BibliothequeServiceTest` dans `src/test/java`, dans le package `be.vinci.mocks.domaine`. Nommez chaque méthode de test d'après son cas : `testServiceTC1`, `testServiceTC2`, …
 
 **Question 1** :
+
 ✏️ *A corriger au tableau*
 
-Relisez le code de `ajouterStage` dans `MoniteurImpl` : pour qu'un stage soit ajouté avec succès, il faut que `stage.getSport().contientMoniteur(this)` renvoie `true`, que `stage.getMoniteur()` renvoie `null` (ou le moniteur lui-même) et que la semaine (`stage.getNumeroDeSemaine()`) soit libre. Il faut donc, dans chaque test, un `Stage` (et le [`Sport`](src/main/java/be/vinci/mocks/domaine/Sport.java) qu'il renvoie) configurés pour satisfaire ce scénario de base — c'est ce que nous allons préparer une bonne fois dans `setUp` plutôt que de le répéter dans chaque test.
-
-Écrivez la méthode `setUp` :
-
-```java
-@BeforeEach
-void setUp() {
-    // ...
-}
-```
-
-Elle doit créer :
-
-- un `moniteur` (`MoniteurImpl` réel, pas un mock — c'est lui l'objet sous test) ;
-- un mock `sportCompetent` pour lequel `contientMoniteur(moniteur)` renvoie `true` ;
-- un mock `stageValide` dont `getSport` renvoie `sportCompetent`, `getMoniteur` renvoie `null`, et `getNumeroDeSemaine` renvoie une semaine libre (par exemple 8, puisque les tests n'utiliseront jamais plus de stages que de semaines libres avant celle-ci).
+Écrivez la méthode `setUp`. Elle doit créer deux bibliothèques inspirées des données réelles d'ODWB (par exemple la Baie des tecks et la bibliothèque libre de Bomel, reprises de la séance 1), un mock de `SourceBibliotheques` qui renvoie ces deux bibliothèques, **dans le désordre**, quand on appelle `rechercher` avec le filtre `cp="5000"`, et un `BibliothequeService` réel qui utilise ce mock : c'est lui l'objet sous test, il ne doit pas être mocké.
 
 **Question 2** :
+
 ✏️ *A corriger au tableau*
 
-Comme en séance 1, plusieurs scénarios du plan de tests partent d'un moniteur ayant déjà un certain nombre de stages (l'« état »). Plutôt que de répéter cette préparation dans chaque test, écrivez une méthode privée `preparerMoniteurAvecNStages(int nombreDeStages)` qui amène le `moniteur` à l'état voulu : à chaque itération, créez un nouveau mock de `Stage` configuré comme `stageValide` (même sport, pas de moniteur), mais avec un numéro de semaine différent à chaque fois (sinon `ajouterStage` échouerait, la semaine étant déjà prise), et ajoutez-le au moniteur.
-
-```java
-private void preparerMoniteurAvecNStages(int nombreDeStages) {
-    for (int numSemaine = 1; numSemaine <= nombreDeStages; numSemaine++) {
-        // Création d'un mock de Stage pour chaque stage à ajouter
-    }
-}
-```
-
-Si vous avez besoin d'inspiration pour configurer vos mocks, n'hésitez pas à (re)lire la théorie sur Mockito.
-
-Implémentez ensuite un test par scénario du plan de tests ci-dessus, nommé en fonction du cas décrit (par exemple `testMoniteurTC1`) :
+Écrivez le scénario TC1 (une recherche, un appel).
 
 **Question 3** :
-
-✏️ *A corriger au tableau*
-
-Écrivez `testMoniteurTC1`, qui utilise directement `stageValide` (état 0).
+Écrivez le scénario TC2 (le cache évite un deuxième appel).
 
 **Question 4** :
 
 ✏️ *A corriger au tableau*
 
-Écrivez `testMoniteurTC2`, qui utilise `preparerMoniteurAvecNStages` pour amener le moniteur à l'état 1, puis ajoute `stageValide`.
+Écrivez le scénario TC3 (une panne n'est pas mise en cache). Il faut configurer le mock pour qu'il lève une exception au premier appel, puis renvoie les bibliothèques au second : la théorie montre comment enchaîner deux réponses (`thenReturn(…).thenReturn(…)`) et comment lever une exception (`thenThrow`) ; combinez les deux.
 
 ### 🤖 À partir d'ici, générez les tests avec l'IA
 
-À partir de la question 5, les scénarios restants (TC3 à TC9) suivent tous le même moule que TC1 et TC2 : c'est répétitif, un bon usage de l'IA. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour générer ces tests à partir du plan de tests, mais relisez et exécutez chaque test généré, et vérifiez qu'il passe bien au rouge si vous cassez volontairement le code testé.
+Les scénarios restants reprennent les configurations du mock que vous venez d'écrire : une réponse normale, une panne, et des vérifications du nombre d'appels. Aidez-vous d'un assistant IA (Claude Code, Copilot, …) pour les générer à partir du plan de tests, mais relisez et exécutez chaque test généré : vérifiez qu'il teste bien le cas décrit, et qu'il échouerait si le service se trompait.
 
 **Question 5** :
-
-Écrivez `testMoniteurTC3`, qui amène le moniteur à l'état 2 avant d'ajouter `stageValide`.
+Écrivez le scénario TC4 (deux codes postaux, un appel chacun).
 
 **Question 6** :
-
-Écrivez `testMoniteurTC4`, qui amène le moniteur à l'état 3 avant d'ajouter `stageValide`.
+Écrivez le scénario TC5 (code postal invalide, aucun appel).
 
 **Question 7** :
-
-Écrivez `testMoniteurTC5`, qui amène le moniteur à l'état 4 (en y incluant `stageValide`) avant de tenter de ré-ajouter `stageValide`.
+Écrivez le scénario TC6 (le cache sert aussi à `plusProche` et à `parThematique`).
 
 **Question 8** :
-
-Écrivez `testMoniteurTC6`, qui amène le moniteur à l'état 4 avant d'ajouter un nouveau mock de `Stage` dont `getNumeroDeSemaine` renvoie une semaine déjà occupée.
-
-**Question 9** :
-
-Écrivez `testMoniteurTC7`, qui amène le moniteur à l'état 4 avant d'ajouter un mock de `Stage` dont `getMoniteur` renvoie un autre moniteur (mocké ou non).
-
-**Question 10** :
-
-Écrivez `testMoniteurTC8`, qui amène le moniteur à l'état 4 avant d'ajouter un mock de `Stage` dont `getMoniteur` renvoie déjà ce `moniteur` (semaine libre).
-
-**Question 11** :
-
-Écrivez `testMoniteurTC9`, qui, sans aucun stage préalable, ajoute un mock de `Stage` dont le sport (un autre mock) renvoie `false` à `contientMoniteur`.
+Écrivez le scénario TC7 (la panne d'une autre recherche ne vide pas le cache).
 
 ## Parties optionnelles
 
@@ -185,7 +141,7 @@ Implémentez ensuite un test par scénario du plan de tests ci-dessus, nommé en
 
 Les deux questions suivantes sont issues des examens de janvier et de septembre 2026 (question « Tests unitaires », 8 points, ± 40 minutes chacune). Elles se font dans le même projet : copiez les packages `be.vinci.mocks.voiture` et `be.vinci.mocks.club` (fournis dans `AJ_atelier05_seance2/src/main/java/`) dans `/src/main/java`, en conservant l'arborescence `be/vinci/mocks/`.
 
-**Question 12** (examen de janvier) : Tests unitaires de [`CarService`](src/main/java/be/vinci/mocks/voiture/CarService.java) (package `be.vinci.mocks.voiture`)
+**Question 9** (examen de janvier) : Tests unitaires de [`CarService`](src/main/java/be/vinci/mocks/voiture/CarService.java) (package `be.vinci.mocks.voiture`)
 
 Vous développez une application de gestion de stock de voitures. L'application permet d'ajouter des voitures et de gérer les marques associées. Les voitures ([`Car`](src/main/java/be/vinci/mocks/voiture/Car.java) : `String brand`, `String model`) sont enregistrées dans un [`CarRepository`](src/main/java/be/vinci/mocks/voiture/CarRepository.java) qui simule une base de données.
 
@@ -205,7 +161,7 @@ Consignes :
 | TC3 (avec mock) | Ajout d'une voiture pour une marque pas encore présente dans le stock | La méthode `addBrand` de `CarRepository` est appelée une fois. La méthode `addCar` de `CarRepository` est appelée une fois. |
 | TC4 (avec mock) | Ajout d'une voiture pour une marque déjà présente dans le stock | La méthode `addBrand` de `CarRepository` n'est pas appelée. La méthode `addCar` de `CarRepository` est appelée une fois. |
 
-**Question 13** (examen de septembre) : Tests unitaires de [`EquipmentManager`](src/main/java/be/vinci/mocks/club/EquipmentManager.java) (package `be.vinci.mocks.club`)
+**Question 10** (examen de septembre) : Tests unitaires de [`EquipmentManager`](src/main/java/be/vinci/mocks/club/EquipmentManager.java) (package `be.vinci.mocks.club`)
 
 Vous développez une application de gestion du matériel sportif d'un club. Les équipements sont enregistrés dans un [`ClubStock`](src/main/java/be/vinci/mocks/club/ClubStock.java), qui simule une source de données lente utilisée par le club.
 

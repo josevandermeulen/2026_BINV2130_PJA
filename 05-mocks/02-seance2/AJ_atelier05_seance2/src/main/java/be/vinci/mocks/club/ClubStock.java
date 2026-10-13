@@ -36,7 +36,12 @@ public class ClubStock {
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
-        return this.equipments.stream().filter(e -> e.getCode().equals(code)).findFirst().orElse(null);
+        for (Equipment e : this.equipments) {
+            if (e.getCode().equals(code)) {
+                return e;
+            }
+        }
+        return null;
     }
 
     /**

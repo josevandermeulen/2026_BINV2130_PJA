@@ -35,3 +35,8 @@ _youtube/*.mov
 # Notes et suivis des étudiants (exports Moodle, tableurs) : données
 # personnelles, jamais versionnées ni synchronisées vers le dépôt public.
 /notes/
+# Révision programme : le dossier BINV2140 (SD2) reste local — la sauvegarde
+# mooVin contient les remises des étudiants (données personnelles). La grille
+# de la commission, à la racine de _revision-programme, est versionnée avec
+# les réponses des deux UE (choix de l'utilisateur, 13/10/2026).
+_revision-programme/BINV2140/

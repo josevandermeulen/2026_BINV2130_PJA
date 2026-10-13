@@ -76,11 +76,12 @@ public class CarService {
             throw new IllegalArgumentException("car model cannot be empty");
         }
 
-        if (getAllCars().stream()
-                .anyMatch(c -> c.getModel().equals(car.getModel()) && c.getBrand().equals(car.getBrand()))) {
-            throw new IllegalArgumentException("car already exists");
+        for (Car c : getAllCars()) {
+            if (c.getModel().equals(car.getModel()) && c.getBrand().equals(car.getBrand())) {
+                throw new IllegalArgumentException("car already exists");
+            }
         }
-        if (getAllBrands().stream().noneMatch(b -> b.equals(car.getBrand()))) {
+        if (!getAllBrands().contains(car.getBrand())) {
             repository.addBrand(car.getBrand());
         }
         return repository.addCar(car);

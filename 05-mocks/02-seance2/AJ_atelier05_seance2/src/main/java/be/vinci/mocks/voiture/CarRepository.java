@@ -39,12 +39,12 @@ public class CarRepository {
      * et les transformer en objets Car
      */
     private List<Car> parseCars() {
-        return cars.stream()
-                .map(car -> {
-                    String[] parts = car.split(",");
-                    return new Car(parts[0].trim(), parts[1].trim());
-                })
-                .toList();
+        List<Car> result = new ArrayList<>();
+        for (String car : cars) {
+            String[] parts = car.split(",");
+            result.add(new Car(parts[0].trim(), parts[1].trim()));
+        }
+        return result;
 
     }
 

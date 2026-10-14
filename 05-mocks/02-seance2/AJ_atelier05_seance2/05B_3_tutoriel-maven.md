@@ -150,6 +150,19 @@ mvn test
 
 Si les deux tests passent (`CalculatorTest` et `MockitoSmokeTest`), l'environnement Maven + JUnit 5 + Mockito est opérationnel.
 
+> [!WARNING]
+> Au lancement d'un test qui crée un mock, la console affiche un gros pavé rouge qui ressemble à ceci :
+>
+> ```
+> Mockito is currently self-attaching to enable the inline-mock-maker. This will no longer work in future releases of the JDK. Please add Mockito as an agent to your build as described in Mockito's documentation: ...
+> WARNING: A Java agent has been loaded dynamically (.../byte-buddy-agent-....jar)
+> WARNING: If a serviceability tool is in use, please run with -XX:+EnableDynamicAgentLoading to hide this warning
+> WARNING: If a serviceability tool is not in use, please run with -Djdk.instrument.traceUsage for more information
+> WARNING: Dynamic loading of agents will be disallowed by default in a future release
+> ```
+>
+> Ce n'est pas une erreur : vos tests s'exécutent normalement et c'est leur résultat (vert ou rouge dans l'onglet Run) qui compte. Le JDK signale simplement que Mockito charge à la volée un « agent » Java pour pouvoir créer ses mocks. Ignorez ce message pour l'instant, nous le ferons disparaître plus tard en configurant le `pom.xml`.
+
 ## Dépannage
 
 - **IntelliJ ne reconnaît pas `@Test`** : le projet n'a pas été rechargé après modification du `pom.xml` (étape 3).

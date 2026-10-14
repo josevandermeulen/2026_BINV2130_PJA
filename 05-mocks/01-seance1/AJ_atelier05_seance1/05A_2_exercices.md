@@ -112,6 +112,8 @@ Lisez la javadoc des trois méthodes publiques de `BibliothequeService` avant de
 | 8 | `parThematique` | les trois bibliothèques du `setUp` | `"5000"`, `"BANDES DESSINÉES"` | le Réseau Namurois seul (majuscules et minuscules ignorées) |
 | 9 | `parThematique` | les trois bibliothèques du `setUp` | `"5000"`, `"astronomie"` | une liste vide |
 
+D'un scénario à l'autre, les paramètres sont souvent les mêmes (`"5000"`) et pourtant le résultat attendu change : c'est la réponse du stub qui fait la différence. Quand cette réponse n'est pas celle du `setUp` (TC2, TC3, TC6 et TC7), le test commence par remplacer le service du `setUp` par un nouveau `BibliothequeService`, construit sur un nouveau `SourceStub` qui renvoie la réponse voulue.
+
 Nommez chaque méthode de test d'après son cas : `testServiceTC1`, `testServiceTC2`, …
 
 Les quatre premiers scénarios couvrent chacun une façon différente de préparer le stub ou une méthode différente du service : écrivez-les vous-même.

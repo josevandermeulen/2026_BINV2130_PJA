@@ -153,14 +153,4 @@ public class ExercicesDeBaseTest {
             assertEquals(t1, exercices.reduce2());
         }
     }
-
-    @Nested
-    @DisplayName("Question 12 : trader à la plus grande valeur totale de transactions")
-    class Question12 {
-
-        @Test
-        void traderValeurTotaleMax_returnsTraderWithHighestTotalValue() {
-            assertEquals(mario, exercices.traderValeurTotaleMax());
-        }
-    }
 }

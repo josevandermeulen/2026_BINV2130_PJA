@@ -20,8 +20,8 @@ L'objectif de cet atelier est d'approfondir l'API Stream : gérer l'absence de r
 1. [Les Streams Java - Introduction](https://www.youtube.com/watch?v=q0zMS0_XRSs)
 2. [Les Streams - les lambdas expressions en Java](https://www.youtube.com/watch?v=k3kLeB7dd48)
 3. [Introduction à la programmation fonctionnelle](https://www.youtube.com/watch?v=rU_O2mrT8SM)
-4. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
-5. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+4. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+5. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
 6. [Streams - Gestion du vide](https://www.youtube.com/watch?v=Oof31l4Raiw)
 7. [Les Streams - GroupingBy](https://www.youtube.com/watch?v=AjMDMp0Dw84)
 8. [Les Streams - debugger les Streams](https://www.youtube.com/watch?v=4hCoZ7HwZsU)
@@ -92,9 +92,14 @@ Dans la méthode `exercice6`, renvoyer les transactions regroupées par année, 
 
 ## Parties optionnelles
 
-### Trader dominant par ville
+### Total par trader
 
 **Question 12** :
+Dans la méthode `traderValeurTotaleMax` de la classe `ExerciceGroupingBy`, renvoyer le trader ayant généré la plus grande valeur totale de transactions (somme des valeurs de toutes ses transactions) — et non celui possédant la transaction individuelle la plus élevée. Utilisez `Collectors.groupingBy` avec un collecteur `summingInt` en aval pour obtenir le total par trader, puis retrouvez le trader dont ce total est maximal.
+
+### Trader dominant par ville
+
+**Question 13** :
 Dans la méthode `villeTraderMaxTotal` de la classe `ExerciceGroupingBy`, construire une `Map<String, Trader>` associant à chaque ville le trader y ayant généré la plus grande valeur totale de transactions. Combinez deux niveaux de `groupingBy` : un premier par ville, puis pour chaque ville un total par trader (`summingInt`) dont vous ne conservez que le trader au total maximal (`Collectors.collectingAndThen`).
 
 ---

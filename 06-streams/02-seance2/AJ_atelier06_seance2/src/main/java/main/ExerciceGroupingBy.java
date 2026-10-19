@@ -63,12 +63,22 @@ public class ExerciceGroupingBy {
     }
 
     /**
+     * Cherche le trader dont la somme des valeurs de transactions est la plus élevée.
+     *
+     * @return le trader au total le plus élevé, ou null si la liste est vide
+     */
+    public Trader traderValeurTotaleMax() {
+        // TODO Question 12
+        throw new UnsupportedOperationException("Not yet implemented");
+    }
+
+    /**
      * Cherche, pour chaque ville, le trader y ayant généré la plus grande valeur totale de transactions.
      *
      * @return une map associant à chaque ville le trader au total le plus élevé
      */
     public Map<String, Trader> villeTraderMaxTotal() {
-        // TODO Question 12
+        // TODO Question 13
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

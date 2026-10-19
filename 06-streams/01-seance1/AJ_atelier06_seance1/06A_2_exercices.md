@@ -15,17 +15,15 @@ L'objectif de cet atelier est de découvrir l'API Stream de Java pour filtrer, t
 7. `sorted`
 8. `collect`
 9. `joining`
-10. `groupingBy`
-11. `summingInt`
-12. Agrégations et réductions
+10. Agrégations et réductions
 
 ## Vidéos
 
 1. [Les Streams Java - Introduction](https://www.youtube.com/watch?v=q0zMS0_XRSs)
 2. [Les Streams - les lambdas expressions en Java](https://www.youtube.com/watch?v=k3kLeB7dd48)
 3. [Introduction à la programmation fonctionnelle](https://www.youtube.com/watch?v=rU_O2mrT8SM)
-4. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
-5. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+4. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+5. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
 6. [Streams - Gestion du vide](https://www.youtube.com/watch?v=Oof31l4Raiw)
 7. [Les Streams - GroupingBy](https://www.youtube.com/watch?v=AjMDMp0Dw84)
 8. [Les Streams - debugger les Streams](https://www.youtube.com/watch?v=4hCoZ7HwZsU)
@@ -113,13 +111,6 @@ Dans la méthode `reduce1`, renvoyer la valeur max des transactions.
 
 **Question 11** :
 Dans la méthode `reduce2`, renvoyer la transaction dont la valeur est la plus petite. Attention : on demande bien de renvoyer la transaction et non sa valeur ! Vous ne pouvez pas utiliser la méthode `min`. Au besoin, créez une transaction « neutre » avec une valeur de `Integer.MAX_VALUE`.
-
-## Parties optionnelles
-
-### Total par trader
-
-**Question 12** :
-Dans la méthode `traderValeurTotaleMax`, renvoyer le trader ayant généré la plus grande valeur totale de transactions (somme des valeurs de toutes ses transactions) — et non celui possédant la transaction individuelle la plus élevée. Utilisez `Collectors.groupingBy` avec un collecteur `summingInt` en aval pour obtenir le total par trader, puis retrouvez le trader dont ce total est maximal.
 
 ---
 

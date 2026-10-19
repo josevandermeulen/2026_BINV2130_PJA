@@ -52,8 +52,8 @@ Playlist: https://www.youtube.com/playlist?list=PLYYzDB0QZ4xc
 1. [Introduction à la programmation fonctionnelle](https://www.youtube.com/watch?v=rU_O2mrT8SM)
 
 ### Traitement des Streams
-1. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
-2. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+1. [Les Streams - Boucles implicites](https://www.youtube.com/watch?v=jZeB6BKyzTM)
+2. [Streams - Reduce](https://www.youtube.com/watch?v=LiZTza_KjnI)
 
 ### Streams avancés
 1. [Streams - Gestion du vide](https://www.youtube.com/watch?v=Oof31l4Raiw)

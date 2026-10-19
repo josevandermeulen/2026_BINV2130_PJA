@@ -104,8 +104,18 @@ public class ExerciceGroupingByTest {
     }
 
     @Nested
-    @DisplayName("Question 12 : trader à la plus grande valeur totale par ville")
+    @DisplayName("Question 12 : trader à la plus grande valeur totale de transactions")
     class Question12 {
+
+        @Test
+        void traderValeurTotaleMax_returnsTraderWithHighestTotalValue() {
+            assertEquals(mario, exercice.traderValeurTotaleMax());
+        }
+    }
+
+    @Nested
+    @DisplayName("Question 13 : trader à la plus grande valeur totale par ville")
+    class Question13 {
 
         @Test
         void villeTraderMaxTotal_returnsTraderWithHighestTotalValuePerCity() {

@@ -12,7 +12,7 @@ L'objectif de cet atelier est d'approfondir l'API Stream : gérer l'absence de r
 4. `groupingBy`
 5. `counting`
 6. `summingInt`
-7. `collectingAndThen`
+7. `collectingAndThen` (partie optionnelle)
 8. Collectors
 
 ## Vidéos
@@ -92,15 +92,21 @@ Dans la méthode `exercice6`, renvoyer les transactions regroupées par année, 
 
 ## Parties optionnelles
 
+Ces deux questions vont au-delà de ce qui est attendu à l'examen : elles font appel à des méthodes qui ne sont pas vues dans la théorie, à chercher dans la Javadoc. Chaque question donne une piste.
+
 ### Total par trader
 
 **Question 12** :
 Dans la méthode `traderValeurTotaleMax` de la classe `ExerciceGroupingBy`, renvoyer le trader ayant généré la plus grande valeur totale de transactions (somme des valeurs de toutes ses transactions) — et non celui possédant la transaction individuelle la plus élevée. Utilisez `Collectors.groupingBy` avec un collecteur `summingInt` en aval pour obtenir le total par trader, puis retrouvez le trader dont ce total est maximal.
 
+*Piste* : parcourez les entrées du dictionnaire obtenu (`entrySet().stream()`) ; `Map.Entry.comparingByValue()` fournit le comparateur à passer à `max`, et un `map` appliqué à l'`Optional` renvoyé par `max` permet d'en extraire la clé (voir « Transformer un Optional » dans la cheat sheet).
+
 ### Trader dominant par ville
 
 **Question 13** :
 Dans la méthode `villeTraderMaxTotal` de la classe `ExerciceGroupingBy`, construire une `Map<String, Trader>` associant à chaque ville le trader y ayant généré la plus grande valeur totale de transactions. Combinez deux niveaux de `groupingBy` : un premier par ville, puis pour chaque ville un total par trader (`summingInt`) dont vous ne conservez que le trader au total maximal (`Collectors.collectingAndThen`).
+
+*Piste* : `Collectors.collectingAndThen(collecteur, fonction)` applique `fonction` au résultat de `collecteur` ; ici, le collecteur est le `groupingBy` par trader de la Question 12 et la fonction reprend sa recherche du maximum.
 
 ---
 

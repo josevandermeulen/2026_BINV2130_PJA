@@ -107,6 +107,60 @@ Map<Type, Long> pg = menu.stream()
 
 compte le nombre de plats de chaque type.
 
+## Pour aller plus loin
+
+Cette section ne fait pas partie de la matière d'examen. Elle présente trois outils utiles pour les parties optionnelles des exercices.
+
+### Transformer le contenu d'un `Optional` (`map`)
+
+Un `Optional` possède lui aussi une méthode `map` : elle applique une fonction à la valeur contenue, si elle existe, et renvoie un nouvel `Optional` avec le résultat. Un `Optional` vide reste vide, sans que la fonction soit appelée. On évite ainsi de tester `isPresent` avant d'appeler `get` :
+
+```java
+Optional<String> nomDuGeant = employes.stream()
+        .filter(e -> e.getTaille() > 210)
+        .findAny()
+        .map(Employe::getNom);
+
+String nom = nomDuGeant.orElse("Aucun géant");
+```
+
+Ici, `findAny` renvoie un `Optional<Employe>`, que `map` transforme en `Optional<String>`.
+
+### Chercher le maximum d'un dictionnaire (`Map.Entry.comparingByValue`)
+
+Un dictionnaire n'est pas un stream, mais ses couples clé-valeur le deviennent : `entrySet` renvoie l'ensemble des entrées (`Map.Entry<K, V>`), chacune donnant sa clé (`getKey`) et sa valeur (`getValue`). `Map.Entry.comparingByValue()` fournit un `Comparator` qui compare deux entrées selon leur valeur (`comparingByKey()`, selon leur clé). Pour trouver le type de plat le plus représenté du menu :
+
+```java
+Map<Type, Long> nombreParType = menu.stream()
+        .collect(Collectors.groupingBy(Dish::getType, counting()));
+
+Optional<Type> typeLePlusFrequent = nombreParType.entrySet().stream()
+        .max(Map.Entry.comparingByValue())
+        .map(Map.Entry::getKey);
+```
+
+`max` renvoie l'entrée de plus grande valeur dans un `Optional` (vide si le dictionnaire l'est), et le `map` de la section précédente en extrait la clé.
+
+### Transformer le résultat d'un collector (`collectingAndThen`)
+
+`Collectors.collectingAndThen(collecteur, fonction)` construit un collector qui fait le travail de `collecteur`, puis applique `fonction` à son résultat. Placé en second argument de `groupingBy`, il transforme ce qui est associé à chaque clé. Par exemple, `counting` produit un `Long` ; pour obtenir un `Integer` par type :
+
+```java
+Map<Type, Integer> nombreParType = menu.stream()
+        .collect(Collectors.groupingBy(Dish::getType,
+                Collectors.collectingAndThen(counting(), Long::intValue)));
+```
+
+Ou encore, pour ne garder par type que le nom du plat le plus calorique — `maxBy` est le collector qui correspond à `max` et renvoie lui aussi un `Optional` :
+
+```java
+Map<Type, String> platLePlusCalorique = menu.stream()
+        .collect(Collectors.groupingBy(Dish::getType,
+                Collectors.collectingAndThen(
+                        Collectors.maxBy(Comparator.comparingInt(Dish::getCalories)),
+                        plat -> plat.map(Dish::getName).orElse(""))));
+```
+
 ---
 
 *Passez aux [exercices](06B_2_exercices.md).*

@@ -1,0 +1,39 @@
+package main;
+
+import domaine.Transaction;
+
+import java.util.List;
+import java.util.Optional;
+
+/**
+ * Exercices de réduction sans valeur neutre, où l'absence de résultat est portée par un Optional.
+ */
+public class ExercicesOptional {
+
+    // Question 1 : valeur max avec orElse
+    /**
+     * Cherche la valeur de transaction la plus élevée, par réduction sans valeur neutre.
+     *
+     * @param transactions la liste des transactions à réduire
+     * @return la valeur maximale, ou -1 si la liste est vide
+     */
+    public Integer optional1(List<Transaction> transactions) {
+        return transactions.stream()
+                .map(Transaction::getValue)
+                .reduce(Integer::max)
+                .orElse(-1);
+    }
+
+    // Question 2 : transaction minimale en Optional
+    /**
+     * Cherche la transaction de valeur la plus faible, par réduction sans valeur neutre.
+     *
+     * @param transactions la liste des transactions à réduire
+     * @return la transaction de valeur minimale, ou un Optional vide si la liste est vide
+     */
+    public Optional<Transaction> optional2(List<Transaction> transactions) {
+        return transactions.stream()
+                .reduce((t1, t2) -> t1.getValue() < t2.getValue() ? t1 : t2);
+    }
+
+}

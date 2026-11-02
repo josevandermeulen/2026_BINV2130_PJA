@@ -29,7 +29,79 @@ Ajouter une méthode abstraite `stream` dans `Collection` et une méthode concr�
 
 Autrement dit, les interfaces permettent de faire comme si on ajoutait l'implémentation d'une méthode à une classe sans modifier celle-ci.
 
-Prenons un exemple concret. Il est possible d'invoquer la méthode `sort` sur une `ArrayList`, pourtant, cette dernière n'en possède aucune implémentation directe. L'interface `List` propose une implémentation par défaut de celle-ci.
+Prenons un exemple concret. Il est possible d'invoquer la méthode `sort` sur une `ArrayList`, pourtant, cette dernière n'en possède aucune implémentation directe. L'interface `List` propose une implémentation par défaut de celle-ci. Voici, à peu de chose près, ce qu'on trouve dans le JDK :
+
+```java
+public interface List<E> extends Collection<E> {
+    // ...
+    default void sort(Comparator<? super E> c) {
+        Object[] a = this.toArray();
+        Arrays.sort(a, (Comparator) c);
+        ListIterator<E> i = this.listIterator();
+        for (Object e : a) {
+            i.next();
+            i.set((E) e);
+        }
+    }
+}
+```
+
+Le mot-clé `default` permet d'écrire le corps d'une méthode directement dans l'interface. `ArrayList`, `LinkedList` et toutes les classes écrites avant Java 8 qui implémentent `List` reçoivent cette méthode sans avoir été modifiées. Remarquez que ce code n'utilise que d'autres méthodes de l'interface (`toArray`, `listIterator`) : il ne sait rien de la façon dont la liste est stockée.
+
+Le même mécanisme fonctionne dans vos propres interfaces :
+
+```java
+public interface Forme {
+    double aire();                      // abstraite : chaque classe doit l'implémenter
+
+    default String decrire() {          // default : implémentation fournie
+        return "Forme d'aire " + aire();
+    }
+}
+
+public class Carre implements Forme {
+    private final double cote;
+
+    public Carre(double cote) {
+        this.cote = cote;
+    }
+
+    @Override
+    public double aire() {
+        return cote * cote;
+    }
+    // pas besoin d'écrire decrire()
+}
+```
+
+`new Carre(2).decrire()` renvoie `"Forme d'aire 4.0"`. Une classe peut aussi redéfinir `decrire` (avec `@Override`) si l'implémentation par défaut ne lui convient pas.
+
+#### Les contraintes à respecter
+
+1. **Pas d'état.** Une interface n'a pas d'attributs d'instance (seulement des constantes `static final`). Une méthode `default` ne peut donc travailler qu'avec ses paramètres et les autres méthodes de l'interface, comme `decrire` qui appelle `aire`.
+2. **Toujours `public`.** Une méthode `default` est implicitement publique ; elle ne peut être ni `private`, ni `protected`, ni `final`. Une classe qui la redéfinit doit donc aussi la déclarer `public`.
+3. **Pas de `default` pour `equals`, `hashCode` ou `toString`.** Ces méthodes existent déjà dans `Object`, dont hérite toute classe : le compilateur refuse `default String toString() { ... }` dans une interface (*default method toString in interface … overrides a member of java.lang.Object*).
+4. **La classe gagne.** Si la classe (ou une de ses superclasses) définit une méthode de même signature, c'est elle qui est utilisée, jamais la version `default`.
+5. **Conflit entre deux interfaces.** Si une classe implémente deux interfaces qui proposent chacune une méthode `default` de même signature, le code ne compile pas tant que la classe ne la redéfinit pas. Elle peut alors choisir (ou combiner) les versions avec la syntaxe `Interface.super.methode()` :
+
+   ```java
+   public interface Volant {
+       default String seDeplacer() { return "Je vole"; }
+   }
+
+   public interface Nageant {
+       default String seDeplacer() { return "Je nage"; }
+   }
+
+   public class Canard implements Volant, Nageant {
+       @Override
+       public String seDeplacer() {   // obligatoire, sinon erreur de compilation
+           return Volant.super.seDeplacer() + " et " + Nageant.super.seDeplacer();
+       }
+   }
+   ```
+
+6. **Une méthode `default` n'est pas abstraite.** Une interface fonctionnelle (voir plus bas) peut donc en contenir autant qu'elle veut, tant qu'elle n'a qu'**une seule** méthode abstraite. `Comparator` en est un bon exemple : `reversed`, que vous avez utilisée dans les exercices, est une méthode `default` de `Comparator`.
 
 ### Petit détour par les Generics
 
@@ -45,7 +117,7 @@ Observons cette signature plus en détail, en commençant par le type du paramè
 
 La raison pour laquelle on utilise `? super E` est pour offrir plus de flexibilité. Imaginez avoir une classe `Animal` et une sous-classe `Dog`. Si vous avez une `List<Dog>`, vous pourriez vouloir la trier en utilisant un `Comparator<Animal>`, car tous les `Dog` sont aussi des `Animal`.
 
-La méthode `sort` de l'interface `List` utilise ensuite la méthode `sort` de la classe `Collections` pour effectivement trier la liste, en utilisant le comparateur fourni.
+Comme on l'a vu plus haut, la méthode `sort` de l'interface `List` copie ensuite les éléments dans un tableau, le trie avec `Arrays.sort` en utilisant le comparateur fourni, puis réécrit les éléments dans la liste. (C'est d'ailleurs l'inverse de ce qu'on pourrait croire : depuis Java 8, `Collections.sort(liste, c)` se contente d'appeler `liste.sort(c)`.)
 
 Ce principe vaut aussi pour la déclaration des interfaces et classes. Prenons par exemple l'interface `List` ; nous y voyons le code suivant :
 
@@ -210,14 +282,66 @@ Vous avez croisé la notation `Employe::getTaille` dans les exercices :
 
 Une référence de méthode est un raccourci d'écriture pour une lambda qui ne fait qu'appeler une méthode existante : `Employe::getTaille` équivaut à `e -> e.getTaille()`. Quand une lambda a cette forme, IntelliJ propose d'ailleurs la conversion automatiquement.
 
-Quelques équivalences courantes :
+Une référence de méthode n'est donc rien d'autre qu'une lambda écrite plus court : elle implémente elle aussi la méthode abstraite d'une interface fonctionnelle.
 
-| Référence de méthode | Lambda équivalente |
-|---|---|
-| `Employe::getNom` | `e -> e.getNom()` |
-| `String::toUpperCase` | `s -> s.toUpperCase()` |
-| `System.out::println` | `s -> System.out.println(s)` |
-| `Employe::new` | `() -> new Employe()` |
+#### Les quatre formes
+
+| Forme | Exemple | Lambda équivalente |
+|---|---|---|
+| Méthode `static` : `Classe::methode` | `Integer::parseInt` | `s -> Integer.parseInt(s)` |
+| Méthode d'**un objet précis** : `objet::methode` | `System.out::println` | `x -> System.out.println(x)` |
+| Méthode d'instance appelée **sur le paramètre** : `Classe::methode` | `Employe::getNom` | `e -> e.getNom()` |
+| Constructeur : `Classe::new` | `ArrayList::new` | `() -> new ArrayList<>()` |
+
+La troisième forme est la plus subtile. On écrit le nom de la classe, mais la méthode n'est pas `static` : le **premier paramètre** de la lambda devient l'objet sur lequel la méthode est appelée, et les paramètres suivants deviennent ses arguments. Avec deux paramètres :
+
+```java
+Comparator<String> c = String::compareToIgnoreCase;
+// équivaut à (s1, s2) -> s1.compareToIgnoreCase(s2)
+```
+
+#### Le type dépend du contexte
+
+Comme une lambda, une référence de méthode n'a pas de type par elle-même : c'est l'interface fonctionnelle attendue à cet endroit qui le fixe. C'est particulièrement visible avec les constructeurs, où Java choisit le constructeur qui correspond aux paramètres de la méthode abstraite :
+
+```java
+Supplier<StringBuilder> s1 = StringBuilder::new;          // () -> new StringBuilder()
+Function<String, StringBuilder> s2 = StringBuilder::new;  // texte -> new StringBuilder(texte)
+```
+
+Notre classe `Employe` n'a qu'un constructeur à trois paramètres (genre, taille, nom). `Employe::new` ne peut donc pas être un `Supplier<Employe>`, car il faudrait un constructeur sans paramètre : il faudrait une interface fonctionnelle dont la méthode abstraite reçoit trois paramètres, ce que le JDK ne fournit pas.
+
+#### En pratique dans un stream
+
+```java
+employes.stream()
+        .filter(Main::estGrand)                    // méthode static de notre classe Main
+        .sorted(Comparator.comparing(Employe::getNom))
+        .map(Employe::getNom)
+        .forEach(System.out::println);
+```
+
+avec, dans la classe `Main` :
+
+```java
+private static boolean estGrand(Employe e) {
+    return e.getTaille() > 180;
+}
+```
+
+Cette astuce est utile quand une lambda devient longue : on la déplace dans une méthode bien nommée et on passe une référence vers celle-ci. Le stream se lit alors comme une phrase.
+
+#### Quand ce n'est pas possible
+
+Une référence de méthode ne fonctionne que si la lambda se contente d'appeler **une** méthode en lui transmettant ses paramètres tels quels, dans le même ordre. Ces lambdas-ci ne peuvent pas être converties :
+
+```java
+e -> e.getTaille() > 180        // un calcul en plus de l'appel
+e -> e.getNom().toUpperCase()   // deux appels enchaînés
+e -> e.getTaille() * 2          // un calcul en plus de l'appel
+```
+
+Pour les écrire avec une référence de méthode, il faut d'abord en faire une méthode nommée, comme `estGrand` ci-dessus.
 
 ---
 

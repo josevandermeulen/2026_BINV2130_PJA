@@ -155,7 +155,7 @@ Faites le même raisonnement qu'au point précédent et transformez le code en i
 ### Des lambdas dans un autre contexte
 
 **Question 13** :
-Dans la classe `ExerciceFunctionalInterface`, prenez la méthode `exComparator`. Celle-ci utilise un `Comparator` en créant une classe et en l'instanciant. Modifiez le code pour remplacer le comparator par une lambda expression.
+Dans la classe `ExerciceFunctionalInterface`, prenez la méthode `exComparator`. Celle-ci utilise un `Comparator` en créant une classe et en l'instanciant. Modifiez le code pour remplacer le comparator par une lambda expression. Lisez d'abord `EmployeComparator` : votre lambda doit trier exactement de la même façon, c'est-à-dire par taille décroissante **puis par nom en cas d'égalité de taille**.
 
 ### Quelques `Predicate` et `Function`
 

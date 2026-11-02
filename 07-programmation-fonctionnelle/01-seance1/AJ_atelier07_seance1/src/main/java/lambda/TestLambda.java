@@ -48,7 +48,7 @@ public class TestLambda {
 //        List<String> result2 = Lambda.allMatches(list2, ???);
 //        System.out.println(result2);
 //
-//        //Retournerune liste qui contient la taille de chacune des String de la liste originale
+//        //Retourne une liste qui contient la taille de chacune des String de la liste originale
 //        List<Integer> result3 = Lambda.transformAll(list2, ???);
 //        System.out.println(result3);
 

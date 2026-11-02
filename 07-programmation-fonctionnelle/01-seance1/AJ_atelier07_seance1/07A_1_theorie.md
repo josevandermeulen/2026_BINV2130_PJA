@@ -258,7 +258,7 @@ Une autre interface fonctionnelle très utile est l'interface `Supplier`. Celle-
 Les lambdas ne sont pas seulement utiles dans le contexte de l'API Stream : toute interface fonctionnelle peut être implémentée par une lambda. C'est le cas des `Comparator` que nous avons écrits lors du travail sur les collections ; leur unique méthode abstraite est `int compare(T o1, T o2)`. Au lieu de déclarer une classe :
 
 ```java
-public class EmployeComparator implements Comparator<Employe> {
+public class TailleComparator implements Comparator<Employe> {
     @Override
     public int compare(Employe e1, Employe e2) {
         return e2.getTaille() - e1.getTaille();
@@ -270,6 +270,16 @@ et de l'instancier au moment du tri, on écrit directement :
 
 ```java
 employes.sort((e1, e2) -> e2.getTaille() - e1.getTaille());
+```
+
+Ce comparateur ne trie que sur la taille : deux employés de même taille restent dans un ordre quelconque. Quand la comparaison demande plusieurs instructions — un `if` pour départager les ex æquo, par exemple —, le corps de la lambda devient un **bloc** entre accolades, avec un `return` explicite, exactement comme le corps de la méthode `compare` :
+
+```java
+employes.sort((e1, e2) -> {
+    int ecart = e2.getTaille() - e1.getTaille();
+    // ... d'autres instructions si nécessaire
+    return ecart;
+});
 ```
 
 ### Les références de méthode

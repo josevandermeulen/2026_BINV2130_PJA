@@ -113,6 +113,21 @@ Dernier atout d'HyperLogLog : deux compteurs se **fusionnent** facilement. Si de
 | 2        | 5         | 5         | 5            |
 | 3        | 0         | 3         | 3            |
 
+## Rappel : copier un `HyperLogLog` avec `clone`
+
+L'exercice demande de copier un estimateur : une « photo » du compteur, qui ne bouge plus pendant que l'original continue de compter. C'est le clonage vu à l'atelier 2 ([`02B_1_theorie.md`](../../../02-collections-enumeres/02-seance2/AJ_atelier02_seance2/02B_1_theorie.md), section *Clonage d'objets*, et la vidéo [Clone, copie superficielle et profonde en Java](https://www.youtube.com/watch?v=la-CVGl3k7E)). Les trois points à retenir :
+
+1. Une classe clonable implémente `Cloneable` et redéfinit `clone` en `public` ; `super.clone()` lance une `CloneNotSupportedException` (vérifiée) qu'on transforme en `AssertionError`, puisqu'elle ne peut pas se produire.
+2. `super.clone()` fait une copie **superficielle** : il copie chaque attribut tel quel. Pour un tableau, qui est un objet mutable, il copie la **référence** : l'original et la copie partageraient les mêmes registres, et un `ajouter` sur l'un se verrait dans l'autre. Il faut donc remplacer le tableau de la copie par un nouveau tableau. Un tableau de types primitifs se copie avec sa propre méthode `clone` :
+
+```java
+int[] t = {1, 2, 3};
+int[] copie = t.clone();   // nouveau tableau, mêmes valeurs
+copie[0] = 99;             // t[0] vaut toujours 1
+```
+
+3. Un attribut `final` ne peut pas être réaffecté, pas même dans `clone` : on ne peut pas remplacer, après `super.clone()`, un tableau déclaré `final`. Une classe qu'on veut cloner en profondeur ne déclare donc pas `final` ses attributs mutables.
+
 ## Petit résumé
 
 1. Compter exactement des valeurs distinctes demande soit trop de mémoire (tout stocker), soit donne un résultat faux (compteur simple, doublons comptés) ; HyperLogLog les **estime** avec une mémoire minuscule et fixe.
@@ -122,6 +137,7 @@ Dernier atout d'HyperLogLog : deux compteurs se **fusionnent** facilement. Si de
 5. Précision : ~25 % d'erreur avec 16 buckets (notre atelier), ~1 % avec 16 384 buckets pour ~12 Ko de mémoire figée — d'où son usage dans Redis et BigQuery.
 6. Le hash doit être uniforme : `String.hashCode()` seul ne suffit pas, on mélange ses bits (fourni dans `DefaultHasher`).
 7. Deux compteurs HyperLogLog se fusionnent en prenant le maximum bucket par bucket.
+8. Copier un compteur demande une copie profonde (`clone`) : `super.clone()`, puis une copie du tableau des registres, qui ne peut donc pas être `final`.
 
 ---
 

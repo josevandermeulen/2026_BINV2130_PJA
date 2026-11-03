@@ -60,4 +60,58 @@ class HyperLogLogTest {
         }
     }
 
+    @Nested
+    @DisplayName("Question 9 : clone renvoie une copie indépendante")
+    class Question9 {
+
+        /**
+         * Vérifie que la copie part des mêmes registres que l'original, sans partager son tableau.
+         */
+        @Test
+        void cloneCopieLesRegistresDansUnNouveauTableau() {
+            HyperLogLog original = new HyperLogLog(new HasherStub(0x12345678), 4);
+            original.ajouter("peu importe");
+
+            HyperLogLog copie = original.clone();
+
+            assertAll(
+                    () -> assertNotSame(original, copie),
+                    () -> assertNotSame(original.registres, copie.registres),
+                    () -> assertArrayEquals(original.registres, copie.registres)
+            );
+        }
+
+        /**
+         * Vérifie qu'ajouter une valeur à l'original, après la copie, ne modifie pas la copie.
+         */
+        @Test
+        void ajouterALOriginalNeModifiePasLaCopie() {
+            HyperLogLog original = new HyperLogLog(new HasherStub(0x12345678), 4);
+            HyperLogLog copie = original.clone();
+
+            original.ajouter("peu importe");
+
+            assertAll(
+                    () -> assertEquals(3, original.registres[1]),
+                    () -> assertEquals(0, copie.registres[1])
+            );
+        }
+
+        /**
+         * Vérifie qu'ajouter une valeur à la copie ne modifie pas l'original.
+         */
+        @Test
+        void ajouterALaCopieNeModifiePasLOriginal() {
+            HyperLogLog original = new HyperLogLog(new HasherStub(0x12345678), 4);
+            HyperLogLog copie = original.clone();
+
+            copie.ajouter("peu importe");
+
+            assertAll(
+                    () -> assertEquals(3, copie.registres[1]),
+                    () -> assertEquals(0, original.registres[1])
+            );
+        }
+    }
+
 }

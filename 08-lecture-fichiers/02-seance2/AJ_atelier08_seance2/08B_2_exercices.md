@@ -2,7 +2,7 @@
 
 ## Objectif
 
-Cet atelier est un exercice récapitulatif : autour d'une implémentation simplifiée de l'algorithme **HyperLogLog** (dont le cœur vous est fourni — voir [`08B_1_theorie.md`](08B_1_theorie.md)), il combine les streams et collections (ateliers 2, 6 et 7), la lecture de fichiers de la séance 1, et les tests unitaires avec stubs et mocks (ateliers 3 et 5).
+Cet atelier est un exercice récapitulatif : autour d'une implémentation simplifiée de l'algorithme **HyperLogLog** (dont le cœur vous est fourni — voir [`08B_1_theorie.md`](08B_1_theorie.md)), il combine les streams et collections (ateliers 2, 6 et 7), le clonage (atelier 2), la lecture de fichiers de la séance 1, et les tests unitaires avec stubs et mocks (ateliers 3 et 5).
 
 ## Concepts
 
@@ -13,6 +13,7 @@ Cet atelier est un exercice récapitulatif : autour d'une implémentation simpli
 5. Tests unitaires JUnit
 6. Stubs et mocks Mockito (révision de l'atelier 5)
 7. Injection de dépendance
+8. Clonage (`Cloneable`, copie profonde)
 
 ## Vidéos
 
@@ -96,6 +97,13 @@ Complétez `ajouterNeDiminueJamaisUnRegistreDejaPlusGrand` : créez un `HyperLog
 **Question 8** :
 Complétez `estimationProcheDuNombreReelDeValeursDistinctes` : créez un `HyperLogLog` à 4 bits d'index avec un vrai `DefaultHasher`, ajoutez-y 500 valeurs distinctes (chacune répétée un nombre variable de fois, pour simuler des doublons), puis vérifiez que `estimerCardinalite` reste dans une marge de ±30 % du nombre réel de valeurs distinctes.
 
+### Photographier un compteur
+
+L'équipe sécurité veut garder, chaque jour à midi, une photo du compteur : une estimation figée à cet instant, pendant que le compteur du jour continue de recevoir des accès. Il faut donc pouvoir copier un `HyperLogLog`, et la copie ne doit pas bouger quand l'original continue de compter. Le rappel sur le clonage se trouve dans la théorie ([`08B_1_theorie.md`](08B_1_theorie.md)).
+
+**Question 9** :
+Complétez `clone` dans `HyperLogLog` : la méthode renvoie une copie **profonde** de l'estimateur, qui ne partage pas son tableau `registres` avec l'original. Rendez la classe clonable comme à l'atelier 2 (`Cloneable`, `super.clone()`). Les tests de la classe `Question9` de `HyperLogLogTest`, qui utilisent votre `HasherStub` de la Question 5, vérifient que la copie part des mêmes registres et qu'un ajout dans l'un ne se voit pas dans l'autre.
+
 ### Passage à l'échelle
 
 Avec 5 petits fichiers et 2 000 accès, difficile de sentir l'intérêt réel de HyperLogLog. Exécutez [`MainGrandeEchelle`](src/main/java/main/MainGrandeEchelle.java) (fourni) : au premier lancement, il génère 100 fichiers de 10 000 accès (1 000 000 au total) dans `logs-grand-volume/`, puis compare, avec les mêmes classes que le `Main` précédent, le comptage exact (`Set<String>`, une entrée par IP unique) et l'estimation HyperLogLog — en affichant le temps de chaque étape.
@@ -106,7 +114,7 @@ Vous devriez observer un écart d'estimation du même ordre que celui de la thé
 
 ### Le stub remplacé par un mock Mockito
 
-**Question 9** :
+**Question 10** :
 À l'atelier 5, vous avez vu que Mockito permet de créer un faux objet sans écrire de classe dédiée. Dans [`HyperLogLogMockitoTest`](src/test/java/domaine/HyperLogLogMockitoTest.java), réécrivez le test de la Question 6 en remplaçant le `HasherStub` par un mock Mockito (`mock(Hasher.class)`, `when(...).thenReturn(...)`), et vérifiez en plus, avec `verify`, que `hash` est appelé exactement une fois.
 
 ---

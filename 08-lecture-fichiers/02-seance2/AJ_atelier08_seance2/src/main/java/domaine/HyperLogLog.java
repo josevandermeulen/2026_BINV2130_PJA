@@ -77,4 +77,20 @@ public class HyperLogLog {
         //  avec l'API Stream (IntStream.of(registres), mapToDouble, sum).
         throw new UnsupportedOperationException("À implémenter");
     }
+
+    /**
+     * Renvoie une copie indépendante de cet estimateur : même précision, mêmes registres.
+     *
+     * Ajouter une valeur à la copie ne change pas l'original, et inversement : les deux
+     * estimateurs ne partagent pas leur tableau de registres. Le hasher, lui, peut être partagé :
+     * il ne garde aucun état.
+     *
+     * @return la copie de cet estimateur
+     */
+    @Override
+    public HyperLogLog clone() {
+        // TODO Question 9 : rendre la classe clonable et renvoyer une copie profonde
+        //  (super.clone(), puis une copie du tableau registres)
+        throw new UnsupportedOperationException("À implémenter");
+    }
 }

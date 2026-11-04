@@ -58,28 +58,28 @@ public class ExercicePortfolio {
                 new Portfolio(new Trader("Nora", "Lisbon"),      Arrays.asList("TSLA", "RIVN", "LCID", "NIO"))
         );
 
-        // Exercice 5.1
-        System.out.println("===== Exercice 5.1 =====");
+        // Question 1
+        System.out.println("===== Question 1 =====");
         System.out.println("Actions de tous les portfolios (avec doublons):");
 
         List<String> actions = actions(portfolios);
         System.out.println("Il y a " + actions.size() + " actions au total dans tous les portfolios.");
         actions.forEach(System.out::println);
 
-        // Exercice 5.2
-        System.out.println("\n===== Exercice 5.2 =====");
+        // Question 2
+        System.out.println("\n===== Question 2 =====");
         System.out.println("\nActions uniques avec leur prix, triées par prix croissant:");
         List<Map.Entry<String, Double>> entries = portfolioToAction(portfolios, PRICES);
         System.out.println("Il y a " + entries.size() + " actions uniques au total.");
         entries.forEach(System.out::println);
 
-        // Exercice 7.1
-        System.out.println("\n===== Exercice 7.1 =====");
+        // Question 15
+        System.out.println("\n===== Question 15 =====");
         System.out.println("\nCouples (action, trader):");
         actionTraderPairs(portfolios).forEach(System.out::println);
 
-        // Exercice 7.2
-        System.out.println("\n===== Exercice 7.2 =====");
+        // Question 16
+        System.out.println("\n===== Question 16 =====");
         System.out.println("\nMap associant à chaque action la liste des traders qui la possèdent:");
         Map<String, List<Trader>> actionsMap = tradersByAction(portfolios);
         actionsMap.forEach((action, traders) -> {
@@ -130,7 +130,7 @@ public class ExercicePortfolio {
      * @return un couple (action, trader) par action détenue
      */
     static List<Map.Entry<String, Trader>> actionTraderPairs(List<Portfolio> portfolios) {
-        // TODO Question 9
+        // TODO Question 15
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -141,7 +141,7 @@ public class ExercicePortfolio {
      * @return chaque action associée aux traders qui la détiennent
      */
     static Map<String, List<Trader>> tradersByAction(List<Portfolio> portfolios) {
-        // TODO Question 10
+        // TODO Question 16
         throw new UnsupportedOperationException("Not yet implemented");
     }
 }

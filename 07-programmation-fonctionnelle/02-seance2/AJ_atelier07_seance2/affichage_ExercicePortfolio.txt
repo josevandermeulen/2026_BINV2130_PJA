@@ -1,4 +1,4 @@
-===== Exercice 5.1 =====
+===== Question 1 =====
 Actions de tous les portfolios (avec doublons):
 Il y a 60 actions au total dans tous les portfolios.
 AAPL
@@ -62,7 +62,7 @@ RIVN
 LCID
 NIO
 
-===== Exercice 5.2 =====
+===== Question 2 =====
 
 Actions uniques avec leur prix, triées par prix croissant:
 Il y a 49 actions uniques au total.
@@ -116,7 +116,7 @@ ASML=980.0
 AVGO=1705.0
 MELI=1705.0
 
-===== Exercice 7.1 =====
+===== Question 15 =====
 
 Couples (action, trader):
 AAPL=Trader:Raoul in Cambridge
@@ -180,7 +180,7 @@ RIVN=Trader:Nora in Lisbon
 LCID=Trader:Nora in Lisbon
 NIO=Trader:Nora in Lisbon
 
-===== Exercice 7.2 =====
+===== Question 16 =====
 
 Map associant à chaque action la liste des traders qui la possèdent:
 AAPL -> [Trader:Raoul in Cambridge, Trader:Omar in Madrid]

@@ -63,8 +63,8 @@ public class ExercicePortfolioTest {
     }
 
     @Nested
-    @DisplayName("Question 9 (optionnelle) : actionTraderPairs")
-    class Question9 {
+    @DisplayName("Question 15 (optionnelle) : actionTraderPairs")
+    class Question15 {
 
         @Test
         void actionTraderPairs_returnsOnePairPerActionHeld() {
@@ -79,8 +79,8 @@ public class ExercicePortfolioTest {
     }
 
     @Nested
-    @DisplayName("Question 10 (optionnelle) : tradersByAction")
-    class Question10 {
+    @DisplayName("Question 16 (optionnelle) : tradersByAction")
+    class Question16 {
 
         @Test
         void tradersByAction_groupsTradersByAction() {

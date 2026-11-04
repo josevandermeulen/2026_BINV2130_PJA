@@ -101,76 +101,76 @@ Comedy : 1
 
 ## Parties optionnelles
 
-### Couples action/trader
-
-Le résultat attendu se trouve dans `AJ_atelier07_seance2/affichage_ExercicePortfolio.txt`.
-
-**Question 9** :
-Dans la méthode `actionTraderPairs` de la classe `ExercicePortfolio`, renvoyer une liste de couples `(action, trader)` — un couple par action détenue par un trader. Utilisez `Map.entry` pour les couples.
-
-**Question 10** :
-Dans la méthode `tradersByAction`, renvoyer une `Map` associant à chaque action la liste des traders qui la possèdent.
-
 ### Tournois de football
 
-Les Questions 11 à 16 sont issues de l'examen de septembre 2026 (question « Les streams », 6 points, ± 40 minutes). Utilisez exclusivement l'API Stream (aucune boucle `for`/`while`) et ne modifiez pas la signature des méthodes. Récupérez le package `football` (fourni dans `AJ_atelier07_seance2/`) et mettez-le dans vos packages. Vous pouvez vérifier votre implémentation en lançant le `main` de `ExamRunner` (fourni) et en comparant la sortie avec celle donnée ci-dessous.
+Les Questions 9 à 14 sont issues de l'examen de septembre 2026 (question « Les streams », 6 points, ± 40 minutes). Utilisez exclusivement l'API Stream (aucune boucle `for`/`while`) et ne modifiez pas la signature des méthodes. Récupérez le package `football` (fourni dans `AJ_atelier07_seance2/`) et mettez-le dans vos packages. Vous pouvez vérifier votre implémentation en lançant le `main` de `ExamRunner` (fourni) et en comparant la sortie avec celle donnée ci-dessous.
 
 Vous développez [`StatsService`](src/main/java/football/StatsService.java) (package `football`), un module de statistiques destiné à une plateforme d'analyse de tournois de football. Le modèle de données, dans le même package, est hiérarchique : [`Tournament`](src/main/java/football/Tournament.java) (`competition`, `matches`) → [`Match`](src/main/java/football/Match.java) (`goalsHome`, `goalsAway`, `scorers`) → [`Player`](src/main/java/football/Player.java) (`name`, `nationality`).
 
-**Question 11** :
+**Question 9** :
 Dans la méthode `findTournamentsWithName`, renvoyer tous les tournois dont le nom contient le mot « Cup » (sensible à la casse).
 
-**Question 12** :
+**Question 10** :
 Dans la méthode `getMatchGoals`, renvoyer, à partir d'un tournoi, la liste du nombre total de buts de chaque match (`goalsHome` + `goalsAway`).
 
-**Question 13** :
+**Question 11** :
 Dans la méthode `getAllScorersInTournament`, renvoyer la liste de tous les buteurs ayant joué dans un tournoi donné (doublons autorisés : un joueur ayant marqué dans 2 matchs apparaît 2 fois).
 
-**Question 14** :
+**Question 12** :
 Dans la méthode `getDistinctNationalities`, renvoyer, à partir d'une liste de joueurs, la liste des nationalités présentes, sans doublon (dans l'ordre d'apparition).
 
-**Question 15** :
+**Question 13** :
 Dans la méthode `findHighestGoalCount`, renvoyer le nombre total de buts (`goalsHome` + `goalsAway`) du match le plus prolifique, sous forme d'`Optional<Integer>` (vide si la liste est vide).
 
-**Question 16** :
+**Question 14** :
 Dans la méthode `countTournamentsByCompetition`, grouper les tournois par type de compétition et compter le nombre de tournois par type, sous forme de `Map<String, Long>`.
 
 Sortie attendue (`ExamRunner`) :
 
 ```
---- Question 11: Tournaments with 'Cup' ---
+--- Question 9: Tournaments with 'Cup' ---
 World Cup
 FA Cup
 French Cup
 
---- Question 12: Goals per match (Champions League) ---
+--- Question 10: Goals per match (Champions League) ---
 3 goals
 2 goals
 
---- Question 13: Scorers (Champions League) ---
+--- Question 11: Scorers (Champions League) ---
 Mbappe (France)
 Haaland (Norway)
 Bellingham (England)
 Mbappe (France)
 Salah (Egypt)
 
---- Question 14: Distinct Nationalities ---
+--- Question 12: Distinct Nationalities ---
 France
 Norway
 England
 Egypt
 
---- Question 15: Highest Goal Count ---
+--- Question 13: Highest Goal Count ---
 Max goals: 5
 
---- Question 16: Count by Competition ---
+--- Question 14: Count by Competition ---
 League : 4
 Cup : 3
 Continental : 2
 Friendly : 1
 ```
 
-Note : l'ordre des clés dans la `Map` de la Question 16 n'est pas garanti (itération d'une `HashMap`) — seuls les comptes par compétition comptent, pas l'ordre d'affichage.
+Note : l'ordre des clés dans la `Map` de la Question 14 n'est pas garanti (itération d'une `HashMap`) — seuls les comptes par compétition comptent, pas l'ordre d'affichage.
+
+### Couples action/trader
+
+Le résultat attendu se trouve dans `AJ_atelier07_seance2/affichage_ExercicePortfolio.txt`.
+
+**Question 15** :
+Dans la méthode `actionTraderPairs` de la classe `ExercicePortfolio`, renvoyer une liste de couples `(action, trader)` — un couple par action détenue par un trader. Utilisez `Map.entry` pour les couples.
+
+**Question 16** :
+Dans la méthode `tradersByAction`, renvoyer une `Map` associant à chaque action la liste des traders qui la possèdent.
 
 ---
 

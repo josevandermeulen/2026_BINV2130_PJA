@@ -1,36 +1,41 @@
 package main;
 
-import domaine.Acces;
-import domaine.DefaultHasher;
-import domaine.HyperLogLog;
-import util.LogReader;
+import domaine.Commande;
+import domaine.Pizzeria;
+import util.LecteurFichiers;
 
 import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
 /**
- * Programme de démonstration : charge les accès des fichiers de logs, puis affiche les statistiques
- * calculées à partir d'eux.
+ * Programme de démonstration : charge les commandes des fichiers du dossier commandes/, puis
+ * affiche les statistiques calculées à partir d'elles et écrit le rapport.
  */
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        AnalyseLogs analyse = new AnalyseLogs(new LogReader());
-        List<Acces> acces = analyse.chargerTousLesAcces("logs");
-
-        HyperLogLog hyperLogLog = new HyperLogLog(new DefaultHasher(), 4);
-
-        System.out.println();
-        System.out.println("Nombre d'accès valides : " + acces.size());
-        System.out.println("Nombre réel d'adresses IP uniques : " + AnalyseIp.compterIpUniques(acces));
-        System.out.println("Estimation HyperLogLog : " + AnalyseIp.estimerIpUniques(acces, hyperLogLog));
+        Pizzeria pizzeria = DonneesPizzeria.creerPizzeria();
+        AnalyseCommandes analyse = new AnalyseCommandes(pizzeria, new LecteurFichiers());
+        List<Commande> commandes = analyse.chargerToutesLesCommandes("commandes");
 
         System.out.println();
-        System.out.println("Estimation par jour :");
-        Map<String, Long> estimationsParJour = AnalyseIp.estimerIpUniquesParJour(acces, new DefaultHasher());
-        estimationsParJour.forEach((jour, estimation) ->
-                System.out.println(jour + " : " + estimation));
+        System.out.println("Nombre de commandes valides : " + commandes.size());
+
+        System.out.println();
+        System.out.println("Chiffre d'affaires par jour :");
+        analyse.chiffreAffairesParJour()
+                .forEach((jour, montant) -> System.out.println("  " + jour + " : " + montant + " euros"));
+
+        System.out.println();
+        System.out.println("Pizzas vendues par catégorie :");
+        analyse.pizzasVenduesParCategorie().entrySet().stream()
+                .sorted(Map.Entry.comparingByKey())
+                .forEach(entree -> System.out.println("  " + entree.getKey().getLibelle() + " : " + entree.getValue()));
+
+        analyse.ecrireRapport("rapport.txt");
+        System.out.println();
+        System.out.println("Rapport écrit dans rapport.txt");
     }
 
 }

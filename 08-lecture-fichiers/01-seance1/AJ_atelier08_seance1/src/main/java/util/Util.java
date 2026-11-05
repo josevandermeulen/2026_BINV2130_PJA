@@ -44,4 +44,5 @@ public interface Util {
                     "La valeur ne peut pas être négative ou nulle");
         }
     }
+
 }

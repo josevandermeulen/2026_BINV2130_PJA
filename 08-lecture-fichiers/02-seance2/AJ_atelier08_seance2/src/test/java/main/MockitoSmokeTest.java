@@ -1,9 +1,10 @@
 package main;
 
-import domaine.Hasher;
+import domaine.Ingredients;
+import domaine.Stock;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -12,11 +13,11 @@ class MockitoSmokeTest {
 
     @Test
     void mockitoFonctionneSansConnexionInternet() {
-        Hasher hasher = mock(Hasher.class);
-        when(hasher.hash("valeur")).thenReturn(42);
+        Stock stock = mock(Stock.class);
+        when(stock.estDisponible(Ingredients.TOMATE)).thenReturn(true);
 
-        assertEquals(42, hasher.hash("valeur"));
-        verify(hasher).hash("valeur");
+        assertTrue(stock.estDisponible(Ingredients.TOMATE));
+        verify(stock).estDisponible(Ingredients.TOMATE);
     }
 
 }

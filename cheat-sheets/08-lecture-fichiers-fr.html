@@ -286,11 +286,11 @@
 <body>
 <div class="site-header" id="top">
   <h1>Semaine 8 — Lecture de fichiers</h1>
-  <p>Document autonome en français sur la lecture et l'écriture de fichiers texte en Java. Il couvre <code>FileReader</code>/<code>BufferedReader</code>, <code>FileWriter</code>/<code>BufferedWriter</code>, le bloc <code>try-with-resources</code>, les exceptions vérifiées liées aux entrées/sorties, ainsi que les utilitaires <code>java.nio.file.Files</code>.</p>
+  <p>Document autonome en français sur la lecture et l'écriture de fichiers texte en Java. Il couvre <code>FileReader</code>/<code>BufferedReader</code>, <code>FileWriter</code>/<code>BufferedWriter</code>, le bloc <code>try-with-resources</code>, les exceptions vérifiées liées aux entrées/sorties, les utilitaires <code>java.nio.file.Files</code>, ainsi que les rappels du langage de la séance 2 (énuméré, <code>Map</code> de collections, <code>Comparator</code>, varargs, type de retour covariant, classes internes).</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="07-programmation-fonctionnelle-fr.html">&larr; Semaine 7</a>
-    <span class="version-badge">v13 &middot; 17/09/2026</span>
+    <span class="version-badge">v14 &middot; 29/10/2026</span>
     <a href="09-threads-completablefuture-fr.html">Semaine 9 &rarr;</a>
   </div>
 </div>
@@ -308,7 +308,7 @@
     <a href="#nio-files">java.nio.file.Files</a>
     <a href="#validation">Validation vs erreurs techniques</a>
     <a href="#exemples">Exemple complet</a>
-    <a href="#hyperloglog">HyperLogLog — comptage de cardinalité</a>
+    <a href="#rappels-langage">Rappels du langage (séance 2)</a>
     <a href="#pieges">Pièges fréquents</a>
     <a href="#reference">Référence rapide</a>
   </div>
@@ -634,105 +634,125 @@ public List&lt;Acces&gt; parserLignes(List&lt;String&gt; lignes) {
       <a class="toplink" href="#top">Retour au sommaire</a>
     </div>
 
-    <div class="doc-section" id="hyperloglog">
-      <h2>HyperLogLog — comptage de cardinalité</h2>
-      <p>Le rapport de l'exemple précédent (<code>ecrireRapport</code>) déduplique les adresses IP avec <code>.distinct()</code> sur un <code>Stream</code> : cela suppose que toutes les valeurs tiennent en mémoire. Sur un flux massif — des millions de vues, en continu —, cette approche ne tient plus la charge. <strong>HyperLogLog</strong> est un algorithme <em>probabiliste</em> de comptage de cardinalité : il <strong>estime</strong> le nombre de valeurs distinctes vues dans un flux, avec une occupation mémoire minuscule et fixée à l'avance, au prix d'une petite marge d'erreur.</p>
+    <div class="doc-section" id="rappels-langage">
+      <h2>Rappels du langage (séance 2)</h2>
+      <p>La séance 2 revient sur six points du langage, sur la pizzeria de la séance 1.</p>
 
       <div class="api">
-        <h3>Le problème : deux approches naïves, deux défauts</h3>
-        <ul>
-          <li>Stocker chaque valeur déjà vue (tableau, <code>Set&lt;String&gt;</code>) : exact, mais la mémoire grandit avec le nombre de valeurs distinctes — une vidéo à 10 millions de vues, ce sont déjà 40 Mo rien que pour les adresses IP.</li>
-          <li>Incrémenter un simple compteur à chaque valeur reçue : mémoire minimale, mais faux — une même valeur revue plusieurs fois est comptée plusieurs fois, sans déduplication.</li>
-        </ul>
-        <p>HyperLogLog vise l'entre-deux : ignorer les doublons <strong>sans</strong> mémoriser individuellement tout ce qui a été vu.</p>
-      </div>
+        <h3>Un énuméré est une classe</h3>
+        <pre><code>public enum Categorie {
 
-      <div class="api">
-        <h3>Le principe : la rareté d'un hash</h3>
-        <p>On calcule un <strong>hash</strong> de chaque valeur — un nombre dont les bits doivent être répartis de façon <strong>uniforme</strong> sur toute la plage possible — et on regarde les zéros au début de son écriture binaire. Plus une séquence de zéros initiaux est longue, plus elle est rare :</p>
-        <table>
-          <thead>
-          <tr><th>Zéros initiaux</th><th>Probabilité</th></tr>
-          </thead>
-          <tbody>
-          <tr><td>0</td><td>1/2</td></tr>
-          <tr><td>1</td><td>1/4</td></tr>
-          <tr><td>2</td><td>1/8</td></tr>
-          <tr><td>k</td><td>1/2<sup>k</sup></td></tr>
-          </tbody>
-        </table>
-        <p>Croiser un hash avec 17 zéros initiaux (une chance sur 2<sup>17</sup>, soit environ 130 000) suggère qu'il a fallu voir beaucoup de valeurs distinctes pour tomber dessus : c'est cette rareté qui permet d'« estimer » une cardinalité. Ajouter dix fois la <strong>même</strong> valeur ne change rien — son hash est identique, il ne bat jamais un record — d'où l'insensibilité de l'algorithme aux doublons.</p>
-      </div>
+    VEGETARIENNE("végétarienne"),
 
-      <div class="api">
-        <h3>Les buckets (registres)</h3>
-        <span class="signature">HyperLogLog(Hasher hasher, int nbBitsIndex)</span>
-        <span class="signature">void ajouter(String valeur)</span>
-        <span class="signature">long estimerCardinalite()</span>
-        <p>Un seul record est instable : avec trois visiteurs et un simple coup de chance sur un hash, l'estimation exploserait. Pour stabiliser, on répartit les hashs dans des <em>buckets</em> — un tableau <code>registres</code> — et on ne garde, dans chaque bucket, que le <strong>maximum</strong> de zéros initiaux observé :</p>
-        <ol>
-          <li>Calculer le hash de la valeur.</li>
-          <li>Les <code>nbBitsIndex</code> premiers bits du hash donnent le numéro de bucket (la <strong>précision</strong>, passée au constructeur).</li>
-          <li>Sur les bits restants, compter les zéros initiaux.</li>
-          <li>Le bucket garde le maximum rencontré jusqu'ici — jamais moins.</li>
-        </ol>
-        <pre><code>hash  = 0x12345678 = 0001 0010 0011 0100 0101 0110 0111 1000
-index = les 4 premiers bits  -> 0001 = bucket 1
-reste = les 28 bits restants -> 0010 0011 0100 0101 0110 0111 1000
-                                 (2 zéros initiaux -> registres[1] = 3)</code></pre>
+    VIANDE("viande");
+
+    private final String libelle;
+
+    Categorie(String libelle) {        // toujours privé
+        this.libelle = libelle;
+    }
+
+    public String getLibelle() {
+        return libelle;
+    }
+
+    public boolean estViande() {
+        return this == VIANDE;         // une constante se compare avec ==
+    }
+
+}
+
+Categorie.VIANDE.getLibelle();         // "viande"</code></pre>
+        <p>Chaque constante est un objet, créé une seule fois par le constructeur avec les arguments écrits entre parenthèses.</p>
       </div>
 
       <div class="api">
-        <h3>L'estimation finale : moyenne harmonique</h3>
-        <pre><code>estimation = ALPHA * m² / Σ(2⁻ʳᵉᵍⁱˢᵗʳᵉ⁽ⁱ⁾)</code></pre>
-        <p>où <code>m</code> est le nombre de buckets et <code>ALPHA</code> une constante qui dépend de <code>m</code> (<code>0.673</code> pour <code>m = 16</code>). La moyenne <strong>harmonique</strong> a l'avantage de faire peu peser les valeurs extrêmes : un registre qui saute à un record improbable ne fait pas exploser l'estimation globale — c'est elle qui amortit le risque de coup de chance évoqué plus haut.</p>
+        <h3>Une <code>Map</code> dont la valeur est une collection</h3>
+        <span class="signature">V computeIfAbsent(K cle, Function&lt;K, V&gt; creation)</span>
+        <pre><code>Map&lt;Categorie, SortedSet&lt;Pizza&gt;&gt; carte = new HashMap&lt;&gt;();
+
+// ajout : l'ensemble est créé au premier ajout dans la catégorie
+carte.computeIfAbsent(pizza.getCategorie(), c -&gt; new TreeSet&lt;&gt;()).add(pizza);
+
+// retrait : la clé disparaît avec le dernier élément
+SortedSet&lt;Pizza&gt; ensemble = carte.get(pizza.getCategorie());
+ensemble.remove(pizza);
+if (ensemble.isEmpty()) {
+    carte.remove(pizza.getCategorie());
+}</code></pre>
       </div>
 
       <div class="api">
-        <h3>Précision et mémoire figée</h3>
-        <table>
-          <thead>
-          <tr><th>Précision (bits d'index)</th><th>Nombre de buckets</th><th>Erreur observée (100 000 valeurs)</th></tr>
-          </thead>
-          <tbody>
-          <tr><td>4</td><td>16</td><td>≈ 25 %</td></tr>
-          <tr><td>14</td><td>16 384</td><td>≈ 1 %</td></tr>
-          </tbody>
-        </table>
-        <p>Le point clé : la mémoire est <strong>figée à l'avance</strong> par le nombre de buckets choisi au constructeur, et elle ne grandit <strong>jamais</strong> avec le nombre d'éléments traités — que le flux compte 300 vues ou 500 millions. Avec un hash sur 32 bits et 14 bits de bucket, il reste 18 bits, donc au plus 18 zéros initiaux à mémoriser par registre : quelques bits par bucket suffisent, pour un total de l'ordre de quelques kilo-octets seulement. C'est cette propriété qui explique la présence de HyperLogLog dans Redis (<code>PFCOUNT</code>) ou BigQuery (<code>APPROX_COUNT_DISTINCT</code>).</p>
-      </div>
+        <h3><code>Comparable</code> et <code>Comparator</code></h3>
+        <span class="signature">int compareTo(T autre)            // Comparable : l'ordre naturel, un seul</span>
+        <span class="signature">int compare(T o1, T o2)           // Comparator : un ordre extérieur, autant qu'on veut</span>
+        <pre><code>// classe nommée
+menu.sort(new ComparateurPrix());
 
-      <div class="warning">
-        Toute la mécanique repose sur un hash bien mélangé : chaque valeur doit avoir autant de chances d'atterrir dans n'importe quel bucket, avec n'importe quel nombre de zéros. Le <code>hashCode()</code> par défaut des chaînes Java est <strong>mal adapté</strong> : des valeurs proches (<code>"user1"</code>, <code>"user2"</code>, des IP qui ne diffèrent que par le dernier chiffre) produisent des hashs qui commencent par les mêmes bits — exactement ceux qui choisissent le bucket. Résultat : la quasi-totalité des valeurs s'entasserait dans deux ou trois buckets, et l'estimation n'aurait plus aucun rapport avec la réalité. Une bonne implémentation de <code>Hasher</code> mélange donc les bits (par exemple via le finalizer de MurmurHash3) avant de s'en servir :
-        <pre><code>int hash = valeur.hashCode();
-hash ^= (hash &gt;&gt;&gt; 16);
-hash *= 0x85ebca6b;
-hash ^= (hash &gt;&gt;&gt; 13);
-hash *= 0xc2b2ae35;
-hash ^= (hash &gt;&gt;&gt; 16);</code></pre>
+// classe anonyme
+menu.sort(new Comparator&lt;Pizza&gt;() {
+    @Override
+    public int compare(Pizza p1, Pizza p2) {
+        return Double.compare(p1.calculerPrix(), p2.calculerPrix());
+    }
+});
+
+// lambda
+menu.sort((p1, p2) -&gt; Double.compare(p1.calculerPrix(), p2.calculerPrix()));</code></pre>
+        <p>Résultat négatif : le premier se place avant ; nul : même rang ; positif : après. Comparez avec <code>Integer.compare</code> / <code>Double.compare</code>, jamais par soustraction.</p>
       </div>
 
       <div class="api">
-        <h3>Fusionner des compteurs</h3>
-        <p>Deux compteurs HyperLogLog se fusionnent facilement : il suffit de prendre, <strong>bucket par bucket</strong>, le maximum des deux tableaux de registres, puis de relancer le calcul d'estimation sur le tableau fusionné. Aucune valeur individuelle n'a besoin d'être échangée entre les deux compteurs — seuls les registres (de simples entiers) circulent.</p>
-        <table>
-          <thead>
-          <tr><th>Registre</th><th>Serveur A</th><th>Serveur B</th><th>Fusion (max)</th></tr>
-          </thead>
-          <tbody>
-          <tr><td>0</td><td>2</td><td>4</td><td>4</td></tr>
-          <tr><td>1</td><td>8</td><td>7</td><td>8</td></tr>
-          <tr><td>2</td><td>5</td><td>5</td><td>5</td></tr>
-          <tr><td>3</td><td>0</td><td>3</td><td>3</td></tr>
-          </tbody>
-        </table>
-        <p>Prendre le maximum registre par registre est une opération <strong>commutative et associative</strong> : l'ordre de fusion de plusieurs compteurs n'a pas d'importance, et le résultat est le même que si toutes les valeurs avaient été ajoutées à un seul et même compteur dès le départ.</p>
+        <h3>Varargs</h3>
+        <pre><code>public int ajouter(Ingredient... ingredients) {   // un tableau Ingredient[] dans la méthode
+    int nombre = 0;
+    for (Ingredient ingredient : ingredients) {
+        if (ajouter(ingredient)) {
+            nombre++;
+        }
+    }
+    return nombre;
+}
+
+pizza.ajouter(Ingredients.TOMATE, Ingredients.THON);   // de zéro à n arguments, ou un tableau</code></pre>
+        <p>Le varargs est toujours le dernier paramètre. Avec un seul argument, une surcharge à paramètre unique est préférée au varargs.</p>
       </div>
 
-      <div class="success">
-        À retenir : HyperLogLog échange de l'exactitude contre une mémoire quasi constante. Le nombre de buckets fixé au constructeur est le seul curseur qui compte : plus il est grand, plus l'estimation est précise, sans jamais dépendre du volume de données traité.
+      <div class="api">
+        <h3>Type de retour covariant</h3>
+        <pre><code>public abstract class Pizza {
+    public abstract Pizza copier();
+}
+
+public class PizzaComposee extends Pizza {
+    @Override
+    public PizzaComposee copier() {   // sous-type de Pizza : accepté
+        // ...
+    }
+}</code></pre>
+        <p>Une redéfinition peut restreindre son type de retour à un sous-type, jamais l'élargir ; les paramètres restent identiques.</p>
       </div>
 
+      <div class="api">
+        <h3>Classes internes</h3>
+        <pre><code>public class Pizzeria {
+
+    private Set&lt;Commande&gt; commandes = new LinkedHashSet&lt;&gt;();
+
+    public static class Bilan { ... }        // liée à aucune Pizzeria : new Pizzeria.Bilan(...)
+
+    public class Fidelite {                  // liée à la Pizzeria qui l'a créée
+        public boolean aDesCommandes() {
+            return !commandes.isEmpty();     // Pizzeria.this.commandes
+        }
+    }
+
+}</code></pre>
+      </div>
+
+      <div class="note">
+        À retenir : déclarez une classe interne <code>static</code> sauf si elle a besoin des attributs de l'objet englobant.
+      </div>
       <a class="toplink" href="#top">Retour au sommaire</a>
     </div>
 

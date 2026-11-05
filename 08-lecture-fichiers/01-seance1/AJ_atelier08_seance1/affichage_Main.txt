@@ -1,31 +1,22 @@
-Ligne ignorée : 2026-11-09T09:14:02;bob
-Ligne ignorée : 2026-11-09T10:45:00;;192.168.0.44
-Ligne ignorée : 2026-11-10T09:47:03;bob;10.0.0.7;proxy
-Ligne ignorée : 2026-11-10T11:00:41;;10.0.0.7
-Ligne ignorée : 2026-11-11T12:30:58
-Fichier introuvable : 2026-11-12.log
+Ligne ignorée : 2026-11-09T12:31:00;0471/12.34.56;margarita
+Ligne ignorée : 2026-11-09T19:02:00;0499/00.00.00;diavola;1
+Ligne ignorée : 2026-11-09T20:15:00;0474/45.67.89;hawaïenne;2
+Ligne ignorée : 2026-11-10T12:47:00;0478/78.90.12;tonno;deux
+Ligne ignorée : 10/11/2026 19:30;0486/11.22.33;ortolana;1
+Ligne ignorée : 2026-11-11T13:05:00;0490/44.55.66;4 fromages;0
+Ligne ignorée : 2026-11-11T20:40:00;;margarita;1
+Fichier introuvable : 2026-11-12.csv
 
-Nombre d'accès valides : 26
+Nombre de commandes valides : 100
 
-Adresses IP uniques :
-  10.0.0.7
-  10.0.0.8
-  172.16.4.101
-  172.16.4.102
-  172.16.4.999
-  192.168.0.12
-  192.168.0.44
-  192.168.1.9
-  203.0.113.5
-  203.0.113.6
-  300.0.0.1
+Chiffre d'affaires par jour :
+  2026-11-09 : 829.0 euros
+  2026-11-10 : 773.0 euros
+  2026-11-11 : 778.0 euros
 
-Nombre d'accès par utilisateur :
-  alice : 6
-  bob : 4
-  carla : 4
-  david : 4
-  emma : 5
-  fred : 3
+Pizzas vendues par catégorie :
+  végétarienne : 78
+  viande : 64
+  poisson : 73
 
 Rapport écrit dans rapport.txt

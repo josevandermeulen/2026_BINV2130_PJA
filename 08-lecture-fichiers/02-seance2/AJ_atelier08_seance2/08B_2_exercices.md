@@ -2,120 +2,132 @@
 
 ## Objectif
 
-Cet atelier est un exercice récapitulatif : autour d'une implémentation simplifiée de l'algorithme **HyperLogLog** (dont le cœur vous est fourni — voir [`08B_1_theorie.md`](08B_1_theorie.md)), il combine les streams et collections (ateliers 2, 6 et 7), le clonage (atelier 2), la lecture de fichiers de la séance 1, et les tests unitaires avec stubs et mocks (ateliers 3 et 5).
+Cet atelier prolonge la pizzeria de la séance 1 pour revenir sur sept points du langage : l'énuméré vu comme une classe, la `Map` dont la valeur est une collection, `Comparable` et `Comparator` écrits de trois façons, les varargs, le type de retour covariant, le clonage et les classes internes. Il se termine par des tests avec un stub puis un mock, en rappel de l'atelier 5, dans un projet qui fonctionne sans connexion internet.
 
 ## Concepts
 
-1. HyperLogLog (théorie : [`08B_1_theorie.md`](08B_1_theorie.md) — le cœur de l'algorithme est fourni)
-2. Streams (`IntStream`, `map`, `distinct`, agrégation numérique)
-3. Collections (`Map`, `Collectors.groupingBy`)
-4. Réutilisation de la lecture de fichiers de la séance 1
-5. Tests unitaires JUnit
-6. Stubs et mocks Mockito (révision de l'atelier 5)
-7. Injection de dépendance
-8. Clonage (`Cloneable`, copie profonde)
+1. Énuméré avec attributs et méthodes
+2. `Map` dont la valeur est une collection (`computeIfAbsent`)
+3. `Comparable` et `Comparator` (classe nommée, classe anonyme, lambda)
+4. Varargs
+5. Type de retour covariant
+6. Clonage (`Cloneable`, copie profonde)
+7. Classes internes statiques et non statiques
+8. Stubs et mocks Mockito (révision de l'atelier 5)
+9. Dépôt Maven embarqué, pour travailler hors ligne
 
 ## Vidéos
 
 1. [Apprendre Java #15 Fichier (File / Reader / Writer / Buffer)](https://www.youtube.com/watch?v=iCobhKfvf3M)
-2. [Comment compter des millions de vues ? HyperLogLog](https://www.youtube.com/watch?v=OWBT86qoEqk)
+2. [Java File Input/Output - It's Way Easier Than You Think](https://www.youtube.com/watch?v=ScUJx4aWRi0)
+3. [Exception Handling in Java Tutorial](https://www.youtube.com/watch?v=1XAfapkBQjk)
+4. [Checked vs. Unchecked Exceptions in Java Tutorial - What's The Difference?](https://www.youtube.com/watch?v=bCPClyGsVhc)
+5. [#79 Exception Hierarchy in Java](https://www.youtube.com/watch?v=IBttEEFkH_Y)
+6. [#84 try with resources in Java](https://www.youtube.com/watch?v=hVQR0ZHFk-o)
+7. [Java Enums Explained in 6 Minutes](https://www.youtube.com/watch?v=wq9SJb8VeyM)
+8. [How to use computeIfAbsent method to prepare multi-value HashMap?](https://www.youtube.com/watch?v=S_sniYjlbLA)
+9. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
+10. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
+11. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)
 
 ## Exercices
 
 ### Introduction
 
-La plateforme web de la séance 1 a grandi : ses fichiers de logs contiennent maintenant des milliers d'accès par jour. L'équipe sécurité veut suivre le nombre d'**adresses IP uniques** qui se connectent. Une solution évidente serait de stocker toutes les adresses déjà vues dans un `Set`, mais si le trafic grandissait fortement, cela finirait par consommer beaucoup de mémoire pour ne connaître, au final, qu'un seul nombre.
+La pizzeria de la séance 1 veut imprimer une carte rangée par catégorie, trier son menu de plusieurs façons, faire son bilan et récompenser ses clients fidèles. Elle veut aussi refuser une commande quand un ingrédient manque au stock : la méthode `Pizzeria.ajouterCommandeSiDisponible` est fournie, il vous reste à la tester.
 
-On va donc utiliser une version simplifiée de l'algorithme **HyperLogLog**, qui estime ce nombre à partir d'un petit tableau de compteurs (la précision est passée au constructeur ; l'atelier travaille partout avec 4 bits d'index, soit 16 compteurs), plutôt que de garder chaque adresse en mémoire. Lisez d'abord [`08B_1_theorie.md`](08B_1_theorie.md) : le principe (registres, zéros de tête, rôle du hash) y est expliqué, et les méthodes qui relèvent de manipulations de bits (`DefaultHasher.hash`, `HyperLogLog.ajouter`) vous sont **fournies déjà implémentées**. Votre travail porte uniquement sur la matière des ateliers précédents : streams, lecture de fichiers, tests.
-
-L'estimation obtenue reste approximative, en particulier avec seulement 16 registres : ce n'est pas un défaut de votre code, c'est la nature même de l'algorithme.
+Lisez d'abord [`08B_1_theorie.md`](08B_1_theorie.md) : chaque section des exercices s'appuie sur un de ses encadrés.
 
 ### Consignes
 
-Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier08_seance2` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Reprenez tel quel le `pom.xml` fourni **avec le dossier `repo/` qui l'accompagne**, à placer à la racine de votre projet : les dépendances JUnit 5 et Mockito y sont **embarquées**, si bien que le projet se construit aussi sans connexion internet.
+Dans IntelliJ, créez un projet Maven intitulé `AJ_atelier08_seance2` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Reprenez tel quel le `pom.xml` fourni **avec le dossier `repo/` qui l'accompagne**, à placer à la racine de votre projet : les dépendances JUnit 5 et Mockito y sont **embarquées**, si bien que le projet se construit aussi sans connexion internet.
 
-Récupérez les classes fournies dans `AJ_atelier08_seance2/src/main/java/` ([`Hasher`](src/main/java/domaine/Hasher.java), [`DefaultHasher`](src/main/java/domaine/DefaultHasher.java), [`HyperLogLog`](src/main/java/domaine/HyperLogLog.java), [`AnalyseIp`](src/main/java/main/AnalyseIp.java), le nouveau [`Main`](src/main/java/main/Main.java)), les tests fournis dans `AJ_atelier08_seance2/src/test/java/` en conservant l'arborescence, et le dossier `logs/` (2 000 accès sur quatre journées), lui aussi à la racine du projet.
+Récupérez les classes fournies dans `AJ_atelier08_seance2/src/main/java/` et les tests fournis dans `AJ_atelier08_seance2/src/test/java/` en conservant l'arborescence, ainsi que le dossier `commandes/`, à la racine du projet. Le code fourni est la solution de la séance 1 (`../../01-seance1/AJ_atelier08_seance1_solution/`), à laquelle s'ajoutent les signatures des méthodes de cette séance, la classe [`ComparateurNombreIngredients`](src/main/java/domaine/ComparateurNombreIngredients.java) (package `domaine`), les classes internes `Pizzeria.Bilan` et `Pizzeria.Fidelite`, et la méthode abstraite `copier` de [`Pizza`](src/main/java/domaine/Pizza.java).
 
-Complétez enfin avec votre solution de la séance 1 (ou celle fournie dans `08-lecture-fichiers/01-seance1/AJ_atelier08_seance1_solution/`, publiée après la séance 1) : copiez les classes des packages `domaine`, `util` et `main` dans `src/main/java/`, à côté des nouvelles classes ci-dessus.
-
-Exécutez les tests directement dans IntelliJ (clic droit sur `src/test/java` → *Run 'All Tests'*) pour vérifier votre implémentation au fur et à mesure, et comparez la sortie de `Main` à `affichage_Main.txt`.
+Exécutez les tests directement dans IntelliJ (clic droit sur `src/test/java` → *Run 'All Tests'*) pour vérifier votre implémentation au fur et à mesure. Les tests de la séance 1 sont verts dès le départ.
 
 ### Vérification de l'installation
 
 ✏️ *A corriger au tableau*
 
-Avant de commencer, vérifiez que le dépôt Maven embarqué (`repo/`) fonctionne bien sans connexion internet : exécutez [`MockitoSmokeTest`](src/test/java/main/MockitoSmokeTest.java) (fourni, package `main` des tests) — il crée un mock avec Mockito et vérifie son comportement. S'il passe, JUnit 5 et Mockito sont correctement résolus depuis `repo/`, sans toucher au réseau.
+Avant de commencer, vérifiez que le dépôt Maven embarqué (`repo/`) fonctionne bien sans connexion internet : exécutez [`MockitoSmokeTest`](src/test/java/main/MockitoSmokeTest.java) (fourni, package `main` des tests). Il crée un mock de `Stock` avec Mockito et vérifie son comportement. S'il passe, JUnit 5 et Mockito sont correctement résolus depuis `repo/`, sans toucher au réseau.
 
-### Estimer la cardinalité
+### L'énuméré `Categorie`
 
 **Question 1** :
-Ouvrez la classe `HyperLogLog` (package `domaine`). Le constructeur et la méthode `ajouter` sont fournis. Complétez `estimerCardinalite`, qui applique la formule donnée dans la théorie à partir du tableau `registres` :
-
-```
-estimation = ALPHA * m² / Σ(2⁻ʳᵉᵍⁱˢᵗʳᵉ⁽ⁱ⁾)
-```
-
-`m` est le nombre de registres (`registres.length`) et `ALPHA` correspond à l'attribut `alpha`, initialisé par le constructeur fourni en fonction de la précision demandée. Utilisez l'API Stream (`IntStream.of(registres)`, `mapToDouble`, `sum`) pour calculer `Σ(2⁻ʳᵉᵍⁱˢᵗʳᵉ⁽ⁱ⁾)`, plutôt qu'une boucle classique.
-
-### Compter les adresses IP uniques
-
-**Question 2** :
-Ouvrez la classe `AnalyseIp` et complétez, en utilisant l'API Stream, `compterIpUniques(List<Acces>)` : le nombre **exact** d'adresses IP distinctes (`map`, `distinct`, `count`).
-
-**Question 3** :
-Complétez `estimerIpUniques(List<Acces>, HyperLogLog)` : ajoute l'adresse IP de chaque accès au `HyperLogLog` reçu (`map`, `forEach`), puis renvoie l'estimation.
-
-### Estimer jour par jour
-
-L'équipe sécurité veut aussi suivre l'évolution du trafic : combien d'adresses IP uniques par jour, plutôt qu'un seul total agrégé.
-
-**Question 4** :
 
 ✏️ *A corriger au tableau*
 
-Complétez `estimerIpUniquesParJour(List<Acces>, Hasher)` dans `AnalyseIp` : elle doit renvoyer une `Map<String, Long>` associant chaque jour (au format `"2026-11-09.log"`, soit les 10 premiers caractères de l'horodatage suivis de `.log`) à son estimation HyperLogLog. Utilisez `Collectors.groupingBy` (avec `TreeMap::new` comme fournisseur de Map, pour un affichage trié chronologiquement) et, comme aval de regroupement, `Collectors.collectingAndThen(Collectors.toList(), ...)` pour transformer chaque groupe d'accès en une estimation (un nouveau `HyperLogLog` par jour).
+Ouvrez l'énuméré [`Categorie`](src/main/java/domaine/Categorie.java) (package `domaine`). Complétez la méthode `estVegetarienne`, qui renvoie `true` pour la seule constante `VEGETARIENNE`. Une méthode d'un énuméré s'appelle sur une constante, comme sur n'importe quel objet : `MenuPizzeria.PIZZA_MARGARITA.getCategorie().estVegetarienne()`.
 
-### Test
+**Question 2** :
+Ajoutez à `Categorie` un deuxième attribut, l'abréviation imprimée sur la carte (`"V"`, `"VI"` et `"P"`), initialisé par le constructeur de l'énuméré à partir d'un second argument donné à chaque constante, puis complétez `getAbreviation`.
 
-Exécutez `Main` (fourni) : il charge les accès du dossier `logs/` grâce à votre `AnalyseLogs` de la séance 1, puis affiche le nombre d'accès valides, le nombre réel d'adresses IP uniques, l'estimation HyperLogLog globale et l'estimation jour par jour. Comparez la sortie console à `affichage_Main.txt` : ces valeurs (628 pour 580 adresses réelles au total, soit environ 8 % d'écart) sont déterministes, vous devez obtenir exactement les mêmes.
+### La carte par catégorie
 
-### Écrire un stub
+**Question 3** :
+La `Pizzeria` a un nouvel attribut, `carte`, une `Map<Categorie, SortedSet<Pizza>>` qui range les pizzas du menu par catégorie. Complétez `ajouterPizza` pour qu'elle range aussi la pizza ajoutée sur la carte, en créant l'ensemble de sa catégorie au premier ajout (`computeIfAbsent`, avec un `TreeSet`). La méthode fournie `aDesPizzas` indique si la carte a une entrée pour une catégorie.
 
-Comme `HyperLogLog` dépend de `Hasher` pour hacher les valeurs, écrire un test unitaire déterministe est délicat avec l'implémentation réelle : on ne contrôle pas facilement quel registre sera modifié. Comme à l'atelier 5, on va donc écrire un **stub** : un faux `Hasher`, configuré pour toujours renvoyer une valeur fixe, peu importe la valeur reçue.
+**Question 4** :
+Complétez `getPizzas(Categorie)`, qui renvoie l'ensemble des pizzas d'une catégorie en lecture seule (`Collections.unmodifiableSortedSet`), ou un ensemble vide (`Collections.emptySortedSet`) si la carte n'en a aucune.
 
 **Question 5** :
-Complétez, dans `src/test/java/domaine/`, la classe [`HasherStub`](src/test/java/domaine/HasherStub.java) implémentant `Hasher` : un seul attribut (le hash fixe à renvoyer), initialisé dans le constructeur, et renvoyé tel quel par `hash(String)`.
+Complétez `retirerPizza(String titre)` : la pizza quitte le menu et la carte, et une catégorie dont la dernière pizza est retirée disparaît de la carte (la méthode fournie `aDesPizzas` renvoie alors `false`).
 
-### Tester `HyperLogLog`
+### Trier le menu
 
 **Question 6** :
-Complétez `ajouterMetAJourLeBonRegistreAvecLeBonNombreDeZeros` dans [`HyperLogLogTest`](src/test/java/domaine/HyperLogLogTest.java) : créez un `HyperLogLog` à 4 bits d'index avec un `HasherStub` fixé à `0x12345678`, appelez `ajouter` une fois avec n'importe quelle valeur, puis vérifiez que le registre d'index `1` vaut `3` et qu'un autre registre (par exemple l'index `0`) est resté à `0`.
+Complétez la méthode `compare` de la classe `ComparateurNombreIngredients` : elle range les pizzas de la plus garnie à la moins garnie et, à nombre d'ingrédients égal, dans leur ordre naturel. Utilisez `Integer.compare` plutôt qu'une soustraction.
 
 **Question 7** :
-Complétez `ajouterNeDiminueJamaisUnRegistreDejaPlusGrand` : créez un `HyperLogLog` à 4 bits d'index avec un `HasherStub` fixé à `0x1FFFFFFF` (index `1`, nombre de zéros `1`), forcez directement `registres[1]` à `5`, appelez `ajouter`, et vérifiez que le registre est resté à `5`.
+Complétez `menuTrieParNombreIngredients` dans `Pizzeria`, qui trie le menu dans le même ordre, mais sans utiliser `ComparateurNombreIngredients` : passez à `sort` un `Comparator` écrit en **classe anonyme**.
 
 **Question 8** :
-Complétez `estimationProcheDuNombreReelDeValeursDistinctes` : créez un `HyperLogLog` à 4 bits d'index avec un vrai `DefaultHasher`, ajoutez-y 500 valeurs distinctes (chacune répétée un nombre variable de fois, pour simuler des doublons), puis vérifiez que `estimerCardinalite` reste dans une marge de ±30 % du nombre réel de valeurs distinctes.
+Complétez `menuTrieParCategorie`, qui trie le menu par catégorie (dans l'ordre de déclaration de l'énuméré : les énumérés sont `Comparable`) puis par titre, avec un `Comparator` écrit en **lambda**.
 
-### Photographier un compteur
-
-L'équipe sécurité veut garder, chaque jour à midi, une photo du compteur : une estimation figée à cet instant, pendant que le compteur du jour continue de recevoir des accès. Il faut donc pouvoir copier un `HyperLogLog`, et la copie ne doit pas bouger quand l'original continue de compter. Le rappel sur le clonage se trouve dans la théorie ([`08B_1_theorie.md`](08B_1_theorie.md)).
+### Varargs et type de retour covariant
 
 **Question 9** :
-Complétez `clone` dans `HyperLogLog` : la méthode renvoie une copie **profonde** de l'estimateur, qui ne partage pas son tableau `registres` avec l'original. Rendez la classe clonable comme à l'atelier 2 (`Cloneable`, `super.clone()`). Les tests de la classe `Question9` de `HyperLogLogTest`, qui utilisent votre `HasherStub` de la Question 5, vérifient que la copie part des mêmes registres et qu'un ajout dans l'un ne se voit pas dans l'autre.
-
-### Passage à l'échelle
-
-Avec 5 petits fichiers et 2 000 accès, difficile de sentir l'intérêt réel de HyperLogLog. Exécutez [`MainGrandeEchelle`](src/main/java/main/MainGrandeEchelle.java) (fourni) : au premier lancement, il génère 100 fichiers de 10 000 accès (1 000 000 au total) dans `logs-grand-volume/`, puis compare, avec les mêmes classes que le `Main` précédent, le comptage exact (`Set<String>`, une entrée par IP unique) et l'estimation HyperLogLog — en affichant le temps de chaque étape.
-
-Vous devriez observer un écart d'estimation du même ordre que celui de la théorie (environ 25 % avec 16 registres), quel que soit le volume : la précision dépend du nombre de registres, pas du nombre d'accès. Ce qui change radicalement, en revanche, c'est la mémoire : le `Set` retient une chaîne par adresse IP unique (près d'un million d'entrées ici), alors que HyperLogLog se contente de ses 16 registres (64 octets), qu'il y ait 2 000 ou 1 000 000 d'accès.
-
-## Parties optionnelles
-
-### Le stub remplacé par un mock Mockito
+Complétez, dans `Pizza`, la méthode `ajouter(Ingredient... ingredients)`, qui ajoute en une fois tous les ingrédients reçus (en ignorant ceux déjà présents) et renvoie le nombre d'ingrédients effectivement ajoutés. Appuyez-vous sur la méthode `ajouter(Ingredient)` existante : une pizza de la carte refusera donc l'ajout de la même façon.
 
 **Question 10** :
-À l'atelier 5, vous avez vu que Mockito permet de créer un faux objet sans écrire de classe dédiée. Dans [`HyperLogLogMockitoTest`](src/test/java/domaine/HyperLogLogMockitoTest.java), réécrivez le test de la Question 6 en remplaçant le `HasherStub` par un mock Mockito (`mock(Hasher.class)`, `when(...).thenReturn(...)`), et vérifiez en plus, avec `verify`, que `hash` est appelé exactement une fois.
+`Pizza` déclare une méthode abstraite `Pizza copier()`, redéfinie dans `PizzaComposable` (fournie). Complétez sa redéfinition dans [`PizzaComposee`](src/main/java/domaine/PizzaComposee.java) : une nouvelle pizza de même titre, même description et mêmes ingrédients (dans une nouvelle liste).
+
+**Question 11** :
+Les deux redéfinitions de `copier` ne renvoient pas une `Pizza`, mais une `PizzaComposable` et une `PizzaComposee`. Pourquoi le compilateur l'accepte-t-il, alors que la signature de `Pizza.copier` annonce une `Pizza` ? Qu'est-ce que cela change pour le code qui appelle `copier` ? Le changement inverse (une redéfinition qui annoncerait `Object`) serait-il accepté ?
+
+Réponses dans [`08B_reponses-observations.md`](08B_reponses-observations.md).
+
+### Cloner une pizza
+
+Un client veut recommander la pizza qu'il a composée la semaine passée, en y ajoutant un ingrédient : on part d'un clone de sa pizza, et l'originale, déjà facturée, ne doit pas changer. Contrairement à `copier`, qui passe par un constructeur, `clone` recopie l'objet tel quel : même créateur, même date de création. Voir la section *Le clonage* de la théorie.
+
+**Question 12** :
+Rendez `Pizza` clonable et complétez sa méthode `clone` : le clone ne doit pas partager sa liste d'ingrédients avec l'original, de sorte qu'ajouter ou retirer un ingrédient de l'un ne change pas l'autre. Les ingrédients eux-mêmes, eux, restent partagés. Les tests de la classe `Question12` de [`PizzaSeance2Test`](src/test/java/domaine/PizzaSeance2Test.java) vérifient cette indépendance.
+
+**Question 13** :
+Complétez `clone` dans `PizzaComposable` en vous appuyant sur `Pizza.clone` : elle renvoie une `PizzaComposable`, et non une `Pizza`, de sorte que `PizzaComposable copie = pizza.clone();` compile sans transtypage.
+
+### Les classes internes
+
+**Question 14** :
+La classe interne **statique** `Pizzeria.Bilan` est fournie. Complétez la méthode `bilan` de `Pizzeria`, qui compte les commandes enregistrées, les pizzas vendues (la somme des quantités des lignes) et le chiffre d'affaires, et renvoie le `Bilan` correspondant. Remarquez que `Bilan` reçoit toutes ses valeurs par son constructeur : étant statique, elle n'a pas accès aux attributs de la `Pizzeria`.
+
+**Question 15** :
+La classe interne **non statique** `Pizzeria.Fidelite` est fournie, avec son constructeur ; on l'obtient par `pizzeria.fidelite(seuil)`. Complétez sa méthode `estFidele(Client)`, qui renvoie `true` si le client a passé au moins `seuil` commandes enregistrées dans la pizzeria. Lisez directement l'attribut `commandes` de la `Pizzeria` englobante, sans passer par `getCommandes`.
+
+### Tester `ajouterCommandeSiDisponible`
+
+Les dernières questions ne demandent pas de code de production : la méthode `ajouterCommandeSiDisponible` est fournie, et c'est vous qui écrivez ses tests, d'abord avec un stub, puis avec un mock. Vérifiez que chaque test échoue quand on casse la méthode testée.
+
+**Question 16** :
+Complétez, dans `src/test/java/domaine/`, la classe [`StockStub`](src/test/java/domaine/StockStub.java) : un attribut, l'ensemble des ingrédients manquants reçus par le constructeur (un varargs, à convertir avec `Set.of`), et `estDisponible`, qui renvoie `false` pour ces seuls ingrédients.
+
+**Question 17** :
+Complétez les deux tests de la classe `Question17` de [`PizzeriaStockTest`](src/test/java/domaine/PizzeriaStockTest.java), avec un `StockStub` : une commande de diavola refusée par une pizzeria qui manque de salami, et une commande de margarita acceptée par la même pizzeria.
+
+**Question 18** :
+Complétez les deux tests de la classe `Question18` de `PizzeriaStockTest`, en remplaçant le `StockStub` par un mock Mockito : configurez-le avec `when(...).thenReturn(...)` (et `any(Ingredient.class)` pour la règle générale), puis vérifiez avec `verify` les ingrédients sur lesquels le stock a été interrogé.
 
 ---
 

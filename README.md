@@ -28,7 +28,7 @@ Le créneau de théorie en autonomie a lieu le **vendredi matin**, et prépare l
 | 05 | Mocks |
 | 06 | Streams |
 | 07 | Programmation fonctionnelle |
-| 08 | Lecture de fichiers |
+| 08 | Lecture de fichiers et compléments Java |
 | 09 | Threads et CompletableFuture |
 | 10 | HyperLogLog et asynchrone |
 | 11 | Introspection |

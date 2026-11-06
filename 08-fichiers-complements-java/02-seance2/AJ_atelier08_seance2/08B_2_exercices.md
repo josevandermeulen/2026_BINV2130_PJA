@@ -1,4 +1,4 @@
-# Atelier 8 : Lecture de fichiers, try-with-resources – séance 2
+# Atelier 8 : Lecture de fichiers et compléments Java – séance 2
 
 ## Objectif
 
@@ -18,17 +18,18 @@ Cet atelier prolonge la pizzeria de la séance 1 pour revenir sur sept points du
 
 ## Vidéos
 
+### Fichiers et exceptions
+
 1. [Apprendre Java #15 Fichier (File / Reader / Writer / Buffer)](https://www.youtube.com/watch?v=iCobhKfvf3M)
 2. [Java File Input/Output - It's Way Easier Than You Think](https://www.youtube.com/watch?v=ScUJx4aWRi0)
 3. [Exception Handling in Java Tutorial](https://www.youtube.com/watch?v=1XAfapkBQjk)
 4. [Checked vs. Unchecked Exceptions in Java Tutorial - What's The Difference?](https://www.youtube.com/watch?v=bCPClyGsVhc)
-5. [#79 Exception Hierarchy in Java](https://www.youtube.com/watch?v=IBttEEFkH_Y)
-6. [#84 try with resources in Java](https://www.youtube.com/watch?v=hVQR0ZHFk-o)
-7. [Java Enums Explained in 6 Minutes](https://www.youtube.com/watch?v=wq9SJb8VeyM)
-8. [How to use computeIfAbsent method to prepare multi-value HashMap?](https://www.youtube.com/watch?v=S_sniYjlbLA)
-9. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
-10. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
-11. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)
+
+### Autres concepts de la semaine
+
+1. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
+2. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
+3. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)
 
 ## Exercices
 
@@ -135,6 +136,6 @@ Complétez les deux tests de la classe `Question18` de `PizzeriaStockTest`, en r
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*
 
-*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/08-lecture-fichiers-fr.html).*
+*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/08-fichiers-complements-java-fr.html).*
 
 *Cette fiche a été rédigée conjointement avec [Claude Code](https://claude.com/claude-code) et [Codex](https://openai.com/codex).*

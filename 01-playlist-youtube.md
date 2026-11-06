@@ -75,21 +75,13 @@ Playlist: https://www.youtube.com/playlist?list=PLYYzDB0QZ4xc
 
 ## Semaine 8
 
-### Lecture de fichiers
+### Fichiers et exceptions
 1. [Apprendre Java #15 Fichier (File / Reader / Writer / Buffer)](https://www.youtube.com/watch?v=iCobhKfvf3M)
 2. [Java File Input/Output - It's Way Easier Than You Think](https://www.youtube.com/watch?v=ScUJx4aWRi0)
+3. [Exception Handling in Java Tutorial](https://www.youtube.com/watch?v=1XAfapkBQjk)
+4. [Checked vs. Unchecked Exceptions in Java Tutorial - What's The Difference?](https://www.youtube.com/watch?v=bCPClyGsVhc)
 
-### Exceptions et try-with-resources
-1. [Exception Handling in Java Tutorial](https://www.youtube.com/watch?v=1XAfapkBQjk)
-2. [Checked vs. Unchecked Exceptions in Java Tutorial - What's The Difference?](https://www.youtube.com/watch?v=bCPClyGsVhc)
-3. [#79 Exception Hierarchy in Java](https://www.youtube.com/watch?v=IBttEEFkH_Y)
-4. [#84 try with resources in Java](https://www.youtube.com/watch?v=hVQR0ZHFk-o)
-
-### Énumérés et Map
-1. [Java Enums Explained in 6 Minutes](https://www.youtube.com/watch?v=wq9SJb8VeyM)
-2. [How to use computeIfAbsent method to prepare multi-value HashMap?](https://www.youtube.com/watch?v=S_sniYjlbLA)
-
-### Classes internes et varargs
+### Autres concepts de la semaine
 1. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
 2. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
 3. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)

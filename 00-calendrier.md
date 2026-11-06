@@ -10,7 +10,7 @@
 | S6 | 19/10/2026 | 25/10/2026 | 06 - Streams : les bases | lun 12/10/2026 | lun 19/10/2026 | José Vander Meulen + Jonathan Fallon | |
 | — | 26/10/2026 | 02/11/2026 | **Congé d'Automne FWB (calendrier officiel HE Vinci), sautée** | | | | contient Toussaint (dim 01/11) et Fête des morts (lun 02/11) |
 | S7 | 03/11/2026 | 08/11/2026 | 07 - Programmation fonctionnelle | lun 19/10/2026 | **mar 03/11/2026** | José Vander Meulen + Jonathan Fallon | semaine écourtée (reprise mardi, 4 jours ouvrés) : lundi férié, QCM reporté au mardi |
-| S8 | 09/11/2026 | 15/11/2026 | 08 - Lecture de fichiers, try-with-resources | mar 03/11/2026 | lun 09/11/2026 | José Vander Meulen + Jonathan Fallon | contient Armistice (mer 11/11) : séance 2BIN3 reportée au **jeu 12/11 8h30** (José Vander Meulen) ; double échéance le lun 09/11 20h : QCM mooVin de la semaine + remise du QCM Markdown coté |
+| S8 | 09/11/2026 | 15/11/2026 | 08 - Lecture de fichiers et compléments Java | mar 03/11/2026 | lun 09/11/2026 | José Vander Meulen + Jonathan Fallon | contient Armistice (mer 11/11) : séance 2BIN3 reportée au **jeu 12/11 8h30** (José Vander Meulen) ; double échéance le lun 09/11 20h : QCM mooVin de la semaine + remise du QCM Markdown coté |
 | S9 | 16/11/2026 | 22/11/2026 | 09 - Threads & CompletableFuture | lun 09/11/2026 | lun 16/11/2026 | José Vander Meulen + Claude Michiels | |
 | S10 | 23/11/2026 | 29/11/2026 | 10 - HyperLogLog appliqué (programmation asynchrone) | lun 16/11/2026 | lun 23/11/2026 | José Vander Meulen + Claude Michiels | |
 | S11 | 30/11/2026 | 06/12/2026 | 11 - Introspection | lun 23/11/2026 | lun 30/11/2026 | José Vander Meulen + Jonathan Fallon | |

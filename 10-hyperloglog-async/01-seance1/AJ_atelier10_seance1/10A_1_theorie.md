@@ -17,7 +17,7 @@
 Cet atelier n'introduit **aucune nouvelle théorie** : il applique la programmation asynchrone de l'atelier 9 (séance 2) au cas HyperLogLog de l'atelier 8 (séance 2). Les deux fiches de référence restent :
 
 1. [`../../../09-threads-completablefuture/02-seance2/AJ_atelier09_seance2/09B_1_theorie.md`](../../../09-threads-completablefuture/02-seance2/AJ_atelier09_seance2/09B_1_theorie.md) pour `CompletableFuture` ;
-2. [`../../../08-lecture-fichiers/02-seance2/AJ_atelier08_seance2/08B_1_theorie.md`](../../../08-lecture-fichiers/02-seance2/AJ_atelier08_seance2/08B_1_theorie.md) pour HyperLogLog (registres, zéros de tête, formule d'estimation).
+2. [`../../../08-fichiers-complements-java/02-seance2/AJ_atelier08_seance2/08B_1_theorie.md`](../../../08-fichiers-complements-java/02-seance2/AJ_atelier08_seance2/08B_1_theorie.md) pour HyperLogLog (registres, zéros de tête, formule d'estimation).
 
 ## Rappel : CompletableFuture
 

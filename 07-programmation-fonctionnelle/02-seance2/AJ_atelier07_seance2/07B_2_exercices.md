@@ -174,7 +174,7 @@ Dans la méthode `tradersByAction`, renvoyer une `Map` associant à chaque actio
 
 ---
 
-*Passez à la [théorie suivante](../../../08-lecture-fichiers/01-seance1/AJ_atelier08_seance1/08A_1_theorie.md).*
+*Passez à la [théorie suivante](../../../08-fichiers-complements-java/01-seance1/AJ_atelier08_seance1/08A_1_theorie.md).*
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*
 

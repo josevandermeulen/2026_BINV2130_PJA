@@ -1,4 +1,4 @@
-# Atelier 8 : Lecture de fichiers, try-with-resources – séance 1
+# Atelier 8 : Lecture de fichiers et compléments Java – séance 1
 
 ## Objectif
 
@@ -17,23 +17,24 @@ L'objectif de cet atelier est de savoir lire et écrire des fichiers texte en Ja
 
 ## Vidéos
 
+### Fichiers et exceptions
+
 1. [Apprendre Java #15 Fichier (File / Reader / Writer / Buffer)](https://www.youtube.com/watch?v=iCobhKfvf3M)
 2. [Java File Input/Output - It's Way Easier Than You Think](https://www.youtube.com/watch?v=ScUJx4aWRi0)
 3. [Exception Handling in Java Tutorial](https://www.youtube.com/watch?v=1XAfapkBQjk)
 4. [Checked vs. Unchecked Exceptions in Java Tutorial - What's The Difference?](https://www.youtube.com/watch?v=bCPClyGsVhc)
-5. [#79 Exception Hierarchy in Java](https://www.youtube.com/watch?v=IBttEEFkH_Y)
-6. [#84 try with resources in Java](https://www.youtube.com/watch?v=hVQR0ZHFk-o)
-7. [Java Enums Explained in 6 Minutes](https://www.youtube.com/watch?v=wq9SJb8VeyM)
-8. [How to use computeIfAbsent method to prepare multi-value HashMap?](https://www.youtube.com/watch?v=S_sniYjlbLA)
-9. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
-10. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
-11. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)
+
+### Autres concepts de la semaine
+
+1. [Inner Class Java Tutorial - Creating and Using Inner Classes](https://www.youtube.com/watch?v=BwkmIXjWWJc)
+2. [Java Anonymous Inner Classes Explained in 6 Minutes](https://www.youtube.com/watch?v=DwtPWZn6T1A)
+3. [Learn VARARGS in 6 minutes!](https://www.youtube.com/watch?v=2knxgAFqwKk)
 
 ## Exercices
 
 ### Introduction
 
-On retrouve la pizzeria de l'atelier 1, séance 2. Son domaine a été complété et vous est fourni tout fait :
+Cette séance part de la pizzeria de l'atelier 1, séance 2, mais son domaine a été complété : le diagramme ci-dessous n'est donc plus celui de l'atelier 1. Les ajouts vous sont fournis tout faits :
 
 - la classe [`Pizzeria`](src/main/java/domaine/Pizzeria.java) (package `domaine`) rassemble les clients, retrouvés par leur numéro de téléphone, les pizzas du menu, retrouvées par leur titre, et les commandes reçues ;
 - chaque `Ingredient` porte une catégorie, l'énuméré [`Categorie`](src/main/java/domaine/Categorie.java) (`VEGETARIENNE`, `VIANDE`, `POISSON`), d'où se déduit celle d'une pizza (`Pizza.getCategorie`) ;
@@ -124,6 +125,6 @@ Avec trois petits fichiers et une centaine de commandes, difficile de savoir si 
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*
 
-*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/08-lecture-fichiers-fr.html).*
+*Cheat sheet de cette semaine : [consultez-la en ligne](https://astounding-queijadas-0f428a.netlify.app/08-fichiers-complements-java-fr.html).*
 
 *Cette fiche a été rédigée conjointement avec [Claude Code](https://claude.com/claude-code) et [Codex](https://openai.com/codex).*

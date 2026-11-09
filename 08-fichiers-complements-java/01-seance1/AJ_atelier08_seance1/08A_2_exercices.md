@@ -57,6 +57,11 @@ Le dossier contient aussi un fichier d'index, `commandes/index.txt`, qui liste l
 
 On souhaite écrire un programme qui charge toutes les commandes dans la pizzeria, calcule quelques statistiques (chiffre d'affaires par jour, pizzas vendues par catégorie) et écrit un rapport dans un nouveau fichier.
 
+Pour garder la lecture des fichiers simple, on fait deux hypothèses :
+
+- on ne considère que les pizzas composées du menu (`PizzaComposee`), retrouvées par leur titre : jamais de `PizzaComposable` ;
+- chaque ligne d'un fichier correspond à une commande distincte, qui ne contient donc qu'une seule ligne de commande (une pizza, dans une certaine quantité).
+
 ### Consignes
 
 Dans IntelliJ, créez un projet Maven intitulé `AJ_atelier08_seance1` (voir le [tutoriel Maven](../../../05-mocks/02-seance2/AJ_atelier05_seance2/05B_3_tutoriel-maven.md) si besoin). Récupérez les classes fournies dans `AJ_atelier08_seance1/src/main/java/` (packages `domaine`, `util`, `main`) et les tests fournis dans `AJ_atelier08_seance1/src/test/java/` en conservant l'arborescence. Ajoutez les dépendances JUnit 5 et Mockito à votre `pom.xml` (voir le `pom.xml` fourni). Copiez également le dossier `commandes/` à la racine de votre projet (pas dans un package ni dans `src/`).
@@ -97,7 +102,7 @@ Complétez la méthode `chargerToutesLesCommandes(String dossier)` : lisez l'ind
 Complétez, en utilisant l'API Stream sur les commandes de la pizzeria, la méthode `chiffreAffairesParJour()` : une `Map<LocalDate, Double>` associant chaque jour au montant total de ses commandes, triée par date. Utilisez `groupingBy` avec trois arguments : la clé, la fabrique de la `Map` (`TreeMap::new`) et `summingDouble`.
 
 **Question 7** :
-Complétez `pizzasVenduesParCategorie()` : une `Map<Categorie, Integer>` associant chaque catégorie au nombre de pizzas vendues. Une commande contenant plusieurs lignes, passez d'un flux de commandes à un flux de lignes avec `flatMap`, puis additionnez les quantités avec `summingInt`.
+Complétez `pizzasVenduesParCategorie()` : une `Map<Categorie, Integer>` associant chaque catégorie au nombre de pizzas vendues. Les commandes chargées n'ont qu'une ligne, mais une commande peut en général en contenir plusieurs : passez d'un flux de commandes à un flux de lignes avec `flatMap`, puis additionnez les quantités avec `summingInt`.
 
 ### Écrire un rapport
 

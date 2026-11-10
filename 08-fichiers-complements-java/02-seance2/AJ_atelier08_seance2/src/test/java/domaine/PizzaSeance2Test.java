@@ -88,12 +88,32 @@ class PizzaSeance2Test {
     @DisplayName("Question 12 : clone, une copie profonde de la liste d'ingrédients")
     class Question12 {
 
+        /**
+         * Une pizza minimale, propre à ces tests : elle hérite de Pizza.clone sans le redéfinir.
+         * Les tests de la Question 12 ne dépendent donc pas de PizzaComposable.clone (Question 13).
+         */
+        private static class PizzaDeTest extends Pizza {
+            PizzaDeTest() {
+                super("Pizza de test", "Une pizza pour tester Pizza.clone");
+            }
+
+            @Override
+            public Pizza copier() {
+                throw new UnsupportedOperationException("Inutile pour ces tests");
+            }
+        }
+
+        private Pizza original;
+
+        @BeforeEach
+        void creerOriginal() {
+            original = new PizzaDeTest();
+            original.ajouter(Ingredients.TOMATE);
+            original.ajouter(Ingredients.MOZZARELLA);
+        }
+
         @Test
         void leCloneAUneListeDIngredientsAPart() {
-            pizza.ajouter(Ingredients.TOMATE);
-            pizza.ajouter(Ingredients.MOZZARELLA);
-            Pizza original = pizza;
-
             Pizza copie = original.clone();
 
             assertAll(
@@ -105,9 +125,6 @@ class PizzaSeance2Test {
 
         @Test
         void ajouterAuCloneNeModifiePasLOriginal() {
-            pizza.ajouter(Ingredients.TOMATE);
-            pizza.ajouter(Ingredients.MOZZARELLA);
-            Pizza original = pizza;
             Pizza copie = original.clone();
 
             copie.ajouter(Ingredients.JAMBON);
@@ -122,9 +139,6 @@ class PizzaSeance2Test {
 
         @Test
         void retirerDeLOriginalNeModifiePasLeClone() {
-            pizza.ajouter(Ingredients.TOMATE);
-            pizza.ajouter(Ingredients.MOZZARELLA);
-            Pizza original = pizza;
             Pizza copie = original.clone();
 
             original.supprimer(Ingredients.TOMATE);

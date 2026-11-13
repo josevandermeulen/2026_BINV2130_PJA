@@ -48,6 +48,8 @@ Le thread « A → B » verrouille le compte source A, puis attend le compte des
 
 L'**attente circulaire** (condition 4) : en verrouillant toujours les comptes dans le même ordre global (numéro croissant), les deux threads convoitent leur premier verrou dans le même ordre — le cycle « A attend B qui attend A » ne peut plus se former. Les trois autres conditions (exclusion mutuelle, rétention et attente, pas de préemption) restent vraies, mais une seule condition cassée suffit.
 
+Autre correction acceptée : ne plus imbriquer les deux blocs, mais les enchaîner — `synchronized (source)` pour débiter, **puis** `synchronized (destination)` pour créditer. Un thread ne détient alors jamais plus d'un verrou à la fois : c'est la **rétention et attente** (condition 2) qui est cassée, et le deadlock disparaît aussi. Le prix : le transfert n'est plus atomique. Entre les deux blocs, le montant a quitté la source sans être encore arrivé sur la destination ; un autre thread qui additionne les deux soldes à ce moment-là voit de l'argent disparaître. L'ordre global garde les deux verrous pendant tout le transfert et n'a pas ce défaut.
+
 ---
 
 *Une remarque ou une erreur repérée ? [Signalez-le ici](https://forms.gle/UhpPjfS36XXmKS2F7).*

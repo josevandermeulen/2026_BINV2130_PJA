@@ -1,7 +1,6 @@
 package sync;
 
 import java.time.LocalDateTime;
-import java.util.stream.IntStream;
 
 /**
  * Un compteur qui affiche les nombres de 1 à son maximum, en marquant une pause à chaque pas.
@@ -47,14 +46,14 @@ public class Compteur {
      * Compte de 1 au maximum en affichant chaque valeur, avec une pause entre deux nombres.
      */
     public void count() {
-        IntStream.rangeClosed(1, max).forEach(i -> {
+        for (int i = 1; i <= max; i++) {
             System.out.println(nom + " : " + i);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        });
-        System.out.println(nom + " a finit de compter jusqu'à " + max + " à " + LocalDateTime.now());
+        }
+        System.out.println(nom + " a fini de compter jusqu'à " + max + " à " + LocalDateTime.now());
     }
 }

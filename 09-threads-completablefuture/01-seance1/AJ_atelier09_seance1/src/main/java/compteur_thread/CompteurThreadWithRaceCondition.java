@@ -1,7 +1,6 @@
 package compteur_thread;
 
 import java.time.LocalDateTime;
-import java.util.stream.IntStream;
 
 /**
  * Le même compteur, doté d'une variable de classe retenant qui a fini le premier.
@@ -54,15 +53,15 @@ public class CompteurThreadWithRaceCondition extends Thread {
         // TODO Question 9 : modifier ce code pour déterminer le gagnant (le 1er qui a fini de compter)
         //  et lors de l'enregistrement du gagnant, veuillez attendre 10 ms avant de l'enregistrer et afficher
         //  le nom du gagnant sous cette forme : "Le compteur gagnant est XXX à 2024-10-25T15:20:16.109588".
-        IntStream.rangeClosed(1, max).forEach(i -> {
+        for (int i = 1; i <= max; i++) {
             System.out.println(nom + " : " + i);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        });
-        System.out.println(nom + " a finit de compter jusqu'à " + max + " à " + LocalDateTime.now());
+        }
+        System.out.println(nom + " a fini de compter jusqu'à " + max + " à " + LocalDateTime.now());
     }
 
     /**

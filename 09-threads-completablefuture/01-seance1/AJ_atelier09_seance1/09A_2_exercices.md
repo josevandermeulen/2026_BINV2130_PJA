@@ -82,7 +82,7 @@ Le comportement observé est identique à celui des Questions 2 et 3. Quel avant
 Complétez `count` dans [`CompteurThreadWithRaceCondition`](src/main/java/compteur_thread/CompteurThreadWithRaceCondition.java) : déterminez le compteur gagnant (pause supplémentaire de 10 ms avant l'enregistrement), et affichez-le au sein du compteur.
 
 **Question 10** :
-Complétez [`TestCompteurThreadWithRaceCondition`](src/main/java/compteur_thread/TestCompteurThreadWithRaceCondition.java) : lancez les compteurs, attendez leur fin, puis affichez le nom du gagnant. Conservez-le dans un attribut de classe `CompteurThreadWithRaceCondition` — attention, cet attribut peut être lu/modifié par plusieurs threads en même temps.
+Complétez [`TestCompteurThreadWithRaceCondition`](src/main/java/compteur_thread/TestCompteurThreadWithRaceCondition.java) : lancez les compteurs, attendez leur fin, puis affichez le nom du gagnant.
 
 **Question 11** :
 Un problème devrait apparaître. Quel est-il, d'où vient-il ?
@@ -95,7 +95,7 @@ Corrigez ce problème.
 Le package `deadlock` contient une petite application bancaire fournie : des [`Compte`](src/main/java/deadlock/Compte.java), un [`GestionnaireTransferts`](src/main/java/deadlock/GestionnaireTransferts.java) dont la méthode `transferer` synchronise sur les deux comptes concernés, et un [`TestTransfertDeadlock`](src/main/java/deadlock/TestTransfertDeadlock.java) qui lance deux threads faisant chacun 1 000 transferts... en sens inverse l'un de l'autre.
 
 **Question 13** :
-Exécutez `TestTransfertDeadlock`. Le programme se fige : pas d'exception, pas de message, plus rien — c'est un **deadlock** (voir [`09A_1_theorie.md`](09A_1_theorie.md)). En relisant `transferer`, expliquez précisément pourquoi les deux threads se bloquent mutuellement. Pendant que le programme est figé, faites un *thread dump* (bouton « Get thread dump » d'IntelliJ, dans l'onglet Run, ou la commande `jstack <pid>`) et retrouvez les deux threads bloqués et les verrous qu'ils détiennent/attendent.
+Exécutez `TestTransfertDeadlock`. Le programme se fige : pas d'exception, pas de message, plus rien — c'est un **deadlock** (voir [`09A_1_theorie.md`](09A_1_theorie.md)). En relisant `transferer`, expliquez précisément pourquoi les deux threads se bloquent mutuellement. Pendant que le programme est figé, faites un *thread dump* (bouton « Dump Threads » d'IntelliJ, l'icône en forme d'appareil photo de l'onglet Run, ou la commande `jstack <pid>`) et retrouvez les deux threads bloqués et les verrous qu'ils détiennent/attendent.
 
 **Question 14** :
 Corrigez `transferer` **sans supprimer les blocs `synchronized`**. Relancez : le programme doit se terminer, et les soldes finaux doivent valoir 10 000 chacun.

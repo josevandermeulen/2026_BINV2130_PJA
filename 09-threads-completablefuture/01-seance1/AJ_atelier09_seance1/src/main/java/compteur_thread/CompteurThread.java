@@ -1,7 +1,6 @@
 package compteur_thread;
 
 import java.time.LocalDateTime;
-import java.util.stream.IntStream;
 
 // TODO Question 2 : faire hériter cette classe de Thread et implémenter la méthode run
 
@@ -40,15 +39,15 @@ public class CompteurThread {
      * Compte de 1 au maximum en affichant chaque valeur, avec une pause entre deux nombres.
      */
     public void count() {
-        IntStream.rangeClosed(1, max).forEach(i -> {
+        for (int i = 1; i <= max; i++) {
             System.out.println(nom + " : " + i);
             try {
                 Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-        });
-        System.out.println(nom + " a finit de compter jusqu'à " + max + " à " + LocalDateTime.now());
+        }
+        System.out.println(nom + " a fini de compter jusqu'à " + max + " à " + LocalDateTime.now());
     }
 
 }

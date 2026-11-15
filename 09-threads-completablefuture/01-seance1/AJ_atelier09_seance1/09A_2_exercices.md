@@ -79,7 +79,7 @@ Le comportement observé est identique à celui des Questions 2 et 3. Quel avant
 ### Race Condition
 
 **Question 9** :
-Complétez `count` dans [`CompteurThreadWithRaceCondition`](src/main/java/compteur_thread/CompteurThreadWithRaceCondition.java) : déterminez le compteur gagnant (pause supplémentaire de 10 ms avant l'enregistrement), et affichez-le au sein du compteur.
+Complétez `count` dans [`CompteurThreadWithRaceCondition`](src/main/java/compteur_thread/CompteurThreadWithRaceCondition.java) : déterminez le compteur gagnant (pause supplémentaire de 10 ms avant l'enregistrement), et affichez-le au sein du compteur. Conservez-le dans l'attribut de classe `gagnant` de `CompteurThreadWithRaceCondition` — attention, cet attribut peut être lu/modifié par plusieurs threads en même temps.
 
 **Question 10** :
 Complétez [`TestCompteurThreadWithRaceCondition`](src/main/java/compteur_thread/TestCompteurThreadWithRaceCondition.java) : lancez les compteurs, attendez leur fin, puis affichez le nom du gagnant.

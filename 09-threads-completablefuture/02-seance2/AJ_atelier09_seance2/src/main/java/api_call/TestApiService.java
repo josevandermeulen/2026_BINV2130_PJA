@@ -63,7 +63,7 @@ public class TestApiService {
 
         // TODO Question 5 : tentez d'afficher le résultat d'une API qui n'existe pas
         //  en utilisant la méthode fetchData de ApiService.
-        //  Gérez l'exception en affichant le code d'erreur retourné
+        //  Gérez l'exception en affichant le message d'erreur retourné
         //  par la méthode fetchData.
 
         long end = System.currentTimeMillis();

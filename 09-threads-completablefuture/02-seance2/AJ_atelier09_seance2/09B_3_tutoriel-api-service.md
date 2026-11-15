@@ -91,17 +91,16 @@ Nom : Leanne Graham
 
 ## Étape 4 — Naviguer dans un `JsonNode`
 
-À partir de la `String` `posts` (JSON retourné par `fetchPosts`), créez un `JsonNode` :
+À partir de la `String` `postsJson` (JSON retourné par `fetchPosts`), créez un `JsonNode` :
 
 ```java
-JsonNode postsJson = objectMapper.readTree(posts);
+JsonNode posts = objectMapper.readTree(postsJson);
 ```
 
 Une fois le JSON parsé, on navigue avec `get(...)` :
 
 ```java
-JsonNode posts = objectMapper.readTree(postsJson);   // tableau -> get(index)
-JsonNode post = posts.get(0);
+JsonNode post = posts.get(0);                         // tableau -> get(index)
 int postId = post.get("id").asInt();                  // objet -> get("propriété")
 String title = post.get("title").asText();
 

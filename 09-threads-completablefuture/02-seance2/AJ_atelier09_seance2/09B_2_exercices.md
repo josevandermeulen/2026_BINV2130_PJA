@@ -68,7 +68,7 @@ Complétez `creerFuturesDepuisCountAndGetPosition` de `CourseCompteurs` : même 
 
 ### Appels asynchrones à une API REST
 
-Jusque-là, nous avons simulé des traitements asynchrones à l'aide de `Thread.sleep`. Il serait intéressant de découvrir une application concrète de traitements asynchrones. Vous allez donc maintenant réaliser des appels asynchrones à une API REST publique et gratuite nommée https://jsonplaceholder.typicode.com/.
+Jusque-là, nous avons simulé des traitements asynchrones à l'aide de `Thread.sleep`. Il serait intéressant de découvrir une application concrète de traitements asynchrones. Vous allez donc maintenant réaliser des appels asynchrones à une API REST publique et gratuite nommée [jsonplaceholder.typicode.com](https://jsonplaceholder.typicode.com/).
 
 Vous trouverez le code pour réaliser les appels à cette API au sein du package `api_call`, dans la classe [`ApiService`](src/main/java/api_call/ApiService.java). Veuillez lire ce code et remarquer que les méthodes fetch (`fetchPosts`, `fetchCommentsForPost` et `fetchUser`) renvoient des `CompletableFuture` de `String` : le body JSON de la réponse HTTP GET, disponible dans le futur. Voir le [tutoriel ApiService & CompletableFuture](09B_3_tutoriel-api-service.md) pour le détail de leur fonctionnement.
 
@@ -78,14 +78,14 @@ Dans `printAllPosts` ([`TestApiService`](src/main/java/api_call/TestApiService.j
 **Question 4** :
 Dans `printAllPostsWithCount`, en programmation fonctionnelle (une seule suite d'appels), faites un fetch de tous les posts, affichez-les, retournez-les en tant que `JsonNode`, puis affichez leur nombre.
 
-TIPS — à partir de la string `posts` (JSON retourné par l'API), créer un `JsonNode` (un tableau d'objets représentant des posts) :
+TIPS — à partir de la string `postsJson` (JSON retourné par l'API), créer un `JsonNode` (un tableau d'objets représentant des posts) :
 
 ```java
-JsonNode postsJson = objectMapper.readTree(posts);
+JsonNode posts = objectMapper.readTree(postsJson);
 ```
 
 **Question 5** :
-Dans `dealWithUnexistedApi`, tentez d'afficher le résultat d'une API qui n'existe pas via `fetchData` (URL `"http://unexistingapi/things"`). Toujours en programmation fonctionnelle, gérez l'exception en affichant le code d'erreur retourné par `fetchData`.
+Dans `dealWithUnexistedApi`, tentez d'afficher le résultat d'une API qui n'existe pas via `fetchData` (URL `"http://unexistingapi/things"`). Toujours en programmation fonctionnelle, gérez l'exception en affichant le message d'erreur retourné par `fetchData`.
 
 **Question 6** :
 Dans `printAllPostsWithUserAndComments`, affichez tous les posts, les commentaires et les détails de l'utilisateur, pour chaque post :

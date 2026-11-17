@@ -38,7 +38,7 @@ Veuillez créer un nouveau Projet Maven au sein d'IntelliJ nommé `AJ_atelier09_
 <dependency>
     <groupId>com.fasterxml.jackson.core</groupId>
     <artifactId>jackson-databind</artifactId>
-    <version>2.18.9</version>
+    <version>2.22.4</version>
 </dependency>
 ```
 
@@ -131,6 +131,8 @@ Est-ce que le temps total d'exécution de vos requêtes semble bien correspondre
 
 **Question 11** :
 Dans `printAllPostsWithUserAndCommentsAnd2Threads`, refaites la Question 6 mais en utilisant un `ExecutorService` avec un pool de threads fixe. Limitez le nombre de threads à 2.
+
+Pour cela, créez une classe `ApiServiceWithExecutor` : une copie d'`ApiService` qui reçoit le nombre de threads dans son constructeur, crée l'`ExecutorService` correspondant et le passe en second argument de `supplyAsync` dans `fetchData`.
 
 ---
 

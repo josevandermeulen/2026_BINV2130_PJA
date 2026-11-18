@@ -2,7 +2,7 @@
 
 ## Objectif
 
-L'objectif de cette séance est d'appliquer `CompletableFuture` (atelier 9, séance 2) à un traitement concret déjà connu : l'estimation du nombre d'adresses IP uniques avec HyperLogLog (atelier 8, séance 2). Le chargement des fichiers de logs et l'estimation sont lancés de manière asynchrone, puis chaînés sans jamais bloquer.
+L'objectif de cette séance est d'appliquer `CompletableFuture` (atelier 9, séance 2) à un traitement concret : l'estimation du nombre d'adresses IP uniques avec HyperLogLog, présenté dans la [théorie](10A_1_theorie.md) de cette séance. Le chargement des fichiers de logs et l'estimation sont lancés de manière asynchrone, puis chaînés sans jamais bloquer.
 
 ## Concepts
 
@@ -12,7 +12,7 @@ L'objectif de cette séance est d'appliquer `CompletableFuture` (atelier 9, séa
 4. `exceptionally`
 5. `allOf` : paralléliser plusieurs traitements asynchrones
 6. Mesure du temps d'exécution (séquentiel vs parallèle)
-7. Réutilisation de HyperLogLog et de la lecture de fichiers (atelier 8 — aucune nouvelle théorie)
+7. HyperLogLog : estimer le nombre de valeurs distinctes (classes fournies)
 
 ## Vidéos
 
@@ -26,9 +26,9 @@ L'objectif de cette séance est d'appliquer `CompletableFuture` (atelier 9, séa
 
 ### Introduction
 
-L'équipe sécurité de l'atelier 8 est satisfaite de son estimateur HyperLogLog... mais plus les fichiers de logs grossissent, plus leur chargement immobilise le programme : tout est figé tant que la lecture n'est pas finie. Vous allez rendre cette analyse **asynchrone** : le chargement et l'estimation s'exécutent dans un thread du pool pendant que le programme principal continue.
+L'équipe sécurité d'une plateforme web veut connaître le nombre d'adresses IP uniques qui la visitent. Elle dispose d'un estimateur HyperLogLog (voir la [théorie](10A_1_theorie.md)) qui lit les fichiers de logs d'accès et en estime le nombre d'adresses distinctes. Mais plus les fichiers de logs grossissent, plus leur chargement immobilise le programme : tout est figé tant que la lecture n'est pas finie. Vous allez rendre cette analyse **asynchrone** : le chargement et l'estimation s'exécutent dans un thread du pool pendant que le programme principal continue.
 
-Toutes les classes de l'atelier 8 vous sont fournies **déjà implémentées** ([`HyperLogLog`](src/main/java/domaine/HyperLogLog.java), [`Hasher`](src/main/java/domaine/Hasher.java), [`DefaultHasher`](src/main/java/domaine/DefaultHasher.java), [`Acces`](src/main/java/domaine/Acces.java), [`AnalyseLogs`](src/main/java/main/AnalyseLogs.java), [`AnalyseIp`](src/main/java/main/AnalyseIp.java), la lecture de fichiers) : votre travail porte uniquement sur la nouvelle classe [`AnalyseIpAsync`](src/main/java/main/AnalyseIpAsync.java) (package `main`).
+Toutes les classes de cette analyse vous sont fournies **déjà implémentées** ([`HyperLogLog`](src/main/java/domaine/HyperLogLog.java), [`Hasher`](src/main/java/domaine/Hasher.java), [`DefaultHasher`](src/main/java/domaine/DefaultHasher.java), [`Acces`](src/main/java/domaine/Acces.java), [`AnalyseLogs`](src/main/java/main/AnalyseLogs.java), [`AnalyseIp`](src/main/java/main/AnalyseIp.java), la lecture de fichiers) : votre travail porte uniquement sur la nouvelle classe [`AnalyseIpAsync`](src/main/java/main/AnalyseIpAsync.java) (package `main`).
 
 ### Consignes
 

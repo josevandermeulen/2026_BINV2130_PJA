@@ -290,12 +290,12 @@
 <body>
 <div class="site-header" id="top">
   <h1>Semaine 10 — HyperLogLog appliqué (programmation asynchrone)</h1>
-  <p>Document autonome en français. Cette semaine n'introduit aucune nouvelle théorie : elle applique <code>CompletableFuture</code> (semaine 9) à HyperLogLog (semaine 8) pour charger, estimer et fusionner des cardinalités en asynchrone.</p>
-  <p>Couvre : chaîne asynchrone de chargement + estimation, piège des exceptions checked dans une lambda <code>supplyAsync</code>, fusion de compteurs HyperLogLog, schéma scatter/gather avec un <code>CompletableFuture</code> par fichier, déterminisme du résultat malgré l'ordre imprévisible des threads.</p>
+  <p>Document autonome en français. Cette semaine introduit HyperLogLog, un algorithme qui estime le nombre de valeurs distinctes avec une mémoire minuscule et fixe, puis lui applique <code>CompletableFuture</code> (semaine 9) pour charger, estimer et fusionner des cardinalités en asynchrone.</p>
+  <p>Couvre : principe d'HyperLogLog (rareté d'un hash, buckets, moyenne harmonique, précision et mémoire, importance du hash), chaîne asynchrone de chargement + estimation, piège des exceptions checked dans une lambda <code>supplyAsync</code>, fusion de compteurs HyperLogLog, schéma scatter/gather avec un <code>CompletableFuture</code> par fichier, déterminisme du résultat malgré l'ordre imprévisible des threads.</p>
   <div class="fiche-nav">
     <a href="index.html">Index</a>
     <a href="09-threads-completablefuture-fr.html">&larr; Semaine 9</a>
-    <span class="version-badge">v15 &middot; 06/11/2026</span>
+    <span class="version-badge">v17 &middot; 18/11/2026</span>
     <a href="11-introspection-fr.html">Semaine 11 &rarr;</a>
   </div>
 </div>
@@ -303,8 +303,9 @@
 <div class="layout">
   <div class="toc" aria-label="Sommaire">
     <h2>Sommaire</h2>
-    <a href="#rappel">Rappel : HyperLogLog et CompletableFuture</a>
-    <a href="#chaine-async">Séance 1 - Chargement et estimation en asynchrone</a>
+    <a href="#hyperloglog">Séance 1 - HyperLogLog : comptage de cardinalité</a>
+    <a href="#rappel">Rappel : CompletableFuture</a>
+    <a href="#chaine-async">Chargement et estimation en asynchrone</a>
     <a href="#exceptions-checked">Le piège des exceptions checked</a>
     <a href="#chrono">Mesurer séquentiel vs asynchrone</a>
     <a href="#fusion">Séance 2 - Fusionner deux HyperLogLog</a>
@@ -315,26 +316,115 @@
   </div>
 
   <div class="content">
+    <div class="doc-section" id="hyperloglog">
+      <h2>Séance 1 - HyperLogLog : comptage de cardinalité</h2>
+      <p>Compter des valeurs distinctes avec un <code>Set</code> ou un <code>.distinct()</code> suppose que toutes les valeurs tiennent en mémoire. Sur un flux massif — des millions de vues, en continu —, cette approche ne tient plus la charge. <strong>HyperLogLog</strong> est un algorithme <em>probabiliste</em> de comptage de cardinalité : il <strong>estime</strong> le nombre de valeurs distinctes vues dans un flux, avec une occupation mémoire minuscule et fixée à l'avance, au prix d'une petite marge d'erreur.</p>
+
+      <div class="api">
+        <h3>Le problème : deux approches naïves, deux défauts</h3>
+        <ul>
+          <li>Stocker chaque valeur déjà vue (tableau, <code>Set&lt;String&gt;</code>) : exact, mais la mémoire grandit avec le nombre de valeurs distinctes — une vidéo à 10 millions de vues, ce sont déjà 40 Mo rien que pour les adresses IP.</li>
+          <li>Incrémenter un simple compteur à chaque valeur reçue : mémoire minimale, mais faux — une même valeur revue plusieurs fois est comptée plusieurs fois, sans déduplication.</li>
+        </ul>
+        <p>HyperLogLog vise l'entre-deux : ignorer les doublons <strong>sans</strong> mémoriser individuellement tout ce qui a été vu.</p>
+      </div>
+
+      <div class="api">
+        <h3>Le principe : la rareté d'un hash</h3>
+        <p>On calcule un <strong>hash</strong> de chaque valeur — un nombre dont les bits doivent être répartis de façon <strong>uniforme</strong> sur toute la plage possible — et on regarde les zéros au début de son écriture binaire. Plus une séquence de zéros initiaux est longue, plus elle est rare :</p>
+        <table>
+          <thead>
+          <tr><th>Le hash commence par</th><th>Probabilité</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>au moins 1 zéro (<code>0...</code>)</td><td>1/2</td></tr>
+          <tr><td>au moins 2 zéros (<code>00...</code>)</td><td>1/4</td></tr>
+          <tr><td>au moins 3 zéros (<code>000...</code>)</td><td>1/8</td></tr>
+          <tr><td>au moins k zéros</td><td>1/2<sup>k</sup></td></tr>
+          </tbody>
+        </table>
+        <p>Croiser un hash qui commence par 17 zéros (une chance sur 2<sup>17</sup>, soit environ 130 000) suggère qu'il a fallu voir beaucoup de valeurs distinctes pour tomber dessus : c'est cette rareté qui permet d'« estimer » une cardinalité. Ajouter dix fois la <strong>même</strong> valeur ne change rien — son hash est identique, il ne bat jamais un record — d'où l'insensibilité de l'algorithme aux doublons.</p>
+      </div>
+
+      <div class="api">
+        <h3>Les buckets (registres)</h3>
+        <span class="signature">HyperLogLog(Hasher hasher, int nbBitsIndex)</span>
+        <span class="signature">void ajouter(String valeur)</span>
+        <span class="signature">long estimerCardinalite()</span>
+        <p>Les classes <code>HyperLogLog</code>, <code>Hasher</code> et <code>DefaultHasher</code> sont <strong>fournies</strong> dans les exercices : il s'agit de comprendre ce qu'elles calculent, pas de les écrire.</p>
+        <p>Un seul record est instable : avec trois visiteurs et un simple coup de chance sur un hash, l'estimation exploserait. Pour stabiliser, on répartit les hashs dans des <em>buckets</em> — un tableau <code>registres</code> — et on ne garde, dans chaque bucket, que le <strong>maximum</strong> de zéros initiaux observé :</p>
+        <ol>
+          <li>Calculer le hash de la valeur.</li>
+          <li>Les <code>nbBitsIndex</code> premiers bits du hash donnent le numéro de bucket (la <strong>précision</strong>, passée au constructeur).</li>
+          <li>Sur les bits restants, compter les zéros initiaux.</li>
+          <li>Le bucket garde le maximum rencontré jusqu'ici — jamais moins.</li>
+        </ol>
+        <pre><code>hash  = 0x12345678 = 0001 0010 0011 0100 0101 0110 0111 1000
+index = les 4 premiers bits  -> 0001 = bucket 1
+reste = les 28 bits restants -> 0010 0011 0100 0101 0110 0111 1000
+                                 (2 zéros initiaux -> registres[1] = 3)</code></pre>
+      </div>
+
+      <div class="api">
+        <h3>L'estimation finale : moyenne harmonique</h3>
+        <pre><code>estimation = ALPHA * m² / Σ(2⁻ʳᵉᵍⁱˢᵗʳᵉ⁽ⁱ⁾)</code></pre>
+        <p>où <code>m</code> est le nombre de buckets et <code>ALPHA</code> une constante qui dépend de <code>m</code> (<code>0.673</code> pour <code>m = 16</code>). La moyenne <strong>harmonique</strong> a l'avantage de faire peu peser les valeurs extrêmes : un registre qui saute à un record improbable ne fait pas exploser l'estimation globale — c'est elle qui amortit le risque de coup de chance évoqué plus haut.</p>
+      </div>
+
+      <div class="api">
+        <h3>Précision et mémoire figée</h3>
+        <table>
+          <thead>
+          <tr><th>Précision (bits d'index)</th><th>Nombre de buckets</th><th>Erreur observée (100 000 valeurs)</th></tr>
+          </thead>
+          <tbody>
+          <tr><td>4</td><td>16</td><td>≈ 25 %</td></tr>
+          <tr><td>14</td><td>16 384</td><td>≈ 1 %</td></tr>
+          </tbody>
+        </table>
+        <p>Le point clé : la mémoire est <strong>figée à l'avance</strong> par le nombre de buckets choisi au constructeur, et elle ne grandit <strong>jamais</strong> avec le nombre d'éléments traités — que le flux compte 300 vues ou 500 millions. Avec un hash sur 32 bits et 14 bits de bucket, il reste 18 bits, donc au plus 18 zéros initiaux à mémoriser par registre : quelques bits par bucket suffisent, pour un total de l'ordre de quelques kilo-octets seulement. C'est cette propriété qui explique la présence de HyperLogLog dans Redis (<code>PFCOUNT</code>) ou BigQuery (<code>APPROX_COUNT_DISTINCT</code>).</p>
+      </div>
+
+      <div class="warning">
+        Toute la mécanique repose sur un hash bien mélangé : chaque valeur doit avoir autant de chances d'atterrir dans n'importe quel bucket, avec n'importe quel nombre de zéros. Le <code>hashCode()</code> par défaut des chaînes Java est <strong>mal adapté</strong> : des valeurs proches (<code>"user1"</code>, <code>"user2"</code>, des IP qui ne diffèrent que par le dernier chiffre) produisent des hashs qui commencent par les mêmes bits — exactement ceux qui choisissent le bucket. Résultat : la quasi-totalité des valeurs s'entasserait dans deux ou trois buckets, et l'estimation n'aurait plus aucun rapport avec la réalité. Une bonne implémentation de <code>Hasher</code> mélange donc les bits (par exemple via le finalizer de MurmurHash3) avant de s'en servir :
+        <pre><code>int hash = valeur.hashCode();
+hash ^= (hash &gt;&gt;&gt; 16);
+hash *= 0x85ebca6b;
+hash ^= (hash &gt;&gt;&gt; 13);
+hash *= 0xc2b2ae35;
+hash ^= (hash &gt;&gt;&gt; 16);</code></pre>
+      </div>
+
+      <div class="note">
+        Deux compteurs HyperLogLog se <strong>fusionnent</strong> en prenant le maximum registre par registre : c'est le sujet de la séance 2 (<a href="#fusion">plus bas</a>).
+      </div>
+
+      <div class="success">
+        À retenir : HyperLogLog échange de l'exactitude contre une mémoire quasi constante. Le nombre de buckets fixé au constructeur est le seul curseur qui compte : plus il est grand, plus l'estimation est précise, sans jamais dépendre du volume de données traité.
+      </div>
+
+      <a class="toplink" href="#top">Retour au sommaire</a>
+    </div>
+
     <div class="doc-section" id="rappel">
-      <h2>Rappel : HyperLogLog et <code>CompletableFuture</code></h2>
-      <p>Cette semaine ne réexplique ni HyperLogLog (registres, zéros de tête, formule d'estimation — voir la fiche de la semaine 8) ni <code>CompletableFuture</code> (création, composition — voir la fiche de la semaine 9). Elle combine les deux : les traitements HyperLogLog déjà connus (<code>ajouter</code>, <code>estimerCardinalite</code>, lecture de fichiers de logs) sont simplement lancés via <code>supplyAsync</code>/<code>thenApply</code>/<code>thenCombine</code> au lieu d'être appelés directement.</p>
+      <h2>Rappel : <code>CompletableFuture</code></h2>
+      <p>Cette page ne réexplique pas <code>CompletableFuture</code> (création, composition — voir la fiche de la semaine 9). Elle l'applique à HyperLogLog : les traitements <code>ajouter</code>, <code>estimerCardinalite</code> et la lecture des fichiers de logs sont lancés via <code>supplyAsync</code>/<code>thenApply</code>/<code>thenCombine</code> au lieu d'être appelés directement.</p>
       <ul>
-        <li><strong>HyperLogLog</strong> : structure de comptage de cardinalité <em>approximatif</em> — estime le nombre de valeurs distinctes vues (ex. IP uniques) avec très peu de mémoire, au prix d'une erreur d'estimation.</li>
         <li><strong><code>supplyAsync</code></strong> : démarre un calcul dans un autre thread, renvoie immédiatement un <code>CompletableFuture&lt;T&gt;</code>.</li>
         <li><strong><code>thenApply</code></strong> : enchaîne une transformation synchrone sur le résultat, sans bloquer.</li>
         <li><strong><code>thenCombine</code></strong> : fusionne les résultats de deux futures indépendantes dès que les deux sont prêtes.</li>
       </ul>
       <div class="note">
-        Pour le détail de HyperLogLog : fiche de la semaine 8. Pour le détail de <code>CompletableFuture</code> (création, <code>thenCompose</code>, gestion d'erreurs, <code>get</code>/<code>join</code>...) : fiche de la semaine 9. Cette page ne couvre que leur combinaison.
+        Pour le détail de <code>CompletableFuture</code> (création, <code>thenCompose</code>, gestion d'erreurs, <code>get</code>/<code>join</code>...) : fiche de la semaine 9.
       </div>
       <a class="toplink" href="#top">Retour au sommaire</a>
     </div>
 
     <div class="doc-section" id="chaine-async">
-      <h2>Séance 1 - Chargement et estimation en asynchrone</h2>
+      <h2>Chargement et estimation en asynchrone</h2>
       <p>Lire des fichiers est une opération d'entrée/sortie : le programme passe l'essentiel de son temps à attendre le disque. C'est le cas d'école de l'asynchrone : pendant que le chargement s'exécute dans un thread du pool, le thread principal reste libre. Le schéma est une simple <strong>chaîne</strong> :</p>
       <pre><code>supplyAsync(charger les accès) ──thenApply──&gt; estimer les IP uniques ──join──&gt; résultat</code></pre>
-      <p>L'estimation elle-même (<code>HyperLogLog</code>, <code>Hasher</code>, <code>AnalyseIp</code>) ne change pas d'un iota par rapport à la semaine 8. Seule la façon de <strong>lancer</strong> le traitement change :</p>
+      <p>L'estimation elle-même (<code>HyperLogLog</code>, <code>Hasher</code>, <code>AnalyseIp</code>) reste celle décrite plus haut. Seule la façon de <strong>lancer</strong> le traitement change :</p>
       <pre><code>public CompletableFuture&lt;List&lt;Acces&gt;&gt; chargerAccesAsync(String dossier) {
     return CompletableFuture.supplyAsync(() -&gt; {
         try {

@@ -16,7 +16,7 @@ C'est exactement ainsi que les bases de données distribuées (Redis avec `PFMER
 
 ## Fusionner deux HyperLogLog
 
-Rappel de l'atelier 8 : un HyperLogLog n'est qu'un tableau de registres, et chaque registre retient le **maximum** de zéros de tête observé pour les valeurs qui lui sont tombées dessus.
+Rappel de la séance 1 : un HyperLogLog n'est qu'un tableau de registres, et chaque registre retient le **maximum** de zéros de tête observé pour les valeurs qui lui sont tombées dessus.
 
 Conséquence directe : pour fusionner deux estimateurs (de même taille) qui ont vu des ensembles de valeurs différents, il suffit de prendre, registre par registre, **le maximum des deux** :
 

@@ -28,7 +28,7 @@ La plateforme s'est agrandie : le trafic passe désormais par plusieurs **routeu
 
 La bonne nouvelle (voir [`10B_1_theorie.md`](10B_1_theorie.md)) : deux HyperLogLog se **fusionnent** en prenant le maximum registre par registre, et le résultat est identique à celui d'un estimateur unique qui aurait tout vu. Chaque routeur peut donc être traité dans son propre `CompletableFuture`, les estimateurs locaux étant fusionnés au fur et à mesure.
 
-Les classes de la séance 1 vous sont fournies (elles reprennent celles de l'atelier 8), plus deux petites méthodes ajoutées à [`AnalyseLogs`](src/main/java/main/AnalyseLogs.java) (`listerFichiers`, `chargerAcces`) et un [`GenerateurLogs`](src/main/java/main/GenerateurLogs.java) adapté qui produit un fichier par routeur. Votre travail porte sur `HyperLogLog.fusionner` et la nouvelle classe [`AnalyseRouteurs`](src/main/java/main/AnalyseRouteurs.java) (package `main`).
+Les classes de la séance 1 vous sont fournies, plus deux petites méthodes ajoutées à [`AnalyseLogs`](src/main/java/main/AnalyseLogs.java) (`listerFichiers`, `chargerAcces`) et un [`GenerateurLogs`](src/main/java/main/GenerateurLogs.java) adapté qui produit un fichier par routeur. Votre travail porte sur `HyperLogLog.fusionner` et la nouvelle classe [`AnalyseRouteurs`](src/main/java/main/AnalyseRouteurs.java) (package `main`).
 
 ### Consignes
 

@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Implémentez la classe `LigneDeCommande` selon le diagramme de classes ci-dessus. Le prix unitaire représente le prix unitaire de la pizza. Il est gardé car, comme les prix peuvent varier au cours du temps, il est important de garder le prix au moment de la […]
+**Énoncé :** Implémentez la classe `LigneDeCommande` selon le diagramme de classes ci-dessus. Le prix unitaire représente le prix unitaire de la pizza. Il est gardé car, comme les prix peuvent varier au cours du temps, il est important de garder le prix au moment de la commande.
 
 *la classe LigneDeCommande* — [`src/LigneDeCommande.java`](src/LigneDeCommande.java) :
 

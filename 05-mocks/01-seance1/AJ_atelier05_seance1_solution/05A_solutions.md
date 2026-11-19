@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Lisez le constructeur et la méthode `parCodePostal` de `BibliothequeService`, puis la javadoc de la classe `OdwbClient`. Donnez au moins trois raisons pour lesquelles des tests de `BibliothequeService` qui utiliseraient un `OdwbClient` ne seraient pas de […]
+**Énoncé :** Lisez le constructeur et la méthode `parCodePostal` de `BibliothequeService`, puis la javadoc de la classe `OdwbClient`. Donnez au moins trois raisons pour lesquelles des tests de `BibliothequeService` qui utiliseraient un `OdwbClient` ne seraient pas de bons tests unitaires.
 
 **pourquoi ne pas tester avec `OdwbClient`**
 
@@ -24,7 +24,7 @@ C'est possible ici parce que `BibliothequeService` ne connaît que l'interface `
 
 ### Question 2
 
-**Énoncé :** Dans le package `domaine` du dossier `test`, écrivez la classe `SourceStub`, qui implémente `SourceBibliotheques`. Elle doit pouvoir être créée de deux façons : avec une liste de bibliothèques, que `rechercher` renverra à chaque appel quel que soit le […]
+**Énoncé :** Dans le package `domaine` du dossier `test`, écrivez la classe `SourceStub`, qui implémente `SourceBibliotheques`. Elle doit pouvoir être créée de deux façons : avec une liste de bibliothèques, que `rechercher` renverra à chaque appel quel que soit le filtre reçu ; ou avec une `SourceIndisponibleException`, que `rechercher` lèvera à chaque appel, pour simuler une panne de l'API. Respectez la définition d'un stub donnée dans la théorie : aucune logique, aucun filtrage.
 
 **le stub de la source**
 
@@ -91,7 +91,7 @@ public class SourceStub implements SourceBibliotheques {
 
 ### Question 3
 
-**Énoncé :** Écrivez la méthode `setUp` de `BibliothequeServiceTest`. Elle crée trois bibliothèques de Namur, inspirées des données réelles d'ODWB (simplifiées pour l'exercice), qui serviront dans la plupart des scénarios, puis un `BibliothequeService` qui utilise un […]
+**Énoncé :** Écrivez la méthode `setUp` de `BibliothequeServiceTest`. Elle crée trois bibliothèques de Namur, inspirées des données réelles d'ODWB (simplifiées pour l'exercice), qui serviront dans la plupart des scénarios, puis un `BibliothequeService` qui utilise un `SourceStub` renvoyant ces trois bibliothèques **dans le désordre** (dans l'ordre du tableau ci-dessous) :
 
 [`test/domaine/BibliothequeServiceTest.java`](test/domaine/BibliothequeServiceTest.java) :
 
@@ -344,7 +344,7 @@ class BibliothequeServiceTest {
 
 ### Question 13
 
-**Énoncé :** Aucun des scénarios TC1 à TC9 ne vérifie ce cache. Que faudrait-il ajouter à `SourceStub` pour pouvoir écrire un test qui vérifie qu'un deuxième appel à `parCodePostal("5000")` n'interroge pas la source ? Pourquoi est-ce déjà un pas au-delà de ce qu'est un […]
+**Énoncé :** Aucun des scénarios TC1 à TC9 ne vérifie ce cache. Que faudrait-il ajouter à `SourceStub` pour pouvoir écrire un test qui vérifie qu'un deuxième appel à `parCodePostal("5000")` n'interroge pas la source ? Pourquoi est-ce déjà un pas au-delà de ce qu'est un stub ?
 
 **vérifier le cache**
 
@@ -358,7 +358,7 @@ Ce n'est plus vraiment un stub : un stub fournit des réponses pour qu'on puisse
 
 #### Question 14
 
-**Énoncé :** Écrivez un scénario TC10 qui vérifie qu'une recherche `parThematique("5000", "histoire")` sur les trois bibliothèques du `setUp` renvoie uniquement la bibliothèque libre de Bomel : la Baie des tecks, qui n'a ni thématique ni fonds, doit être simplement […]
+**Énoncé :** Écrivez un scénario TC10 qui vérifie qu'une recherche `parThematique("5000", "histoire")` sur les trois bibliothèques du `setUp` renvoie uniquement la bibliothèque libre de Bomel : la Baie des tecks, qui n'a ni thématique ni fonds, doit être simplement ignorée.
 
 **données incomplètes**
 

@@ -110,7 +110,7 @@ public class ExerciceGroupingBy {
 
 ### Question 5
 
-**Énoncé :** Dans la méthode `groupBy3`, construire une `Map<TransactionsLevel, List<Transaction>>` — considérant l'enum `TransactionsLevel {VERY_HI, HI, LO, ME}`, les transactions sont réparties selon leur valeur : `VERY_HI` à partir de 1000, `HI` de 800 à moins de […]
+**Énoncé :** Dans la méthode `groupBy3`, construire une `Map<TransactionsLevel, List<Transaction>>` — considérant l'enum `TransactionsLevel {VERY_HI, HI, LO, ME}`, les transactions sont réparties selon leur valeur : `VERY_HI` à partir de 1000, `HI` de 800 à moins de 1000, `ME` de 600 à moins de 800, et `LO` en dessous. La map ne doit pas être triée.
 
 *regroupement par niveau* — [`src/main/java/main/ExerciceGroupingBy.java`](src/main/java/main/ExerciceGroupingBy.java) :
 
@@ -315,7 +315,7 @@ public class ExercicesPanaches {
 
 #### Question 12
 
-**Énoncé :** Dans la méthode `traderValeurTotaleMax` de la classe `ExerciceGroupingBy`, renvoyer le trader ayant généré la plus grande valeur totale de transactions (somme des valeurs de toutes ses transactions) — et non celui possédant la transaction individuelle la […]
+**Énoncé :** Dans la méthode `traderValeurTotaleMax` de la classe `ExerciceGroupingBy`, renvoyer le trader ayant généré la plus grande valeur totale de transactions (somme des valeurs de toutes ses transactions) — et non celui possédant la transaction individuelle la plus élevée. Utilisez `Collectors.groupingBy` avec un collecteur `summingInt` en aval pour obtenir le total par trader, puis retrouvez le trader dont ce total est maximal.
 
 *trader à la plus grande valeur totale de transactions* — [`src/main/java/main/ExerciceGroupingBy.java`](src/main/java/main/ExerciceGroupingBy.java) :
 
@@ -346,7 +346,7 @@ public class ExerciceGroupingBy {
 
 #### Question 13
 
-**Énoncé :** Dans la méthode `villeTraderMaxTotal` de la classe `ExerciceGroupingBy`, construire une `Map<String, Trader>` associant à chaque ville le trader y ayant généré la plus grande valeur totale de transactions. Combinez deux niveaux de `groupingBy` : un premier […]
+**Énoncé :** Dans la méthode `villeTraderMaxTotal` de la classe `ExerciceGroupingBy`, construire une `Map<String, Trader>` associant à chaque ville le trader y ayant généré la plus grande valeur totale de transactions. Combinez deux niveaux de `groupingBy` : un premier par ville, puis pour chaque ville un total par trader (`summingInt`) dont vous ne conservez que le trader au total maximal (`Collectors.collectingAndThen`).
 
 *trader à la plus grande valeur totale par ville* — [`src/main/java/main/ExerciceGroupingBy.java`](src/main/java/main/ExerciceGroupingBy.java) :
 

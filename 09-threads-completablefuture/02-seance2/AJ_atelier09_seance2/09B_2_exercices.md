@@ -51,6 +51,9 @@ Au sein de la classe [`CompteurEtPosition`](src/main/java/compteur_future/Compte
 Chaque question est vérifiée par les tests JUnit fournis ([`CourseCompteursTest`](src/test/java/compteur_future/CourseCompteursTest.java)) : exécutez-les directement dans IntelliJ (bouton ▶) pour vérifier votre implémentation au fur et à mesure.
 
 **Question 1** :
+
+✏️ *A corriger au tableau*
+
 Complétez `attendreResultatsAsync` de `CourseCompteurs` : pour chaque compteur, lancez `countAndGetPositionAsync` et affichez sa position dès qu'elle arrive. L'affichage doit être du même style que pour les traitements synchrones :
 
 ```

@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Écrivez la méthode `setUp`. Elle doit créer deux bibliothèques inspirées des données réelles d'ODWB (par exemple la Baie des tecks et la bibliothèque libre de Bomel, reprises de la séance 1), un mock de `SourceBibliotheques` qui renvoie ces deux […]
+**Énoncé :** Écrivez la méthode `setUp`. Elle doit créer deux bibliothèques inspirées des données réelles d'ODWB (par exemple la Baie des tecks et la bibliothèque libre de Bomel, reprises de la séance 1), un mock de `SourceBibliotheques` qui renvoie ces deux bibliothèques, **dans le désordre**, quand on appelle `rechercher` avec le filtre `cp="5000"`, et un `BibliothequeService` réel qui utilise ce mock : c'est lui l'objet sous test, il ne doit pas être mocké.
 
 *setUp — service réel, source mockée* — [`src/test/java/be/vinci/mocks/domaine/BibliothequeServiceTest.java`](src/test/java/be/vinci/mocks/domaine/BibliothequeServiceTest.java) :
 
@@ -90,7 +90,7 @@ class BibliothequeServiceTest {
 
 ### Question 4
 
-**Énoncé :** Écrivez le scénario TC3 (une panne n'est pas mise en cache). Il faut configurer le mock pour qu'il lève une exception au premier appel, puis renvoie les bibliothèques au second : la théorie montre comment enchaîner deux réponses […]
+**Énoncé :** Écrivez le scénario TC3 (une panne n'est pas mise en cache). Il faut configurer le mock pour qu'il lève une exception au premier appel, puis renvoie les bibliothèques au second : la théorie montre comment enchaîner deux réponses (`thenReturn(…).thenReturn(…)`) et comment lever une exception (`thenThrow`) ; combinez les deux.
 
 *TC3 — une panne n'est pas mise en cache : la recherche suivante réinterroge la source* — [`src/test/java/be/vinci/mocks/domaine/BibliothequeServiceTest.java`](src/test/java/be/vinci/mocks/domaine/BibliothequeServiceTest.java) :
 

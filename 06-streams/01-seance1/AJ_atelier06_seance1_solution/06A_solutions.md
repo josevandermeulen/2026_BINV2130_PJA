@@ -279,7 +279,7 @@ public class ExercicesDeBase {
 
 ### Question 11
 
-**Énoncé :** Dans la méthode `reduce2`, renvoyer la transaction dont la valeur est la plus petite. Attention : on demande bien de renvoyer la transaction et non sa valeur ! Vous ne pouvez pas utiliser la méthode `min`. Au besoin, créez une transaction « neutre » avec […]
+**Énoncé :** Dans la méthode `reduce2`, renvoyer la transaction dont la valeur est la plus petite. Attention : on demande bien de renvoyer la transaction et non sa valeur ! Vous ne pouvez pas utiliser la méthode `min`. Au besoin, créez une transaction « neutre » avec une valeur de `Integer.MAX_VALUE`.
 
 *transaction de valeur minimale (reduce)* — [`src/main/java/main/ExercicesDeBase.java`](src/main/java/main/ExercicesDeBase.java) :
 

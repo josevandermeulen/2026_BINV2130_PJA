@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Ouvrez l'énuméré `Categorie` (package `domaine`). Complétez la méthode `estVegetarienne`, qui renvoie `true` pour la seule constante `VEGETARIENNE`. Une méthode d'un énuméré s'appelle sur une constante, comme sur n'importe quel objet : […]
+**Énoncé :** Ouvrez l'énuméré `Categorie` (package `domaine`). Complétez la méthode `estVegetarienne`, qui renvoie `true` pour la seule constante `VEGETARIENNE`. Une méthode d'un énuméré s'appelle sur une constante, comme sur n'importe quel objet : `MenuPizzeria.PIZZA_MARGARITA.getCategorie().estVegetarienne()`.
 
 [`src/main/java/domaine/Categorie.java`](src/main/java/domaine/Categorie.java) :
 
@@ -69,7 +69,7 @@ public enum Categorie {
 
 ### Question 3
 
-**Énoncé :** La `Pizzeria` a un nouvel attribut, `carte`, une `Map<Categorie, SortedSet<Pizza>>` qui range les pizzas du menu par catégorie. Complétez `ajouterPizza` pour qu'elle range aussi la pizza ajoutée sur la carte, en créant l'ensemble de sa catégorie au premier […]
+**Énoncé :** La `Pizzeria` a un nouvel attribut, `carte`, une `Map<Categorie, SortedSet<Pizza>>` qui range les pizzas du menu par catégorie. Complétez `ajouterPizza` pour qu'elle range aussi la pizza ajoutée sur la carte, en créant l'ensemble de sa catégorie au premier ajout (`computeIfAbsent`, avec un `TreeSet`). La méthode fournie `aDesPizzas` indique si la carte a une entrée pour une catégorie.
 
 *ranger la pizza sur la carte* — [`src/main/java/domaine/Pizzeria.java`](src/main/java/domaine/Pizzeria.java) :
 
@@ -286,7 +286,7 @@ public class Pizzeria {
 
 ### Question 9
 
-**Énoncé :** Complétez, dans `Pizza`, la méthode `ajouter(Ingredient... ingredients)`, qui ajoute en une fois tous les ingrédients reçus (en ignorant ceux déjà présents) et renvoie le nombre d'ingrédients effectivement ajoutés. Appuyez-vous sur la méthode […]
+**Énoncé :** Complétez, dans `Pizza`, la méthode `ajouter(Ingredient... ingredients)`, qui ajoute en une fois tous les ingrédients reçus (en ignorant ceux déjà présents) et renvoie le nombre d'ingrédients effectivement ajoutés. Appuyez-vous sur la méthode `ajouter(Ingredient)` existante : une pizza de la carte refusera donc l'ajout de la même façon.
 
 [`src/main/java/domaine/Pizza.java`](src/main/java/domaine/Pizza.java) :
 
@@ -346,7 +346,7 @@ public class PizzaComposee extends Pizza {
 
 ### Question 11
 
-**Énoncé :** Les deux redéfinitions de `copier` ne renvoient pas une `Pizza`, mais une `PizzaComposable` et une `PizzaComposee`. Pourquoi le compilateur l'accepte-t-il, alors que la signature de `Pizza.copier` annonce une `Pizza` ? Qu'est-ce que cela change pour le […]
+**Énoncé :** Les deux redéfinitions de `copier` ne renvoient pas une `Pizza`, mais une `PizzaComposable` et une `PizzaComposee`. Pourquoi le compilateur l'accepte-t-il, alors que la signature de `Pizza.copier` annonce une `Pizza` ? Qu'est-ce que cela change pour le code qui appelle `copier` ? Le changement inverse (une redéfinition qui annoncerait `Object`) serait-il accepté ?
 
 **le type de retour covariant**
 
@@ -366,7 +366,7 @@ Le changement inverse est refusé : une redéfinition qui annoncerait `Object` �
 
 ### Question 12
 
-**Énoncé :** Rendez `Pizza` clonable et complétez sa méthode `clone` : le clone ne doit pas partager sa liste d'ingrédients avec l'original, de sorte qu'ajouter ou retirer un ingrédient de l'un ne change pas l'autre. Les ingrédients eux-mêmes, eux, restent partagés. […]
+**Énoncé :** Rendez `Pizza` clonable et complétez sa méthode `clone` : le clone ne doit pas partager sa liste d'ingrédients avec l'original, de sorte qu'ajouter ou retirer un ingrédient de l'un ne change pas l'autre. Les ingrédients eux-mêmes, eux, restent partagés. Les tests de la classe `Question12` de `PizzaSeance2Test` vérifient cette indépendance.
 
 **Pizza.clone**
 
@@ -440,7 +440,7 @@ public class PizzaComposable extends Pizza {
 
 ### Question 14
 
-**Énoncé :** La classe interne **statique** `Pizzeria.Bilan` est fournie. Complétez la méthode `bilan` de `Pizzeria`, qui compte les commandes enregistrées, les pizzas vendues (la somme des quantités des lignes) et le chiffre d'affaires, et renvoie le `Bilan` […]
+**Énoncé :** La classe interne **statique** `Pizzeria.Bilan` est fournie. Complétez la méthode `bilan` de `Pizzeria`, qui compte les commandes enregistrées, les pizzas vendues (la somme des quantités des lignes) et le chiffre d'affaires, et renvoie le `Bilan` correspondant. Remarquez que `Bilan` reçoit toutes ses valeurs par son constructeur : étant statique, elle n'a pas accès aux attributs de la `Pizzeria`.
 
 [`src/main/java/domaine/Pizzeria.java`](src/main/java/domaine/Pizzeria.java) :
 
@@ -472,7 +472,7 @@ public class Pizzeria {
 
 ### Question 15
 
-**Énoncé :** La classe interne **non statique** `Pizzeria.Fidelite` est fournie, avec son constructeur ; on l'obtient par `pizzeria.fidelite(seuil)`. Complétez sa méthode `estFidele(Client)`, qui renvoie `true` si le client a passé au moins `seuil` commandes […]
+**Énoncé :** La classe interne **non statique** `Pizzeria.Fidelite` est fournie, avec son constructeur ; on l'obtient par `pizzeria.fidelite(seuil)`. Complétez sa méthode `estFidele(Client)`, qui renvoie `true` si le client a passé au moins `seuil` commandes enregistrées dans la pizzeria. Lisez directement l'attribut `commandes` de la `Pizzeria` englobante, sans passer par `getCommandes`.
 
 [`src/main/java/domaine/Pizzeria.java`](src/main/java/domaine/Pizzeria.java) :
 
@@ -594,7 +594,7 @@ class PizzeriaStockTest {
 
 ### Question 18
 
-**Énoncé :** Complétez les deux tests de la classe `Question18` de `PizzeriaStockTest`, en remplaçant le `StockStub` par un mock Mockito : configurez-le avec `when(...).thenReturn(...)` (et `any(Ingredient.class)` pour la règle générale), puis vérifiez avec `verify` […]
+**Énoncé :** Complétez les deux tests de la classe `Question18` de `PizzeriaStockTest`, en remplaçant le `StockStub` par un mock Mockito : configurez-le avec `when(...).thenReturn(...)` (et `any(Ingredient.class)` pour la règle générale), puis vérifiez avec `verify` les ingrédients sur lesquels le stock a été interrogé.
 
 [`src/test/java/domaine/PizzeriaStockTest.java`](src/test/java/domaine/PizzeriaStockTest.java) :
 

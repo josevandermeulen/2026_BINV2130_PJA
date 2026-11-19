@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Ouvrez la classe `LecteurFichiers` (package `util`). Elle implémente l'interface `LecteurCommandes` (fournie). Complétez la méthode `lireIndex(String chemin)` : ouvrez le fichier avec un `BufferedReader` dans un bloc `try-with-resources`, lisez-le ligne […]
+**Énoncé :** Ouvrez la classe `LecteurFichiers` (package `util`). Elle implémente l'interface `LecteurCommandes` (fournie). Complétez la méthode `lireIndex(String chemin)` : ouvrez le fichier avec un `BufferedReader` dans un bloc `try-with-resources`, lisez-le ligne par ligne avec `readLine`, et renvoyez la liste des noms de fichiers lus, dans l'ordre du fichier. Ne traitez pas l'`IOException` ici : la signature de la méthode la propage avec `throws`.
 
 [`src/main/java/util/LecteurFichiers.java`](src/main/java/util/LecteurFichiers.java) :
 
@@ -42,7 +42,7 @@ public class LecteurFichiers implements LecteurCommandes {
 
 ### Question 2
 
-**Énoncé :** Complétez la méthode `lireLignes(String chemin)` de `LecteurFichiers` : ouvrez le fichier dans un bloc `try-with-resources`, mais récupérez cette fois toutes les lignes via la méthode `lines` du `BufferedReader`, qui renvoie un `Stream<String>` (à […]
+**Énoncé :** Complétez la méthode `lireLignes(String chemin)` de `LecteurFichiers` : ouvrez le fichier dans un bloc `try-with-resources`, mais récupérez cette fois toutes les lignes via la méthode `lines` du `BufferedReader`, qui renvoie un `Stream<String>` (à collecter dans une liste).
 
 [`src/main/java/util/LecteurFichiers.java`](src/main/java/util/LecteurFichiers.java) :
 
@@ -72,7 +72,7 @@ public class LecteurFichiers implements LecteurCommandes {
 
 ### Question 3
 
-**Énoncé :** Ouvrez la classe `AnalyseCommandes` (package `main`). Elle reçoit la `Pizzeria` et un `LecteurCommandes` dans son constructeur. Complétez la méthode `parserLigne(String ligne)`, qui convertit une ligne en commande clôturée. Découpez la ligne avec […]
+**Énoncé :** Ouvrez la classe `AnalyseCommandes` (package `main`). Elle reçoit la `Pizzeria` et un `LecteurCommandes` dans son constructeur. Complétez la méthode `parserLigne(String ligne)`, qui convertit une ligne en commande clôturée. Découpez la ligne avec `split(";")` et levez une `IllegalArgumentException` si elle ne compte pas exactement quatre champs, si la date est mal formée (`LocalDateTime.parse` lève alors une `DateTimeParseException`, qui n'est pas une `IllegalArgumentException` : attrapez-la), si le client ou la pizza est inconnu de la pizzeria, ou si la quantité n'est pas un entier strictement positif. Créez ensuite la commande à la date lue, ajoutez-y la pizza dans la quantité lue, et clôturez la commande en cours du client. Vérifiez bien tous les champs **avant** de créer la commande : la Javadoc de `parserLigne` explique pourquoi.
 
 **parserLigne**
 
@@ -149,7 +149,7 @@ public class AnalyseCommandes {
 
 ### Question 4
 
-**Énoncé :** Complétez la méthode `parserLignes(List<String> lignes)` : pour chaque ligne, appelez `parserLigne`. Une ligne invalide ne doit pas interrompre le traitement : attrapez l'`IllegalArgumentException`, affichez `"Ligne ignorée : " + ligne` sur la sortie […]
+**Énoncé :** Complétez la méthode `parserLignes(List<String> lignes)` : pour chaque ligne, appelez `parserLigne`. Une ligne invalide ne doit pas interrompre le traitement : attrapez l'`IllegalArgumentException`, affichez `"Ligne ignorée : " + ligne` sur la sortie standard, et continuez avec la ligne suivante.
 
 [`src/main/java/main/AnalyseCommandes.java`](src/main/java/main/AnalyseCommandes.java) :
 
@@ -186,7 +186,7 @@ public class AnalyseCommandes {
 
 ### Question 5
 
-**Énoncé :** Complétez la méthode `chargerToutesLesCommandes(String dossier)` : lisez l'index (`dossier + "/index.txt"`), puis, pour chaque nom de fichier listé, lisez ses lignes (`dossier + "/" + nomFichier`) et parsez-les. L'index mentionne `2026-11-12.csv`, qui […]
+**Énoncé :** Complétez la méthode `chargerToutesLesCommandes(String dossier)` : lisez l'index (`dossier + "/index.txt"`), puis, pour chaque nom de fichier listé, lisez ses lignes (`dossier + "/" + nomFichier`) et parsez-les. L'index mentionne `2026-11-12.csv`, qui n'existe pas : un fichier introuvable ne doit pas interrompre le chargement. Attrapez la `FileNotFoundException`, affichez `"Fichier introuvable : " + nomFichier`, et continuez avec le fichier suivant ; les autres `IOException` (index illisible, droits insuffisants, …) continuent, elles, à se propager. Enregistrez enfin chaque commande chargée dans la pizzeria (`ajouterCommande`), et renvoyez la liste de toutes les commandes chargées, dans l'ordre de l'index.
 
 **chargerToutesLesCommandes**
 
@@ -238,7 +238,7 @@ public class AnalyseCommandes {
 
 ### Question 6
 
-**Énoncé :** Complétez, en utilisant l'API Stream sur les commandes de la pizzeria, la méthode `chiffreAffairesParJour()` : une `Map<LocalDate, Double>` associant chaque jour au montant total de ses commandes, triée par date. Utilisez `groupingBy` avec trois arguments […]
+**Énoncé :** Complétez, en utilisant l'API Stream sur les commandes de la pizzeria, la méthode `chiffreAffairesParJour()` : une `Map<LocalDate, Double>` associant chaque jour au montant total de ses commandes, triée par date. Utilisez `groupingBy` avec trois arguments : la clé, la fabrique de la `Map` (`TreeMap::new`) et `summingDouble`.
 
 [`src/main/java/main/AnalyseCommandes.java`](src/main/java/main/AnalyseCommandes.java) :
 
@@ -265,7 +265,7 @@ public class AnalyseCommandes {
 
 ### Question 7
 
-**Énoncé :** Complétez `pizzasVenduesParCategorie()` : une `Map<Categorie, Integer>` associant chaque catégorie au nombre de pizzas vendues. Les commandes chargées n'ont qu'une ligne, mais une commande peut en général en contenir plusieurs : passez d'un flux de […]
+**Énoncé :** Complétez `pizzasVenduesParCategorie()` : une `Map<Categorie, Integer>` associant chaque catégorie au nombre de pizzas vendues. Les commandes chargées n'ont qu'une ligne, mais une commande peut en général en contenir plusieurs : passez d'un flux de commandes à un flux de lignes avec `flatMap`, puis additionnez les quantités avec `summingInt`.
 
 **pizzasVenduesParCategorie**
 
@@ -300,7 +300,7 @@ public class AnalyseCommandes {
 
 ### Question 8
 
-**Énoncé :** Complétez la méthode `ecrireRapport(String chemin)` : dans un bloc `try-with-resources` utilisant un `BufferedWriter`, écrivez une ligne par jour, par date croissante, au format `"2026-11-09 : 829.0 euros"`, suivie d'une dernière ligne `"Chiffre d'affaires […]
+**Énoncé :** Complétez la méthode `ecrireRapport(String chemin)` : dans un bloc `try-with-resources` utilisant un `BufferedWriter`, écrivez une ligne par jour, par date croissante, au format `"2026-11-09 : 829.0 euros"`, suivie d'une dernière ligne `"Chiffre d'affaires total : "` suivie du total et de `" euros"`.
 
 [`src/main/java/main/AnalyseCommandes.java`](src/main/java/main/AnalyseCommandes.java) :
 
@@ -339,7 +339,7 @@ public class AnalyseCommandes {
 
 #### Question 9
 
-**Énoncé :** Complétez `meilleurClient()` : le client qui a dépensé le plus, toutes commandes de la pizzeria confondues, dans un `Optional<Client>` (vide si la pizzeria n'a aucune commande). Regroupez les commandes par client en additionnant leurs montants, puis […]
+**Énoncé :** Complétez `meilleurClient()` : le client qui a dépensé le plus, toutes commandes de la pizzeria confondues, dans un `Optional<Client>` (vide si la pizzeria n'a aucune commande). Regroupez les commandes par client en additionnant leurs montants, puis cherchez l'entrée de plus grande valeur avec `max(Map.Entry.comparingByValue())`.
 
 *optionnelle* — [`src/main/java/main/AnalyseCommandes.java`](src/main/java/main/AnalyseCommandes.java) :
 

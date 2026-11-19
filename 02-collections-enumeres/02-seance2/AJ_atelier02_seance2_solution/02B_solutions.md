@@ -6,7 +6,7 @@
 
 ### Question 1
 
-**Énoncé :** Pour pouvoir trier les plats par type (entrée, plat, dessert) dans notre livre, il va falloir créer cette notion de « type de plat » dans notre application. Comme les types sont bien définis et a priori invariables, on pense immédiatement à un énuméré. […]
+**Énoncé :** Pour pouvoir trier les plats par type (entrée, plat, dessert) dans notre livre, il va falloir créer cette notion de « type de plat » dans notre application. Comme les types sont bien définis et a priori invariables, on pense immédiatement à un énuméré. Comme ce type n'a de sens que pour un plat, on va le mettre en classe interne.
 
 *énuméré interne Type — l'attribut nom (avec getter) est ajouté à la Question 11* — [`src/domaine/Plat.java`](src/domaine/Plat.java) :
 
@@ -425,7 +425,7 @@ via `getNom()` (extrait à la Question 5) pour afficher `Entrée` au lieu de `EN
 
 ### Question 12
 
-**Énoncé :** Exécutez la classe `Main` (package `main`). La sortie attendue se trouve dans `AJ_atelier02_seance2/affichage_Main.txt`, à l'ordre des ingrédients près (il dépend du `HashSet` utilisé). Votre sortie doit correspondre jusqu'à la ligne `Usages des […]
+**Énoncé :** Exécutez la classe `Main` (package `main`). La sortie attendue se trouve dans `AJ_atelier02_seance2/affichage_Main.txt`, à l'ordre des ingrédients près (il dépend du `HashSet` utilisé). Votre sortie doit correspondre jusqu'à la ligne `Usages des ingrédients :` exclue — tout ce qui suit provient de la Question 14 (partie optionnelle ci-dessous).
 
 **exécution du Main fourni**
 
@@ -622,7 +622,7 @@ public class Main {
 
 #### Question 18
 
-**Énoncé :** Modifiez votre implémentation en utilisant une collection `Map<Ingredient, IngredientQuantifie>` dans la classe `Plat` au lieu de la collection `Set<IngredientQuantifie>` pour stocker les ingrédients. Après ce changement, l'ordre d'affichage des […]
+**Énoncé :** Modifiez votre implémentation en utilisant une collection `Map<Ingredient, IngredientQuantifie>` dans la classe `Plat` au lieu de la collection `Set<IngredientQuantifie>` pour stocker les ingrédients. Après ce changement, l'ordre d'affichage des ingrédients peut différer de celui que vous obteniez avec le `Set` : une `HashMap` ne garantit pas plus d'ordre qu'un `HashSet`. Ce n'est pas une régression — seul le contenu compte, comme indiqué à la Question 12.
 
 *Map à la place du Set pour stocker les ingrédients (optionnelle)* — [`src/domaine/Plat.java`](src/domaine/Plat.java) :
 
@@ -751,7 +751,7 @@ demandé ici.
 
 #### Question 21
 
-**Énoncé :** On souhaiterait faire en sorte que lorsqu'on appelle la méthode `keySet` de la `Map` des plats de la classe `Livre`, on obtienne les clefs dans un ordre bien précis. À savoir, par ordre de service dans un restaurant. D'abord les entrées, puis les plats, […]
+**Énoncé :** On souhaiterait faire en sorte que lorsqu'on appelle la méthode `keySet` de la `Map` des plats de la classe `Livre`, on obtienne les clefs dans un ordre bien précis. À savoir, par ordre de service dans un restaurant. D'abord les entrées, puis les plats, puis les desserts.
 
 **keySet dans l'ordre de service**
 

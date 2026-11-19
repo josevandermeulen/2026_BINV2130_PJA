@@ -1,0 +1,60 @@
+package compteur_thread;
+
+import java.time.LocalDateTime;
+
+// Question 5
+/**
+ * Un compteur exécutable en parallèle, écrit en implémentant Runnable.
+ *
+ * Variante à préférer à CompteurThread : implémenter Runnable laisse la classe libre
+ * d'hériter d'autre chose, et sépare ce qui est exécuté du fil qui l'exécute.
+ */
+public class CompteurRunnable implements Runnable {
+
+    private final String nom;
+    private final int max;
+
+    /**
+     * Crée un compteur.
+     *
+     * @param nom le nom affiché devant chaque nombre
+     * @param max le nombre jusqu'auquel compter
+     */
+    public CompteurRunnable(String nom, int max) {
+        this.nom = nom;
+        this.max = max;
+    }
+
+    /**
+     * Renvoie le nom du compteur.
+     *
+     * @return le nom du compteur
+     */
+    public String getNom() {
+        return nom;
+    }
+
+    /**
+     * Compte de 1 au maximum en affichant chaque valeur, avec une pause entre deux nombres.
+     */
+    public void count() {
+        for (int i = 1; i <= max; i++) {
+            System.out.println(nom + " : " + i);
+            try {
+                Thread.sleep(10);
+            } catch (InterruptedException e) {
+                throw new RuntimeException("Compteur interrompu pendant l'attente", e);
+            }
+        }
+        System.out.println(nom + " a fini de compter jusqu'à " + max + " à " + LocalDateTime.now());
+    }
+
+    /**
+     * Lance le comptage dans le thread courant.
+     */
+    @Override
+    public void run() {
+        count();
+    }
+
+}

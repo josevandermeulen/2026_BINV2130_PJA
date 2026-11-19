@@ -450,7 +450,7 @@ public class TodoList {
 
 ### Question 4
 
-**Énoncé :** Il devrait aussi être possible de modifier une tâche par le biais de la `TodoList` (`updateTask`), en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche. Veuillez faire du TDD pour ces scénarios au sein de la […]
+**Énoncé :** Il devrait aussi être possible de modifier une tâche par le biais de la `TodoList` (`updateTask`), en indiquant tant la tâche que l'on souhaite mettre à jour que les nouvelles données de cette tâche. Veuillez faire du TDD pour ces scénarios au sein de la classe `TodoListTest`.
 
 *Test* — [`test/TodoListTest.java`](test/TodoListTest.java) :
 

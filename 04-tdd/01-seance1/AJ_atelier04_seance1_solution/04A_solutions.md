@@ -62,7 +62,7 @@ public class TodoList {
 
 ### Question 2
 
-**Énoncé :** *(UC « Renommer une tâche » — deviendra l'UC4 « Modifier le titre d'une tâche » après l'évolution de la question 5)* : Nous voulons pouvoir renommer une tâche existante : `renameTask(String existingTask, String newTask)`. Veuillez faire du TDD pour ces […]
+**Énoncé :** *(UC « Renommer une tâche » — deviendra l'UC4 « Modifier le titre d'une tâche » après l'évolution de la question 5)* : Nous voulons pouvoir renommer une tâche existante : `renameTask(String existingTask, String newTask)`. Veuillez faire du TDD pour ces scénarios :
 
 *Test* — [`test/TodoListTest.java`](test/TodoListTest.java) :
 

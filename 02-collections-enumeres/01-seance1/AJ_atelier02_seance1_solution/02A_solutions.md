@@ -331,7 +331,7 @@ public class Plat {
 
 ### Question 4
 
-**Énoncé :** Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`affichage_Main.txt`), en laissant de côté la partie relative aux ingrédients : elle sera traitée à la question sur la gestion des ingrédients. À ce stade, […]
+**Énoncé :** Ajoutez la méthode `toString` dans la classe `Plat` en vous basant sur l'exemple de sortie attendu (`affichage_Main.txt`), en laissant de côté la partie relative aux ingrédients : elle sera traitée à la question sur la gestion des ingrédients. À ce stade, la section `Ingrédients :` de la sortie se réduit donc à son titre.
 
 *toString de Plat (à ce stade, sans la partie ingrédients — traitée à la Question 6)* — [`src/domaine/Plat.java`](src/domaine/Plat.java) :
 
@@ -376,7 +376,7 @@ public class Plat {
 
 ### Question 5
 
-**Énoncé :** Copiez la classe `Main` fournie dans votre projet (à vous de voir dans quel package la mettre). Elle exerce toute l'API du plat, gestion des ingrédients comprise : elle ne compilera donc qu'une fois la question suivante terminée. Son exécution et la […]
+**Énoncé :** Copiez la classe `Main` fournie dans votre projet (à vous de voir dans quel package la mettre). Elle exerce toute l'API du plat, gestion des ingrédients comprise : elle ne compilera donc qu'une fois la question suivante terminée. Son exécution et la comparaison de sa sortie font l'objet de la section `Test`, en fin d'énoncé.
 
 **exécution du Main fourni**
 

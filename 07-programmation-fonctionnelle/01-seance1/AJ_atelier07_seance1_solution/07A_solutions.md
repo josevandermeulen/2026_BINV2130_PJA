@@ -192,7 +192,7 @@ public class ExerciceFunctionalInterface {
 
 ### Question 13
 
-**Énoncé :** Dans la classe `ExerciceFunctionalInterface`, prenez la méthode `exComparator`. Celle-ci utilise un `Comparator` en créant une classe et en l'instanciant. Modifiez le code pour remplacer le comparator par une lambda expression. Lisez d'abord […]
+**Énoncé :** Dans la classe `ExerciceFunctionalInterface`, prenez la méthode `exComparator`. Celle-ci utilise un `Comparator` en créant une classe et en l'instanciant. Modifiez le code pour remplacer le comparator par une lambda expression. Lisez d'abord `EmployeComparator` : votre lambda doit trier exactement de la même façon, c'est-à-dire par taille décroissante **puis par nom en cas d'égalité de taille**.
 
 [`src/main/java/main/ExerciceFunctionalInterface.java`](src/main/java/main/ExerciceFunctionalInterface.java) :
 
@@ -287,7 +287,7 @@ public class Lambda {
 
 #### Question 16
 
-**Énoncé :** Les signatures fournies de `allMatches` et `transformAll` sont déjà génériques (`<T>` pour la première, `<P, R>` pour la seconde) : vérifiez que vos implémentations acceptent bien des `List` de n'importe quel type, et pas seulement des `Integer`. Dans la […]
+**Énoncé :** Les signatures fournies de `allMatches` et `transformAll` sont déjà génériques (`<T>` pour la première, `<P, R>` pour la seconde) : vérifiez que vos implémentations acceptent bien des `List` de n'importe quel type, et pas seulement des `Integer`. Dans la classe `TestLambda`, décommentez la deuxième partie et complétez les expressions lambda, qui travaillent cette fois sur des `String`.
 
 **rendre allMatches et transformAll génériques**
 
